@@ -22,7 +22,6 @@
       }
     ],
     "types": ["node"],
-    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
@@ -53,7 +52,6 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "prisma"
+    "node_modules"
   ]
 }
