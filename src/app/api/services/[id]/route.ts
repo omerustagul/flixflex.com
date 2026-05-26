@@ -1,0 +1,35 @@
+import { NextResponse } from "next/server"
+import { requirePermission, jsonError } from "@/lib/ai/api-utils"
+import prisma from "@/lib/prisma"
+import { servicePayloadSchema } from "@/lib/validators/content-schema"
+
+export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const gate = await requirePermission("portfolio", "update")
+  if (!gate.ok) return gate.response
+  if (!prisma) return jsonError("Veritabanı bağlantısı yok.", 503)
+
+  const { id } = await params
+  const parsed = servicePayloadSchema.safeParse(await req.json().catch(() => null))
+  if (!parsed.success) {
+    return NextResponse.json({ ok: false, errors: parsed.error.flatten().fieldErrors }, { status: 400 })
+  }
+
+  const item = await prisma.service.update({
+    where: { id },
+    data: {
+      ...parsed.data,
+      parentId: parsed.data.parentId || null,
+    },
+  })
+  return NextResponse.json({ ok: true, item })
+}
+
+export async function DELETE(_req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const gate = await requirePermission("portfolio", "delete")
+  if (!gate.ok) return gate.response
+  if (!prisma) return jsonError("Veritabanı bağlantısı yok.", 503)
+
+  const { id } = await params
+  await prisma.service.delete({ where: { id } })
+  return NextResponse.json({ ok: true })
+}
