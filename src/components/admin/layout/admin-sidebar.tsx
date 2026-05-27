@@ -66,7 +66,7 @@ export function AdminSidebar({ user, siteLogo, logoHeight }: AdminSidebarProps) 
         className={cn(
           "sticky top-0 h-screen z-40 w-fit shrink-0",
           "flex flex-col",
-          "bg-[#0F0F1A] border-r border-[#2A2A2A]",
+          "bg-[#0d0d0d] border-r border-[#2A2A2A]",
           "overflow-hidden"
         )}
         animate={{ width: isHovered ? 240 : 64 }}
@@ -131,8 +131,8 @@ export function AdminSidebar({ user, siteLogo, logoHeight }: AdminSidebarProps) 
                   href={item.href}
                   target={"external" in item && item.external ? "_blank" : undefined}
                   className={cn(
-                    "group flex items-center gap-3 w-full",
-                    "h-10 px-2.5",
+                    "group flex items-center justify-start gap-3 w-full",
+                    "h-10 pl-3.5 rounded-md",
                     "text-[13px] font-medium",
                     "transition-all duration-150 relative",
                     "border-l-2",

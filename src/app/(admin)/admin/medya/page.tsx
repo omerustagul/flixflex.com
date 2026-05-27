@@ -294,7 +294,7 @@ export default function MediaPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
         <div>
-          <h1 className="font-display text-2xl font-extrabold text-[var(--foreground)]">
+          <h1 className="font-display text-2xl font-extrabold text-[#0d0d0d]">
             Medya Kütüphanesi
           </h1>
           {/* Breadcrumbs */}
@@ -303,18 +303,18 @@ export default function MediaPage() {
               onClick={() => navigateToFolder(null)}
               onDragOver={onDragOver}
               onDrop={(e) => onDrop(e, "root")}
-              className={cn("text-[11px] font-bold transition-all hover:text-[var(--ff-purple)] px-1 rounded", !currentFolderId ? "text-[var(--ff-purple)]" : "text-[var(--foreground-muted)] hover:bg-[var(--surface)]")}
+              className={cn("text-[11px] font-bold transition-all hover:text-[#ff4fd8] px-1 rounded", !currentFolderId ? "text-[#ff4fd8]" : "text-[#666666] hover:bg-[#f7f7f5]")}
             >
               Dosyalar
             </button>
             {folderPath.map((folder, index) => (
               <React.Fragment key={folder.id}>
-                <ChevronRight size={10} className="text-[var(--foreground-faint)]" />
+                <ChevronRight size={10} className="text-[#0D0D0D]" />
                 <button
                   onClick={() => navigateBack(index)}
                   onDragOver={onDragOver}
                   onDrop={(e) => onDrop(e, folder.id)}
-                  className={cn("text-[11px] font-bold transition-all hover:text-[var(--ff-purple)] px-1 rounded", index === folderPath.length - 1 ? "text-[var(--ff-purple)]" : "text-[var(--foreground-muted)] hover:bg-[var(--surface)]")}
+                  className={cn("text-[11px] font-bold transition-all hover:text-[#ff4fd8] px-1 rounded", index === folderPath.length - 1 ? "text-[#ff4fd8]" : "text-[#666666] hover:bg-[#f7f7f5]")}
                 >
                   {folder.name}
                 </button>
@@ -325,15 +325,15 @@ export default function MediaPage() {
 
         <div className="flex items-center gap-3">
           {/* Sort Controls */}
-          <div className="flex items-center gap-2 border-r border-[var(--border)] pr-4">
-            <div className="flex bg-[var(--surface-muted)] p-1 ff-shape-button border border-[var(--border)]">
+          <div className="flex items-center gap-2 border-r border-[#CCCCCC] pr-4">
+            <div className="flex bg-[#f7f7f5] p-1 ff-shape-button border border-[#CCCCCC]">
               {(["createdAt", "title", "type", "size"] as const).map((field) => (
                 <button
                   key={field}
                   onClick={() => setSortBy(field)}
                   className={cn(
                     "w-8 h-8 flex items-center justify-center transition-all ff-shape-button",
-                    sortBy === field ? "bg-[var(--ff-purple)] text-white" : "text-[var(--foreground-faint)] hover:text-[var(--foreground)]"
+                    sortBy === field ? "bg-[#ff4fd8] text-white" : "text-[#666666] hover:text-[#ff4fd8]"
                   )}
                   title={field === "createdAt" ? "Tarih" : field === "title" ? "Ad" : field === "type" ? "Tür" : "Boyut"}
                 >
@@ -343,14 +343,14 @@ export default function MediaPage() {
             </div>
             <button
               onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
-              className="w-10 h-10 flex items-center justify-center bg-[var(--surface-muted)] border border-[var(--border)] ff-shape-button text-[var(--foreground-muted)] hover:text-[var(--ff-purple)] transition-all"
+              className="w-10 h-10 flex items-center justify-center bg-[#f7f7f5] border border-[#CCCCCC] ff-shape-button text-[#666666] hover:text-[#ff4fd8] transition-all"
             >
               {sortOrder === "asc" ? <SortAsc size={16} /> : <SortDesc size={16} />}
             </button>
           </div>
 
           {/* Filter Tabs */}
-          <div className="ff-shape-button hidden sm:flex p-1 border border-[var(--border)] bg-[var(--surface-muted)]">
+          <div className="ff-shape-button hidden sm:flex p-1 border border-[#CCCCCC] bg-[#f7f7f5]">
             {(["all", "folder", "image", "video"] as const).map((f) => (
               <button
                 key={f}
@@ -358,8 +358,8 @@ export default function MediaPage() {
                 className={cn(
                   "ff-shape-button px-4 py-1.5 text-[11px] font-bold transition-all",
                   filter === f
-                    ? "bg-[var(--ff-purple)] text-white"
-                    : "text-[var(--foreground-muted)] hover:text-[var(--foreground)]"
+                    ? "bg-[#ff4fd8] text-white"
+                    : "text-[#666666] hover:text-[#ff4fd8]"
                 )}
               >
                 {f === "all" ? "Hepsi" : f === "folder" ? "Klasörler" : f === "image" ? "Görseller" : "Videolar"}
@@ -369,7 +369,7 @@ export default function MediaPage() {
 
           <button
             onClick={createFolder}
-            className="ff-shape-button inline-flex items-center gap-2 h-9 px-4 border border-[var(--border)] text-[var(--foreground)] font-bold text-[11px] hover:bg-[var(--surface)] transition-all"
+            className="ff-shape-button inline-flex items-center gap-2 h-9 px-4 border border-[#CCCCCC] text-[#666666] font-bold text-[11px] hover:bg-[#f7f7f5] transition-all"
           >
             <FolderPlus size={16} />
             <span className="hidden sm:inline">Klasör</span>
@@ -379,7 +379,7 @@ export default function MediaPage() {
             onClick={handleSyncMux}
             disabled={loading || uploading}
             title="Mux'tan Videoları Çek"
-            className="ff-shape-button inline-flex items-center justify-center w-9 h-9 border border-[var(--border)] text-[var(--foreground-muted)] hover:text-[var(--ff-purple)] transition-all disabled:opacity-50"
+            className="ff-shape-button inline-flex items-center justify-center w-9 h-9 border border-[#CCCCCC] text-[#666666] hover:text-[#ff4fd8] transition-all disabled:opacity-50"
           >
             <RefreshCw size={16} className={cn(loading && "animate-spin")} />
           </button>
@@ -387,7 +387,7 @@ export default function MediaPage() {
           <button
             onClick={() => fileInputRef.current?.click()}
             disabled={uploading}
-            className="ff-shape-button inline-flex items-center gap-2 h-9 px-6 bg-[var(--ff-purple)] text-white font-bold text-[12px] hover:bg-[var(--ff-purple-hover)] transition-all disabled:opacity-50"
+            className="ff-shape-button inline-flex items-center gap-2 h-9 px-6 bg-[#ff4fd8] text-white font-bold text-[12px] hover:bg-[#ff4fd8]/90 transition-all disabled:opacity-50"
           >
             {uploading ? <Loader2 className="animate-spin" size={16} /> : <Upload size={16} />}
             Yükle
@@ -408,9 +408,9 @@ export default function MediaPage() {
           <Loader2 className="animate-spin text-[var(--ff-purple)]" size={40} />
         </div>
       ) : (sortedFolders.length === 0 && sortedItems.length === 0) ? (
-        <div className="ff-shape-container border border-[var(--border)] border-dashed py-32 flex flex-col items-center justify-center text-center">
-          <ImageIcon size={24} className="text-[var(--foreground-faint)] mb-2" />
-          <p className="text-xs text-[var(--foreground-muted)]">Henüz içerik yok.</p>
+        <div className="ff-shape-container border border-[#CCCCCC] border-dashed py-32 flex flex-col items-center justify-center text-center">
+          <ImageIcon size={24} className="text-[#666666] mb-2" />
+          <p className="text-xs text-[#666666]">Henüz içerik yok.</p>
         </div>
       ) : (
         <div className="space-y-12">
@@ -418,8 +418,8 @@ export default function MediaPage() {
           {(filter === "all" || filter === "folder") && sortedFolders.length > 0 && (
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <h2 className="text-[11px] font-bold text-[var(--foreground-muted)]">Klasörler ({sortedFolders.length})</h2>
-                <div className="h-px flex-1 bg-[var(--border)] opacity-30" />
+                <h2 className="text-[11px] font-bold text-[#666666]">Klasörler ({sortedFolders.length})</h2>
+                <div className="h-px flex-1 bg-[#CCCCCC] opacity-30" />
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-6">
                 {sortedFolders.map((folder) => (
@@ -438,22 +438,22 @@ export default function MediaPage() {
                     className={cn(
                       "group relative ff-shape-container overflow-hidden border transition-all duration-300 cursor-pointer flex flex-col",
                       dragOverFolderId === folder.id
-                        ? "border-[var(--ff-purple)] bg-[rgba(161,52,255,0.05)] scale-[1.02] shadow-lg"
-                        : "border-[var(--border)] bg-[var(--surface)] hover:border-[var(--ff-purple)] hover:shadow-md"
+                        ? "border-[#ff4fd8] bg-[rgba(255,79,216,0.05)] scale-[1.02] shadow-lg"
+                        : "border-[#CCCCCC] bg-[#f7f7f5] hover:border-[#ff4fd8] hover:shadow-md"
                     )}
                   >
                     {/* Folder Icon Area */}
-                    <div className="aspect-square flex flex-col items-center justify-center h-26 bg-[var(--surface-muted)] group-hover:bg-[var(--surface)] transition-colors relative">
+                    <div className="aspect-square flex flex-col items-center justify-center h-26 bg-[#f7f7f5] group-hover:bg-[#f7f7f5] transition-colors relative">
                       <Folder size={36} className={cn(
                         "transition-all duration-300",
-                        dragOverFolderId === folder.id ? "text-[var(--ff-purple)] scale-110" : "text-[var(--ff-purple)] opacity-80 group-hover:opacity-100 group-hover:scale-110"
+                        dragOverFolderId === folder.id ? "text-[#ff4fd8] scale-110" : "text-[#ff4fd8] opacity-80 group-hover:opacity-100 group-hover:scale-110"
                       )} />
 
                       {/* Folder Actions */}
                       <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                         <button
                           onClick={(e) => deleteFolder(folder.id, e)}
-                          className="w-7 h-7 ff-shape-button bg-[var(--error)]/10 shadow-sm border border-[var(--error)]/10 text-[var(--error)] flex items-center justify-center hover:bg-[var(--error)]/10 hover:text-[var(--error)] transition-all"
+                          className="w-7 h-7 ff-shape-button bg-[#ff4fd8]/10 shadow-sm border border-[#ff4fd8]/10 text-[#ff4fd8] flex items-center justify-center hover:bg-[#ff4fd8]/10 hover:text-[#ff4fd8] transition-all"
                         >
                           <Trash2 size={12} />
                         </button>
@@ -461,11 +461,11 @@ export default function MediaPage() {
                     </div>
 
                     {/* Folder Info Area */}
-                    <div className="p-3 border-t border-[var(--border)] bg-[var(--surface)] h-[64px] flex flex-col justify-center">
-                      <p className="text-[12px] font-bold text-[var(--foreground)] truncate">
+                    <div className="p-3 border-t border-[#CCCCCC] bg-[#f7f7f5] h-[64px] flex flex-col justify-center">
+                      <p className="text-[12px] font-bold text-[#333333] truncate">
                         {folder.name}
                       </p>
-                      <p className="text-[10px] text-[var(--foreground-faint)] mt-0.5 truncate">
+                      <p className="text-[10px] text-[#666666] mt-0.5 truncate">
                         {folder._count?.media || 0} Dosya / {folder._count?.children || 0} Klasör
                       </p>
                     </div>
@@ -479,13 +479,13 @@ export default function MediaPage() {
           {filter !== "folder" && (
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <h2 className="text-[11px] font-bold text-[var(--foreground-muted)]">Dosyalar ({sortedItems.length})</h2>
-                <div className="h-px flex-1 bg-[var(--border)] opacity-30" />
+                <h2 className="text-[11px] font-bold text-[#666666]">Dosyalar ({sortedItems.length})</h2>
+                <div className="h-px flex-1 bg-[#CCCCCC] opacity-30" />
               </div>
 
               {sortedItems.length === 0 ? (
-                <div className="py-12 text-center border border-dashed border-[var(--border)] ff-shape-container">
-                  <p className="text-xs text-[var(--foreground-faint)]">Seçili kategoride dosya bulunamadı.</p>
+                <div className="py-12 text-center border border-dashed border-[#CCCCCC] ff-shape-container">
+                  <p className="text-xs text-[#666666]">Seçili kategoride dosya bulunamadı.</p>
                 </div>
               ) : (
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-6">
@@ -494,10 +494,10 @@ export default function MediaPage() {
                       key={item.id}
                       draggable
                       onDragStart={(e) => onDragStart(e, item.id)}
-                      className="group relative ff-shape-container overflow-hidden border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--ff-purple)] hover:shadow-md transition-all duration-300 cursor-grab active:cursor-grabbing flex flex-col"
+                      className="group relative ff-shape-container overflow-hidden border border-[#CCCCCC] bg-[#f7f7f5] hover:border-[#ff4fd8] hover:shadow-md transition-all duration-300 cursor-grab active:cursor-grabbing flex flex-col"
                     >
                       {/* Preview Area */}
-                      <div className="aspect-square h-26 relative overflow-hidden bg-[var(--background-alt)] flex items-center justify-center">
+                      <div className="aspect-square h-26 relative overflow-hidden bg-[#f7f7f5] flex items-center justify-center">
                         {item.type === "image" ? (
                           <Image
                             src={item.url}
@@ -519,25 +519,25 @@ export default function MediaPage() {
                                 className="object-cover opacity-60"
                               />
                             ) : (
-                              <div className="w-full h-full flex items-center justify-center bg-zinc-900">
-                                <Video size={32} className="text-zinc-700" />
+                              <div className="w-full h-full flex items-center justify-center bg-[#F0F0F0]">
+                                <Video size={18} className="text-[#666666]" />
                               </div>
                             )}
                             <div className="absolute inset-0 flex items-center justify-center">
                               {item.muxStatus === "ready" ? (
-                                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30 text-white group-hover:scale-110 transition-transform">
+                                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-[#ff4fd8] text-[#ff4fd8] group-hover:scale-110 transition-transform">
                                   <Play size={18} className="ml-1" />
                                 </div>
                               ) : (
                                 <div className="flex flex-col items-center gap-2">
-                                  <Loader2 className="animate-spin text-[var(--ff-purple)]" size={20} />
-                                  <span className="text-[9px] text-white/70">İşleniyor</span>
+                                  <Loader2 className="animate-spin text-[#ff4fd8]" size={20} />
+                                  <span className="text-[9px] text-[#ff4fd8]">İşleniyor</span>
                                 </div>
                               )}
                             </div>
                           </div>
                         ) : (
-                          <div className="w-full h-full flex flex-col items-center justify-center bg-[var(--surface-muted)] text-[var(--foreground-muted)]">
+                          <div className="w-full h-full flex flex-col items-center justify-center bg-[#f7f7f5] text-[#666666]">
                             {item.type === "pdf" ? (
                               <FileText size={48} className="text-red-500/80 mb-2" />
                             ) : (
@@ -550,7 +550,7 @@ export default function MediaPage() {
                         )}
 
                         {/* Overlay Actions */}
-                        <div className="absolute inset-0 bg-black/40 backdrop-blur-xs group opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                        <div className="absolute inset-0 bg-[#F0F0F0]/40 backdrop-blur-xs group opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                           <button
                             onClick={() => setPreviewItem(item)}
                             className="w-8 h-8 ff-shape-button bg-white text-black flex items-center justify-center hover:bg-[var(--ff-purple)] hover:text-white transition-colors"
@@ -576,16 +576,16 @@ export default function MediaPage() {
                       </div>
 
                       {/* Info Area */}
-                      <div className="p-3 border-t border-[var(--border)] bg-[var(--surface)] h-[64px] flex flex-col justify-center">
-                        <p className="text-[11px] font-bold text-[var(--foreground)] truncate mb-1" title={item.title || ""}>
+                      <div className="p-3 border-t border-[#CCCCCC] bg-[#f7f7f5] h-[64px] flex flex-col justify-center">
+                        <p className="text-[11px] font-bold text-[#666666] truncate mb-1" title={item.title || ""}>
                           {item.title || "Adsız Medya"}
                         </p>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-1.5">
-                            <span className="ff-shape-button px-1.5 py-0.5 rounded-sm bg-[var(--surface-muted)] border border-[var(--border)] text-[8px] font-bold text-[var(--ff-purple)]">
+                            <span className="ff-shape-button px-2.5 py-0.5 rounded-sm bg-[#f7f7f5] border border-[#CCCCCC] text-[8px] font-bold text-[#ff4fd8]">
                               {item.mimeType?.split('/').pop()?.toUpperCase() || item.type.toUpperCase()}
                             </span>
-                            <span className="text-[9px] text-[var(--foreground-faint)] font-medium">
+                            <span className="text-[9px] text-[#666666] font-medium">
                               {item.type === "video" && item.height ? (
                                 item.height >= 2160 ? "4K" :
                                   item.height >= 1080 ? "1080p" :
@@ -636,7 +636,7 @@ export default function MediaPage() {
                   />
                 </div>
               ) : (
-                <div className="bg-[var(--surface)] p-10 ff-shape-container border border-[var(--border)] flex flex-col items-center gap-4 animate-ff-scaleIn">
+                <div className="bg-[var(--surface)] p-10 ff-shape-container border border-[#CCCCCC] flex flex-col items-center gap-4 animate-ff-scaleIn">
                   <FileText size={80} className="text-[var(--ff-purple)]" />
                   <p className="text-xl font-bold">{previewItem?.title}</p>
                   <button

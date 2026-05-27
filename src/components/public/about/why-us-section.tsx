@@ -50,13 +50,13 @@ function ComparisonRow({
         <div
           className={cn(
             "my-2 px-2 py-1 shrink-0",
-            "border border-[rgba(161,52,255,0.25)] bg-[rgba(161,52,255,0.06)]",
+            "border border-[var(--ff-purple)]/30 bg-[var(--ff-purple)]/10 text-[var(--ff-purple)]",
             "transition-[background-color,border-color,box-shadow] duration-300",
-            "group-hover:bg-[rgba(161,52,255,0.12)] group-hover:border-[rgba(161,52,255,0.45)]",
+            "group-hover:bg-[var(--ff-purple)] group-hover:border-[var(--ff-purple)]",
             "group-hover:shadow-[0_0_12px_rgba(161,52,255,0.2)]"
           )}
         >
-          <span className="font-mono text-[9px] md:text-[10px] font-semibold tracking-[0.15em] uppercase text-[#A134FF] whitespace-nowrap">
+          <span className="font-mono text-[9px] md:text-[10px] font-semibold text-[var(--ff-purple)] whitespace-nowrap">
             {diff.topic}
           </span>
         </div>
@@ -74,7 +74,7 @@ function ComparisonRow({
           aria-hidden
           className={cn(
             "shrink-0 w-6 h-6 flex items-center justify-center",
-            "bg-[#A134FF] border border-[#A134FF] text-white",
+            "bg-[var(--ff-purple)] border border-[var(--ff-purple)] text-white",
             "transition-[box-shadow] duration-300",
             "group-hover:shadow-[0_0_14px_rgba(161,52,255,0.5)]"
           )}
@@ -126,7 +126,7 @@ export function WhyUsSection() {
           transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
           className="mb-14 md:mb-20 text-center"
         >
-          <p className="mb-4 text-[11px] font-semibold tracking-[0.2em] uppercase text-[#A134FF]">
+          <p className="mb-4 text-[11px] font-semibold text-[var(--ff-purple)]">
             — Neden FlixFlex —
           </p>
           <h2
@@ -137,7 +137,7 @@ export function WhyUsSection() {
             )}
           >
             Diğerleri vs.{" "}
-            <span className="text-[#A134FF]">Biz</span>
+            <span className="text-[var(--ff-purple)]">Biz</span>
           </h2>
           <p className="mt-5 text-base md:text-lg text-[var(--foreground-muted)] max-w-2xl mx-auto leading-relaxed">
             Piyasadaki ajanslardan nasıl ayrışıyoruz? Şeffaf, direkt ve
@@ -162,7 +162,7 @@ export function WhyUsSection() {
             <span className="w-8 invisible" />
           </div>
           <div className="py-3 pl-4 md:pl-8">
-            <span className="text-[10px] font-semibold tracking-[0.18em] uppercase text-[#A134FF]">
+            <span className="text-[10px] font-semibold tracking-[0.18em] uppercase text-[var(--ff-purple)]">
               FlixFlex
             </span>
           </div>

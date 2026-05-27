@@ -72,7 +72,7 @@ export function FFStatCounter({ stats, className, variant = "grid" }: FFStatCoun
             variant === "row" && "flex-1 min-w-[180px]"
           )}
         >
-          <p className="font-display text-4xl md:text-5xl font-bold text-[var(--ff-purple)] leading-none mb-2">
+          <p className="font-display text-4xl md:text-5xl font-bold text-[var(--secondary)] leading-none mb-2">
             <Counter value={stat.value} suffix={stat.suffix} prefix={stat.prefix} />
           </p>
           <p className="font-semibold text-[var(--foreground)] text-sm uppercase tracking-wider mb-1">

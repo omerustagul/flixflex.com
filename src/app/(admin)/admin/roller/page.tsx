@@ -38,8 +38,8 @@ export default async function RolesPage() {
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-extrabold text-[var(--foreground)]">Roller</h1>
-          <p className="text-xs text-[var(--foreground-muted)] mt-1">
+          <h1 className="font-display text-2xl font-extrabold text-[#333333]">Roller</h1>
+          <p className="text-xs text-[#666666] mt-1">
             Erişim seviyelerini ve sistem rollerini yönetin
           </p>
         </div>
@@ -52,10 +52,10 @@ export default async function RolesPage() {
 
       {/* Table */}
       {roles.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-20 border border-dashed border-[var(--border)] text-center">
-          <ShieldCheck className="w-10 h-10 text-[var(--foreground-faint)] mb-4" />
-          <p className="text-sm font-medium text-[var(--foreground-muted)]">Henüz rol yok</p>
-          <p className="text-xs text-[var(--foreground-faint)] mt-1 mb-4">
+        <div className="flex flex-col items-center justify-center py-20 border border-dashed border-[#CCCCCC] text-center">
+          <ShieldCheck className="w-10 h-10 text-[#666666] mb-4" />
+          <p className="text-sm font-medium text-[#666666]">Henüz rol yok</p>
+          <p className="text-xs text-[#666666] mt-1 mb-4">
             İlk rolü oluşturarak başlayın
           </p>
           <Link href="/admin/roller/yeni">
@@ -65,22 +65,22 @@ export default async function RolesPage() {
           </Link>
         </div>
       ) : (
-        <div className="ff-shape-container border border-[var(--border)] overflow-hidden">
+        <div className="ff-shape-container border border-[#CCCCCC] overflow-hidden">
           {/* Table header */}
-          <div className="grid grid-cols-[1fr_2fr_auto_auto_auto] gap-4 px-6 py-3 bg-[var(--background)] border-b border-[var(--border)]">
-            <span className="text-[10px] font-semibold tracking-[0.08em] uppercase text-[var(--foreground-muted)]">
+          <div className="grid grid-cols-[1fr_2fr_auto_auto_auto] gap-4 px-6 py-3 bg-[#f7f7f5] border-b border-[#CCCCCC]">
+            <span className="text-[10px] font-semibold tracking-[0.08em] uppercase text-[#666666]">
               Rol Adı
             </span>
-            <span className="text-[10px] font-semibold tracking-[0.08em] uppercase text-[var(--foreground-muted)]">
+            <span className="text-[10px] font-semibold tracking-[0.08em] uppercase text-[#666666]">
               Açıklama
             </span>
-            <span className="text-[10px] font-semibold tracking-[0.08em] uppercase text-[var(--foreground-muted)] text-center">
+            <span className="text-[10px] font-semibold tracking-[0.08em] uppercase text-[#666666] text-center">
               Kullanıcılar
             </span>
-            <span className="text-[10px] font-semibold tracking-[0.08em] uppercase text-[var(--foreground-muted)] text-center">
+            <span className="text-[10px] font-semibold tracking-[0.08em] uppercase text-[#666666] text-center">
               İzinler
             </span>
-            <span className="text-[10px] font-semibold tracking-[0.08em] uppercase text-[var(--foreground-muted)] text-right">
+            <span className="text-[10px] font-semibold tracking-[0.08em] uppercase text-[#666666] text-right">
               İşlemler
             </span>
           </div>
@@ -89,12 +89,12 @@ export default async function RolesPage() {
           {roles.map((role) => (
             <div
               key={role.id}
-              className="grid grid-cols-[1fr_2fr_auto_auto_auto] gap-4 px-6 py-4 border-b border-[var(--border)] last:border-b-0
-                         hover:bg-[var(--surface)] transition-colors items-center"
+              className="grid grid-cols-[1fr_2fr_auto_auto_auto] gap-4 px-6 py-4 border-b border-[#CCCCCC] last:border-b-0
+                         hover:bg-[#f7f7f5] transition-colors items-center"
             >
               {/* Name + system badge */}
               <div className="flex items-center gap-2 min-w-0">
-                <span className="font-semibold text-sm text-[var(--foreground)] truncate">
+                <span className="font-semibold text-sm text-[#333333] truncate">
                   {role.name}
                 </span>
                 {role.isSystem && (
@@ -103,12 +103,12 @@ export default async function RolesPage() {
               </div>
 
               {/* Description */}
-              <span className="text-sm text-[var(--foreground-muted)] truncate">
+              <span className="text-sm text-[#666666] truncate">
                 {role.description ?? <span className="opacity-40">—</span>}
               </span>
 
               {/* User count */}
-              <div className="flex items-center justify-center gap-1 text-sm text-[var(--foreground)]">
+              <div className="flex items-center justify-center gap-1 text-sm text-[#333333]">
                 <Users className="w-3.5 h-3.5" />
                 <span>{role._count.users}</span>
               </div>

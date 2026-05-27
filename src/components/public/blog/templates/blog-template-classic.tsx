@@ -75,13 +75,13 @@ export function BlogTemplateClassic({ post, related }: ClassicTemplateProps) {
           </h1>
 
           {/* Excerpt / lead */}
-          <p className="text-lg md:text-xl text-[var(--foreground-muted)] leading-[1.7] mb-8 border-l-2 border-[#A134FF] pl-5">
+          <p className="text-lg md:text-xl text-[var(--foreground-muted)] leading-[1.7] mb-8 border-l-2 border-[var(--ff-purple)] pl-5">
             {post.excerpt}
           </p>
 
           {/* Author strip */}
           <div className="flex items-center gap-3 pb-8 mb-8 border-b border-[var(--border)]">
-            <span className="w-10 h-10 flex items-center justify-center text-sm font-bold text-white bg-[#A134FF] flex-shrink-0">
+            <span className="w-10 h-10 flex items-center justify-center text-sm font-bold text-white bg-[var(--ff-purple)] flex-shrink-0">
               {post.author.initials}
             </span>
             <div>
@@ -102,7 +102,7 @@ export function BlogTemplateClassic({ post, related }: ClassicTemplateProps) {
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] border border-[var(--border)] text-[var(--foreground-muted)] hover:border-[rgba(161,52,255,0.45)] hover:text-[#A134FF] transition-colors duration-200 cursor-default"
+                className="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] border border-[var(--border)] text-[var(--foreground-muted)] hover:border-[var(--ff-purple)]/40 hover:text-[var(--ff-purple)] transition-colors duration-200 cursor-default"
               >
                 #{tag}
               </span>
@@ -125,7 +125,7 @@ export function BlogTemplateClassic({ post, related }: ClassicTemplateProps) {
 
       <CTASection
         eyebrow="— Birlikte Büyüyelim —"
-        title={<>Markanızı bir üst seviyeye <span className="text-[#A134FF]">taşıyalım.</span></>}
+        title={<>Markanızı bir üst seviyeye <span className="text-[var(--ff-purple)]">taşıyalım.</span></>}
         description="Bu makaleyi beğendiyseniz, FlixFlex'in markanız için neler yapabileceğini keşfedin."
       />
     </>

@@ -53,23 +53,23 @@ export function QuickActions() {
               <Link href={action.href}>
                 <TiltCard
                   variant="glass"
-                  className="flex flex-row items-start justify-between vertical-align: middle gap-3 p-4 overflow-hidden"
+                  className="flex flex-row items-start justify-between vertical-align: middle bg-[#ff4fd8]/10 border border-[#ff4fd8]/30 gap-3 p-4 overflow-hidden"
                 >
                   {/* Left accent on hover */}
-                  <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-[var(--ff-purple)] opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                  <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-[#ff4fd8] opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
 
                   <div className="flex items-center gap-3">
-                    <div className="ff-shape-button w-9 h-9 flex items-center justify-center bg-[rgba(161,52,255,0.08)] shrink-0">
+                    <div className="ff-shape-button w-9 h-9 flex items-center justify-center bg-[#ff4fd8]/10 shrink-0">
                       <Icon
                         size={16}
-                        className="text-[var(--foreground-muted)] group-hover:text-[var(--ff-purple)] transition-colors duration-200"
+                        className="text-[#ff4fd8] transition-colors duration-200"
                       />
                     </div>
                     <div>
-                      <p className="text-[13px] font-semibold text-[var(--foreground)] leading-tight">
+                      <p className="text-[13px] font-semibold text-[#0d0d0d] leading-tight">
                         {action.label}
                       </p>
-                      <p className="text-[11px] text-[var(--foreground-faint)] mt-0.5">
+                      <p className="text-[11px] text-[#888888] mt-0.5">
                         {action.description}
                       </p>
                     </div>
@@ -77,7 +77,7 @@ export function QuickActions() {
 
                   <ArrowUpRight
                     size={14}
-                    className="shrink-0 text-[var(--foreground-faint)] group-hover:text-[var(--ff-purple)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200"
+                    className="shrink-0 text-[#888888] group-hover:text-[#ff4fd8] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200"
                   />
                 </TiltCard>
               </Link>

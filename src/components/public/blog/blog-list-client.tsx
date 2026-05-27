@@ -126,7 +126,7 @@ export function BlogListClient() {
               "ff-shape-button px-5 py-2.5 text-[11px] font-semibold border transition-all duration-200",
               safePage <= 1
                 ? "border-[var(--border)] text-[var(--foreground-faint)] cursor-not-allowed opacity-40"
-                : "border-[var(--border)] text-[var(--foreground-muted)] hover:border-[rgba(161,52,255,0.45)] hover:text-[#A134FF]"
+                : "border-[var(--border)] text-[var(--foreground-muted)] hover:border-[var(--ff-purple)]/40 hover:text-[var(--ff-purple)]"
             )}
             aria-label="Önceki sayfa"
           >
@@ -145,7 +145,7 @@ export function BlogListClient() {
               "ff-shape-button px-5 py-2.5 text-[11px] font-semibold border transition-all duration-200",
               safePage >= totalPages
                 ? "border-[var(--border)] text-[var(--foreground-faint)] cursor-not-allowed opacity-40"
-                : "border-[var(--border)] text-[var(--foreground-muted)] hover:border-[rgba(161,52,255,0.45)] hover:text-[#A134FF]"
+                : "border-[var(--border)] text-[var(--foreground-muted)] hover:border-[var(--ff-purple)]/40 hover:text-[var(--ff-purple)]"
             )}
             aria-label="Sonraki sayfa"
           >

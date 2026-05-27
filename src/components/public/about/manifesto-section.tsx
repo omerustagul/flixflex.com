@@ -21,7 +21,7 @@ function RevealWord({
 }: RevealWordProps) {
   const colorClass = {
     white: "text-[var(--foreground)]",
-    purple: "text-[#A134FF]",
+    purple: "text-[var(--ff-purple)]",
     muted: "text-[var(--foreground-faint)]",
   }[color]
 
@@ -58,7 +58,7 @@ function Dot({ delay }: { delay: number }) {
   return (
     <motion.span
       aria-hidden
-      className="inline-block mx-[0.2em] align-middle w-[0.14em] h-[0.14em] bg-[#A134FF] self-center shrink-0"
+      className="inline-block mx-[0.2em] align-middle w-[0.14em] h-[0.14em] bg-[var(--ff-purple)] self-center shrink-0"
       initial={{ opacity: 0, scale: 0 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: "-15%" }}
@@ -80,7 +80,7 @@ function SubTagline() {
   ]
 
   return (
-    <p className="overflow-hidden font-display text-[clamp(14px,2vw,22px)] tracking-[0.08em] uppercase text-[var(--foreground-muted)]">
+    <p className="overflow-hidden font-display text-[clamp(14px,2vw,22px)] text-[var(--foreground-muted)]">
       {words.map((word, i) => (
         <motion.span
           key={i}
@@ -215,7 +215,7 @@ export function ManifestoSection() {
 
         {/* Bottom line separator */}
         <motion.div
-          className="mt-14 mx-auto h-px w-32 bg-gradient-to-r from-transparent via-[#A134FF] to-transparent"
+          className="mt-14 mx-auto h-px w-32 bg-gradient-to-r from-transparent via-[var(--ff-purple)] to-transparent"
           initial={{ scaleX: 0, opacity: 0 }}
           whileInView={{ scaleX: 1, opacity: 1 }}
           viewport={{ once: true }}

@@ -81,7 +81,7 @@ export function ChangePasswordForm({ userId }: ChangePasswordFormProps) {
         <button
           type="button"
           className="flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.07em] uppercase
-                     text-[var(--foreground-muted)] hover:text-[#A134FF] transition-colors"
+                     text-[var(--foreground-muted)] hover:text-[var(--ff-purple)] transition-colors"
           onClick={() => {
             alert("Şifre sıfırlama maili gönderme özelliği henüz aktif değil. (TODO: Resend/SMTP entegrasyonu)")
           }}

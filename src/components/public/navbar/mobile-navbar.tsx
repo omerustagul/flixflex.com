@@ -73,7 +73,7 @@ export function MobileNavbar({
       {/* Subtle top accent line — slightly purple */}
       <div
         aria-hidden
-        className="absolute -top-px inset-x-0 h-px bg-gradient-to-r from-transparent via-[#A134FF] to-transparent opacity-40"
+        className="absolute -top-px inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--ff-purple)] to-transparent opacity-40"
       />
 
       <ul
@@ -95,7 +95,7 @@ export function MobileNavbar({
                   "transition-colors duration-200",
                   variant === "dock" ? "py-2" : "py-1.5",
                   active
-                    ? "text-[#A134FF]"
+                    ? "text-[var(--ff-purple)]"
                     : "text-[var(--foreground-muted)] hover:text-[var(--foreground)]"
                 )}
               >
@@ -103,7 +103,7 @@ export function MobileNavbar({
                 {active && (
                   <motion.span
                     layoutId="mobile-nav-active"
-                    className="absolute inset-x-3 top-0 h-[2px] bg-[#A134FF]"
+                    className="absolute inset-x-3 top-0 h-[2px] bg-[var(--ff-purple)] rounded-full"
                     transition={{
                       type: "spring",
                       stiffness: 350,

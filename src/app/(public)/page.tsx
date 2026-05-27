@@ -37,7 +37,7 @@ export default async function HomePage() {
     servicesItems = (await listPublishedServices()).filter((s) => !s.parentId);
   } catch (err) {
     console.error('[HomePage] Services load error:', err);
-    servicesItems = SERVICES;
+    servicesItems = SERVICES.map(({ icon, ...rest }) => rest);
   }
 
   const pageData = await getPageBySlug("anasayfa")

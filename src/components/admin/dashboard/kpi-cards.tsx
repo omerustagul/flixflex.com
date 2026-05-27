@@ -101,26 +101,26 @@ function KpiCard({
     >
       <TiltCard
         variant="glass"
-        className="p-5 overflow-hidden"
+        className="bg-[#ff4fd8]/10 border border-[#ff4fd8]/30 p-5 overflow-hidden"
       >
         {/* Top purple accent on hover */}
-        <div className="absolute inset-x-0 top-0 h-px bg-[var(--ff-purple)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-x-0 top-0 h-px bg-[#ff4fd8] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
         {/* Icon */}
         <div
-          className="ff-shape-button w-9 h-9 flex items-center justify-center mb-4"
-          style={{ background: "rgba(161,52,255,0.1)" }}
+          className="ff-shape-button bg-[#ff4fd8]/10 w-9 h-9 flex items-center justify-center mb-4"
+          style={{ background: "rgba(255, 79, 216, 0.1)" }}
         >
           <Icon size={17} style={{ color }} />
         </div>
 
         {/* Value */}
-        <p className="font-display text-3xl font-bold text-[var(--foreground)] leading-none tabular-nums">
+        <p className="font-display text-3xl font-bold text-[#0d0d0d] leading-none tabular-nums">
           {display.toLocaleString("tr-TR")}{suffix}
         </p>
 
         {/* Label */}
-        <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--foreground-muted)] mt-2">
+        <p className="text-[11px] font-semibold text-[#888888] mt-2">
           {label}
         </p>
 
@@ -133,12 +133,12 @@ function KpiCard({
               "text-[11px] font-medium",
               up === true ? "text-green-500" :
                 up === false ? "text-red-400" :
-                  "text-[var(--foreground-faint)]"
+                  "text-[#888888]"
             )}
           >
             {delta}
           </span>
-          <span className="text-[11px] text-[var(--foreground-faint)]">{deltaLabel}</span>
+          <span className="text-[11px] text-[#888888]">{deltaLabel}</span>
         </div>
       </TiltCard>
     </motion.div>

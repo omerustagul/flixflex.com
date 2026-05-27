@@ -1,11 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { motion } from "framer-motion"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { ease } from "@/lib/animations"
-import { TiltCard } from "@/components/ui/tilt-card"
 import type { PortfolioItem } from "@/components/public"
 
 interface PrevNextProps {
@@ -25,79 +22,84 @@ function NavSide({
   return (
     <Link
       href={`/portfolio/${item.slug}`}
-      className="flex-1 block"
+      className="flex-1 block relative group min-h-[300px] md:min-h-[400px] overflow-hidden ff-shape-container border border-[var(--border)]"
     >
-      <TiltCard
-        variant="glass"
-        className={cn(
-          "flex flex-col gap-3 p-8 md:p-10 overflow-hidden",
-          isNext ? "items-end text-right" : "items-start text-left"
-        )}
-      >
-        {/* Hover aura */}
-        <div
-          aria-hidden
-          className={cn(
-            "absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500",
-            isNext
-              ? "bg-[radial-gradient(ellipse_at_right_center,rgba(161,52,255,0.08)_0%,transparent_60%)]"
-              : "bg-[radial-gradient(ellipse_at_left_center,rgba(161,52,255,0.08)_0%,transparent_60%)]"
-          )}
-        />
+      {/* Background Image */}
+      <img
+        src={item.coverImage || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800"}
+        alt={item.title}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        loading="lazy"
+      />
 
-        {/* Direction label */}
-        <div
-          className={cn(
-            "flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] uppercase",
-            "text-[var(--foreground-faint)] group-hover:text-[var(--ff-purple)] transition-colors duration-200"
-          )}
-        >
-          {!isNext && (
-            <motion.span
-              animate={{ x: [0, -4, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: ease.smooth }}
-            >
-              <ArrowLeft size={12} />
-            </motion.span>
-          )}
+      {/* Dark Ambient Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent pointer-events-none z-0" />
+      <div className="absolute inset-0 bg-[var(--ff-purple)]/0 group-hover:bg-[var(--ff-purple)]/8 transition-colors duration-500 z-0" />
+      <div className="absolute inset-0 ring-1 ring-inset ring-white/0 group-hover:ring-[var(--ff-purple)]/40 transition-all duration-500 z-0" />
+
+      {/* Content */}
+      <div className={cn(
+        "absolute inset-0 z-10 p-8 md:p-12 flex flex-col justify-between text-white",
+        isNext ? "items-end text-right" : "items-start text-left"
+      )}>
+        {/* Top: Direction Indicator */}
+        <div className={cn(
+          "flex items-center gap-2 text-[10px] font-semibold tracking-[0.25em] uppercase text-white/60 group-hover:text-[var(--ff-purple)] transition-colors duration-300"
+        )}>
+          {!isNext && <ArrowLeft size={12} className="transition-transform duration-300 group-hover:-translate-x-1" />}
           <span>{isNext ? "Sonraki Proje" : "Önceki Proje"}</span>
-          {isNext && (
-            <motion.span
-              animate={{ x: [0, 4, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: ease.smooth }}
-            >
-              <ArrowRight size={12} />
-            </motion.span>
-          )}
+          {isNext && <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-1" />}
         </div>
 
-        {/* Project title — big */}
-        <p
-          className={cn(
-            "font-display font-extrabold leading-[0.9] tracking-tight",
-            "text-[clamp(22px,3.5vw,48px)]",
-            "text-[var(--foreground)] group-hover:text-[var(--ff-purple)]",
-            "transition-colors duration-200"
+        {/* Bottom: Client and Title */}
+        <div className={cn(
+          "flex flex-col gap-2 md:gap-3",
+          isNext ? "items-end" : "items-start"
+        )}>
+          {/* Logo or Initial */}
+          {item.clientLogo ? (
+            <img
+              src={item.clientLogo}
+              alt={item.client ?? ""}
+              className="h-5 w-auto max-w-[90px] object-contain filter brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+              loading="lazy"
+            />
+          ) : (
+            <div className="w-5 h-5 rounded-full bg-[var(--ff-purple)]/20 border border-[var(--ff-purple)]/40 flex items-center justify-center text-[10px] font-bold text-[var(--ff-purple)]">
+              {item.client ? item.client.charAt(0) : "P"}
+            </div>
           )}
-        >
-          {item.title}
-        </p>
 
-        {/* Client + category */}
-        <p className="text-[11px] font-medium tracking-[0.15em] uppercase text-[var(--foreground-faint)]">
-          {item.client} &middot; {item.category}
-        </p>
+          <div className={cn(
+            "flex flex-col gap-1",
+            isNext ? "items-end" : "items-start"
+          )}>
+            <span className="text-white/50 text-[10px] font-semibold tracking-wider uppercase">
+              {item.client} &middot; {item.category}
+            </span>
+            <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-extrabold leading-[1.15] tracking-tight group-hover:text-[var(--ff-purple)] transition-colors duration-300 max-w-lg">
+              {item.title}
+            </h3>
+          </div>
 
-        {/* Bottom corner accent */}
-        <span
-          aria-hidden
-          className={cn(
-            "absolute bottom-0 h-[2px] w-0 bg-[var(--ff-purple)]",
-            "group-hover:w-full transition-all duration-500",
-            isNext ? "right-0" : "left-0"
-          )}
-        />
-      </TiltCard>
+          {/* Hover Action */}
+          <div className="h-5 overflow-hidden mt-1">
+            <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[var(--ff-purple)] opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out">
+              Projeyi İncele {isNext ? <ArrowRight size={12} className="ml-0.5" /> : <ArrowLeft size={12} className="mr-0.5 order-first" />}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom accent glow border */}
+      <span
+        aria-hidden
+        className={cn(
+          "absolute bottom-0 h-[2px] w-0 bg-[var(--ff-purple)]",
+          "group-hover:w-full transition-all duration-500",
+          isNext ? "right-0" : "left-0"
+        )}
+      />
     </Link>
   )
 }
@@ -106,17 +108,12 @@ export function PrevNextNav({ prev, next }: PrevNextProps) {
   if (!prev && !next) return null
 
   return (
-    <div className="border-t border-[var(--border)]">
-      <div className="flex flex-col md:flex-row">
+    <div className="bg-[var(--background)] px-6 md:px-10 xl:px-16 py-10">
+      <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row gap-6">
         {prev ? (
           <NavSide item={prev} direction="prev" />
         ) : (
           <div className="flex-1" />
-        )}
-
-        {/* Divider */}
-        {prev && next && (
-          <div className="w-px bg-[var(--border)] hidden md:block" />
         )}
 
         {next ? (

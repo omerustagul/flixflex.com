@@ -17,7 +17,7 @@ import * as Tabs from "@radix-ui/react-tabs"
 import { HexColorPicker } from "react-colorful"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { Menu, Loader2, LayoutGrid, Square, Hexagon, Scissors, Smartphone, Layers, MoreHorizontal, Trash2, ChevronLeft, RotateCcw, Save, X } from "lucide-react"
+import { Menu, Loader2, LayoutGrid, Square, Hexagon, Scissors, Smartphone, Layers, MoreHorizontal, Trash2, ChevronLeft, RotateCcw, Save, X, Check } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { checkWCAG } from "@/lib/utils"
 import { FFBadge } from "@/components/ui"
@@ -135,14 +135,14 @@ function ColorField({ label, hint, value, onChange, allowRgba }: ColorFieldProps
   }
 
   return (
-    <div className="flex items-center gap-3 py-2 border-b border-[var(--border)] last:border-b-0">
+    <div className="flex items-center gap-3 py-2 border-b border-[#E0E0E0] last:border-b-0">
       {/* Swatch + Picker popover */}
       <Popover.Root>
         <Popover.Trigger asChild>
           <button
             type="button"
             aria-label={`${label} rengini seç`}
-            className="ff-shape-button w-9 h-9 flex-shrink-0 border-2 border-[var(--border)] hover:border-[var(--ff-purple)] transition-colors"
+            className="ff-shape-button w-9 h-9 flex-shrink-0 border-2 border-[#E0E0E0] hover:border-[#FF4FD8] transition-colors"
             style={{ backgroundColor: value }}
           />
         </Popover.Trigger>
@@ -151,7 +151,7 @@ function ColorField({ label, hint, value, onChange, allowRgba }: ColorFieldProps
             side="right"
             align="start"
             sideOffset={8}
-            className="z-50 bg-[var(--surface-elevated)] border border-[var(--border)] p-3 shadow-xl"
+            className="z-50 bg-[#F7F7F5] border border-[#E0E0E0] p-3 shadow-xl"
           >
             <HexColorPicker
               color={toPickerHex(value)}
@@ -160,7 +160,7 @@ function ColorField({ label, hint, value, onChange, allowRgba }: ColorFieldProps
                 setInputVal(hex)
               }}
             />
-            <Popover.Arrow className="fill-[var(--border)]" />
+            <Popover.Arrow className="fill-[#E0E0E0]" />
           </Popover.Content>
         </Popover.Portal>
       </Popover.Root>
@@ -168,7 +168,7 @@ function ColorField({ label, hint, value, onChange, allowRgba }: ColorFieldProps
       {/* Label + hex input */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between gap-2">
-          <label className="text-[11px] font-semibold tracking-widest uppercase text-[var(--foreground-muted)] truncate">
+          <label className="text-[11px] font-semibold tracking-widest uppercase text-[#666666] truncate">
             {label}
           </label>
           <input
@@ -180,15 +180,15 @@ function ColorField({ label, hint, value, onChange, allowRgba }: ColorFieldProps
               if (e.key === "Enter") commitInput((e.target as HTMLInputElement).value)
             }}
             className={cn(
-              "ff-shape-container w-36 text-[12px] font-mono bg-[var(--surface)] border border-[var(--border)]",
-              "px-2 py-1 outline-none text-[var(--foreground)]",
-              "focus:border-[var(--ff-purple)] focus:shadow-[0_0_0_2px_rgba(161,52,255,0.15)]"
+              "ff-shape-container w-36 text-[12px] font-mono bg-[#F7F7F5]] border border-[#E0E0E0] focus:border-[#FF4FD8] focus:shadow-[0_0_5px_rgba(255,79,216,0.5)]",
+              "px-2 py-1 outline-none text-[#666666]",
+              "focus:border-[#FF4FD8] focus:shadow-[0_0_5px_rgba(255,79,216,0.5)]"
             )}
             spellCheck={false}
           />
         </div>
         {hint && (
-          <p className="text-[10px] text-[var(--foreground-faint)] mt-0.5">{hint}</p>
+          <p className="text-[10px] text-[#666666] mt-0.5">{hint}</p>
         )}
       </div>
     </div>
@@ -239,7 +239,7 @@ function LivePreview({
 
   return (
     <div
-      className="ff-shape-container border border-[var(--border)] overflow-hidden"
+      className="ff-shape-container border border-[#E0E0E0] overflow-hidden"
       style={styleVars as React.CSSProperties}
     >
       {/* Mini navbar */}
@@ -251,7 +251,7 @@ function LivePreview({
         }}
       >
         <span
-          className="text-[11px] font-bold tracking-widest uppercase"
+          className="text-[11px] font-bold"
           style={{ color: "var(--ff-purple)" }}
         >
           FlixFlex
@@ -260,7 +260,7 @@ function LivePreview({
           {["Anasayfa", "Blog", "İletişim"].map((item) => (
             <span
               key={item}
-              className="text-[10px] uppercase tracking-wider"
+              className="text-[10px]"
               style={{ color: "#FFFFFF99" }}
             >
               {item}
@@ -275,8 +275,8 @@ function LivePreview({
         style={{ backgroundColor: "var(--background)" }}
       >
         <p
-          className="text-[13px] font-bold uppercase tracking-widest mb-2"
-          style={{ color: "var(--foreground)", fontFamily: "var(--font-display)" }}
+          className="text-[13px] font-bold mb-2"
+          style={{ color: "#FFFFFF", fontFamily: "var(--font-display)" }}
         >
           Dijital Reklamda Yeni Dönem
         </p>
@@ -416,18 +416,18 @@ function VariantTile({ active, onClick, icon, title, hint, preview }: VariantTil
         "ff-shape-container group relative flex flex-col gap-3 p-4 text-left",
         "border transition-all duration-200",
         active
-          ? "border-[var(--ff-purple)] bg-[rgba(161,52,255,0.06)] shadow-[0_0_0_3px_rgba(161,52,255,0.15)]"
-          : "border-[var(--border)] hover:border-[var(--border-strong)]"
+          ? "border-[#ff4fd8]/40 bg-[rgba(255,79,216,0.1)] shadow-[0_0_0_3px_rgba(255,79,216,0.3)]"
+          : "border-[#CCCCCC] hover:border-[#ff4fd8]/40 hover:bg-[rgba(255,79,216,0.1)]",
       )}
     >
       <div className="flex items-center gap-2.5">
         <span
           className={cn(
-            "w-7 h-7 flex items-center justify-center",
+            "ff-shape-container w-7 h-7 flex items-center justify-center",
             "transition-colors duration-200",
             active
-              ? "bg-[var(--ff-purple)] text-white"
-              : "bg-[var(--surface)] text-[var(--foreground-muted)]"
+              ? "bg-[#ff4fd8] text-white"
+              : "bg-[#F0F0F0] text-[#0d0d0d] group-hover:bg-[#ff4fd8] group-hover:text-white"
           )}
         >
           {icon}
@@ -436,20 +436,20 @@ function VariantTile({ active, onClick, icon, title, hint, preview }: VariantTil
           <p
             className={cn(
               "font-display text-sm font-bold leading-tight",
-              active ? "text-[var(--ff-purple)]" : "text-[var(--foreground)]"
+              active ? "text-[#ff4fd8]" : "text-[#0d0d0d]"
             )}
           >
             {title}
           </p>
           {hint && (
-            <p className="text-[10px] text-[var(--foreground-faint)] leading-tight mt-0.5">
+            <p className="text-[10px] text-[#010000] leading-tight mt-0.5">
               {hint}
             </p>
           )}
         </div>
       </div>
       {preview && (
-        <div className="border-t border-[var(--border)] pt-3 mt-1">{preview}</div>
+        <div className="border-t border-[#CCCCCC] pt-3 mt-1">{preview}</div>
       )}
     </button>
   )
@@ -466,7 +466,7 @@ function HeaderVariantPicker({
   return (
     <section>
       <header className="mb-3">
-        <p className="text-[10px] uppercase tracking-widest font-semibold text-[var(--foreground-faint)] mb-1">
+        <p className="text-[10px] font-semibold text-[#010000] mb-1">
           Header Tasarımı
         </p>
         <p className="text-[12px] text-[var(--foreground-muted)] leading-relaxed">
@@ -483,13 +483,13 @@ function HeaderVariantPicker({
           hint="Logo · Yatay nav · CTA"
           preview={
             <div className="flex items-center justify-between gap-1">
-              <span className="w-6 h-3 bg-[var(--ff-purple)]" />
+              <span className="w-6 h-3 bg-[#ff4fd8]" />
               <div className="flex-1 flex gap-1.5 justify-center">
                 {[1, 2, 3].map((i) => (
-                  <span key={i} className="h-1 w-4 bg-[var(--foreground-muted)]" />
+                  <span key={i} className="h-1 w-4 bg-[#888888]" />
                 ))}
               </div>
-              <span className="h-3 w-10 bg-[var(--foreground)]" />
+              <span className="h-3 w-10 bg-[#888888]" />
             </div>
           }
         />
@@ -501,12 +501,12 @@ function HeaderVariantPicker({
           hint="Logo · Menü → Tam ekran overlay"
           preview={
             <div className="flex items-center justify-between gap-2">
-              <span className="w-6 h-3 bg-[var(--ff-purple)]" />
-              <span className="flex items-center gap-1.5 px-2 py-1 border border-[var(--foreground)]">
-                <span className="text-[8px] text-[var(--foreground)] font-bold">
+              <span className="w-6 h-3 bg-[#ff4fd8]" />
+              <span className="flex items-center gap-1.5 px-2 py-1 border border-[#888888]">
+                <span className="text-[8px] text-[#888888] font-bold">
                   Menü
                 </span>
-                <Menu size={9} className="text-[var(--foreground)]" />
+                <Menu size={9} className="text-[#888888]" />
               </span>
             </div>
           }
@@ -594,7 +594,7 @@ function ShapeVariantPicker({
               hint={opt.hint}
               preview={
                 <span
-                  className="block h-7 bg-[var(--ff-purple)]/10 border border-[var(--ff-purple)]"
+                  className="block h-7 bg-[#ff4fd8]/10 border border-[#ff4fd8] mx-auto"
                   style={opt.previewStyle}
                 />
               }
@@ -632,14 +632,14 @@ function MobileNavbarPicker({
       </header>
 
       {/* On / Off toggle */}
-      <div className="ff-shape-container flex items-center justify-between gap-3 px-4 py-3 border border-[var(--border)] mb-4">
+      <div className="ff-shape-container flex items-center justify-between gap-3 px-4 py-3 border border-[#CCCCCC] mb-4">
         <div className="flex items-center gap-2.5">
-          <Smartphone size={16} className="text-[var(--ff-purple)]" />
+          <Smartphone size={16} className="text-[#ff4fd8]" />
           <div>
-            <p className="text-[13px] font-semibold text-[var(--foreground)]">
+            <p className="text-[13px] font-semibold text-[#0d0d0d]">
               Alt Navbar
             </p>
-            <p className="text-[10px] text-[var(--foreground-faint)]">
+            <p className="text-[10px] text-[#010000]">
               {enabled ? "Açık" : "Kapalı"}
             </p>
           </div>
@@ -650,16 +650,16 @@ function MobileNavbarPicker({
           aria-checked={enabled}
           onClick={() => onToggle(!enabled)}
           className={cn(
-            "ff-shape-button relative w-11 h-6 transition-colors duration-200",
+            "relative w-11 h-6 rounded-full transition-colors duration-200",
             "border",
             enabled
-              ? "bg-[var(--ff-purple)] border-[var(--ff-purple)]"
-              : "bg-[var(--surface)] border-[var(--border-strong)]"
+              ? "bg-[#ff4fd8]/80 border-[#ff4fd8]"
+              : "bg-[#F0F0F0] border-[#CCCCCC]"
           )}
         >
           <span
             className={cn(
-              "ff-shape-button absolute top-0.25 left-0.25 w-5 h-5 bg-white transition-transform duration-200",
+              "absolute top-0.25 left-0.25 w-5 h-5 rounded-full bg-[#f7f7f5] transition-transform duration-200",
               enabled && "translate-x-[20px]"
             )}
           />
@@ -688,16 +688,16 @@ function MobileNavbarPicker({
                       className={cn(
                         "w-5 h-5",
                         i === 1
-                          ? "bg-[var(--ff-purple)]"
-                          : "bg-[var(--foreground-muted)]"
+                          ? "bg-[#ff4fd8]"
+                          : "bg-[#888888]"
                       )}
                     />
                     <span
                       className={cn(
                         "h-1 w-4",
                         i === 1
-                          ? "bg-[var(--ff-purple)]"
-                          : "bg-[var(--foreground-faint)]"
+                          ? "bg-[#ff4fd8]"
+                          : "bg-[#888888]"
                       )}
                     />
                   </div>
@@ -718,7 +718,7 @@ function MobileNavbarPicker({
                     key={i}
                     className={cn(
                       "w-5 h-5",
-                      i === 1 ? "bg-[var(--ff-purple)]" : "bg-[var(--foreground-muted)]"
+                      i === 1 ? "bg-[#ff4fd8]" : "bg-[#888888]"
                     )}
                   />
                 ))}
@@ -949,12 +949,12 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
         <div>
           <Link
             href="/admin/theme"
-            className="inline-flex items-center gap-1 text-[12px] text-[var(--foreground-faint)] hover:text-[var(--ff-purple)] transition-colors"
+            className="inline-flex items-center gap-1 text-[12px] text-[#666666] hover:text-[#ff4fd8] transition-colors"
           >
             <ChevronLeft size={13} />
             Temalar&apos;a Geri Dön
           </Link>
-          <h1 className="font-display text-2xl font-bold text-[var(--foreground)] mt-1">
+          <h1 className="font-display text-2xl font-bold text-[#0D0D0D] mt-1">
             {initial.name}
           </h1>
         </div>
@@ -966,9 +966,9 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
       </div>
 
       {/* Name + description */}
-      <div className="ff-card grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="ff-card bg-[#F7F7F5] border border-[#E0E0E0] grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="flex flex-col gap-1.5">
-          <label className="text-[11px] font-semibold tracking-widest uppercase text-[var(--foreground-muted)]">
+          <label className="text-[11px] font-semibold tracking-widest uppercase text-[#666666]">
             Tema Düzeni Adı
           </label>
           <input
@@ -977,13 +977,13 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
             onChange={(e) => setName(e.target.value)}
             disabled={initial.isSystem}
             className={cn(
-              "ff-shape-button ff-input text-sm",
+              "ff-shape-button ff-input font-bold bg-[#f7f7f5] border border-[#E0E0E0] text-[#666666] text-sm",
               initial.isSystem && "opacity-50 cursor-not-allowed"
             )}
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <label className="text-[11px] font-semibold tracking-widest uppercase text-[var(--foreground-muted)]">
+          <label className="text-[11px] font-semibold text-[#666666]">
             Açıklama
           </label>
           <input
@@ -991,7 +991,7 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Kısa bir açıklama..."
-            className="ff-shape-button ff-input text-sm"
+            className="ff-shape-button ff-input font-bold bg-[#f7f7f5] border border-[#E0E0E0] text-[#666666] text-sm"
           />
         </div>
       </div>
@@ -999,9 +999,9 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
       {/* Two-column editor layout */}
       <div className="grid grid-cols-1 xl:grid-cols-[1fr_360px] gap-6 items-start">
         {/* Left — color fields */}
-        <div className="ff-card space-y-0">
+        <div className="ff-card bg-[#F7F7F5] border border-[#E0E0E0] space-y-0">
           <Tabs.Root defaultValue="light">
-            <Tabs.List className="flex border-b border-[var(--border)] mb-4 flex-wrap">
+            <Tabs.List className="flex border-b border-[#E0E0E0] mb-4 flex-wrap">
               {[
                 { value: "light", label: "Aydınlık Renkler" },
                 { value: "dark", label: "Karanlık Renkler" },
@@ -1015,8 +1015,8 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
                   className={cn(
                     "px-5 py-2.5 text-[11px] font-semibold",
                     "border-b-2 border-transparent -mb-px transition-colors",
-                    "text-[var(--foreground-muted)] hover:text-[var(--foreground)]",
-                    "data-[state=active]:border-[var(--ff-purple)] data-[state=active]:text-[var(--ff-purple)]"
+                    "text-[#666666] hover:text-[#0D0D0D]",
+                    "data-[state=active]:border-[#ff4fd8] data-[state=active]:text-[#ff4fd8]"
                   )}
                 >
                   {tab.label}
@@ -1051,31 +1051,31 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
             <Tabs.Content value="fonts" className="space-y-8">
               <section>
                 <header className="mb-4">
-                  <p className="text-[10px] uppercase tracking-widest font-semibold text-[var(--foreground-faint)] mb-1">
+                  <p className="text-[10px] font-semibold text-[#666666] mb-1">
                     Yazı Tipi Aileleri
                   </p>
-                  <p className="text-[12px] text-[var(--foreground-muted)]">
+                  <p className="text-[12px] text-[#666666]">
                     Başlıklar ve gövde metni için Google Fonts kütüphanesinden seçim yapın.
                   </p>
                 </header>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[11px] font-bold text-[var(--foreground-muted)]">Başlık Fontu (Display)</label>
+                    <label className="text-[11px] font-bold text-[#666666]">Başlık Fontu (Display)</label>
                     <select
                       value={fontDisplay}
                       onChange={(e) => setFontDisplay(e.target.value)}
-                      className="ff-shape-button w-full h-10 px-3 bg-[var(--surface)] border border-[var(--border)] text-sm outline-none focus:border-[var(--ff-purple)]"
+                      className="ff-shape-button w-full h-10 px-3 bg-[#f7f7f5] border border-[#E0E0E0] text-[#666666] text-sm outline-none focus:border-[#8B1FE8]"
                     >
                       {allFontOptions.map(f => <option key={f} value={f}>{f}</option>)}
                     </select>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[11px] font-bold text-[var(--foreground-muted)]">Gövde Fontu (Body)</label>
+                    <label className="text-[11px] font-bold text-[#666666]">Gövde Fontu (Body)</label>
                     <select
                       value={fontBody}
                       onChange={(e) => setFontBody(e.target.value)}
-                      className="ff-shape-button w-full h-10 px-3 bg-[var(--surface)] border border-[var(--border)] text-sm outline-none focus:border-[var(--ff-purple)]"
+                      className="ff-shape-button w-full h-10 px-3 bg-[#f7f7f5] border border-[#E0E0E0] text-[#666666] text-sm outline-none focus:border-[#8B1FE8]"
                     >
                       {allFontOptions.map(f => <option key={f} value={f}>{f}</option>)}
                     </select>
@@ -1083,35 +1083,35 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
                 </div>
               </section>
 
-              <section className="border-t border-[var(--border)] pt-8">
+              <section className="border-t border-[#E0E0E0] pt-8">
                 <header className="mb-4">
-                  <p className="text-[10px] uppercase tracking-widest font-semibold text-[var(--foreground-faint)] mb-1">
+                  <p className="text-[10px] font-semibold text-[#666666] mb-1">
                     Özel Font Yükle (.TTF)
                   </p>
-                  <p className="text-[12px] text-[var(--foreground-muted)]">
+                  <p className="text-[12px] text-[#666666]">
                     Kendi kurumsal fontlarınızı sisteme ekleyin.
                   </p>
                 </header>
 
-                <div className="ff-shape-container bg-[var(--surface)] p-6 border border-[var(--border)] space-y-4">
+                <div className="ff-shape-container bg-[#f7f7f5] p-6 border border-[#E0E0E0] space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label className="text-[11px] font-semibold text-[var(--foreground-faint)]">Font Ailesi Adı</label>
+                      <label className="text-[11px] font-semibold text-[#666666]">Font Ailesi Adı</label>
                       <input
                         type="text"
                         placeholder="Örn: FlixFlex Sans"
                         value={newFontName}
                         onChange={(e) => setNewFontName(e.target.value)}
-                        className="ff-shape-button w-full px-3 py-2 bg-[var(--background)] border border-[var(--border)] text-sm outline-none focus:border-[var(--ff-purple)]"
+                        className="ff-shape-button w-full px-3 py-2 bg-[#f7f7f5] border border-[#E0E0E0] text-[#666666] text-sm outline-none focus:border-[#8B1FE8]"
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[11px] font-semibold text-[var(--foreground-faint)]">.TTF Dosyası</label>
+                      <label className="text-[11px] font-semibold text-[#666666]">.TTF Dosyası</label>
                       <input
                         type="file"
                         accept=".ttf"
                         onChange={(e) => setNewFontFile(e.target.files?.[0] || null)}
-                        className="ff-shape-button border border-[var(--border)] w-full text-xs text-[var(--foreground-muted)] file:mr-4 file:py-2 file:px-4 file:ff-shape-button file:border-0 file:text-xs file:font-semibold file:bg-[var(--ff-purple)] file:text-white hover:file:bg-[#8B1FE8]"
+                        className="ff-shape-button border border-[#E0E0E0] w-full text-xs text-[#666666] file:mr-4 file:py-2 file:px-4 file:ff-shape-button file:border-0 file:text-xs file:font-semibold file:bg-[#8B1FE8] file:text-white hover:file:bg-[#8B1FE8]"
                       />
                     </div>
                   </div>
@@ -1119,7 +1119,7 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
                     type="button"
                     onClick={handleFontUpload}
                     disabled={uploadingFont || !newFontFile || !newFontName}
-                    className="ff-shape-button px-6 py-2.5 bg-[var(--ff-purple)] text-white text-[11px] font-bold disabled:opacity-40"
+                    className="ff-shape-button px-6 py-2.5 bg-[#8B1FE8] text-white text-[11px] font-bold disabled:opacity-40"
                   >
                     {uploadingFont ? "Yükleniyor..." : "Fontu Sisteme Ekle"}
                   </button>
@@ -1127,13 +1127,13 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
 
                 {customFonts.length > 0 && (
                   <div className="mt-6 space-y-2">
-                    <p className="text-[10px] font-bold text-[var(--foreground-faint)]">Yüklenen Fontlar</p>
+                    <p className="text-[10px] font-bold text-[#666666]">Yüklenen Fontlar</p>
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                       {customFonts.map(f => (
-                        <div key={f.id} className="ff-shape-container flex items-center justify-between p-3 bg-[var(--surface)] border border-[var(--border)] group">
+                        <div key={f.id} className="ff-shape-container flex items-center justify-between p-3 bg-[#f7f7f5] border border-[#E0E0E0] group">
                           <div>
-                            <p className="text-[12px] font-bold text-[var(--foreground)]">{f.name}</p>
-                            <p className="text-[10px] text-[var(--foreground-faint)] font-mono">.ttf</p>
+                            <p className="text-[12px] font-bold text-[#666666]">{f.name}</p>
+                            <p className="text-[10px] text-[#666666] font-mono">.ttf</p>
                           </div>
                           <button
                             onClick={() => handleDeleteFont(f.id)}
@@ -1151,10 +1151,10 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
 
               <section>
                 <header className="mb-4">
-                  <p className="text-[10px] font-semibold text-[var(--foreground-faint)] mb-1">
+                  <p className="text-[10px] font-semibold text-[#666666] mb-1">
                     Yazı Boyutları
                   </p>
-                  <p className="text-[12px] text-[var(--foreground-muted)]">
+                  <p className="text-[12px] text-[#666666]">
                     Sitenin temel tipografi ölçeğini ayarlayın.
                   </p>
                 </header>
@@ -1162,35 +1162,35 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <label className="text-[11px] font-bold text-[var(--foreground-muted)]">Başlık Ölçeği</label>
+                      <label className="text-[11px] font-bold text-[#666666]">Başlık Ölçeği</label>
                       <span className="text-[12px] font-mono font-bold text-[var(--ff-purple)]">{settings.fontHeadingSize}px</span>
                     </div>
                     <div className="flex items-center gap-4">
-                      <button onClick={() => patchSettings({ fontHeadingSize: Math.max(12, settings.fontHeadingSize - 1) })} className="ff-shape-button w-8 h-8 flex items-center justify-center border border-[var(--border)] hover:bg-[var(--surface)]"><Minus size={14} /></button>
+                      <button onClick={() => patchSettings({ fontHeadingSize: Math.max(12, settings.fontHeadingSize - 1) })} className="ff-shape-button w-8 h-8 flex items-center justify-center bg-[#ff4fd8] border border-[#E0E0E0] hover:bg-[#dc2db6]"><Minus size={14} /></button>
                       <input
                         type="range" min="12" max="120"
                         value={settings.fontHeadingSize}
                         onChange={(e) => patchSettings({ fontHeadingSize: parseInt(e.target.value) })}
                         className="flex-1 accent-[var(--ff-purple)]"
                       />
-                      <button onClick={() => patchSettings({ fontHeadingSize: Math.min(120, settings.fontHeadingSize + 1) })} className="ff-shape-button w-8 h-8 flex items-center justify-center border border-[var(--border)] hover:bg-[var(--surface)]"><Plus size={14} /></button>
+                      <button onClick={() => patchSettings({ fontHeadingSize: Math.min(120, settings.fontHeadingSize + 1) })} className="ff-shape-button w-8 h-8 flex items-center justify-center bg-[#ff4fd8] border border-[#E0E0E0] hover:bg-[#dc2db6]"><Plus size={14} /></button>
                     </div>
                   </div>
 
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <label className="text-[11px] font-bold text-[var(--foreground-muted)]">Gövde Boyutu</label>
+                      <label className="text-[11px] font-bold text-[#666666]">Gövde Boyutu</label>
                       <span className="text-[12px] font-mono font-bold text-[var(--ff-purple)]">{settings.fontBodySize}px</span>
                     </div>
                     <div className="flex items-center gap-4">
-                      <button onClick={() => patchSettings({ fontBodySize: Math.max(8, settings.fontBodySize - 1) })} className="ff-shape-button w-8 h-8 flex items-center justify-center border border-[var(--border)] hover:bg-[var(--surface)]"><Minus size={14} /></button>
+                      <button onClick={() => patchSettings({ fontBodySize: Math.max(8, settings.fontBodySize - 1) })} className="ff-shape-button w-8 h-8 flex items-center justify-center bg-[#ff4fd8] border border-[#E0E0E0] hover:bg-[#dc2db6]"><Minus size={14} /></button>
                       <input
                         type="range" min="8" max="32"
                         value={settings.fontBodySize}
                         onChange={(e) => patchSettings({ fontBodySize: parseInt(e.target.value) })}
                         className="flex-1 accent-[var(--ff-purple)]"
                       />
-                      <button onClick={() => patchSettings({ fontBodySize: Math.min(32, settings.fontBodySize + 1) })} className="ff-shape-button w-8 h-8 flex items-center justify-center border border-[var(--border)] hover:bg-[var(--surface)]"><Plus size={14} /></button>
+                      <button onClick={() => patchSettings({ fontBodySize: Math.min(32, settings.fontBodySize + 1) })} className="ff-shape-button w-8 h-8 flex items-center justify-center bg-[#ff4fd8] border border-[#E0E0E0] hover:bg-[#dc2db6]"><Plus size={14} /></button>
                     </div>
                   </div>
                 </div>
@@ -1231,8 +1231,8 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
 
         {/* Right — live preview + WCAG */}
         <div className="space-y-4 xl:sticky xl:top-6">
-          <div className="ff-card space-y-4">
-            <p className="text-[10px] uppercase tracking-widest font-semibold text-[var(--foreground-faint)]">
+          <div className="ff-card bg-[#f7f7f5] border border-[#E0E0E0] space-y-4">
+            <p className="text-[10px] font-semibold text-[#666666]">
               Canlı Önizleme
             </p>
             <LivePreview
@@ -1242,7 +1242,7 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
             />
           </div>
 
-          <div className="ff-card">
+          <div className="ff-card bg-[#f7f7f5] border border-[#E0E0E0]">
             <WcagPanel colors={colors} />
           </div>
         </div>
@@ -1250,7 +1250,7 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
 
       {/* Error message */}
       {error && (
-        <div className="bg-red-500/10 border border-red-500/30 px-4 py-3 text-sm text-red-500">
+        <div className="ff-shape-container bg-red-500/10 border border-red-500/30 px-4 py-3 text-sm text-red-500">
           {error}
         </div>
       )}
@@ -1259,12 +1259,12 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
       <div
         className={cn(
           "ff-shape-container sticky bottom-2 z-10 flex items-center justify-center w-full gap-3 py-4 px-6 transition-all",
-          "bg-[var(--surface-elevated)]/60 backdrop-blur-sm border border-[var(--border)]",
-          isDirty && "border-[var(--border)] shadow-[0_-4px_20px_rgba(161,52,255,0.15)]"
+          "bg-[#f7f7f5]/60 backdrop-blur-sm border border-[#E0E0E0]/50  ",
+          isDirty && "border-[#E0E0E0] shadow-[0_-4px_20px_rgba(161,52,255,0.1)]",
         )}
       >
         {isDirty && (
-          <span className="text-[11px] text-[var(--ff-purple)] font-semibold">
+          <span className="text-[11px] text-[#666666] font-semibold">
             Kaydedilmemiş değişiklikler var.
           </span>
         )}
@@ -1284,7 +1284,7 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
               type="button"
               onClick={handleResetToSystemDefault}
               disabled={saving}
-              className="ff-btn ff-btn-ghost h-9 bg-[var(--approve)]/10 text-[12px] border border-[var(--approve)]/30 text-[var(--approve)] hover:bg-[var(--approve)]/20 group hover:scale-98"
+              className="ff-btn ff-btn-ghost h-9 bg-[var(--warning)]/10 text-[12px] border border-[var(--warning)]/30 text-[var(--warning)] hover:bg-[var(--warning)]/20 group hover:scale-98"
               title="Sistem varsayılan ayarlarına dön"
             >
               <RotateCcw size={14} className="mr-1" />
@@ -1297,7 +1297,7 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
             disabled={saving || !isDirty}
             className={cn(
               "ff-btn ff-btn-primary h-9 bg-[var(--success)]/10 border border-[var(--success)]/30 text-[var(--success)] hover:bg-[var(--success)]/30 group hover:scale-98 text-[12px] disabled:opacity-40",
-              isDirty && "shadow-[0_0_16px_rgba(161,52,255,0.4)]"
+              isDirty && "shadow-[var(--success),0.4)]"
             )}
           >
             <Save size={14} className="mr-1" />
@@ -1308,8 +1308,9 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
               type="button"
               onClick={handleActivate}
               disabled={activating}
-              className="ff-btn ff-btn-outline h-9 bg-[var(--success)]/10 text-[var(--success)] border border-[var(--success)]/30 text-[12px] disabled:opacity-40"
+              className="ff-btn ff-btn-outline h-9 bg-[var(--approve)]/10 text-[var(--approve)] border border-[var(--approve)]/30 text-[12px] disabled:opacity-40"
             >
+              <Check size={14} className="mr-1" />  
               {activating ? "..." : "Aktif Et"}
             </button>
           )}

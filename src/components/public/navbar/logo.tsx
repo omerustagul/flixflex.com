@@ -9,6 +9,7 @@ interface FlixFlexLogoProps {
   size?: "sm" | "md" | "lg"
   logoUrl?: string
   logoHeight?: number
+  transparent?: boolean
 }
 
 const sizeMap = {
@@ -17,7 +18,7 @@ const sizeMap = {
   lg: { mark: "w-11 h-11 text-sm",    text: "text-xl"  },
 }
 
-export function FlixFlexLogo({ className, size = "md", logoUrl, logoHeight }: FlixFlexLogoProps) {
+export function FlixFlexLogo({ className, size = "md", logoUrl, logoHeight, transparent }: FlixFlexLogoProps) {
   const s = sizeMap[size]
 
   return (
@@ -27,11 +28,11 @@ export function FlixFlexLogo({ className, size = "md", logoUrl, logoHeight }: Fl
       className={cn("group inline-flex items-center gap-2.5", className)}
     >
       {logoUrl ? (
-        <img 
-          src={logoUrl} 
-          alt="FlixFlex" 
-          className="w-auto object-contain" 
-          style={{ height: logoHeight || (size === "sm" ? 24 : size === "md" ? 32 : 40) }} 
+        <img
+          src={logoUrl}
+          alt="FlixFlex"
+          className="w-auto object-contain"
+          style={{ height: logoHeight || (size === "sm" ? 24 : size === "md" ? 32 : 40) }}
         />
       ) : (
         <>
@@ -39,7 +40,7 @@ export function FlixFlexLogo({ className, size = "md", logoUrl, logoHeight }: Fl
           <motion.span
             className={cn(
               "relative flex items-center justify-center",
-              "bg-[#A134FF] text-white font-bold tracking-tight",
+              "bg-[var(--ff-purple)] text-white font-bold tracking-tight",
               "transition-shadow duration-300",
               "group-hover:shadow-[0_0_20px_rgba(161,52,255,0.5)]",
               s.mark
@@ -61,12 +62,12 @@ export function FlixFlexLogo({ className, size = "md", logoUrl, logoHeight }: Fl
           {/* Text */}
           <span
             className={cn(
-              "font-display font-extrabold tracking-tight leading-none",
-              "text-[var(--foreground)]",
+              "font-display font-extrabold tracking-tight leading-none transition-colors duration-300",
+              transparent ? "text-white" : "text-[var(--foreground)]",
               s.text
             )}
           >
-            Flix<span className="text-[#A134FF]">Flex</span>
+            Flix<span className="text-[var(--ff-purple)]">Flex</span>
           </span>
         </>
       )}

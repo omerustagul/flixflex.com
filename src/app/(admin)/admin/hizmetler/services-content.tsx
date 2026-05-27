@@ -22,8 +22,8 @@ export function ServicesContent({ items }: { items: ServiceCardItem[] }) {
 
   if (items.length === 0) {
     return (
-      <div className="ff-shape-container bg-[var(--surface-elevated)] border border-[var(--border)] py-16 text-center">
-        <p className="text-[var(--foreground-muted)] text-sm">Henüz hizmet kaydı yok.</p>
+      <div className="ff-shape-container bg-[#f7f7f5] border border-[#cccccc] py-16 text-center">
+        <p className="text-[#666666] text-sm">Henüz hizmet kaydı yok.</p>
       </div>
     )
   }
@@ -41,26 +41,26 @@ export function ServicesContent({ items }: { items: ServiceCardItem[] }) {
           ))}
         </div>
       ) : (
-        <div className="ff-shape-container bg-[var(--surface-elevated)] border border-[var(--border)] overflow-hidden">
+        <div className="ff-shape-container bg-[#f7f7f5] border border-[#cccccc] overflow-hidden">
           <table className="w-full">
-            <thead className="border-b border-[var(--border)] text-left">
+            <thead className="border-b border-[#cccccc] text-left">
               <tr>
-                <th className="px-4 py-3 text-[10px] font-bold text-[var(--foreground-muted)]">Hizmet</th>
-                <th className="px-4 py-3 text-[10px] font-bold text-[var(--foreground-muted)]">Bağlı Portfolyo</th>
-                <th className="px-4 py-3 text-[10px] font-bold text-[var(--foreground-muted)]">Durum</th>
-                <th className="px-4 py-3 text-[10px] font-bold text-[var(--foreground-muted)] text-right">Aksiyonlar</th>
+                <th className="px-4 py-3 text-[10px] font-bold text-[#666666]">Hizmet</th>
+                <th className="px-4 py-3 text-[10px] font-bold text-[#666666]">Bağlı Portfolyo</th>
+                <th className="px-4 py-3 text-[10px] font-bold text-[#666666]">Durum</th>
+                <th className="px-4 py-3 text-[10px] font-bold text-[#666666] text-right">Aksiyonlar</th>
               </tr>
             </thead>
             <tbody>
               {items.map((item) => (
-                <tr key={item.id} className="border-b border-[var(--border)] last:border-0 hover:bg-[var(--surface)] transition-colors">
+                <tr key={item.id} className="border-b border-[#cccccc] last:border-0 hover:bg-[#f7f7f5] transition-colors">
                   <td className="px-4 py-3">
-                    <Link href={`/admin/hizmetler/${item.id}`} className="text-[13px] font-semibold hover:text-[var(--ff-purple)] transition-colors">
+                    <Link href={`/admin/hizmetler/${item.id}`} className="text-[13px] font-semibold hover:text-[#ff4fd8] transition-colors">
                       {item.title}
                     </Link>
-                    <p className="text-[11px] text-[var(--foreground-faint)] mt-0.5">/hizmetler/{item.slug}</p>
+                    <p className="text-[11px] text-[#666666] mt-0.5">/hizmetler/{item.slug}</p>
                   </td>
-                  <td className="px-4 py-3 text-[12px] text-[var(--foreground-muted)]">
+                  <td className="px-4 py-3 text-[12px] text-[#666666]">
                     {item.portfolios.length} proje
                   </td>
                   <td className="px-4 py-3">
@@ -68,10 +68,10 @@ export function ServicesContent({ items }: { items: ServiceCardItem[] }) {
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex justify-end gap-1">
-                      <Link href={`/hizmetler/${item.slug}`} target="_blank" className="ff-shape-button border border-[var(--border)] w-7 h-7 flex items-center justify-center hover:border-[var(--ff-purple-border)] transition-colors">
+                      <Link href={`/hizmetler/${item.slug}`} target="_blank" className="ff-shape-button border border-[#cccccc] w-7 h-7 flex items-center justify-center hover:border-[#ff4fd8] text-[#666666] hover:text-[#ff4fd8] transition-colors">
                         <ExternalLink size={12} />
                       </Link>
-                      <Link href={`/admin/hizmetler/${item.id}`} className="ff-shape-button border border-[var(--border)] w-7 h-7 flex items-center justify-center hover:border-[var(--ff-purple-border)] transition-colors">
+                      <Link href={`/admin/hizmetler/${item.id}`} className="ff-shape-button border border-[#cccccc] w-7 h-7 flex items-center justify-center hover:border-[#ff4fd8] text-[#666666] hover:text-[#ff4fd8] transition-colors">
                         <Pencil size={12} />
                       </Link>
                     </div>
@@ -91,15 +91,15 @@ function ServiceCard({ item }: { item: ServiceCardItem }) {
 
   return (
     <div className={cn(
-      "ff-shape-container group relative bg-[var(--surface-elevated)] border border-[var(--border)]",
-      "p-5 transition-all duration-200 hover:border-[var(--ff-purple-border)]",
+      "ff-shape-container group relative bg-[#f7f7f5] border border-[#cccccc]",
+      "p-5 transition-all duration-200 hover:border-[#ff4fd8]",
       "flex flex-col"
     )}>
-      <div className="absolute inset-x-0 top-0 h-px bg-[var(--ff-purple)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-x-0 top-0 h-px bg-[#ff4fd8] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
       <div className="flex items-start justify-between gap-3">
         <div className="ff-shape-button w-10 h-10 flex items-center justify-center shrink-0" style={{ background: "rgba(161,52,255,0.1)" }}>
-          <Icon size={18} className="text-[var(--ff-purple)]" />
+          <Icon size={18} className="text-[#ff4fd8]" />
         </div>
         <Status published={item.isPublished} />
       </div>
@@ -107,30 +107,30 @@ function ServiceCard({ item }: { item: ServiceCardItem }) {
       <div className="mt-3 space-y-2 flex-1">
         <Link
           href={`/admin/hizmetler/${item.id}`}
-          className="text-sm font-semibold text-[var(--foreground)] hover:text-[var(--ff-purple)] transition-colors line-clamp-1"
+          className="text-sm font-semibold text-[#333333] hover:text-[#ff4fd8] transition-colors line-clamp-1"
         >
           {item.title}
         </Link>
-        <p className="text-[11px] text-[var(--foreground-faint)]">
+        <p className="text-[11px] text-[#666666]">
           /hizmetler/{item.slug}
         </p>
       </div>
 
-      <div className="flex items-center justify-between pt-3 mt-3 border-t border-[var(--border)]">
-        <span className="text-[11px] text-[var(--foreground-muted)]">
+      <div className="flex items-center justify-between pt-3 mt-3 border-t border-[#cccccc]">
+        <span className="text-[11px] text-[#666666]">
           {item.portfolios.length} proje
         </span>
         <div className="flex gap-1">
           <Link
             href={`/hizmetler/${item.slug}`}
             target="_blank"
-            className="ff-shape-button border border-[var(--border)] w-7 h-7 flex items-center justify-center hover:border-[var(--ff-purple-border)] transition-colors"
+            className="ff-shape-button border border-[#cccccc] w-7 h-7 flex items-center justify-center hover:border-[#ff4fd8] text-[#666666] hover:text-[#ff4fd8] transition-colors"
           >
             <ExternalLink size={12} />
           </Link>
           <Link
             href={`/admin/hizmetler/${item.id}`}
-            className="ff-shape-button border border-[var(--border)] w-7 h-7 flex items-center justify-center hover:border-[var(--ff-purple-border)] transition-colors"
+            className="ff-shape-button border border-[#cccccc] w-7 h-7 flex items-center justify-center hover:border-[#ff4fd8] text-[#666666] hover:text-[#ff4fd8] transition-colors"
           >
             <Pencil size={12} />
           </Link>
@@ -145,8 +145,8 @@ function Status({ published }: { published: boolean }) {
     <span className={cn(
       "ff-shape-container px-3 py-1 text-[10px] border",
       published
-        ? "text-[var(--success)] border-[var(--success)]/40 bg-[var(--success)]/20 backdrop-blur-sm"
-        : "text-[var(--warning)] border-[var(--warning)]/40 bg-[var(--warning)]/20 backdrop-blur-sm"
+        ? "text-[#10b981] border-[#10b981]/40 bg-[#10b981]/20 backdrop-blur-sm"
+        : "text-[#f59e0b] border-[#f59e0b]/40 bg-[#f59e0b]/20 backdrop-blur-sm"
     )}>
       {published ? "Yayında" : "Taslak"}
     </span>

@@ -135,7 +135,7 @@ model PortfolioItem {
   tags        String[]
   results     Json?
   gradient    String   @default("from-[#1A1A1A] via-[#2A1A3A] to-[#3D1A5C]")
-  accentColor String   @default("#A134FF")
+  accentColor String   @default("#FF4FD8")
   tall        Boolean  @default(false)
   narrativeParagraphs Json?
   sidebarItems Json?

@@ -13,7 +13,7 @@ export function RelatedPosts({ posts, className }: RelatedPostsProps) {
   return (
     <section className={cn("", className)}>
       <div className="flex items-center gap-4 mb-8">
-        <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#A134FF]">
+        <p className="text-[11px] font-semibold text-[var(--ff-purple)]">
           — İlgili Yazılar —
         </p>
         <span className="flex-1 h-px bg-[var(--border)]" />

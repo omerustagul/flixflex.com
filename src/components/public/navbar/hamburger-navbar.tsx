@@ -62,10 +62,10 @@ export function HamburgerNavbar({ siteSettings = {} }: HamburgerNavbarProps) {
         initial={false}
         className={cn(
           "fixed top-0 inset-x-0 z-50",
-          "transition-[background-color,border-color,backdrop-filter] duration-300",
+          "transition-all duration-300",
           scrolled
             ? "bg-[var(--background)]/85 backdrop-blur-md border-b border-[var(--border)]"
-            : "bg-transparent border-b border-transparent"
+            : "bg-white/[0.03] backdrop-blur-xl border-b border-white/[0.06]"
         )}
       >
         <div className="mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16">
@@ -80,6 +80,7 @@ export function HamburgerNavbar({ siteSettings = {} }: HamburgerNavbarProps) {
               size={scrolled ? "sm" : "md"}
               logoUrl={scrolled ? siteSettings.site_logo : (siteSettings.site_logo_transparent || siteSettings.site_logo_white)}
               logoHeight={siteSettings.site_logo_height ? parseInt(siteSettings.site_logo_height) : undefined}
+              transparent={!scrolled}
             />
 
             <button
@@ -90,10 +91,10 @@ export function HamburgerNavbar({ siteSettings = {} }: HamburgerNavbarProps) {
               className={cn(
                 "ff-shape-button",
                 "inline-flex items-center justify-center gap-2",
-                "h-9 px-5 text-[11px] font-semibold uppercase tracking-[0.16em]",
-                "border border-[var(--foreground-muted)] text-[var(--foreground-muted)]",
-                "hover:bg-[var(--foreground-muted)] hover:text-[var(--background)]",
-                "transition-colors duration-200"
+                "h-9 px-5 text-[11px] font-semibold uppercase tracking-[0.16em] transition-all duration-300",
+                scrolled
+                  ? "border border-[var(--foreground-muted)] text-[var(--foreground-muted)] hover:bg-[var(--foreground-muted)] hover:text-[var(--background)]"
+                  : "border border-white/20 text-white/80 hover:bg-white/15 hover:text-white hover:border-white/40 bg-white/5"
               )}
             >
               <span className="hidden sm:inline">Menü</span>
@@ -155,7 +156,7 @@ export function HamburgerNavbar({ siteSettings = {} }: HamburgerNavbarProps) {
                     "ff-shape-button",
                     "w-11 h-11 flex items-center justify-center",
                     "border border-[var(--foreground)] text-[var(--foreground)]",
-                    "hover:border-[#A134FF] hover:text-[#A134FF]",
+                    "hover:border-[var(--ff-purple)] hover:text-[var(--ff-purple)]",
                     "transition-colors duration-200"
                   )}
                 >
@@ -190,8 +191,8 @@ export function HamburgerNavbar({ siteSettings = {} }: HamburgerNavbarProps) {
                             "font-display font-extrabold tracking-tight leading-none",
                             "transition-colors duration-200",
                             active
-                              ? "text-[#A134FF]"
-                              : "text-[var(--foreground)] hover:text-[#A134FF]"
+                              ? "text-[var(--ff-purple)]"
+                              : "text-[var(--foreground)] hover:text-[var(--ff-purple)]"
                           )}
                           style={{
                             fontSize: "clamp(24px, 3vw, 32px)",

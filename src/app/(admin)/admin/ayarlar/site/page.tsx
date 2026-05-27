@@ -65,10 +65,10 @@ export default async function SiteAyarlariPage() {
       {/* ── Header ────────────────────────────── */}
       <header className="mb-10 flex items-start justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-extrabold text-[var(--foreground)] mb-2">
-            Site <span className="text-[var(--ff-purple)]">Kimliği</span>
+          <h1 className="font-display text-2xl font-extrabold text-[#333333] mb-2">
+            Site <span className="text-[#ff4fd8]">Kimliği</span>
           </h1>
-          <p className="text-[var(--foreground-muted)] text-sm max-w-xl">
+          <p className="text-[#666666] text-sm max-w-xl">
             Markanızın dijital dünyadaki görünümünü buradan yönetin. Logo, başlık ve SEO ayarları tüm siteyi etkiler.
           </p>
         </div>

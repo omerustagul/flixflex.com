@@ -13,10 +13,10 @@ export default function AdminDashboardPage() {
     <div className="px-6 md:px-10 py-8 space-y-8">
       {/* Page header */}
       <div>
-        <h1 className="font-display text-2xl font-extrabold text-[var(--foreground)]">
+        <h1 className="font-display text-2xl font-extrabold text-[#333333]">
           Dashboard
         </h1>
-        <p className="text-xs text-[var(--foreground-muted)] mt-1">
+        <p className="text-xs text-[#666666] mt-1">
           Hoş geldin — FlixFlex yönetim paneline genel bakış
         </p>
       </div>
@@ -26,7 +26,7 @@ export default function AdminDashboardPage() {
 
       {/* Quick actions + AI status */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        <div className="xl:col-span-2">
+        <div className="bg-[#f7f7f5] border border-[#E0E0E0] p-4 xl:col-span-2">
           <QuickActions />
         </div>
         <div>

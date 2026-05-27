@@ -69,16 +69,16 @@ export default async function SayfalarPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="font-display text-2xl font-extrabold text-[var(--foreground)]">
+          <h1 className="font-display text-2xl font-extrabold text-[#0d0d0d]">
             Sayfalar
           </h1>
-          <p className="text-xs text-[var(--foreground-muted)] mt-1">
+          <p className="text-xs text-[#666666] mt-1">
             {pages.length} sayfa
           </p>
         </div>
         <Link
           href="/admin/sayfalar/yeni"
-          className="ff-shape-button inline-flex items-center h-9 gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)] hover:bg-[var(--ff-purple)] transition-colors duration-150"
+          className="ff-shape-button inline-flex items-center h-9 gap-2 px-5 py-2.5 text-[13px] font-semibold bg-[#ff4fd8] text-white border border-[#ff4fd8] hover:bg-[#ff4fd8] transition-colors duration-150"
         >
           <Plus size={14} />
           Yeni Sayfa
@@ -86,13 +86,13 @@ export default async function SayfalarPage() {
       </div>
 
       {/* Table */}
-      <div className="ff-shape-container border border-[var(--border)]">
+      <div className="ff-shape-container border border-[#CCCCCC]">
         {/* Table head */}
-        <div className="grid grid-cols-[1fr_160px_120px_140px_180px] gap-0 border-b border-[var(--border)] px-4 py-2">
+        <div className="grid grid-cols-[1fr_160px_120px_140px_180px] gap-0 border-b border-[#CCCCCC] px-4 py-2">
           {["Başlık", "Slug", "Durum", "Güncelleme", "İşlemler"].map((h) => (
             <span
               key={h}
-              className="text-[10px] font-semibold tracking-[0.08em] uppercase text-[var(--foreground-muted)]"
+              className="text-[10px] font-semibold text-[#666666]"
             >
               {h}
             </span>
@@ -102,13 +102,13 @@ export default async function SayfalarPage() {
         {/* Rows */}
         {pages.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center">
-            <FileText size={24} className="text-[var(--foreground-faint)] mb-3" />
-            <p className="text-sm text-[var(--foreground-muted)]">
+            <FileText size={24} className="text-[#666666] mb-3" />
+            <p className="text-sm text-[#666666]">
               Henüz sayfa yok
             </p>
             <Link
               href="/admin/sayfalar/yeni"
-              className="mt-4 text-[11px] text-[var(--ff-purple)] underline underline-offset-2 hover:no-underline"
+              className="mt-4 text-[11px] text-[#ff4fd8] underline underline-offset-2 hover:no-underline"
             >
               İlk sayfayı oluştur
             </Link>
@@ -117,23 +117,23 @@ export default async function SayfalarPage() {
           pages.map((page, idx) => (
             <div
               key={page.id}
-              className={`grid grid-cols-[1fr_160px_120px_140px_180px] gap-0 px-4 py-3 items-center ${idx < pages.length - 1 ? "border-b border-[var(--border)]" : ""
-                } hover:bg-[var(--surface)] transition-colors duration-100`}
+              className={`grid grid-cols-[1fr_160px_120px_140px_180px] gap-0 px-4 py-3 items-center ${idx < pages.length - 1 ? "border-b border-[#CCCCCC]" : ""
+                } hover:bg-[#f7f7f5] transition-colors duration-100`}
             >
               {/* Title */}
               <div className="min-w-0">
-                <p className="text-sm font-medium text-[var(--foreground)] truncate">
+                <p className="text-sm font-medium text-[#333333] truncate">
                   {page.title}
                 </p>
                 {page.description && (
-                  <p className="text-[11px] text-[var(--foreground-faint)] truncate mt-0.5">
+                  <p className="text-[11px] text-[#666666] truncate mt-0.5">
                     {page.description}
                   </p>
                 )}
               </div>
 
               {/* Slug */}
-              <span className="text-[11px] font-mono text-[var(--foreground-muted)] truncate">
+              <span className="text-[11px] font-mono text-[#666666] truncate">
                 {page.slug}
               </span>
 
@@ -143,7 +143,7 @@ export default async function SayfalarPage() {
               </div>
 
               {/* Updated */}
-              <span className="text-[11px] text-[var(--foreground-muted)]">
+              <span className="text-[11px] text-[#666666]">
                 {formatDate(page.updatedAt)}
               </span>
 
@@ -151,14 +151,14 @@ export default async function SayfalarPage() {
               <div className="flex items-end gap-1">
                 <Link
                   href={`/admin/sayfalar/${page.id}/edit`}
-                  className="ff-shape-button w-9 h-9 flex items-center justify-center border border-[var(--border)] text-[var(--foreground-muted)] hover:border-[var(--ff-purple)] hover:text-[var(--ff-purple)] transition-colors duration-150"
+                  className="ff-shape-button w-9 h-9 flex items-center justify-center border border-[#CCCCCC] text-[#666666] hover:border-[#ff4fd8] hover:text-[#ff4fd8] transition-colors duration-150"
                   title="Düzenle"
                 >
                   <Pencil size={14} />
                 </Link>
                 <Link
                   href={`/admin/sayfalar/yeni?copy=${page.id}`}
-                  className="ff-shape-button w-9 h-9 flex items-center justify-center border border-[var(--border)] text-[var(--foreground-muted)] hover:border-[var(--border-strong)] transition-colors duration-150"
+                  className="ff-shape-button w-9 h-9 flex items-center justify-center border border-[#CCCCCC] text-[#666666] hover:border-[#e28b28] hover:text-[#e28b28] transition-colors duration-150"
                   title="Kopyala"
                 >
                   <Copy size={14} />

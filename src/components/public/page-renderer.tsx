@@ -8,6 +8,7 @@ import {
   StatsSection,
   ServicesSection,
   PortfolioSection,
+  PortfolioVerticalScrollSection,
   TestimonialsSection,
   CTASection,
   ManifestoSection,
@@ -90,6 +91,21 @@ const SECTION_RENDERERS: Partial<Record<SectionType, (
     return <ServicesSection headline={p.headline} subheadline={p.subheadline} services={ctx?.servicesItems ?? []} />
   },
   "portfolio": (s, ctx) => <PortfolioSection items={ctx?.portfolioItems as any} />,
+  "portfolio-vertical-scroll": (s, ctx) => {
+    const p = s.props as any
+    return (
+      <PortfolioVerticalScrollSection
+        headline={p.headline}
+        subheadline={p.subheadline}
+        direction={p.direction}
+        speed={p.speed}
+        pauseOnHover={p.pauseOnHover}
+        maxItems={p.maxItems}
+        hideMobileDock={p.hideMobileDock}
+        items={ctx?.portfolioItems as any}
+      />
+    )
+  },
   "testimonials": () => <TestimonialsSection />,
   "team": () => <TeamSection />,
   "manifesto": () => <ManifestoSection />,

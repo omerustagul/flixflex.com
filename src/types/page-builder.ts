@@ -34,6 +34,7 @@ export type SectionType =
   | "portfolio-marquee-gallery"
   | "portfolio-offer-carousel"
   | "portfolio-project-showcase"
+  | "portfolio-vertical-scroll"
   | "hero-animated-video"
   | "parallax"
 
@@ -126,6 +127,16 @@ export const portfolioPropsSchema = z.object({
   subheadline: z.string().default("Seçkin projelerimiz"),
   filterEnabled: z.boolean().default(true),
   maxItems: z.number().int().default(6),
+  hideMobileDock: z.boolean().default(false),
+})
+
+export const portfolioVerticalScrollPropsSchema = z.object({
+  headline: z.string().default("Seçili İşlerimiz"),
+  subheadline: z.string().default("Akıcı ve dikey formatta projelerimiz"),
+  speed: z.enum(["slow", "normal", "fast"]).default("normal"),
+  direction: z.enum(["left", "right"]).default("right"),
+  pauseOnHover: z.boolean().default(true),
+  maxItems: z.number().int().default(12),
   hideMobileDock: z.boolean().default(false),
 })
 
@@ -236,6 +247,7 @@ export type VideoEmbedProps = z.infer<typeof videoEmbedPropsSchema>
 export type FAQProps = z.infer<typeof faqPropsSchema>
 export type TeamProps = z.infer<typeof teamPropsSchema>
 export type ContactFormProps = z.infer<typeof contactFormPropsSchema>
+export type PortfolioVerticalScrollProps = z.infer<typeof portfolioVerticalScrollPropsSchema>
 
 // ── Schema Registry ───────────────────────────────
 export const SECTION_SCHEMAS: Record<SectionType, z.ZodObject<z.ZodRawShape>> = {
@@ -269,4 +281,5 @@ export const SECTION_SCHEMAS: Record<SectionType, z.ZodObject<z.ZodRawShape>> = 
   "portfolio-project-showcase": z.object({}),
   "hero-animated-video": heroAnimatedVideoPropsSchema,
   "parallax": parallaxPropsSchema,
+  "portfolio-vertical-scroll": portfolioVerticalScrollPropsSchema,
 }

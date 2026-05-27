@@ -49,11 +49,11 @@ export function HeroVisual({ className }: { className?: string }) {
           <span className="w-2 h-2 bg-[#FF5F57]" />
           <span className="w-2 h-2 bg-[#FEBC2E]" />
           <span className="w-2 h-2 bg-[#28C840]" />
-          <span className="ml-3 text-[10px] uppercase tracking-widest text-[var(--foreground-faint)] font-mono">
+          <span className="ml-3 text-[10px] text-[var(--foreground-faint)] font-mono">
             flixflex / dashboard
           </span>
-          <span className="ml-auto inline-flex items-center gap-1 text-[10px] text-[#A134FF] font-medium">
-            <span className="w-1.5 h-1.5 bg-[#A134FF] animate-pulse" />
+          <span className="ml-auto inline-flex items-center gap-1 text-[10px] text-[var(--ff-purple)] font-medium">
+            <span className="w-1.5 h-1.5 bg-[var(--ff-purple)] animate-pulse" />
             LIVE
           </span>
         </div>
@@ -95,7 +95,7 @@ export function HeroVisual({ className }: { className?: string }) {
                 className={cn(
                   "flex-1",
                   i === 5 || i === 7
-                    ? "bg-[#A134FF]"
+                    ? "bg-[var(--ff-purple)]"
                     : "bg-[var(--border-strong)]"
                 )}
               />
@@ -135,7 +135,7 @@ export function HeroVisual({ className }: { className?: string }) {
         transition={{ duration: 0.5, delay: 1.6, ease: [0.34, 1.56, 0.64, 1] }}
         className={cn(
           "ff-shape-container absolute -top-3 -right-3 z-10",
-          "px-3 py-2 bg-[#A134FF] text-white",
+          "px-3 py-2 bg-[var(--ff-purple)] text-white",
           "shadow-[0_10px_30px_rgba(161,52,255,0.4)]",
           "flex items-center gap-1.5"
         )}
@@ -154,7 +154,7 @@ export function HeroVisual({ className }: { className?: string }) {
         className={cn(
           "ff-shape-container absolute -bottom-4 -left-4 z-10",
           "bg-[#0C0C0C] text-white p-4 min-w-[160px]",
-          "border-l-2 border-l-[#A134FF]",
+          "border-l-2 border-l-[var(--ff-purple)]",
           "shadow-[0_15px_40px_rgba(0,0,0,0.4)]"
         )}
         style={{
@@ -172,7 +172,7 @@ export function HeroVisual({ className }: { className?: string }) {
             initial={{ width: 0 }}
             animate={{ width: "82%" }}
             transition={{ delay: 2.1, duration: 1.2, ease: "easeOut" }}
-            className="h-full bg-[#A134FF]"
+            className="h-full bg-[var(--ff-purple)]"
           />
         </div>
       </motion.div>

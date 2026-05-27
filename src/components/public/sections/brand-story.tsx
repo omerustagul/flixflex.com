@@ -33,7 +33,7 @@ function Side({ word, accent, title, body, bullets, icon, direction }: SideProps
         className={cn(
           "font-display font-extrabold leading-[0.85] tracking-[-0.04em]",
           "text-[clamp(80px,14vw,200px)]",
-          accent ? "text-[#A134FF]" : "text-[var(--foreground)]"
+          accent ? "text-[var(--ff-purple)]" : "text-[var(--foreground)]"
         )}
       >
         {word}
@@ -51,7 +51,7 @@ function Side({ word, accent, title, body, bullets, icon, direction }: SideProps
             "ff-shape-button w-9 h-9 flex items-center justify-center",
             "border",
             accent
-              ? "bg-[#A134FF] text-white border-[#A134FF]"
+              ? "bg-[var(--ff-purple)] text-white border-[var(--ff-purple)]"
               : "bg-transparent text-[var(--foreground)] border-[var(--border-strong)]"
           )}
         >
@@ -90,7 +90,7 @@ function Side({ word, accent, title, body, bullets, icon, direction }: SideProps
             <span
               className={cn(
                 "w-3 h-px",
-                accent ? "bg-[#A134FF]" : "bg-[var(--foreground-muted)]"
+                accent ? "bg-[var(--ff-purple)]" : "bg-[var(--foreground-muted)]"
               )}
             />
             <span className="uppercase tracking-[0.12em] text-xs">{b}</span>
@@ -111,7 +111,7 @@ function PulseSeparator() {
       {/* Vertical line */}
       <div className="relative w-px flex-1 bg-[var(--border)]">
         <motion.span
-          className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-transparent via-[#A134FF] to-transparent"
+          className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-transparent via-[var(--ff-purple)] to-transparent"
           animate={{ y: ["-12%", "120%"] }}
           transition={{
             duration: 4,
@@ -126,7 +126,7 @@ function PulseSeparator() {
         className={cn(
           "absolute top-1/2 -translate-y-1/2",
           "w-12 h-12 flex items-center justify-center",
-          "bg-[var(--background)] border border-[#A134FF]",
+          "bg-[var(--background)] border border-[var(--ff-purple)]",
           "shadow-[0_0_40px_rgba(161,52,255,0.45)]"
         )}
         animate={{
@@ -143,7 +143,7 @@ function PulseSeparator() {
         }}
       >
         <span
-          className="text-[#A134FF] text-lg font-bold"
+          className="text-[var(--ff-purple)] text-lg font-bold"
           style={{ transform: "rotate(-45deg)" }}
         >
           ×
@@ -174,13 +174,13 @@ export function BrandStorySection() {
     >
       {/* Eyebrow */}
       <div className="mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16 mb-16 md:mb-24 text-center">
-        <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#A134FF] mb-4">
+        <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[var(--ff-purple)] mb-4">
           — Markamızın iki kalbi —
         </p>
         <h2 className="font-display text-3xl md:text-5xl font-extrabold leading-[1.1] tracking-tight max-w-3xl mx-auto">
           The <span className="text-[var(--foreground)]">Flix</span>{" "}
           <span className="text-[var(--foreground-faint)]">&amp;</span>{" "}
-          The <span className="text-[#A134FF]">Flex</span>
+          The <span className="text-[var(--ff-purple)]">Flex</span>
         </h2>
         <p className="mt-4 text-[var(--foreground-muted)] text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
           İki güç. Bir yöntem. FlixFlex&apos;i benzersiz kılan ikili.

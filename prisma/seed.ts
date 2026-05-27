@@ -19,18 +19,18 @@ const ADMIN_PASSWORD =
 
 // ── FlixFlex Default Color Palette ────────────────
 const FLIXFLEX_DEFAULT_PALETTE = {
-  primary:        "#A134FF",
-  primaryHover:   "#8B1FE8",
-  primaryMuted:   "rgba(161, 52, 255, 0.12)",
-  secondary:      "#323232",
-  secondaryLight: "#484848",
-  background:     "#FFFFFF",
-  surface:        "#F2F2F2",
-  foreground:     "#111111",
-  muted:          "#666666",
-  border:         "#E0E0E0",
+  primary:        "#FF4FD8",
+  primaryHover:   "#DC2DB6",
+  primaryMuted:   "rgba(255, 79, 216, 0.12)",
+  secondary:      "#D6FF3B",
+  secondaryLight: "#D6FF380D",
+  background:     "#F7F7F5",
+  surface:        "#FFFFFF",
+  foreground:     "#0D0D0D",
+  muted:          "#888888",
+  border:         "#CCCCCC",
   dark: {
-    background: "#0C0C0C",
+    background: "#0D0D0D",
     surface:    "#1A1A1A",
     foreground: "#F0F0F0",
     muted:      "#888888",
@@ -95,7 +95,7 @@ const DEMO_PORTFOLIO = [
     tags:       ["social media", "instagram", "tiktok"],
     serviceSlugs: ["sosyal-medya-yonetimi", "icerik-uretimi"],
     gradient: "from-[#0A0A0A] via-[#1A1A1A] to-[#2A2A2A]",
-    accentColor: "#A134FF",
+    accentColor: "#FF4FD8",
     tall: false,
     narrativeParagraphs: [
       "Zara Home için sosyal medya operasyonunu yalnızca içerik üretimi olarak değil, bir büyüme sistemi olarak ele aldık.",
@@ -269,9 +269,22 @@ const DEMO_PAGES = [
       { id: "h1", type: "hero", order: 0, visible: true, props: {} },
       { id: "h2", type: "stats", order: 1, visible: true, props: {} },
       { id: "h3", type: "services", order: 2, visible: true, props: {} },
-      { id: "h4", type: "portfolio", order: 3, visible: true, props: {} },
-      { id: "h5", type: "testimonials", order: 4, visible: true, props: {} },
-      { id: "h6", type: "cta", order: 5, visible: true, props: {} },
+      {
+        id: "h-marquee-scroll",
+        type: "portfolio-vertical-scroll",
+        order: 3,
+        visible: true,
+        props: {
+          headline: "Domine Ettiğimiz Markalar",
+          subheadline: "Stratejik vizyonumuzun ürünü olan dikey formatta projelerimiz.",
+          speed: "normal",
+          direction: "right",
+          pauseOnHover: true,
+        },
+      },
+      { id: "h4", type: "portfolio", order: 4, visible: true, props: {} },
+      { id: "h5", type: "testimonials", order: 5, visible: true, props: {} },
+      { id: "h6", type: "cta", order: 6, visible: true, props: {} },
     ],
   },
   {
@@ -523,7 +536,9 @@ async function main() {
   for (const page of DEMO_PAGES) {
     await prisma.page.upsert({
       where:  { slug: page.slug },
-      update: {},
+      update: {
+        sections: page.sections,
+      },
       create: page,
     })
     console.log(`  ✓ ${page.title}`)

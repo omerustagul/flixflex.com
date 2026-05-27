@@ -240,11 +240,11 @@ export function AIStudio({ keyConfigured, defaultModel }: AIStudioProps) {
       {/* Header */}
       <div className="flex items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="font-display text-2xl font-extrabold text-[var(--foreground)] flex items-center gap-2">
+          <h1 className="font-display text-2xl font-extrabold text-[#333333] flex items-center gap-2">
             <Sparkles size={20} className="text-[var(--ff-purple)]" />
             AI Studio
           </h1>
-          <p className="text-xs text-[var(--foreground-muted)] mt-1">
+          <p className="text-xs text-[#666666] mt-1">
             Adım {step} / {STEPS.length} — {STEPS[step - 1].label}
           </p>
         </div>

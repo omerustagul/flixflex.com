@@ -110,7 +110,7 @@ export function TeamSection() {
           transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
           className="mb-14 md:mb-20 text-center"
         >
-          <p className="mb-4 text-[11px] font-semibold tracking-[0.2em] uppercase text-[#A134FF]">
+          <p className="mb-4 text-[11px] font-semibold text-[var(--ff-purple)]">
             — Ekibimiz —
           </p>
           <h2

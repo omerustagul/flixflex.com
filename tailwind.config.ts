@@ -11,13 +11,13 @@ const config: Config = {
     extend: {
       // ── FlixFlex Brand Colors ───────────────────
       colors: {
-        "ff-purple":       "#A134FF",
-        "ff-purple-hover": "#8B1FE8",
-        "ff-purple-dark":  "#6A0FCC",
-        "ff-purple-light": "#C266FF",
-        "ff-charcoal":     "#323232",
-        "ff-charcoal-light": "#484848",
-        "ff-charcoal-dark":  "#1A1A1A",
+        "ff-purple":       "#FF4FD8",
+        "ff-purple-hover": "#dc2db6",
+        "ff-purple-dark":  "#dd2bb7",
+        "ff-purple-light": "#ff4fd833",
+        "ff-charcoal":     "#D6FF3B",
+        "ff-charcoal-light": "#D6FF380D",
+        "ff-charcoal-dark":  "#D6FF3B80",
         // Semantic tokens (CSS variable backed)
         background:    "var(--background)",
         surface:       "var(--surface)",

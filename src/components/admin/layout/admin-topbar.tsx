@@ -49,7 +49,7 @@ export function AdminTopbar({ user }: AdminTopbarProps) {
         "sticky top-0 z-30",
         "flex items-center justify-between gap-4",
         "h-[calc(8vh)] px-4 md:px-6",
-        "bg-[var(--background)] border-b border-[var(--border)]"
+        "bg-[#F7F7F5] border-b border-[#E0E0E0]",
       )}
     >
       {/* Breadcrumbs */}
@@ -59,16 +59,16 @@ export function AdminTopbar({ user }: AdminTopbarProps) {
             {i > 0 && (
               <ChevronRight
                 size={12}
-                className="text-[var(--foreground-faint)] shrink-0"
-                aria-hidden
+                className="text-[#666666] shrink-0"
+                aria-hidden="true"
               />
             )}
             <span
               className={cn(
                 "text-[12px] font-medium truncate",
                 crumb.isLast
-                  ? "text-[var(--foreground)]"
-                  : "text-[var(--foreground-faint)]"
+                  ? "text-[#0D0D0D]"
+                  : "text-[#666666] hover:text-[#0D0D0D] transition-colors"
               )}
             >
               {crumb.label}
@@ -85,16 +85,13 @@ export function AdminTopbar({ user }: AdminTopbarProps) {
           aria-label="Ara"
           className={cn(
             "ff-shape-button w-9 h-9 flex items-center justify-center",
-            "border border-[var(--border)] text-[var(--foreground-muted)]",
-            "hover:border-[var(--ff-purple)] hover:text-[var(--ff-purple)]",
+            "border border-[#E0E0E0] text-[#666666]",
+            "hover:border-[#ff4fd8] hover:text-[#ff4fd8]",
             "transition-colors duration-150"
           )}
         >
           <Search size={15} />
         </button>
-
-        {/* Theme toggle */}
-        <ThemeToggle size="sm" />
 
         {/* Notification bell */}
         <DropdownMenu.Root>
@@ -105,8 +102,8 @@ export function AdminTopbar({ user }: AdminTopbarProps) {
                 aria-label="Bildirimler"
                 className={cn(
                   "ff-shape-button w-9 h-9 flex items-center justify-center",
-                  "border border-[var(--border)] text-[var(--foreground-muted)]",
-                  "hover:border-[var(--ff-purple)] hover:text-[var(--ff-purple)]",
+                  "border border-[#E0E0E0] text-[#666666]",
+                  "hover:border-[#ff4fd8] hover:text-[#ff4fd8]",
                   "transition-colors duration-150"
                 )}
               >
@@ -118,8 +115,8 @@ export function AdminTopbar({ user }: AdminTopbarProps) {
                 className={cn(
                   "absolute -top-1 -right-1 z-10",
                   "w-4 h-4 flex items-center justify-center rounded-full",
-                  "bg-[var(--ff-purple)] text-white text-[9px] font-bold",
-                  "shadow-[0_0_10px_var(--ff-purple)]/40",
+                  "bg-[#ff4fd8] text-white text-[9px] font-bold",
+                  "shadow-[0_0_10px_#ff4fd8]/40",
                 )}
               >
                 3
@@ -133,66 +130,66 @@ export function AdminTopbar({ user }: AdminTopbarProps) {
               sideOffset={8}
               className={cn(
                 "ff-shape-container z-50 min-w-[320px] max-w-[380px]",
-                "bg-[var(--background)] border border-[var(--border)]",
+                "bg-[#F7F7F5] border border-[#E0E0E0]",
                 "shadow-2xl animate-ff-fadeIn overflow-hidden"
               )}
             >
-              <div className="px-4 py-3 border-b border-[var(--border)] flex items-center justify-between">
-                <h3 className="text-[13px] font-bold text-[var(--foreground)]">Bildirimler</h3>
-                <span className="text-[10px] text-[var(--ff-purple)] font-medium cursor-pointer hover:underline">
+              <div className="px-4 py-3 border-b border-[#E0E0E0] flex items-center justify-between">
+                <h3 className="text-[13px] font-bold text-[#0D0D0D]">Bildirimler</h3>
+                <span className="text-[10px] text-[#ff4fd8] font-medium cursor-pointer hover:underline">
                   Tümünü okundu işaretle
                 </span>
               </div>
 
               <div className="max-h-[350px] overflow-y-auto">
                 {/* AI Assistant Suggestion */}
-                <div className="p-4 border-b border-[var(--border)] hover:bg-[var(--surface)] transition-colors cursor-pointer group">
+                <div className="p-4 border-b border-[#E0E0E0] hover:bg-[#F7F7F5] transition-colors cursor-pointer group">
                   <div className="flex gap-3">
                     <div className="w-8 h-8 rounded-full bg-[rgba(161,52,255,0.1)] flex items-center justify-center shrink-0 border border-[rgba(161,52,255,0.2)]">
-                      <Search size={14} className="text-[var(--ff-purple)]" />
+                      <Search size={14} className="text-[#ff4fd8]" />
                     </div>
                     <div className="space-y-1">
-                      <p className="text-[12px] text-[var(--foreground)] leading-tight">
+                      <p className="text-[12px] text-[#0D0D0D] leading-tight">
                         <span className="font-bold">AI Asistan:</span> Yeni bir blog konusu önerisi var: &quot;2024 Tasarım Trendleri&quot;
                       </p>
-                      <p className="text-[10px] text-[var(--foreground-faint)]">2 dakika önce</p>
+                      <p className="text-[10px] text-[#666666]">2 dakika önce</p>
                     </div>
                   </div>
                 </div>
 
                 {/* System Update */}
-                <div className="p-4 border-b border-[var(--border)] hover:bg-[var(--surface)] transition-colors cursor-pointer">
+                <div className="p-4 border-b border-[#E0E0E0] hover:bg-[#F7F7F5] transition-colors cursor-pointer">
                   <div className="flex gap-3">
                     <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0 border border-blue-500/20">
                       <Settings size={14} className="text-blue-400" />
                     </div>
                     <div className="space-y-1">
-                      <p className="text-[12px] text-[var(--foreground)] leading-tight">
+                      <p className="text-[12px] text-[#0D0D0D] leading-tight">
                         <span className="font-bold">Sistem:</span> Yedekleme başarıyla tamamlandı.
                       </p>
-                      <p className="text-[10px] text-[var(--foreground-faint)]">1 saat önce</p>
+                      <p className="text-[10px] text-[#666666]">1 saat önce</p>
                     </div>
                   </div>
                 </div>
 
                 {/* New User */}
-                <div className="p-4 hover:bg-[var(--surface)] transition-colors cursor-pointer">
+                <div className="p-4 hover:bg-[#F7F7F5] transition-colors cursor-pointer">
                   <div className="flex gap-3">
                     <div className="w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center shrink-0 border border-green-500/20">
                       <User size={14} className="text-green-400" />
                     </div>
                     <div className="space-y-1">
-                      <p className="text-[12px] text-[var(--foreground)] leading-tight">
+                      <p className="text-[12px] text-[#0D0D0D] leading-tight">
                         <span className="font-bold">Kullanıcı:</span> Yeni bir ekip üyesi kaydoldu: Selin Yılmaz
                       </p>
-                      <p className="text-[10px] text-[var(--foreground-faint)]">5 saat önce</p>
+                      <p className="text-[10px] text-[#666666]">5 saat önce</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="px-4 py-2 bg-[var(--surface)] border-t border-[var(--border)] text-center">
-                <Link href="/admin/bildirimler" className="text-[11px] font-bold text-[var(--foreground-muted)] hover:text-[var(--ff-purple)] transition-colors">
+              <div className="px-4 py-2 bg-[#F7F7F5] border-t border-[#E0E0E0] text-center">
+                <Link href="/admin/bildirimler" className="text-[11px] font-bold text-[#666666] hover:text-[#FF4FD8] transition-colors">
                   Tüm Bildirimleri Gör
                 </Link>
               </div>
@@ -208,20 +205,20 @@ export function AdminTopbar({ user }: AdminTopbarProps) {
               aria-label="Kullanıcı menüsü"
               className={cn(
                 "ff-shape-button flex items-center gap-2 h-9 px-2",
-                "border border-[var(--border)] text-[var(--foreground-muted)]",
-                "hover:border-[var(--ff-purple)] hover:text-[var(--foreground)]",
+                "border border-[#E0E0E0] text-[#666666]",
+                "hover:border-[#FF4FD8] hover:text-[#FF4FD8]",
                 "transition-colors duration-150"
               )}
             >
               <span
                 className={cn(
                   "w-5 h-5 flex items-center justify-center rounded-full shrink-0",
-                  "bg-[var(--ff-purple)] text-white text-[9px] font-bold font-display"
+                  "bg-[#FF4FD8] text-white text-[9px] font-bold font-display"
                 )}
               >
                 {user.initials}
               </span>
-              <span className="hidden md:block text-[12px] font-medium text-[var(--foreground)] truncate w-fit max-w-[200px]">
+              <span className="hidden md:block text-[12px] font-medium text-[#666666] truncate w-fit max-w-[200px]">
                 {user.name}
               </span>
             </button>
@@ -233,20 +230,20 @@ export function AdminTopbar({ user }: AdminTopbarProps) {
               sideOffset={6}
               className={cn(
                 "ff-shape-container z-50 min-w-[200px]",
-                "bg-[var(--background)] border border-[var(--border)]",
+                "bg-[#F7F7F5] border border-[#E0E0E0]",
                 "py-1 shadow-xl",
                 "animate-ff-fadeIn"
               )}
             >
               {/* User info header */}
               <div className="px-4 py-3 border-b border-[var(--border)]">
-                <p className="text-[13px] font-semibold text-[var(--foreground)] truncate">
+                <p className="text-[13px] font-semibold text-[#666666] truncate">
                   {user.name}
                 </p>
-                <p className="text-[11px] text-[var(--foreground-faint)] truncate mt-0.5">
+                <p className="text-[11px] text-[#666666] truncate mt-0.5">
                   {user.email}
                 </p>
-                <span className="inline-block mt-1.5 text-[9px] uppercase tracking-widest font-semibold px-2 py-0.5 bg-[var(--ff-purple)]/12 text-[var(--ff-purple)] border border-[var(--ff-purple)]/25">
+                <span className="inline-block mt-1.5 text-[9px] font-semibold px-2 py-0.5 bg-[#ff4fd8]/12 text-[#ff4fd8] border border-[#ff4fd8]/25">
                   {user.role}
                 </span>
               </div>
@@ -256,8 +253,8 @@ export function AdminTopbar({ user }: AdminTopbarProps) {
                   href="/admin/profil"
                   className={cn(
                     "flex items-center gap-2.5 px-4 py-2.5",
-                    "text-[13px] text-[var(--foreground-muted)]",
-                    "hover:bg-[var(--surface)] hover:text-[var(--foreground)]",
+                    "text-[13px] text-[#666666]",
+                    "hover:bg-[#F7F7F5] hover:text-[#FF4FD8]",
                     "outline-none cursor-pointer transition-colors duration-100"
                   )}
                 >
@@ -271,8 +268,8 @@ export function AdminTopbar({ user }: AdminTopbarProps) {
                   href="/admin/ayarlar"
                   className={cn(
                     "flex items-center gap-2.5 px-4 py-2.5",
-                    "text-[13px] text-[var(--foreground-muted)]",
-                    "hover:bg-[var(--surface)] hover:text-[var(--foreground)]",
+                    "text-[13px] text-[#666666]",
+                    "hover:bg-[#F7F7F5] hover:text-[#FF4FD8]",
                     "outline-none cursor-pointer transition-colors duration-100"
                   )}
                 >
@@ -281,7 +278,7 @@ export function AdminTopbar({ user }: AdminTopbarProps) {
                 </Link>
               </DropdownMenu.Item>
 
-              <DropdownMenu.Separator className="h-px bg-[var(--border)] my-1" />
+              <DropdownMenu.Separator className="h-px bg-[#E0E0E0] my-1" />
 
               <DropdownMenu.Item asChild>
                 <button

@@ -138,7 +138,7 @@ export const IMAGE_DESCRIPTION_SYSTEM = `${BRAND_VOICE}
 
 Görevin: Verilen blog yazısı için 3-5 adet inline görsel öneri üret. Her
 öneri yazının bir bölümünü görsel olarak destekleyen, FlixFlex'in modern,
-keskin, mor-tonlu (#A134FF) estetiğine uygun bir kavram tasviri olmalı.
+keskin, mor-tonlu (#FF4FD8) estetiğine uygun bir kavram tasviri olmalı.
 
 Çıktı SADECE şu formatta geçerli JSON olsun, başka hiçbir metin ekleme:
 

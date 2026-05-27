@@ -34,7 +34,7 @@ function MediaField({ label, value, onChange }: { label: string; value: string; 
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="ff-shape-button w-9 h-9 shrink-0 border border-[var(--border)] flex items-center justify-center hover:bg-[var(--surface-muted)] text-[var(--foreground-muted)] hover:text-[var(--ff-purple)] transition-all"
+          className="ff-shape-button w-9 h-9 shrink-0 border border-[#CCCCCC] flex items-center justify-center hover:bg-[#f0f0f0] text-[#666666] hover:text-[#ff4fd8] transition-all"
           title="Medyadan Seç"
         >
           <ImageIcon size={14} />
@@ -64,7 +64,7 @@ function MediaListField({ label, values, onChange }: { label: string; values: st
 
   return (
     <div className="space-y-2">
-      <span className="text-[11px] font-bold text-[var(--foreground-muted)]">{label}</span>
+      <span className="text-[11px] font-bold text-[#666666]">{label}</span>
       <div className="space-y-2">
         {values.map((value, index) => (
           <div key={index} className="flex gap-2">
@@ -76,7 +76,7 @@ function MediaListField({ label, values, onChange }: { label: string; values: st
             <button
               type="button"
               onClick={() => setPickerIndex(index)}
-              className="ff-shape-button w-9 h-9 shrink-0 border border-[var(--border)] flex items-center justify-center hover:bg-[var(--surface-muted)] text-[var(--foreground-muted)] hover:text-[var(--ff-purple)] transition-all"
+              className="ff-shape-button w-9 h-9 shrink-0 border border-[#CCCCCC] flex items-center justify-center hover:bg-[#f0f0f0] text-[#666666] hover:text-[#ff4fd8] transition-all"
               title="Medyadan Seç"
             >
               <ImageIcon size={14} />
@@ -84,7 +84,7 @@ function MediaListField({ label, values, onChange }: { label: string; values: st
             <button
               type="button"
               onClick={() => onChange(values.filter((_, i) => i !== index))}
-              className="ff-shape-button flex justify-center items-center w-9 h-9 border border-[var(--border)] text-[var(--foreground-muted)] hover:text-red-500"
+              className="ff-shape-button flex justify-center items-center w-9 h-9 border border-[#CCCCCC] text-[#666666] hover:text-red-500"
               aria-label="Satırı sil"
             >
               <Trash2 size={13} />
@@ -96,8 +96,8 @@ function MediaListField({ label, values, onChange }: { label: string; values: st
         type="button"
         onClick={() => onChange([...values, ""])}
         className={cn(
-          "ff-shape-button inline-flex items-center gap-1.5 border border-[var(--border)]",
-          "px-3 py-1.5 text-[12px] text-[var(--foreground-muted)] hover:text-[var(--ff-purple)]"
+          "ff-shape-button inline-flex items-center gap-1.5 border border-[#CCCCCC]",
+          "px-3 py-1.5 text-[12px] text-[#666666] hover:text-[#ff4fd8]"
         )}
       >
         <Plus size={13} />
@@ -205,10 +205,10 @@ export function PortfolioEditor({ mode, initial, services }: PortfolioEditorProp
     <div className="px-6 md:px-10 py-8 space-y-6">
       <div className="flex items-end justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="font-display text-2xl font-extrabold text-[var(--foreground)]">
+          <h1 className="font-display text-2xl font-extrabold text-[#333333] mb-2">
             {mode === "new" ? "Yeni Portfolyo" : "Portfolyo Düzenle"}
           </h1>
-          <p className="text-xs text-[var(--foreground-muted)] mt-1">
+          <p className="text-xs text-[#666666] mt-1">
             Detay sayfasındaki tüm metin ve sonuç alanlarını buradan yönetin.
           </p>
         </div>
@@ -256,7 +256,7 @@ export function PortfolioEditor({ mode, initial, services }: PortfolioEditorProp
           </Field>
           <StringListField label="Proje hikayesi paragrafları" values={form.narrativeParagraphs} onChange={(values) => patch({ narrativeParagraphs: values })} />
           <div className="space-y-2">
-            <span className="text-[11px] font-bold text-[var(--foreground-muted)]">Zorluk / Yaklaşım / Sonuç</span>
+            <span className="text-[11px] font-bold text-[#666666]">Zorluk / Yaklaşım / Sonuç</span>
             {form.sidebarItems.map((item, index) => (
               <div key={index} className="grid md:grid-cols-[160px_1fr] gap-2">
                 <input className={inputCls} value={item.heading} onChange={(e) => patch({ sidebarItems: form.sidebarItems.map((x, i) => i === index ? { ...x, heading: e.target.value } : x) })} />
@@ -265,7 +265,7 @@ export function PortfolioEditor({ mode, initial, services }: PortfolioEditorProp
             ))}
           </div>
           <div className="space-y-2">
-            <span className="text-[11px] font-bold text-[var(--foreground-muted)]">Sonuç metrikleri</span>
+            <span className="text-[11px] font-bold text-[#666666]">Sonuç metrikleri</span>
             {form.resultStats.map((item, index) => (
               <div key={index} className="grid md:grid-cols-[90px_80px_1fr_1fr] gap-2">
                 <input type="number" className={inputCls} value={item.value} onChange={(e) => patch({ resultStats: form.resultStats.map((x, i) => i === index ? { ...x, value: Number(e.target.value) } : x) })} />
@@ -290,18 +290,18 @@ export function PortfolioEditor({ mode, initial, services }: PortfolioEditorProp
           <Field label="Sıra">
             <input type="number" className={inputCls} value={form.order} onChange={(e) => patch({ order: Number(e.target.value) })} />
           </Field>
-          <label className="flex items-center gap-2 text-[13px] text-[var(--foreground-muted)]">
+          <label className="flex items-center gap-2 text-[13px] text-[#666666]">
             <input type="checkbox" checked={form.tall} onChange={(e) => patch({ tall: e.target.checked })} />
             Grid'de uzun kart
           </label>
-          <label className="flex items-center gap-2 text-[13px] text-[var(--foreground-muted)]">
+          <label className="flex items-center gap-2 text-[13px] text-[#666666]">
             <input type="checkbox" checked={form.isPublished} onChange={(e) => patch({ isPublished: e.target.checked })} />
             Yayında
           </label>
           <div className="space-y-2">
-            <span className="text-[11px] font-bold text-[var(--foreground-muted)]">Bağlı hizmetler</span>
+            <span className="text-[11px] font-bold text-[#666666]">Bağlı hizmetler</span>
             {services.map((service) => (
-              <label key={service.id} className="flex items-center gap-2 text-[13px]">
+              <label key={service.id} className="flex items-center gap-2 text-[13px] text-[#666666]">
                 <input
                   type="checkbox"
                   checked={form.serviceIds.includes(service.id)}

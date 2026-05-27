@@ -37,12 +37,12 @@ function FactItem({
       {/* Left accent line */}
       <span
         aria-hidden
-        className="absolute left-0 top-0 bottom-0 w-px bg-[var(--border)] group-hover:bg-[#A134FF]"
+        className="absolute left-0 top-0 bottom-0 w-px bg-[var(--border)] group-hover:bg-[var(--ff-purple)] transition-colors"
       />
 
       {/* Year / value */}
       <div className="w-20 shrink-0">
-        <span className="font-display font-extrabold text-2xl md:text-3xl text-[#A134FF] leading-none tabular-nums">
+        <span className="font-display font-extrabold text-2xl md:text-3xl text-[var(--ff-purple)] leading-none tabular-nums">
           {year}
         </span>
       </div>
@@ -99,7 +99,7 @@ export function StorySection() {
             transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
           >
             {/* Eyebrow */}
-            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#A134FF] mb-5">
+            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[var(--ff-purple)] mb-5">
               — Hikâyemiz —
             </p>
 
@@ -112,7 +112,7 @@ export function StorySection() {
               )}
             >
               Sıfırdan değil,{" "}
-              <span className="text-[#A134FF]">sıfırı</span>{" "}
+              <span className="text-[var(--ff-purple)]">sıfırı</span>{" "}
               domine ederek.
             </h2>
 
@@ -168,7 +168,7 @@ export function StorySection() {
               variants={fadeInUp}
               className="mb-8"
             >
-              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#A134FF] mb-2">
+              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[var(--ff-purple)] mb-2">
                 — Rakamlarla FlixFlex —
               </p>
               <h3 className="font-display text-xl md:text-2xl font-bold text-[var(--foreground)] tracking-tight">

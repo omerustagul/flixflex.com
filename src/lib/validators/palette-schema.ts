@@ -9,7 +9,7 @@
 
 import { z } from "zod"
 
-const hexRegex = /^#[0-9a-fA-F]{6}$/
+const hexRegex = /^#[0-9a-fA-F]{6}([0-9a-fA-F]{2})?$/
 
 // rgba(0-255, 0-255, 0-255, 0.0-1.0)
 const rgbaRegex =

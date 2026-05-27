@@ -5,7 +5,7 @@ import { Plus, Trash2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export const inputCls =
-  "ff-shape-container w-full h-9 bg-[var(--surface)] border border-[var(--border)] px-3 py-2 text-[13px] text-[var(--foreground)] outline-none focus:border-[var(--ff-purple)]"
+  "ff-shape-container w-full h-9 bg-[#f7f7f5] border border-[#CCCCCC] px-3 py-2 text-[13px] text-[#333333] placeholder:text-[#666666] outline-none focus:border-[#ff4fd8] transition-colors"
 
 export function Field({
   label,
@@ -16,7 +16,7 @@ export function Field({
 }) {
   return (
     <label className="block space-y-1.5">
-      <span className="text-[11px] font-bold text-[var(--foreground-muted)]">
+      <span className="text-[11px] font-bold text-[#666666]">
         {label}
       </span>
       {children}
@@ -41,7 +41,7 @@ export function StringListField({
 
   return (
     <div className="space-y-2">
-      <span className="text-[11px] font-bold text-[var(--foreground-muted)]">
+      <span className="text-[11px] font-bold text-[#666666]">
         {label}
       </span>
       <div className="space-y-2">
@@ -56,7 +56,7 @@ export function StringListField({
             <button
               type="button"
               onClick={() => onChange(values.filter((_, i) => i !== index))}
-              className="ff-shape-button flex justify-center items-center w-9 h-9 border border-[var(--border)] text-[var(--foreground-muted)] hover:text-red-500"
+              className="ff-shape-button flex justify-center items-center w-9 h-9 border border-[#CCCCCC] text-[#666666] hover:text-red-500"
               aria-label="Satırı sil"
             >
               <Trash2 size={13} />
@@ -68,8 +68,8 @@ export function StringListField({
         type="button"
         onClick={() => onChange([...values, ""])}
         className={cn(
-          "ff-shape-button inline-flex items-center gap-1.5 border border-[var(--border)]",
-          "px-3 py-1.5 text-[12px] text-[var(--foreground-muted)] hover:text-[var(--ff-purple)]"
+          "ff-shape-button inline-flex items-center gap-1.5 border border-[#CCCCCC]",
+          "px-3 py-1.5 text-[12px] text-[#666666] hover:text-[#ff4fd8] transition-colors"
         )}
       >
         <Plus size={13} />

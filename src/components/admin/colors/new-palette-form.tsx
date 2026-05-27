@@ -82,14 +82,14 @@ export function NewPaletteForm({ existingPalettes }: NewPaletteFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="ff-card max-w-xl space-y-6"
+      className="ff-card max-w-xl bg-[#f7f7f5] border border-[#E0E0E0] space-y-6"
       noValidate
     >
       {/* Palette name */}
       <div className="flex flex-col gap-1.5">
         <label
           htmlFor="palette-name"
-          className="text-[11px] font-semibold tracking-widest uppercase text-[var(--foreground-muted)]"
+          className="text-[11px] font-semibold text-[#888888]"
         >
           Tema Düzeni Adı <span className="text-red-500">*</span>
         </label>
@@ -99,7 +99,7 @@ export function NewPaletteForm({ existingPalettes }: NewPaletteFormProps) {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Örn: Bahar Teması"
-          className="ff-input"
+          className="ff-input h-10 bg-white border-[#ccc] focus:ring-2 focus:ring-[#ff4fd8] focus:border-transparent text-[#0d0d0d]" 
           maxLength={64}
           required
         />
@@ -109,7 +109,7 @@ export function NewPaletteForm({ existingPalettes }: NewPaletteFormProps) {
       <div className="flex flex-col gap-1.5">
         <label
           htmlFor="palette-desc"
-          className="text-[11px] font-semibold tracking-widest uppercase text-[var(--foreground-muted)]"
+          className="text-[11px] font-semibold text-[#888888]"
         >
           Açıklama
         </label>
@@ -119,7 +119,7 @@ export function NewPaletteForm({ existingPalettes }: NewPaletteFormProps) {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Kısa bir açıklama (opsiyonel)"
-          className="ff-input"
+          className="ff-input h-10 bg-[#FFFFFF] border border-[#CCCCCC] focus:ring-2 focus:ring-[#ff4fd8] focus:border-transparent text-[#0d0d0d]"
           maxLength={256}
         />
       </div>
@@ -128,7 +128,7 @@ export function NewPaletteForm({ existingPalettes }: NewPaletteFormProps) {
       <div className="flex flex-col gap-1.5">
         <label
           htmlFor="palette-copy"
-          className="text-[11px] font-semibold tracking-widest uppercase text-[var(--foreground-muted)]"
+          className="text-[11px] font-semibold text-[#888888]"
         >
           Başlangıç Teması
         </label>
@@ -165,17 +165,17 @@ export function NewPaletteForm({ existingPalettes }: NewPaletteFormProps) {
       )}
 
       {/* Actions */}
-      <div className="flex items-center gap-3 pt-2 border-t border-[var(--border)]">
+      <div className="flex items-center gap-3 pt-2 border-t border-[#E0E0E0]">
         <Link
           href="/admin/theme"
-          className="ff-btn ff-btn-ghost text-[12px]"
+          className="ff-btn ff-btn-ghost h-9 bg-[#f7f7f5] border border-[#E0E0E0] text-[#0d0d0d] hover:bg-red-500 hover:text-white text-[12px]"
         >
           Vazgeç
         </Link>
         <button
           type="submit"
           disabled={submitting}
-          className="ff-btn ff-btn-primary text-[12px] disabled:opacity-40"
+          className="ff-btn ff-btn-primary h-9 bg-[#ff4fd8]/10 border border-[#ff4fd8]/40 text-[#ff4fd8] hover:bg-[#ff4fd8] hover:text-white text-[12px] disabled:opacity-40"
         >
           {submitting ? "Oluşturuluyor..." : "Palet Oluştur"}
         </button>

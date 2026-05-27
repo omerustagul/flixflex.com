@@ -207,7 +207,7 @@ export function PermissionMatrix({
         {!isLocked && (
           <button
             onClick={toggleAll}
-            className="text-[11px] font-semibold tracking-[0.07em] uppercase text-[#A134FF] hover:text-[#8B1FE8] transition-colors flex items-center gap-1.5"
+            className="text-[11px] font-semibold tracking-[0.07em] uppercase text-[var(--ff-purple)] hover:text-[#8B1FE8] transition-colors flex items-center gap-1.5"
           >
             {checked.size === totalAvailable ? (
               <><CheckSquare className="w-3.5 h-3.5" /> Hepsini Kaldır</>
@@ -239,8 +239,8 @@ export function PermissionMatrix({
                         className={cn(
                           "w-4 h-4 border transition-colors",
                           isColAllChecked(action)
-                            ? "bg-[#A134FF] border-[#A134FF]"
-                            : "bg-transparent border-[var(--border)] hover:border-[#A134FF]"
+                            ? "bg-[var(--ff-purple)] border-[var(--ff-purple)]"
+                            : "bg-transparent border-[var(--border)] hover:border-[var(--ff-purple)]"
                         )}
                         title={`${ACTION_LABELS[action] ?? action} — tüm kaynaklar`}
                         aria-label={`${action} sütununu seç`}
@@ -276,11 +276,12 @@ export function PermissionMatrix({
                           className={cn(
                             "w-4 h-4 border flex-shrink-0 transition-colors relative",
                             rowAll
-                              ? "bg-[#A134FF] border-[#A134FF]"
+                              ? "bg-[var(--ff-purple)] border-[var(--ff-purple)]"
                               : rowPartial
-                                ? "bg-[rgba(161,52,255,0.2)] border-[#A134FF]"
-                                : "bg-transparent border-[var(--border)] hover:border-[#A134FF]"
+                                ? "bg-[var(--ff-purple)/0.2] border-[var(--ff-purple)]"
+                                : "bg-transparent border-[var(--border)] hover:border-[var(--ff-purple)]",
                           )}
+                          title={`${RESOURCE_LABELS[resource] ?? resource} kaynak izinleri`}
                           aria-label={`${resource} satırını seç`}
                         >
                           {rowAll && (
@@ -290,7 +291,7 @@ export function PermissionMatrix({
                           )}
                           {rowPartial && !rowAll && (
                             <span className="absolute inset-0 flex items-center justify-center">
-                              <span className="w-2 h-0.5 bg-[#A134FF]" />
+                              <span className="w-2 h-0.5 bg-[var(--ff-purple)]" />
                             </span>
                           )}
                         </button>
@@ -312,9 +313,9 @@ export function PermissionMatrix({
                         {available ? (
                           isLocked ? (
                             isChecked ? (
-                              <span className="inline-flex items-center justify-center w-5 h-5 bg-[#A134FF]/20 border border-[#A134FF]/30">
+                              <span className="inline-flex items-center justify-center w-5 h-5 bg-[var(--ff-purple)/0.2] border border-[var(--ff-purple)/0.3]">
                                 <svg viewBox="0 0 10 8" className="w-3 h-3" fill="none">
-                                  <path d="M1 4L4 7L9 1" stroke="#A134FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                  <path d="M1 4L4 7L9 1" stroke="var(--ff-purple)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                               </span>
                             ) : (
@@ -326,8 +327,8 @@ export function PermissionMatrix({
                               className={cn(
                                 "w-5 h-5 border transition-colors",
                                 isChecked
-                                  ? "bg-[#A134FF] border-[#A134FF]"
-                                  : "bg-transparent border-[var(--border)] hover:border-[#A134FF]"
+                                  ? "bg-[var(--ff-purple)] border-[var(--ff-purple)]"
+                                  : "bg-transparent border-[var(--border)] hover:border-[var(--ff-purple)]"
                               )}
                               aria-label={`${resource}:${action}`}
                               aria-checked={isChecked}
@@ -358,7 +359,7 @@ export function PermissionMatrix({
         {isDirty && !isLocked && (
           <motion.div
             className="sticky bottom-0 left-0 right-0 flex items-center justify-between
-                       px-6 py-4 bg-[var(--surface)] border-t border-[#A134FF]/40
+                       px-6 py-4 bg-[var(--surface)] border-t border-[var(--ff-purple)/40]
                        shadow-[0_-4px_24px_rgba(161,52,255,0.12)]"
             initial={{ y: 60, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -366,7 +367,7 @@ export function PermissionMatrix({
             transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <div className="flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-[#A134FF] animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-[var(--ff-purple)] animate-pulse" />
               <span className="text-sm text-[var(--foreground-muted)]">
                 Kaydedilmemiş değişiklikler var
               </span>

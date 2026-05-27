@@ -18,7 +18,7 @@ function parseBold(text: string): ReactNode[] {
 interface MarkdownRendererProps {
   content: string
   className?: string
-  /** Optional accent colour override, defaults to #A134FF */
+  /** Optional accent colour override, defaults to #FF4FD8 */
   accentColor?: string
 }
 
@@ -106,7 +106,7 @@ export function MarkdownRenderer({
         <blockquote
           key={idx}
           className={cn(
-            "my-6 pl-5 border-l-2 border-[#A134FF]",
+            "my-6 pl-5 border-l-2 border-[var(--ff-purple)] text-[var(--foreground)]",
             "italic text-[var(--foreground-muted)] text-lg leading-relaxed"
           )}
         >

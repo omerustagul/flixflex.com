@@ -146,7 +146,7 @@ export function HeroVideoSection({
               "px-4 py-2"
             )}
           >
-            <span className="w-1.5 h-1.5 bg-[#A134FF] animate-pulse rounded-full" />
+            <span className="w-1.5 h-1.5 bg-[var(--ff-purple)] animate-pulse rounded-full" />
             <span className="text-[10px] md:text-[11px] font-bold text-white">
               Creative Excellence · 2026
             </span>
@@ -185,7 +185,7 @@ export function HeroVideoSection({
                 "ff-shape-button",
                 "group inline-flex items-center justify-center gap-3",
                 "h-10 px-4 text-sm font-bold uppercase",
-                "bg-white text-black hover:bg-[#A134FF] hover:text-white",
+                "bg-white text-black hover:bg-[var(--ff-purple)] hover:text-white",
                 "transition-all duration-300 transform hover:scale-105"
               )}
             >

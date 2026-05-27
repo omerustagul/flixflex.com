@@ -60,7 +60,7 @@ function FieldLabel({ name }: { name: string }) {
     .replace(/^./, (c) => c.toUpperCase())
     .trim()
   return (
-    <label className="text-[10px] font-semibold tracking-[0.08em] uppercase text-[var(--foreground-muted)] block mb-1">
+    <label className="text-[10px] font-semibold text-[#666666] block mb-1">
       {label}
     </label>
   )
@@ -75,9 +75,9 @@ function TextField({ name, value, onChange }: FieldProps) {
         onChange={(e) => onChange(e.target.value)}
         className={cn(
           "ff-shape-container w-full px-3 py-2 text-[12px]",
-          "bg-[var(--background)] border border-[var(--border)]",
-          "text-[var(--foreground)] placeholder:text-[var(--foreground-faint)]",
-          "outline-none focus:border-[var(--ff-purple)] transition-colors duration-150"
+          "bg-[#f7f7f5] border border-[#CCCCCC]",
+          "text-[#333333] placeholder:text-[#666666]",
+          "outline-none focus:border-[#ff4fd8] transition-colors duration-150"
         )}
       />
     </div>
@@ -94,9 +94,9 @@ function TextareaField({ name, value, onChange }: FieldProps) {
         rows={3}
         className={cn(
           "ff-shape-container w-full px-3 py-2 text-[12px] resize-y min-h-[72px]",
-          "bg-[var(--background)] border border-[var(--border)]",
-          "text-[var(--foreground)] placeholder:text-[var(--foreground-faint)]",
-          "outline-none focus:border-[var(--ff-purple)] transition-colors duration-150"
+          "bg-[#f7f7f5] border border-[#CCCCCC]",
+          "text-[#333333] placeholder:text-[#666666]",
+          "outline-none focus:border-[#ff4fd8] transition-colors duration-150"
         )}
       />
     </div>
@@ -114,8 +114,8 @@ function BooleanField({ name, value, onChange }: FieldProps) {
         className={cn(
           "ff-shape-container relative w-11 h-6 border transition-colors duration-200 shrink-0",
           value
-            ? "bg-[var(--ff-purple)] border-[var(--ff-purple)]"
-            : "bg-[var(--foreground-faint)] border-[var(--border)]"
+            ? "bg-[#ff4fd8] border-[#ff4fd8]"
+            : "bg-[#f7f7f5] border-[#CCCCCC]"
         )}
       >
         <span
@@ -164,9 +164,9 @@ function NumberField({ name, value, onChange }: FieldProps) {
         onChange={(e) => onChange(Number(e.target.value))}
         className={cn(
           "ff-shape-container w-full px-3 py-2 text-[12px]",
-          "bg-[var(--background)] border border-[var(--border)]",
-          "text-[var(--foreground)]",
-          "outline-none focus:border-[var(--ff-purple)] transition-colors duration-150"
+          "bg-[#f7f7f5] border border-[#CCCCCC]",
+          "text-[#333333]",
+          "outline-none focus:border-[#ff4fd8] transition-colors duration-150"
         )}
       />
     </div>
@@ -180,9 +180,9 @@ function ColorField({ name, value, onChange }: FieldProps) {
       <div className="flex items-center gap-2">
         <input
           type="color"
-          value={typeof value === "string" ? value : "var(--ff-purple)"}
+          value={typeof value === "string" ? value : "#ff4d8d"}
           onChange={(e) => onChange(e.target.value)}
-          className="ff-shape-button w-8 h-8 border border-[var(--border)] cursor-pointer bg-transparent p-0"
+          className="ff-shape-button w-8 h-8 border border-[#CCCCCC] cursor-pointer bg-transparent p-0"
         />
         <input
           type="text"
@@ -190,11 +190,11 @@ function ColorField({ name, value, onChange }: FieldProps) {
           onChange={(e) => onChange(e.target.value)}
           className={cn(
             "flex-1 px-3 py-2 text-[12px]",
-            "bg-[var(--background)] border border-[var(--border)]",
-            "text-[var(--foreground)]",
-            "outline-none focus:border-[var(--ff-purple)] transition-colors duration-150"
+            "bg-[#f7f7f5] border border-[#CCCCCC]",
+            "text-[#333333]",
+            "outline-none focus:border-[#ff4fd8] transition-colors duration-150"
           )}
-          placeholder="var(--ff-purple)"
+          placeholder="#ff4d8d veya CSS renk değeri"
         />
       </div>
     </div>
@@ -216,15 +216,15 @@ function MediaField({ name, value, onChange }: FieldProps) {
           onChange={(e) => onChange(e.target.value)}
           className={cn(
             "ff-shape-container flex-1 px-3 py-2 text-[11px]",
-            "bg-[var(--background)] border border-[var(--border)]",
-            "text-[var(--foreground)] outline-none focus:border-[var(--ff-purple)] transition-all duration-150"
+            "bg-[#f7f7f5] border border-[#CCCCCC]",
+            "text-[#333333] outline-none focus:border-[#ff4fd8] transition-all duration-150"
           )}
           placeholder="URL girin veya seçin..."
         />
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="ff-shape-button w-9 h-9 shrink-0 border border-[var(--border)] flex items-center justify-center hover:bg-[var(--surface-muted)] text-[var(--foreground-muted)] hover:text-[var(--ff-purple)] transition-all"
+          className="ff-shape-button w-9 h-9 shrink-0 border border-[#CCCCCC] flex items-center justify-center hover:bg-[#f0f0f0] text-[#666666] hover:text-[#ff4fd8] transition-all"
           title="Medyadan Seç"
         >
           {isVideo ? <Video size={14} /> : <ImageIcon size={14} />}
@@ -323,18 +323,18 @@ export function PropertyEditor() {
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--border)] shrink-0">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-[#CCCCCC] shrink-0">
         <div className="flex items-center gap-2">
-          <span className="text-[var(--ff-purple)]">
+          <span className="text-[#ff4fd8]">
             {meta ? <meta.icon size={14} /> : <X size={14} />}
           </span>
-          <span className="text-[12px] font-semibold text-[var(--foreground)]">
+          <span className="text-[12px] font-semibold text-[#333333]">
             {meta?.label ?? "Section Yok"}
           </span>
         </div>
         <button
           onClick={() => selectSection(null)}
-          className="text-[var(--foreground-faint)] hover:text-[var(--foreground)] transition-colors"
+          className="text-[#666666] hover:text-[#333333] transition-colors"
           aria-label="Kapat"
         >
           <X size={14} />
@@ -367,9 +367,9 @@ export function PropertyEditor() {
                   rows={5}
                   className={cn(
                     "ff-shape-container w-full px-3 py-2 text-[11px] font-mono resize-y",
-                    "bg-[var(--background)] border border-[var(--border)]",
-                    "text-[var(--foreground)]",
-                    "outline-none focus:border-[var(--ff-purple)] transition-colors duration-150"
+                    "bg-[#f7f7f5] border border-[#CCCCCC]",
+                    "text-[#333333]",
+                    "outline-none focus:border-[#ff4fd8] transition-colors duration-150"
                   )}
                 />
               </div>

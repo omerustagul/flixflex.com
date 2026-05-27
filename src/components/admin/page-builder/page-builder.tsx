@@ -173,16 +173,16 @@ export function PageBuilder({ initialPage }: PageBuilderProps) {
   const isPublished = page.status === "published"
 
   return (
-    <div className="flex flex-col h-[calc(92vh)] bg-[var(--background)] overflow-hidden">
+    <div className="flex flex-col h-[calc(92vh)] bg-[#f7f7f5] overflow-hidden">
       {/* ── Top Toolbar ─────────────────────────────── */}
-      <header className="flex items-center gap-3 px-4 h-14 border-b border-[var(--border)] bg-[var(--surface)] shrink-0">
+      <header className="flex items-center gap-3 px-4 h-14 border-b border-[#CCCCCC] bg-[#f7f7f5] shrink-0">
         {/* Title input */}
         <div className="flex-1 min-w-0 max-w-sm">
           <input
             className={cn(
-              "w-full bg-transparent text-sm font-medium text-[var(--foreground)]",
-              "placeholder:text-[var(--foreground-faint)]",
-              "border-b border-transparent focus:border-[var(--ff-purple)]",
+              "w-full bg-transparent text-sm font-medium text-[#333333]",
+              "placeholder:text-[#666666]",
+              "border-b border-transparent focus:border-[#ff4fd8]",
               "outline-none py-1 transition-colors duration-150"
             )}
             value={page.title}
@@ -212,7 +212,7 @@ export function PageBuilder({ initialPage }: PageBuilderProps) {
             title="Geri Al (Ctrl+Z)"
             className={cn(
               "w-8 h-8 flex items-center justify-center transition-colors",
-              "text-[var(--foreground-muted)] hover:text-[var(--ff-purple)]",
+              "text-[#666666] hover:text-[#ff4fd8]",
               "disabled:opacity-30 disabled:cursor-not-allowed"
             )}
           >
@@ -224,7 +224,7 @@ export function PageBuilder({ initialPage }: PageBuilderProps) {
             title="Yinele (Ctrl+Shift+Z)"
             className={cn(
               "w-8 h-8 flex items-center justify-center transition-colors",
-              "text-[var(--foreground-muted)] hover:text-[var(--ff-purple)]",
+              "text-[#666666] hover:text-[#ff4fd8]",
               "disabled:opacity-30 disabled:cursor-not-allowed"
             )}
           >
@@ -233,13 +233,13 @@ export function PageBuilder({ initialPage }: PageBuilderProps) {
         </div>
 
         {/* Divider */}
-        <div className="w-px h-5 bg-[var(--border)]" />
+        <div className="w-px h-5 bg-[#CCCCCC]" />
 
         {/* Save state indicator */}
-        <div className="flex items-center gap-1.5 text-[11px] text-[var(--foreground-faint)]">
+        <div className="flex items-center gap-1.5 text-[11px] text-[#666666]">
           {isSaving ? (
             <>
-              <div className="w-3 h-3 border border-[var(--ff-purple)] border-t-transparent rounded-full animate-spin" />
+              <div className="w-3 h-3 border border-[#ff4fd8] border-t-transparent rounded-full animate-spin" />
               <span>Kaydediliyor...</span>
             </>
           ) : isDirty ? (
@@ -265,8 +265,8 @@ export function PageBuilder({ initialPage }: PageBuilderProps) {
             "ff-shape-button flex items-center gap-1.5 px-4 py-2 text-[11px] font-medium",
             "border transition-colors duration-150",
             showPreview
-              ? "border-[var(--ff-purple)] text-[var(--ff-purple)] bg-[var(--ff-purple)]/10"
-              : "border-[var(--border)] text-[var(--foreground-muted)] hover:border-[var(--ff-purple)] hover:text-[var(--ff-purple)]"
+              ? "border-[#ff4fd8] text-[#ff4fd8] bg-[#ff4fd8]/10"
+              : "border-[#CCCCCC] text-[#666666] hover:border-[#ff4fd8] hover:text-[#ff4fd8]"
           )}
         >
           <Eye size={12} />
@@ -302,17 +302,17 @@ export function PageBuilder({ initialPage }: PageBuilderProps) {
       ) : (
         <div className="flex flex-1 min-h-0 overflow-hidden">
           {/* Left: Section Panel */}
-          <aside className="w-72 shrink-0 border-r border-[var(--border)] bg-[var(--surface)] overflow-y-auto">
+          <aside className="w-72 shrink-0 border-r border-[#CCCCCC] bg-[#f7f7f5] overflow-y-auto">
             <SectionPanel />
           </aside>
 
           {/* Center: Sortable Canvas */}
-          <main className="flex-1 min-w-0 overflow-y-auto bg-[var(--background)]">
+          <main className="flex-1 min-w-0 overflow-y-auto bg-[#f7f7f5]">
             <SortableCanvas />
           </main>
 
           {/* Right: Property Editor */}
-          <aside className="w-80 shrink-0 border-l border-[var(--border)] bg-[var(--surface)] overflow-y-auto">
+          <aside className="w-80 shrink-0 border-l border-[#CCCCCC] bg-[#f7f7f5] overflow-y-auto">
             <PropertyEditor />
           </aside>
         </div>

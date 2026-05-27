@@ -84,7 +84,7 @@ export function PaletteListActions({ palette }: PaletteListActionsProps) {
   }
 
   return (
-    <div className="flex items-center gap-2 flex-wrap pt-2 border-t border-[var(--border)]">
+    <div className="flex items-center gap-2 flex-wrap pt-2 border-t border-[#E0E0E0]">
       {/* Düzenle */}
       <a
         href={`/admin/theme/${palette.id}`}

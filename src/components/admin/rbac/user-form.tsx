@@ -152,7 +152,7 @@ export function UserForm({ roles, initial }: UserFormProps) {
           <input
             type="checkbox"
             id="sendInviteEmail"
-            className="w-4 h-4 accent-[#A134FF]"
+            className="w-4 h-4 accent-[var(--ff-purple)]"
             {...register("sendInviteEmail" as keyof FormData)}
           />
           <label
@@ -179,7 +179,7 @@ export function UserForm({ roles, initial }: UserFormProps) {
           <input
             type="checkbox"
             id="isActive"
-            className="w-4 h-4 accent-[#A134FF]"
+            className="w-4 h-4 accent-[var(--ff-purple)]"
             {...register("isActive" as keyof FormData)}
           />
           <label

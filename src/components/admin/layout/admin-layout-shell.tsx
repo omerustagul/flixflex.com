@@ -34,7 +34,7 @@ export function AdminLayoutShell({ user, siteLogo, logoHeight, children }: Admin
         {/* Page content */}
         <main
           id="admin-content"
-          className="flex-1 bg-[var(--background)]"
+          className="flex-1 bg-[#F7F7F5]"
         >
           {children}
         </main>

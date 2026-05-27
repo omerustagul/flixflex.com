@@ -10,6 +10,7 @@ import { checkWCAG } from "@/lib/utils"
 import { PaletteListActions } from "@/components/admin/colors/palette-list-actions"
 import prisma from "@/lib/prisma"
 import type { ColorPalette } from "@/lib/colors/types"
+import { Plus } from "lucide-react"
 
 export const metadata: Metadata = { title: "Tema Düzeni" }
 
@@ -67,10 +68,10 @@ export default async function ThemePage() {
       {/* Page header */}
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="font-display text-2xl font-extrabold text-[var(--foreground)]">
+          <h1 className="font-display text-2xl font-extrabold text-[#0d0d0d]">
             Tema Düzeni
           </h1>
-          <p className="text-xs text-[var(--foreground-muted)] mt-1">
+          <p className="text-xs text-[#888888] mt-1">
             Temalarınızı oluşturun ve yönetin.
           </p>
         </div>
@@ -78,7 +79,8 @@ export default async function ThemePage() {
           href="/admin/theme/yeni"
           className="ff-btn ff-btn-primary text-[13px]"
         >
-          + Yeni Tema Düzeni
+          <Plus size={14} /> 
+          Tema Oluştur
         </Link>
       </div>
 
@@ -109,11 +111,11 @@ export default async function ThemePage() {
 
               {/* Name + description */}
               <div>
-                <h2 className="font-display text-base font-bold text-[var(--foreground)]">
+                <h2 className="font-display text-base font-bold text-[#0d0d0d]">
                   {palette.name}
                 </h2>
                 {palette.description && (
-                  <p className="text-xs text-[var(--foreground-muted)] mt-0.5 leading-relaxed">
+                  <p className="text-xs text-[#888888] mt-0.5 leading-relaxed">
                     {palette.description}
                   </p>
                 )}
@@ -125,7 +127,7 @@ export default async function ThemePage() {
                   <div
                     key={idx}
                     title={color}
-                    className="ff-shape-container w-7 h-7 border border-[var(--border)] flex-shrink-0"
+                    className="ff-shape-container w-7 h-7 border border-[#CCCCCC] flex-shrink-0"
                     style={{ backgroundColor: color }}
                   />
                 ))}
@@ -133,7 +135,7 @@ export default async function ThemePage() {
 
               {/* WCAG badge */}
               <div className="flex items-center gap-2">
-                <span className="text-[10px] uppercase tracking-widest text-[var(--foreground-faint)] font-medium">
+                <span className="text-[10px] text-[#010000] font-medium">
                   WCAG Primary/BG:
                 </span>
                 {wcag.aaa ? (

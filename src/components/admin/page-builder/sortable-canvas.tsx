@@ -81,12 +81,12 @@ function SortableItem({
       style={style}
       className={cn(
         "group flex items-center gap-2 h-16 px-3 py-3",
-        "border transition-all duration-150 cursor-pointer",
+        "border-b transition-all duration-150 cursor-pointer",
         "select-none",
         isDragging && "opacity-30",
         isSelected
-          ? "border-[#A134FF] bg-[rgba(161,52,255,0.08)]"
-          : "border-[var(--border)] bg-[var(--surface)] hover:border-[rgba(161,52,255,0.4)]",
+          ? "border-[#ff4fd8] bg-[#ff4fd8]/0.1"
+          : "border-[#CCCCCC] bg-[#f7f7f5] hover:border-[#ff4fd8]/0.4",
         !section.visible && "opacity-50"
       )}
       onClick={() => onSelect(section.id)}
@@ -104,7 +104,7 @@ function SortableItem({
       <button
         className={cn(
           "shrink-0 w-5 h-5 flex items-center justify-center",
-          "text-[var(--foreground-faint)] hover:text-[var(--foreground)]",
+          "text-[#666666] hover:text-[#ff4fd8]",
           "cursor-grab active:cursor-grabbing",
           "focus:outline-none"
         )}
@@ -118,15 +118,15 @@ function SortableItem({
       </button>
 
       {/* Icon + label */}
-      <span className="shrink-0 text-[#A134FF]">
+      <span className="shrink-0 text-[#ff4fd8]">
         <Icon size={14} />
       </span>
-      <span className="flex-1 min-w-0 text-[12px] font-medium text-[var(--foreground)] truncate">
+      <span className="flex-1 min-w-0 text-[12px] font-medium text-[#333333] truncate">
         {meta?.label}
       </span>
 
       {/* Order badge */}
-      <span className="shrink-0 text-[10px] text-[var(--foreground-faint)] tabular-nums w-5 text-center">
+      <span className="shrink-0 text-[10px] text-[#666666] tabular-nums w-5 text-center">
         {section.order + 1}
       </span>
 
@@ -140,21 +140,21 @@ function SortableItem({
         <button
           onClick={() => onToggle(section.id)}
           title={section.visible ? "Gizle" : "Göster"}
-          className="w-7 h-7 flex items-center justify-center text-[var(--foreground-faint)] hover:text-[#A134FF] transition-colors"
+          className="w-7 h-7 flex items-center justify-center text-[#666666] hover:text-[#ff4fd8] transition-colors"
         >
           {section.visible ? <Eye size={13} /> : <EyeOff size={13} />}
         </button>
         <button
           onClick={() => onDuplicate(section.id)}
           title="Kopyala"
-          className="w-7 h-7 flex items-center justify-center text-[var(--foreground-faint)] hover:text-[#A134FF] transition-colors"
+          className="w-7 h-7 flex items-center justify-center text-[#666666] hover:text-[#ff4fd8] transition-colors"
         >
           <Copy size={13} />
         </button>
         <button
           onClick={() => onDelete(section.id)}
           title="Sil"
-          className="w-7 h-7 flex items-center justify-center text-[var(--foreground-faint)] hover:text-red-400 transition-colors"
+          className="w-7 h-7 flex items-center justify-center text-[#666666] hover:text-red-400 transition-colors"
         >
           <Trash2 size={13} />
         </button>
@@ -171,14 +171,14 @@ function DragGhost({ section }: { section: SectionBlock }) {
     <div
       className={cn(
         "flex items-center gap-2 px-3 py-3",
-        "border border-[#A134FF] bg-[rgba(161,52,255,0.12)]",
+        "border border-[#ff4fd8] bg-[#ff4fd8]/0.12]",
         "shadow-[0_8px_32px_rgba(161,52,255,0.25)]",
         "w-72 opacity-90"
       )}
     >
-      <GripVertical size={14} className="text-[var(--foreground-faint)]" />
-      <span className="text-[#A134FF]"><Icon size={14} /></span>
-      <span className="text-[12px] font-medium text-[var(--foreground)]">
+      <GripVertical size={14} className="text-[#666666]" />
+      <span className="text-[#ff4fd8]"><Icon size={14} /></span>
+      <span className="text-[12px] font-medium text-[#333333]">
         {meta.label}
       </span>
     </div>

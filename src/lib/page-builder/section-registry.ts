@@ -21,6 +21,7 @@ import {
   Layout,
   Newspaper,
   Phone,
+  ArrowLeftRight,
   type LucideIcon,
 } from "lucide-react"
 import type { SectionType } from "@/types/page-builder"
@@ -40,6 +41,7 @@ import {
   teamPropsSchema,
   contactFormPropsSchema,
   parallaxPropsSchema,
+  portfolioVerticalScrollPropsSchema,
 } from "@/types/page-builder"
 
 // ── Category Labels ───────────────────────────────
@@ -298,6 +300,14 @@ export const SECTION_REGISTRY: Record<string, SectionMeta> = {
     icon: Grid2X2,
     defaultProps: {},
     description: "Proje showcase görünümü",
+  },
+  "portfolio-vertical-scroll": {
+    type: "portfolio-vertical-scroll",
+    label: "Dikey Kart Yatay Akış",
+    category: "Portföy & Medya",
+    icon: ArrowLeftRight,
+    defaultProps: portfolioVerticalScrollPropsSchema.parse({}),
+    description: "Sonsuz döngü marquee dikey portfolyo kartları",
   },
 }
 

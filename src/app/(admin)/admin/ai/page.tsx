@@ -27,11 +27,11 @@ export default async function AIDashboardPage() {
       {/* Page header */}
       <div className="flex items-end justify-between gap-6 flex-wrap">
         <div>
-          <h1 className="font-display text-2xl font-extrabold text-[var(--foreground)] flex items-center gap-3">
-            <Sparkles className="text-[var(--ff-purple)]" size={24} />
+          <h1 className="font-display text-2xl font-extrabold text-[#0d0d0d] flex items-center gap-3">
+            <Sparkles className="text-[#ff4fd8]" size={24} />
             AI Asistan
           </h1>
-          <p className="text-xs text-[var(--foreground-muted)] mt-1">
+          <p className="text-xs text-[#888888] mt-1">
             FlixFlex AI içerik motoru — başlıktan yayınlanmış yazıya tek akışta
           </p>
         </div>
@@ -40,8 +40,8 @@ export default async function AIDashboardPage() {
           href="/admin/ai/studio"
           className={cn(
             "ff-shape-button inline-flex items-center gap-2 h-11 px-5 py-3",
-            "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
-            "hover:bg-[var(--ff-purple-hover)] hover:shadow-[0_4px_24px_rgba(161,52,255,0.45)]",
+            "bg-[#ff4fd8] text-white border border-[#ff4fd8]",
+            "hover:bg-[#ff4fd8]/80 hover:shadow-[0_4px_14px_0_rgba(255,79,216,0.4)]",
             "text-[13px] font-semibold",
             "transition-all duration-200"
           )}
@@ -56,7 +56,7 @@ export default async function AIDashboardPage() {
       <section
         className={cn(
           "ff-shape-container relative overflow-hidden",
-          "bg-gradient-to-br from-[rgba(161,52,255,0.18)] via-[rgba(161,52,255,0.08)] to-[var(--surface-elevated)]",
+          "bg-gradient-to-br from-[#ff4fd8]/10 via-[#ff4fd8]/30 to-[#ff4fd8]/50",
           "border border-[rgba(161,52,255,0.35)]",
           "p-8 md:p-12"
         )}
@@ -71,13 +71,13 @@ export default async function AIDashboardPage() {
           }}
         />
         <div className="relative">
-          <p className="text-[11px] font-mono text-[var(--ff-purple)] mb-3">
+          <p className="text-[11px] font-mono text-[#ff4fd8] mb-3">
             {"// AI BLOG MOTORU"}
           </p>
-          <h2 className="font-display text-lg md:text-xl font-extrabold text-[var(--foreground)] leading-tight tracking-tight">
-            Konudan yayınlanmış yazıya — <span className="text-[var(--ff-purple)]">altı adım</span>.
+          <h2 className="font-display text-lg md:text-xl font-extrabold text-[#0d0d0d] leading-tight tracking-tight">
+            Konudan yayınlanmış yazıya — <span className="text-[#ff4fd8]">altı adım</span>.
           </h2>
-          <p className="text-xs text-[var(--foreground-muted)] mt-4 max-w-xl leading-relaxed">
+          <p className="text-xs text-[#888888] mt-4 max-w-xl leading-relaxed">
             Başlık önerisi, araştırma, makale üretimi, görseller, şablon seçimi ve
             taslak olarak kaydetme. FlixFlex&apos;in ses tonuyla, Türkçe, dakikalar
             içinde.
@@ -86,7 +86,7 @@ export default async function AIDashboardPage() {
           {/* Key status pill */}
           <div className="ff-shape-button mt-6 inline-flex items-center gap-2 px-3 py-1.5 border border-[var(--border)] bg-[var(--surface)]">
             <KeyRound size={13} className={keyConfigured ? "text-green-500" : "text-yellow-500"} />
-            <span className="text-[12px] font-medium text-[var(--foreground-muted)]">
+            <span className="text-[12px] font-medium text-[#888888]">
               ANTHROPIC_API_KEY:
             </span>
             <span
@@ -131,7 +131,7 @@ export default async function AIDashboardPage() {
 
       {/* Quick actions */}
       <section>
-        <h3 className="font-display text-[13px] font-bold text-[var(--foreground-muted)] mb-4">
+        <h3 className="font-display text-[13px] font-bold text-[#0d0d0d] mb-4">
           Hızlı Aksiyonlar
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -169,19 +169,19 @@ interface StatCardProps {
 }
 function StatCard({ icon: Icon, label, value, hint }: StatCardProps) {
   return (
-    <div className="ff-shape-container bg-[var(--surface-elevated)] border border-[var(--border)] p-5">
+    <div className="ff-shape-container bg-[#ff4fd8]/10 border border-[#ff4fd8]/30 p-5">
       <div className="flex items-center justify-between mb-3">
-        <span className="text-[11px] font-semibold text-[var(--foreground-muted)]">
+        <span className="text-[11px] font-semibold text-[#0d0d0d]">
           {label}
         </span>
-        <div className="w-8 h-8 flex items-center justify-center bg-[rgba(161,52,255,0.08)]">
-          <Icon size={15} className="text-[var(--ff-purple)]" />
+        <div className="w-8 h-8 flex items-center justify-center bg-[#ff4fd8]/10">
+          <Icon size={15} className="text-[#ff4fd8]" />
         </div>
       </div>
-      <p className="font-mono font-extrabold text-xl text-[var(--foreground)] leading-none">
+      <p className="font-mono font-extrabold text-xl text-[#0d0d0d] leading-none">
         {value}
       </p>
-      <p className="text-[11px] text-[var(--foreground-faint)] mt-2">{hint}</p>
+      <p className="text-[11px] text-[#888888] mt-2">{hint}</p>
     </div>
   )
 }
@@ -200,19 +200,19 @@ function QuickAction({ href, icon: Icon, title, desc, primary }: QuickActionProp
       className={cn(
         "ff-shape-container group block p-5 border transition-all duration-200",
         primary
-          ? "bg-[rgba(161,52,255,0.08)] border-[rgba(161,52,255,0.35)] hover:bg-[rgba(161,52,255,0.15)] hover:border-[var(--ff-purple)]"
-          : "bg-[var(--surface-elevated)] border-[var(--border)] hover:border-[var(--ff-purple)]"
+          ? "bg-[#ff4fd8]/10 border-[#ff4fd8]/30 hover:bg-[#ff4fd8]/20 hover:border-[#ff4fd8]/50"
+          : "bg-[#ff4fd8]/10 border-[#ff4fd8]/30 hover:bg-[#ff4fd8]/20 hover:border-[#ff4fd8]/50"
       )}
     >
       <div className="flex items-center justify-between mb-3">
-        <Icon size={18} className={primary ? "text-[var(--ff-purple)]" : "text-[var(--foreground-muted)]"} />
+        <Icon size={18} className={primary ? "text-[#ff4fd8]" : "text-[#ff4fd8]"} />
         <ArrowUpRight
           size={14}
-          className="text-[var(--foreground-faint)] group-hover:text-[var(--ff-purple)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
+          className="text-[#888888] group-hover:text-[#ff4fd8] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
         />
       </div>
-      <h4 className="font-display font-bold text-[var(--foreground)] mb-1">{title}</h4>
-      <p className="text-[12px] text-[var(--foreground-muted)]">{desc}</p>
+      <h4 className="font-display font-bold text-[#0d0d0d] mb-1">{title}</h4>
+      <p className="text-[12px] text-[#888888]">{desc}</p>
     </Link>
   )
 }

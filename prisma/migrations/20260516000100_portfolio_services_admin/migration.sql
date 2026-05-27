@@ -1,5 +1,5 @@
 -- AlterTable
-ALTER TABLE "portfolio_items" ADD COLUMN     "accentColor" TEXT NOT NULL DEFAULT '#A134FF',
+ALTER TABLE "portfolio_items" ADD COLUMN     "accentColor" TEXT NOT NULL DEFAULT '#FF4FD8',
 ADD COLUMN     "gradient" TEXT NOT NULL DEFAULT 'from-[#1A1A1A] via-[#2A1A3A] to-[#3D1A5C]',
 ADD COLUMN     "narrativeParagraphs" JSONB,
 ADD COLUMN     "resultStats" JSONB,

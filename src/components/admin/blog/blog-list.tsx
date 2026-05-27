@@ -94,10 +94,10 @@ export function BlogList({ initialPosts }: BlogListProps) {
       {/* Header */}
       <div className="flex items-end justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="font-display text-2xl font-extrabold text-[var(--foreground)]">
+          <h1 className="font-display text-2xl font-extrabold text-[#333333] mb-2">
             Blog &amp; İçerik
           </h1>
-          <p className="text-xs text-[var(--foreground-muted)] mt-1">
+          <p className="text-xs text-[#666666] mt-1">
             {filtered.length} yazı &middot; {posts.filter((p) => p.aiGenerated).length} AI üretimi
           </p>
         </div>

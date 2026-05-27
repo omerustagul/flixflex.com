@@ -29,12 +29,12 @@ export function ResultCounter({ stats, className }: ResultCounterProps) {
     >
       {/* Section label */}
       <motion.div variants={fadeInUp}>
-        <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#A134FF] mb-3">
+        <p className="text-[11px] font-semibold text-[var(--ff-purple)] mb-3">
           — Ölçülebilir Sonuçlar —
         </p>
         <h2 className="font-display text-2xl md:text-4xl font-extrabold leading-tight tracking-tight">
           Rakamlar{" "}
-          <span className="text-[#A134FF]">her şeyi anlatır.</span>
+          <span className="text-[var(--ff-purple)]">her şeyi anlatır.</span>
         </h2>
         <p className="mt-3 text-[var(--foreground-muted)] text-base max-w-xl leading-relaxed">
           Bu projenin kampanya döneminde elde ettiği ölçülebilir performans sonuçları.

@@ -5,9 +5,12 @@ import {
   type PortfolioItem as PublicPortfolioItem,
 } from "@/components/public/sections/portfolio-data"
 import {
-  SERVICES,
+  SERVICES as RAW_SERVICES,
   type Service as PublicService,
 } from "@/components/public/sections/services-data"
+
+// Strip React component icons — only plain objects can cross Server→Client boundary
+const SERVICES = RAW_SERVICES.map(({ icon, ...rest }) => rest)
 
 type PortfolioWithServices = Prisma.PortfolioItemGetPayload<{
   include: { services: true }

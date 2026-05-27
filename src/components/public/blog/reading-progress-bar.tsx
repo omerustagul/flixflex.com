@@ -20,7 +20,7 @@ export function ReadingProgressBar({ className }: ReadingProgressBarProps) {
       )}
     >
       <div
-        className="h-full bg-[#A134FF] transition-[width] duration-100 ease-linear"
+        className="h-full bg-[var(--ff-purple)] transition-[width] duration-100 ease-linear"
         style={{ width: `${progress}%` }}
       />
     </div>

@@ -35,7 +35,7 @@ export function SuccessMessage({ refCode, onReset }: SuccessMessageProps) {
       >
         {/* Outer pulse ring */}
         <motion.span
-          className="absolute inset-0 border border-[#A134FF]"
+          className="absolute inset-0 border border-[var(--ff-purple)] rounded-full opacity-75"
           animate={{
             scale:   [1, 1.5, 1.5],
             opacity: [0.7, 0, 0],
@@ -48,18 +48,18 @@ export function SuccessMessage({ refCode, onReset }: SuccessMessageProps) {
             "bg-[rgba(161,52,255,0.1)] border border-[rgba(161,52,255,0.35)]"
           )}
         >
-          <CheckCircle2 size={40} className="text-[#A134FF]" strokeWidth={1.5} />
+          <CheckCircle2 size={40} className="text-[var(--ff-purple)]" strokeWidth={1.5} />
         </span>
       </motion.div>
 
       {/* Heading */}
       <motion.div variants={fadeInUp} className="space-y-3 max-w-md">
-        <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#A134FF]">
+        <p className="text-[11px] font-semibold text-[var(--ff-purple)]">
           — Mesajınız İletildi —
         </p>
         <h3 className="font-display text-2xl md:text-3xl font-extrabold text-[var(--foreground)] leading-tight">
           Teşekkürler!{" "}
-          <span className="text-[#A134FF]">Sesinizi duyduk.</span>
+          <span className="text-[var(--ff-purple)]">Sesinizi duyduk.</span>
         </h3>
         <p className="text-sm text-[var(--foreground-muted)] leading-relaxed">
           Ekibimiz en kısa sürede — genellikle{" "}
@@ -78,7 +78,7 @@ export function SuccessMessage({ refCode, onReset }: SuccessMessageProps) {
             "text-[11px] tracking-wider uppercase"
           )}
         >
-          <span className="w-1.5 h-1.5 bg-[#A134FF] shrink-0" />
+          <span className="w-1.5 h-1.5 bg-[var(--ff-purple)] shrink-0" />
           <span className="text-[var(--foreground-faint)]">Referans kodu:</span>
           <span className="font-mono font-bold text-[var(--foreground)]">{refCode}</span>
         </motion.div>
@@ -92,7 +92,7 @@ export function SuccessMessage({ refCode, onReset }: SuccessMessageProps) {
             "mt-2 inline-flex items-center gap-2",
             "px-6 py-3 text-[12px] font-medium uppercase tracking-[0.08em]",
             "border border-[var(--border)] text-[var(--foreground-muted)]",
-            "hover:border-[#A134FF] hover:text-[#A134FF]",
+            "hover:border-[var(--ff-purple)] hover:text-[var(--ff-purple)]",
             "transition-colors duration-200"
           )}
         >

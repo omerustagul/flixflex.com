@@ -28,7 +28,7 @@ function ValueCard({ value, index }: { value: Value; index: number }) {
         )}
       >
         {/* Purple top border on hover */}
-        <div className="absolute inset-x-0 top-0 h-[2px] bg-[#A134FF] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-x-0 top-0 h-[2px] bg-[var(--ff-purple)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
         {/* Index */}
         <span className="font-mono text-[10px] font-semibold tracking-[0.15em] text-[var(--foreground-faint)]">
@@ -43,7 +43,7 @@ function ValueCard({ value, index }: { value: Value; index: number }) {
             "bg-[var(--surface)]",
             "text-[var(--foreground-muted)]",
             "transition-[background-color,border-color,color,box-shadow] duration-300",
-            "group-hover:bg-[#A134FF] group-hover:border-[#A134FF] group-hover:text-white",
+            "group-hover:bg-[var(--ff-purple)] group-hover:border-[var(--ff-purple)] group-hover:text-white",
             "group-hover:shadow-[0_0_20px_rgba(161,52,255,0.4)]"
           )}
         >
@@ -52,7 +52,7 @@ function ValueCard({ value, index }: { value: Value; index: number }) {
 
         {/* Title block */}
         <div>
-          <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#A134FF] mb-1">
+          <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[var(--ff-purple)] mb-1">
             {value.titleTr}
           </p>
           <h3 className="font-display text-xl md:text-2xl font-bold text-[var(--foreground)] leading-tight tracking-tight">
@@ -64,7 +64,7 @@ function ValueCard({ value, index }: { value: Value; index: number }) {
         <p
           className={cn(
             "text-sm font-medium text-[var(--foreground)] leading-snug",
-            "border-l-2 border-[#A134FF] pl-3",
+            "border-l-2 border-[var(--ff-purple)] pl-3",
             "transition-colors duration-300"
           )}
         >
@@ -121,7 +121,7 @@ export function ValuesSection() {
           transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
           className="mb-14 md:mb-20 text-center"
         >
-          <p className="mb-4 text-[11px] font-semibold tracking-[0.2em] uppercase text-[#A134FF]">
+          <p className="mb-4 text-[11px] font-semibold tracking-[0.2em] uppercase text-[var(--ff-purple)]">
             — Temel Değerlerimiz —
           </p>
           <h2
@@ -132,7 +132,7 @@ export function ValuesSection() {
             )}
           >
             İşimizin{" "}
-            <span className="text-[#A134FF]">DNA&apos;sı</span> bu.
+            <span className="text-[var(--ff-purple)]">DNA&apos;sı</span> bu.
           </h2>
           <p className="mt-5 text-base md:text-lg text-[var(--foreground-muted)] max-w-2xl mx-auto leading-relaxed">
             Her kararımızı, her çalışmamızı ve her müşteri ilişkimizi şekillendiren

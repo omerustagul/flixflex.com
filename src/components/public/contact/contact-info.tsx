@@ -110,11 +110,11 @@ export function ContactInfo() {
         <p className="text-[11px] font-semibold text-[var(--ff-purple)] mb-3">
           — Bize Ulaşın —
         </p>
-        <h2 className="font-display text-2xl font-extrabold text-[var(--foreground)] leading-tight">
+        <h2 className="font-display text-2xl font-extrabold text-[#333333] leading-tight">
           Doğrudan konuşmayı<br />
           <span className="text-[var(--ff-purple)]">tercih eder misiniz?</span>
         </h2>
-        <p className="mt-3 text-sm text-[var(--foreground-muted)] leading-relaxed">
+        <p className="mt-3 text-sm text-[#666666] leading-relaxed">
           Formu doldurmak yerine bize doğrudan yazabilir ya da arayabilirsiniz.
           Tüm kanallardan ulaşabilirsiniz.
         </p>

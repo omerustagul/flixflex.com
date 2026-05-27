@@ -39,7 +39,7 @@ export function DeletePageButton({ pageId, pageTitle }: DeletePageButtonProps) {
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
         <button
-          className="ff-shape-button w-9 h-9 flex items-center justify-center border border-[var(--border)] text-[var(--foreground-muted)] hover:border-red-500/50 hover:text-red-400 transition-colors duration-150"
+          className="ff-shape-button w-9 h-9 flex items-center justify-center border border-[#CCCCCC] text-[#666666] hover:border-red-500/50 hover:text-red-400 transition-colors duration-150"
           aria-label={`${pageTitle} sayfasını sil`}
         >
           <Trash2 size={14} />

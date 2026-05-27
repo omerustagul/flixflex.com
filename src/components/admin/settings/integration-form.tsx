@@ -63,7 +63,7 @@ export function IntegrationForm({ initialData }: { initialData: IntegrationsData
       {/* ── SECTION: AI SERVISLERI ────────────────────────────────────────── */}
       <section className="space-y-6">
         <header className="flex items-center gap-3 pb-2 border-b border-[var(--border)]">
-          <Sparkles size={20} className="text-[#A134FF]" />
+          <Sparkles size={20} className="text-[var(--ff-purple)]" />
           <h2 className="font-display text-xl font-bold text-[var(--foreground)]">Yapay Zeka (AI) Servisleri</h2>
         </header>
 
@@ -71,7 +71,7 @@ export function IntegrationForm({ initialData }: { initialData: IntegrationsData
           {/* Anthropic */}
           <div className="ff-shape-container p-6 bg-[var(--background)] border border-[var(--border)] flex flex-col justify-between">
             <div className="flex items-center gap-3 mb-6">
-              <div className="ff-shape-button w-10 h-10 flex items-center justify-center bg-[#A134FF]/10 text-[#A134FF] border border-[#A134FF]/20">
+              <div className="ff-shape-button w-10 h-10 flex items-center justify-center bg-[var(--ff-purple)/0.1] text-[var(--ff-purple)] border border-[var(--ff-purple)/0.2]">
                 <Plug size={20} />
               </div>
               <div>
@@ -150,7 +150,7 @@ export function IntegrationForm({ initialData }: { initialData: IntegrationsData
                 className={cn(
                   "ff-shape-button w-full bg-[var(--background)] border border-[var(--border)]",
                   "px-4 py-3 text-sm text-[var(--foreground)] outline-none",
-                  "focus:border-[#A134FF]"
+                  "focus:border-[var(--ff-purple)] focus:ring-[var(--ff-purple)]/50 focus:ring-1",
                 )}
               >
                 <optgroup label="Anthropic">
@@ -247,7 +247,7 @@ export function IntegrationForm({ initialData }: { initialData: IntegrationsData
 
           <div className="ff-shape-container p-6 bg-[var(--background)] border border-[var(--border)]">
             <div className="flex items-center gap-3 mb-4">
-              <Share2 size={18} className="text-[#A134FF]" />
+              <Share2 size={18} className="text-[var(--ff-purple)]" />
               <h3 className="font-display text-sm font-bold text-[var(--foreground)]">Mailchimp</h3>
             </div>
             <FFInput

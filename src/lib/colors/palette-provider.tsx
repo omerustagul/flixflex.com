@@ -33,8 +33,8 @@ const FALLBACK: ActiveTheme = (() => {
     name:        p.name,
     colors:      p.colors,
     settings:    p.settings ?? DEFAULT_THEME_SETTINGS,
-    fontDisplay: "Syne",
-    fontBody:    "DM Sans",
+    fontDisplay: "Outfit",
+    fontBody:    "Inter",
     customFonts: [],
   }
 })()

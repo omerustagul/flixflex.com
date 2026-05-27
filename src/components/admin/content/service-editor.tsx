@@ -96,10 +96,10 @@ export function ServiceEditor({ mode, initial, allServices }: ServiceEditorProps
     <div className="px-6 md:px-10 py-8 space-y-6">
       <div className="flex items-end justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="font-display text-2xl font-extrabold text-[var(--foreground)]">
+          <h1 className="font-display text-2xl font-extrabold text-[#333333] mb-2">
             {mode === "new" ? "Yeni Hizmet" : "Hizmet Düzenle"}
           </h1>
-          <p className="text-xs text-[var(--foreground-muted)] mt-1">
+          <p className="text-xs text-[#666666] mt-1">
             Hizmet listesi, detay sayfası, süreç ve teslimatlar buradan beslenir.
           </p>
         </div>

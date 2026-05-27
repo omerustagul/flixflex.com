@@ -84,9 +84,9 @@ export interface ThemeSettings {
 
 export const DEFAULT_THEME_SETTINGS: ThemeSettings = {
   headerVariant:       "classic",
-  buttonShape:         "sharp",
-  containerShape:      "sharp",
-  mobileNavbar:        false,
+  buttonShape:         "bevel",
+  containerShape:      "bevel",
+  mobileNavbar:        true,
   mobileNavbarVariant: "dock",
   fontBodySize:        16,
   fontHeadingSize:     32,

@@ -68,16 +68,16 @@ const ACTIVITIES = [
 export function RecentActivity() {
   return (
     <div>
-      <h2 className="font-display text-[13px] font-bold uppercase tracking-[0.08em] text-[var(--foreground-muted)] mb-4">
+      <h2 className="font-display text-[13px] font-bold text-[#666666] mb-4">
         Son Aktiviteler
       </h2>
 
-      <div className="ff-shape-container bg-[var(--surface-elevated)] border border-[var(--border)]">
+      <div className="ff-shape-container bg-[#f7f7f5] border border-[#cccccc]">
         {/* Table header */}
         <div className={cn(
           "hidden md:grid grid-cols-[2fr_3fr_1fr] gap-4",
-          "px-5 py-3 border-b border-[var(--border)]",
-          "text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--foreground-faint)]"
+          "px-5 py-3 border-b border-[#cccccc]",
+          "text-[10px] font-bold text-[#0d0d0d]"
         )}>
           <span>Kullanıcı</span>
           <span>İşlem</span>
@@ -96,8 +96,8 @@ export function RecentActivity() {
               className={cn(
                 "grid grid-cols-1 md:grid-cols-[2fr_3fr_1fr] gap-2 md:gap-4 items-start md:items-center",
                 "px-5 py-3.5",
-                "border-b border-[var(--border)] last:border-b-0",
-                "hover:bg-[var(--surface)] transition-colors duration-150 group"
+                "border-b border-[#cccccc] last:border-b-0",
+                "hover:bg-[#f7f7f5] transition-colors duration-150 group"
               )}
             >
               {/* User */}
@@ -115,24 +115,24 @@ export function RecentActivity() {
                 >
                   {activity.user.initials}
                 </div>
-                <span className="text-[12px] font-medium text-[var(--foreground)] truncate">
+                <span className="text-[12px] font-medium text-[#666666] truncate">
                   {activity.user.name}
                 </span>
               </div>
 
               {/* Action */}
               <div className="pl-9 md:pl-0">
-                <span className="text-[12px] text-[var(--foreground-muted)]">
+                <span className="text-[12px] text-[#666666]">
                   {activity.action}{" "}
                 </span>
-                <span className="text-[12px] text-[var(--foreground)] font-medium">
+                <span className="text-[12px] text-[#333333] font-medium">
                   {activity.target}
                 </span>
               </div>
 
               {/* Timestamp */}
               <div className="pl-9 md:pl-0 md:text-right">
-                <span className="text-[11px] text-[var(--foreground-faint)] tabular-nums">
+                <span className="text-[11px] text-[#666666] tabular-nums">
                   {formatRelativeTime(activity.time)}
                 </span>
               </div>

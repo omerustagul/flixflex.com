@@ -338,7 +338,7 @@ export function ContactForm() {
               href="/kvkk"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#A134FF] hover:underline"
+              className="text-[var(--ff-purple)] hover:underline"
               onClick={(e) => e.stopPropagation()}
             >
               KVKK Aydınlatma Metni

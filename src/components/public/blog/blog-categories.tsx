@@ -33,13 +33,13 @@ export function BlogCategories({
             className={cn(
               "ff-shape-button relative px-4 py-2 text-[11px] font-semibold",
               "transition-colors duration-200 border",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A134FF]",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ff-purple)] focus-visible:ring-offset-1",
               isActive
-                ? "bg-[#A134FF] border-[#A134FF] text-white"
+                ? "bg-[var(--ff-purple)] border-[var(--ff-purple)] text-white"
                 : [
                   "bg-transparent text-[var(--foreground-muted)]",
                   "border-[var(--border)]",
-                  "hover:text-[var(--foreground)] hover:border-[rgba(161,52,255,0.35)]",
+                  "hover:text-[var(--foreground)] hover:border-[var(--ff-purple)]",
                 ]
             )}
             aria-current={isActive ? "page" : undefined}
@@ -48,7 +48,7 @@ export function BlogCategories({
             {isActive && (
               <motion.span
                 layoutId="blog-category-pill"
-                className="absolute inset-0 bg-[#A134FF] -z-[1]"
+                className="absolute inset-0 bg-[var(--ff-purple)] -z-[1]"
                 transition={{ duration: 0.25, ease: ease.smooth }}
               />
             )}

@@ -71,7 +71,7 @@ Kullanıcının marka ile her temas noktasında yaşadığı his. En soyut ama e
 ## Sonuç
 
 **Güçlü marka kimliği inşa etmek bir süreç, bir an değil.** Her gün biraz daha derinleşen, kullanıcıyla büyüyen bir ilişki. FlixFlex olarak bu yolculukta markaların yanında oluyoruz.`,
-    coverGradient: "from-[#A134FF]/30 via-[#6A0FCC]/20 to-[#0C0C0C]",
+    coverGradient: "from-[var(--ff-purple)]/30 via-[var(--ff-purple)]/20 to-[var(--foreground)]",
     template: "classic",
     category: "Marka",
     tags: ["marka kimliği", "tasarım", "strateji", "2026"],

@@ -114,7 +114,7 @@ export function MobileMenu({ open, onClose, links, siteSettings = {} }: MobileMe
           {/* Topbar */}
           <div className="flex items-center justify-between px-6 h-16 border-b border-[var(--border)]">
             <span className="font-display font-extrabold text-lg">
-              Flix<span className="text-[#A134FF]">Flex</span>
+              Flix<span className="text-[var(--ff-purple)]">Flex</span>
             </span>
             <button
               type="button"
@@ -123,7 +123,7 @@ export function MobileMenu({ open, onClose, links, siteSettings = {} }: MobileMe
               className={cn(
                 "ff-shape-button w-10 h-10 flex items-center justify-center",
                 "border border-[var(--foreground)] text-[var(--foreground)]",
-                "hover:border-[#A134FF] hover:text-[#A134FF]",
+                "hover:border-[var(--ff-purple)] hover:text-[var(--ff-purple)]",
                 "transition-colors duration-200"
               )}
             >
@@ -155,8 +155,8 @@ export function MobileMenu({ open, onClose, links, siteSettings = {} }: MobileMe
                         "font-display text-2xl font-bold tracking-tight",
                         "transition-colors duration-200",
                         isActive
-                          ? "text-[#A134FF]"
-                          : "text-[var(--foreground)] hover:text-[#A134FF]"
+                          ? "text-[var(--ff-purple)]"
+                          : "text-[var(--foreground)] hover:text-[var(--ff-purple)]"
                       )}
                     >
                       <span className="flex items-baseline gap-3">
@@ -207,7 +207,7 @@ export function MobileMenu({ open, onClose, links, siteSettings = {} }: MobileMe
           {/* Footer */}
           <div className="px-6 py-5 border-t border-[var(--border)] text-[12px] text-[var(--foreground-faint)] flex items-center justify-between">
             <span>© {siteSettings.site_name || 'FlixFlex'} {new Date().getFullYear()}</span>
-            <span className="text-[#A134FF]">{siteSettings.site_address || 'İstanbul · Türkiye'}</span>
+            <span className="text-[var(--ff-purple)]">{siteSettings.site_address || 'İstanbul · Türkiye'}</span>
           </div>
         </motion.div>
       )}

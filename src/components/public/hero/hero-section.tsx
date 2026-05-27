@@ -71,8 +71,8 @@ export function HeroSection({
                 "px-3 py-1.5"
               )}
             >
-              <span className="w-1.5 h-1.5 bg-[#A134FF] animate-pulse" />
-              <span className="text-[10px] uppercase tracking-[0.18em] font-medium text-[#A134FF]">
+              <span className="w-1.5 h-1.5 bg-[var(--ff-purple)] animate-pulse" />
+              <span className="text-[10px] uppercase tracking-[0.18em] font-medium text-[var(--ff-purple)]">
                 Next-Gen Reklam Ajansı · 2026
               </span>
             </motion.div>
@@ -115,14 +115,14 @@ export function HeroSection({
               initial="hidden"
               animate="visible"
               className={cn(
-                "mt-8 max-w-xl text-base md:text-lg leading-relaxed",
-                "text-[var(--foreground-muted)]"
+                "mt-8 max-w-xl text-base md:text-md leading-relaxed",
+                "text-[var(--foreground)]"
               )}
             >
               {subtitle || (
                 <>
                   Strateji, yaratıcılık ve performansı tek bir vuruşta birleştiriyoruz.
-                  <span className="text-[var(--foreground)] font-medium">
+                  <span className="text-[var(--secondary)] font-medium">
                     {" "}Hız. Güç. Esneklik.
                   </span>{" "}
                   Markanızın bir sonraki bölümünü birlikte yazalım.
@@ -161,9 +161,9 @@ export function HeroSection({
                   "ff-shape-button",
                   "group inline-flex items-center justify-center gap-2.5",
                   "px-8 py-4 text-sm font-medium uppercase tracking-[0.05em]",
-                  "bg-transparent text-[#A134FF] border border-[#A134FF]",
-                  "hover:bg-[rgba(161,52,255,0.1)]",
-                  "hover:shadow-[0_0_20px_rgba(161,52,255,0.15)]",
+                  "bg-transparent text-[var(--ff-purple)] border border-[var(--ff-purple)]",
+                  "hover:bg-[var(--ff-purple)/0.1] hover:border-[var(--ff-purple)] hover:text-[var(--ff-purple-dark)]",
+                  "hover:shadow-[0_0_20px_var(--ff-purple)/0.15)]",
                   "transition-all duration-200"
                 )}
               >
@@ -183,16 +183,16 @@ export function HeroSection({
                 <span className="font-display font-bold text-2xl text-[var(--foreground)]">
                   150+
                 </span>
-                <span className="text-xs uppercase tracking-widest text-[var(--foreground-faint)]">
+                <span className="text-xs text-[var(--foreground-faint)]">
                   Proje
                 </span>
               </div>
               <span className="w-px h-6 bg-[var(--border)]" />
               <div className="flex items-baseline gap-2">
-                <span className="font-display font-bold text-2xl text-[#A134FF]">
+                <span className="font-display font-bold text-2xl text-[var(--ff-purple)]">
                   340%
                 </span>
-                <span className="text-xs uppercase tracking-widest text-[var(--foreground-faint)]">
+                <span className="text-xs text-[var(--foreground-faint)]">
                   Ortalama Büyüme
                 </span>
               </div>

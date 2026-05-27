@@ -38,7 +38,7 @@ export function AiStatusWidget() {
 
       <TiltCard
         variant="glass"
-        className="p-5 flex flex-col gap-5"
+        className="bg-[#ff4fd8]/10 border border-[#ff4fd8]/30 p-5 flex flex-col gap-5"
       >
         {/* Status indicator */}
         <div className="flex items-center justify-between">
@@ -61,7 +61,7 @@ export function AiStatusWidget() {
             </span>
             <span
               className={cn(
-                "text-[12px] font-semibold uppercase tracking-[0.08em]",
+                "text-[12px] font-semibold",
                 running ? "text-green-500" : "text-yellow-500"
               )}
             >
@@ -71,7 +71,7 @@ export function AiStatusWidget() {
 
           {/* Queue badge */}
           {queuedCount > 0 && (
-            <span className="ff-shape-button text-[10px] uppercase tracking-widest px-2 py-0.5 bg-[rgba(161,52,255,0.1)] text-[var(--ff-purple)] border border-[rgba(161,52,255,0.25)] font-semibold">
+            <span className="ff-shape-button bg-[#ff4fd8]/10 text-[10px] px-2 py-0.5 text-[#ff4fd8] border border-[#ff4fd8]/25 font-semibold">
               {queuedCount} kuyrukta
             </span>
           )}
@@ -79,21 +79,21 @@ export function AiStatusWidget() {
 
         {/* Sparkle icon */}
         <div className="flex items-center gap-2 text-[var(--foreground-muted)]">
-          <div className="ff-shape-button w-8 h-8 flex items-center justify-center bg-[rgba(161,52,255,0.08)]">
-            <Sparkles size={15} className="text-[var(--ff-purple)]" />
+          <div className="ff-shape-button w-8 h-8 flex items-center justify-center bg-[#ff4fd8]/10">
+            <Sparkles size={15} className="text-[#ff4fd8]" />
           </div>
           <div>
-            <p className="text-[11px] text-[var(--foreground-faint)] uppercase tracking-widest">
+            <p className="text-[11px] text-[#888888]">
               Son üretilen
             </p>
-            <p className="text-[12px] font-medium text-[var(--foreground)] mt-0.5 line-clamp-1">
+            <p className="text-[12px] font-medium text-[#0d0d0d] line-clamp-1">
               {lastPostTitle}
             </p>
           </div>
         </div>
 
         {/* Timestamp */}
-        <div className="flex items-center gap-1.5 text-[11px] text-[var(--foreground-faint)]">
+        <div className="flex items-center gap-1.5 text-[11px] text-[#888888]">
           <Clock size={11} />
           <span>{formatRelativeTime(lastGenerated)}</span>
         </div>
@@ -105,9 +105,9 @@ export function AiStatusWidget() {
             "ff-shape-button group flex items-center justify-center gap-2",
             "w-full py-2.5",
             "text-[12px] font-medium uppercase tracking-[0.07em]",
-            "bg-[var(--ff-purple)]/12 text-[var(--ff-purple)]",
-            "border border-[var(--ff-purple)]/30",
-            "hover:bg-[var(--ff-purple)]/20 hover:border-[var(--ff-purple)]/50",
+            "bg-[#ff4fd8]/12 text-[#ff4fd8]",
+            "border border-[#ff4fd8]/30",
+            "hover:bg-[#ff4fd8]/20 hover:border-[#ff4fd8]/50",
             "transition-all duration-200"
           )}
         >

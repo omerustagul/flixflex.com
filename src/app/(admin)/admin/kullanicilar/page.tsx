@@ -79,8 +79,8 @@ export default async function UsersPage({ searchParams }: Props) {
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-extrabold text-[var(--foreground)]">Kullanıcılar</h1>
-          <p className="text-xs text-[var(--foreground-muted)] mt-1">
+          <h1 className="font-display text-2xl font-extrabold text-[#0d0d0d]">Kullanıcılar</h1>
+          <p className="text-xs text-[#888888] mt-1">
             {total} kullanıcı kayıtlı
           </p>
         </div>
@@ -103,19 +103,17 @@ export default async function UsersPage({ searchParams }: Props) {
 
       {/* Table */}
       {users.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-20 border border-dashed border-[var(--border)] text-center">
+        <div className="flex flex-col items-center justify-center py-20 border border-dashed border-[#CCCCCC] text-center">
           {q ? (
             <>
-              <Search className="w-10 h-10 text-[var(--foreground-faint)] mb-4" />
-              <p className="text-sm font-medium text-[var(--foreground-muted)]">
-                &ldquo;{q}&rdquo; için sonuç bulunamadı
-              </p>
+              <Search className="w-10 h-10 text-[#888888] mb-4" />
+              <p className="text-sm font-medium text-[#888888]">"{q}" için sonuç bulunamadı</p>
             </>
           ) : (
             <>
-              <UserX className="w-10 h-10 text-[var(--foreground-faint)] mb-4" />
-              <p className="text-sm font-medium text-[var(--foreground-muted)]">Henüz kullanıcı yok</p>
-              <p className="text-xs text-[var(--foreground-faint)] mt-1 mb-4">
+              <UserX className="w-10 h-10 text-[#888888] mb-4" />
+              <p className="text-sm font-medium text-[#888888]">Henüz kullanıcı yok</p>
+              <p className="text-xs text-[#888888] mt-1 mb-4">
                 İlk kullanıcıyı oluşturarak başlayın
               </p>
               <Link href="/admin/kullanicilar/yeni">
@@ -127,16 +125,16 @@ export default async function UsersPage({ searchParams }: Props) {
           )}
         </div>
       ) : (
-        <div className="ff-shape-container border border-[var(--border)] overflow-hidden">
+        <div className="ff-shape-container border border-[#CCCCCC] overflow-hidden">
           {/* Table header */}
           <div className="grid grid-cols-[auto_1fr_1fr_auto_auto_auto_auto] gap-4 px-6 py-3 bg-[var(--background)] border-b border-[var(--border)] items-center">
-            <span className="text-[10px] font-semibold text-[var(--foreground-muted)] w-8" />
-            <span className="text-[10px] font-semibold text-[var(--foreground-muted)]">Kullanıcı</span>
-            <span className="text-[10px] font-semibold text-[var(--foreground-muted)]">E-posta</span>
-            <span className="text-[10px] font-semibold text-[var(--foreground-muted)]">Rol</span>
-            <span className="text-[10px] font-semibold text-[var(--foreground-muted)] text-center">Aktif</span>
-            <span className="text-[10px] font-semibold text-[var(--foreground-muted)]">Son Giriş</span>
-            <span className="text-[10px] font-semibold text-[var(--foreground-muted)] text-right">İşlem</span>
+            <span className="text-[10px] font-semibold text-[#888888] w-8" />
+            <span className="text-[10px] font-semibold text-[#888888]">Kullanıcı</span>
+            <span className="text-[10px] font-semibold text-[#888888]">E-posta</span>
+            <span className="text-[10px] font-semibold text-[#888888]">Rol</span>
+            <span className="text-[10px] font-semibold text-[#888888] text-center">Aktif</span>
+            <span className="text-[10px] font-semibold text-[#888888]">Son Giriş</span>
+            <span className="text-[10px] font-semibold text-[#888888] text-right">İşlem</span>
           </div>
 
           {users.map((user) => {

@@ -18,16 +18,16 @@ const CATEGORIES = ["Strateji", "Yaratıcılık", "Performans", "SEO", "Sosyal M
 const TEMPLATES = ["classic", "editorial", "visual"] as const
 
 const GRADIENTS = [
-  "from-[#A134FF]/30 via-[#6A0FCC]/20 to-[#0C0C0C]",
-  "from-[#1A3A6B]/40 via-[#0D2447]/30 to-[#0C0C0C]",
-  "from-[#FF6B35]/25 via-[#C23616]/20 to-[#0C0C0C]",
-  "from-[#16A34A]/25 via-[#0D6931]/20 to-[#0C0C0C]",
-  "from-[#D97706]/25 via-[#92400E]/20 to-[#0C0C0C]",
-  "from-[#0EA5E9]/25 via-[#0369A1]/20 to-[#0C0C0C]",
-  "from-[#EC4899]/25 via-[#9D174D]/20 to-[#0C0C0C]",
-  "from-[#7C3AED]/30 via-[#4C1D95]/20 to-[#0C0C0C]",
-  "from-[#2563EB]/25 via-[#1D4ED8]/20 to-[#0C0C0C]",
-  "from-[#DC2626]/20 via-[#7F1D1D]/20 to-[#0C0C0C]",
+  "from-[#FF4FD8]/30 via-[#6A0FCC]/20 to-[#0D0D0D]",
+  "from-[#1A3A6B]/40 via-[#0D2447]/30 to-[#0D0D0D]",
+  "from-[#FF6B35]/25 via-[#C23616]/20 to-[#0D0D0D]",
+  "from-[#16A34A]/25 via-[#0D6931]/20 to-[#0D0D0D]",
+  "from-[#D97706]/25 via-[#92400E]/20 to-[#0D0D0D]",
+  "from-[#0EA5E9]/25 via-[#0369A1]/20 to-[#0D0D0D]",
+  "from-[#EC4899]/25 via-[#9D174D]/20 to-[#0D0D0D]",
+  "from-[#7C3AED]/30 via-[#4C1D95]/20 to-[#0D0D0D]",
+  "from-[#2563EB]/25 via-[#1D4ED8]/20 to-[#0D0D0D]",
+  "from-[#DC2626]/20 via-[#7F1D1D]/20 to-[#0D0D0D]",
 ]
 
 interface BlogEditorProps {

@@ -49,15 +49,15 @@ export function SectionPanel() {
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
-      <div className="px-4 py-3 border-b border-[var(--border)]">
-        <p className="text-[10px] font-semibold text-[var(--foreground-faint)] mb-2">
+      <div className="px-4 py-3 border-b border-[#CCCCCC]">
+        <p className="text-[10px] font-semibold text-[#666666] mb-2">
           Section Ekle
         </p>
         {/* Search */}
         <div className="relative">
           <Search
             size={13}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--foreground-faint)]"
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-[#666666]"
           />
           <input
             value={query}
@@ -65,9 +65,9 @@ export function SectionPanel() {
             placeholder="Section ara..."
             className={cn(
               "ff-shape-container w-full pl-8 pr-3 py-2 text-[12px]",
-              "bg-[var(--background)] border border-[var(--border)]",
-              "text-[var(--foreground)] placeholder:text-[var(--foreground-faint)]",
-              "outline-none focus:border-[var(--ff-purple)] transition-colors duration-150"
+              "bg-[#f7f7f5] border border-[#CCCCCC]",
+              "text-[#333333] placeholder:text-[#666666]",
+              "outline-none focus:border-[#ff4fd8] transition-colors duration-150"
             )}
           />
         </div>
@@ -87,8 +87,8 @@ export function SectionPanel() {
                 onClick={() => toggleCategory(cat)}
                 className={cn(
                   "w-full flex items-center justify-between px-4 py-2",
-                  "text-[10px] font-semibold tracking-[0.08em] uppercase",
-                  "text-[var(--foreground-muted)] hover:text-[var(--foreground)]",
+                  "text-[10px] font-semibold",
+                  "text-[#666666] hover:text-[#ff4fd8]",
                   "transition-colors duration-100"
                 )}
               >
@@ -111,8 +111,8 @@ export function SectionPanel() {
                         title={meta.description}
                         className={cn(
                           "ff-shape-container group flex flex-col items-center gap-2 p-2.5",
-                          "border border-[var(--border)] bg-[var(--background)]",
-                          "hover:border-[var(--ff-purple)] hover:bg-[var(--ff-purple)]/20",
+                          "border border-[#CCCCCC] bg-[#f7f7f5]",
+                          "hover:border-[#ff4fd8] hover:bg-[#ff4fd8]/20",
                           "transition-all duration-150 cursor-pointer text-left"
                         )}
                       >
@@ -121,13 +121,13 @@ export function SectionPanel() {
                           className={cn(
                             "ff-shape-button w-full h-10 flex items-center justify-center",
                             meta.thumbnailColor,
-                            "text-ff-purple text-[11px] font-medium tracking-wider uppercase"
+                            "text-[#ff4fd8] text-[11px] font-medium tracking-wider uppercase"
                           )}
                         >
                           <Icon size={16} className="opacity-60 group-hover:opacity-100 transition-opacity" />
                         </div>
                         {/* Label */}
-                        <span className="text-[10px] font-medium text-[var(--foreground-muted)] group-hover:text-[var(--foreground)] leading-tight">
+                        <span className="text-[10px] font-medium text-[#666666] group-hover:text-[#ff4fd8] leading-tight">
                           {meta.label}
                         </span>
                       </button>
@@ -141,7 +141,7 @@ export function SectionPanel() {
 
         {/* Empty state */}
         {SECTION_CATEGORIES.every((c) => !filteredGrouped[c]?.length) && (
-          <div className="px-4 py-8 text-center text-[12px] text-[var(--foreground-faint)]">
+          <div className="px-4 py-8 text-center text-[12px] text-[#666666]">
             &quot;{query}&quot; için sonuç bulunamadı
           </div>
         )}

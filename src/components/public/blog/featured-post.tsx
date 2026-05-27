@@ -92,7 +92,7 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
           {/* Author + CTA row */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
             <div className="flex items-center gap-3">
-              <span className="ff-shape-container w-9 h-9 flex items-center justify-center text-[11px] font-bold text-white bg-[#A134FF] flex-shrink-0">
+              <span className="ff-shape-container w-9 h-9 flex items-center justify-center text-[11px] font-bold text-white bg-[var(--ff-purple)] flex-shrink-0">
                 {post.author.initials}
               </span>
               <div>

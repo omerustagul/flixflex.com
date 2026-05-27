@@ -53,7 +53,7 @@ export function SwatchRow({ swatches }: SwatchRowProps) {
         <div
           key={idx}
           title={color}
-          className="ff-shape-container w-7 h-7 border border-[var(--border)] flex-shrink-0"
+          className="ff-shape-container w-7 h-7 border border-[#CCCCCC] flex-shrink-0"
           style={{ backgroundColor: color }}
         />
       ))}
@@ -63,8 +63,8 @@ export function SwatchRow({ swatches }: SwatchRowProps) {
           title={`${remaining} daha renk`}
           className={cn(
             "ff-shape-container w-7 h-7 flex items-center justify-center flex-shrink-0",
-            "bg-[var(--surface)] border border-[var(--border)]",
-            "text-[10px] font-bold text-[var(--foreground-muted)]"
+            "bg-[#f7f7f5] border border-[#CCCCCC]",
+            "text-[10px] font-bold text-[#888888]"
           )}
         >
           +{remaining}
