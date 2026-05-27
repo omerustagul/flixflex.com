@@ -81,6 +81,9 @@
     "tsx": "^4.21.0",
     "typescript": "^5"
   },
+  "overrides": {
+    "next": "$next"
+  },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   }

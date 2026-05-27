@@ -94,7 +94,7 @@ export default async function ThemePage() {
           return (
             <div
               key={palette.id}
-              className="ff-card bg-[#f7f7f5] border border-[#CCCCCC] p-4 relative flex flex-col gap-4"
+              className="ff-card bg-[#f7f7f5] border border-[#CCCCCC] hover:shadow-xs p-4 relative flex flex-col gap-4"
             >
               {/* Badges */}
               <div className="flex items-center gap-2 flex-wrap">

@@ -89,7 +89,7 @@ export function PaletteListActions({ palette }: PaletteListActionsProps) {
       <a
         href={`/admin/theme/${palette.id}`}
         title="Paleti Düzenle"
-        className="ff-btn ff-btn-ghost w-9 h-9 p-0 normal-case"
+        className="ff-btn ff-btn-ghost bg-[#F7f7f5] border border-[#cccccc] text-[#666666] hover:bg-[#ff4fd8]/10 hover:border-[#ff4fd8]/30 hover:text-[#ff4fd8] w-9 h-9 p-0 normal-case"
       >
         <Pencil size={16} />
       </a>
@@ -100,7 +100,7 @@ export function PaletteListActions({ palette }: PaletteListActionsProps) {
         onClick={handleDuplicate}
         disabled={loading === "duplicate"}
         title="Paleti Çoğalt"
-        className="ff-btn ff-btn-ghost w-9 h-9 p-0 disabled:opacity-40 normal-case"
+        className="ff-btn ff-btn-ghost bg-[#F7f7f5] border border-[#cccccc] text-[#666666] hover:bg-[#ff4fd8]/10 hover:border-[#ff4fd8]/30 hover:text-[#ff4fd8] w-9 h-9 p-0 disabled:opacity-40 normal-case"
       >
         {loading === "duplicate" ? "..." : <CopyPlus size={16} />}
       </button>
