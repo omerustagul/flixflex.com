@@ -38,7 +38,7 @@ function ValueCard({ value, index }: { value: Value; index: number }) {
         {/* Icon */}
         <div
           className={cn(
-            "w-12 h-12 flex items-center justify-center",
+            "ff-shape-container w-12 h-12 flex items-center justify-center",
             "border border-[var(--border)]",
             "bg-[var(--surface)]",
             "text-[var(--foreground-muted)]",
@@ -146,7 +146,7 @@ export function ValuesSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[var(--border)]"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
         >
           {VALUES.map((value, i) => (
             <div key={value.slug} className="bg-[var(--background)]">

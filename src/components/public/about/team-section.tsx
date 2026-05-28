@@ -21,7 +21,7 @@ function TeamCard({ member }: { member: TeamMember }) {
         <div className="flex items-start justify-between">
           <div
             className={cn(
-              "w-14 h-14 flex items-center justify-center",
+              "ff-shape-container w-14 h-14 flex items-center justify-center",
               "font-display font-extrabold text-lg",
               "transition-[box-shadow] duration-300",
               member.accent

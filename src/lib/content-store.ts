@@ -213,6 +213,30 @@ export async function listPublishedChildServices(): Promise<PublicService[]> {
   }
 }
 
+export async function listPublishedMainServices(): Promise<PublicService[]> {
+  if (!prisma) return SERVICES.filter((s) => !s.parentId)
+
+  try {
+    const rows = await prisma.service.findMany({
+      where: { isPublished: true, parentId: null },
+      include: {
+        portfolios: { include: { services: true } },
+        children: {
+          where: { isPublished: true },
+          orderBy: [{ order: "asc" }, { createdAt: "asc" }],
+        },
+        parent: { select: { id: true, title: true } },
+      },
+      orderBy: [{ order: "asc" }, { createdAt: "asc" }],
+    })
+
+    return rows.length ? rows.map((item) => mapService(item)) : SERVICES.filter((s) => !s.parentId)
+  } catch (err) {
+    console.error('[listPublishedMainServices] DB error:', err)
+    return SERVICES.filter((s) => !s.parentId)
+  }
+}
+
 export async function getPublishedServiceBySlug(
   slug: string,
 ): Promise<PublicService & { children?: PublicService[]; parentId?: string | null } | null> {

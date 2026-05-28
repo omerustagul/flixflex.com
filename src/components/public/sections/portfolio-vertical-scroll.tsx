@@ -223,10 +223,14 @@ export function PortfolioVerticalScrollSection({
             {headline}
           </h2>
           {subheadline && (
-            <p className="mt-4 text-[var(--foreground-muted)] text-base md:text-lg max-w-xl leading-relaxed">
+            <p className="mt-1 text-[var(--foreground-muted)] text-base md:text-sm max-w-xl leading-relaxed">
               {subheadline}
             </p>
-          )}
+                      )}
+            <button className="inline-flex items-center gap-1.5 px-3 py-1 underline text-[11px] font-semibold text-[var(--foreground)] hover:text-[var(--ff-purple)] transition-colors mt-2">
+            Tüm İşlerimiz
+            <ArrowRight size={11} />
+            </button>
         </div>
       </div>
 

@@ -61,17 +61,17 @@ export function WhyUs() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 border border-[var(--border)]"
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-2"
         >
           {CARDS.map(({ icon: Icon, title, body }, i) => (
             <motion.div
               key={title}
               variants={fadeInUp}
               className={cn(
-                "flex flex-col gap-4 p-7",
+                "ff-shape-container flex flex-col gap-4 p-7",
                 "border-[var(--border)]",
                 i < CARDS.length - 1 && "border-r",
-                "hover:bg-[var(--background)] transition-colors duration-200 group"
+                "border border-[var(--border)] hover:bg-[var(--background)] transition-colors duration-200 group"
               )}
             >
               <span

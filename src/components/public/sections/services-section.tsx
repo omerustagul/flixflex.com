@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight, Tag } from "lucide-react"
+import { ArrowRight, BriefcaseBusiness, Tag } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ServiceCard } from "./service-card"
 import type { Service } from "./services-data"
@@ -46,24 +46,24 @@ export function ServicesSection({ services, headline, subheadline }: ServicesSec
 
       <div className="relative px-6 md:px-10 xl:px-16">
         {/* ── Section header ── */}
-        <div className="w-full flex flex-col items-center justify-center py-12 md:py-20">
+        <div className="w-full flex flex-col items-center justify-center py-6 md:py-10">
           <div className="w-full flex flex-col items-center justify-center space-y-8 md:space-y-12">
-            <div className="flex flex-col items-center justify-center gap-1">
-              <span className="ff-shape-container inline-flex items-center gap-1.5 px-3 py-1 bg-[var(--ff-purple)]/10 border border-[var(--ff-purple)]/20 text-[11px] font-semibold text-[var(--ff-purple)]">
-                <Tag size={11} />
-                Hizmetlerimiz
-              </span>
-              <h2 className="font-display text-xl md:text-2xl lg:text-3xl font-extrabold text-[var(--foreground)] tracking-tight">
-                Sunduğumuz Hizmetler
-              </h2>
-              <p className="text-xs text-[var(--foreground-muted)] max-w-xl">
-                Sunduğumuz hizmetlerle size nasıl değer katabileceğinizi keşfedin.
-              </p>
-              <button className="inline-flex items-center gap-1.5 px-3 py-1 underline text-[11px] font-semibold text-[var(--foreground)] hover:text-[var(--ff-purple)] transition-colors mt-6">
-                Tüm Hizmetler
-                <ArrowRight size={11} />
-              </button>
-            </div>
+            <div className="flex flex-col items-center justify-center gap-1 text-center">
+            <span className="ff-shape-container inline-flex items-center gap-1.5 px-3 py-1 bg-[var(--ff-purple)]/10 border border-[var(--ff-purple)]/20 text-[11px] font-semibold text-[var(--ff-purple)] mb-4">
+            <Tag size={11} />
+            Hizmetlerimiz
+            </span>
+            <h2 className="font-display text-xl md:text-2xl lg:text-3xl font-extrabold leading-[1.15] tracking-tight max-w-2xl text-[var(--foreground)]">
+            Sunduğumuz Hizmetler
+            </h2>
+            <p className="mt-1 text-[var(--foreground-muted)] text-base md:text-sm max-w-xl leading-relaxed">
+            Sunduğumuz hizmetlerle size nasıl değer katabileceğinizi keşfedin.
+            </p>
+            <button className="inline-flex items-center gap-1.5 px-3 py-1 underline text-[11px] font-semibold text-[var(--foreground)] hover:text-[var(--ff-purple)] transition-colors mt-2">
+            Tüm Hizmetlerimiz
+            <ArrowRight size={11} />
+            </button>
+        </div>
             {/* ── Desktop grid (hidden on mobile) ── */}
             <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-3">
               {services.map((service, i) => (

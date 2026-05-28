@@ -4,7 +4,7 @@ import { ServicesListAnimated } from "@/components/public/services/services-list
 
 import { getPageBySlug } from "@/lib/page-data"
 import { PageRenderer } from "@/components/public/page-renderer"
-import { listPublishedChildServices, listPublishedPortfolio } from "@/lib/content-store"
+import { listPublishedMainServices, listPublishedPortfolio } from "@/lib/content-store"
 
 // ── SEO ────────────────────────────────────────────────────
 export const metadata: Metadata = {
@@ -27,7 +27,7 @@ export default async function HizmetlerPage() {
   const portfolioItems = await listPublishedPortfolio();
   const pageData = await getPageBySlug("hizmetler")
   const [services, portfolio] = await Promise.all([
-    listPublishedChildServices(),
+    listPublishedMainServices(),
     listPublishedPortfolio(),
   ])
 

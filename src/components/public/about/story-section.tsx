@@ -29,19 +29,18 @@ function FactItem({
     <motion.div
       variants={fadeInUp}
       className={cn(
-        "relative flex items-start gap-5",
-        "pb-6 border-b border-[var(--border)]",
-        "last:border-b-0 last:pb-0"
+        "ff-shape-container relative flex items-center justify-center h-20 gap-3 p-3",
+        "border border-[var(--border)]",
       )}
     >
       {/* Left accent line */}
       <span
         aria-hidden
-        className="absolute left-0 top-0 bottom-0 w-px bg-[var(--border)] group-hover:bg-[var(--ff-purple)] transition-colors"
+        className="flex items-center justify-center absolute left-0 top-0 bottom-0 w-px bg-[var(--border)] group-hover:bg-[var(--ff-purple)] transition-colors"
       />
 
       {/* Year / value */}
-      <div className="w-20 shrink-0">
+      <div className="flex items-center w-20 shrink-0">
         <span className="font-display font-extrabold text-2xl md:text-3xl text-[var(--ff-purple)] leading-none tabular-nums">
           {year}
         </span>
@@ -177,7 +176,7 @@ export function StorySection() {
             </motion.div>
 
             {/* Facts list */}
-            <div className="space-y-0">
+            <div className="space-y-2">
               {FACTS.map((fact, i) => (
                 <FactItem
                   key={fact.label}

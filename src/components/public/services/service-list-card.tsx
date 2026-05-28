@@ -10,6 +10,25 @@ import {
   Fingerprint,
   Clapperboard,
   Globe,
+  Search,
+  Target,
+  Film,
+  LayoutGrid,
+  PenTool,
+  Camera,
+  FileText,
+  MessageCircle,
+  Video,
+  TrendingUp,
+  Shapes,
+  BookOpen,
+  Lightbulb,
+  Layout,
+  Sparkles,
+  Scissors,
+  Monitor,
+  Code2,
+  Zap,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { fadeInUp } from "@/lib/animations"
@@ -22,6 +41,25 @@ const ICONS = {
   Fingerprint,
   Clapperboard,
   Globe,
+  Search,
+  Target,
+  Film,
+  LayoutGrid,
+  PenTool,
+  Camera,
+  FileText,
+  MessageCircle,
+  Video,
+  TrendingUp,
+  Shapes,
+  BookOpen,
+  Lightbulb,
+  Layout,
+  Sparkles,
+  Scissors,
+  Monitor,
+  Code2,
+  Zap,
 } as const
 
 interface ServiceListCardProps {
@@ -127,6 +165,35 @@ export function ServiceListCard({ service, index }: ServiceListCardProps) {
               </li>
             ))}
           </ul>
+
+          {/* Sub-services buttons */}
+          {service.subServices && service.subServices.length > 0 && (
+            <div className="mt-2 space-y-3 relative z-20">
+              <h4 className="text-[10px] font-bold tracking-[0.2em] text-[var(--foreground-faint)] uppercase">
+                Uzmanlık Alanlarımız
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {service.subServices.map((sub, si) => {
+                  const SubIcon = ICONS[sub.iconKey as keyof typeof ICONS] || Globe
+                  return (
+                    <Link
+                      key={si}
+                      href={sub.href}
+                      className={cn(
+                        "inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold",
+                        "border border-[var(--border)] bg-[var(--background)] text-[var(--foreground-muted)] hover:border-[var(--ff-purple)] hover:text-[var(--ff-purple)]",
+                        "transition-all duration-200 hover:shadow-[0_2px_10px_rgba(var(--ff-purple),0.08)]",
+                        "rounded-none"
+                      )}
+                    >
+                      <SubIcon size={12} strokeWidth={2} className="opacity-80" />
+                      <span>{sub.label}</span>
+                    </Link>
+                  )
+                })}
+              </div>
+            </div>
+          )}
 
           {/* CTA link — visible, styled as text link, z-index above overlay */}
           <Link

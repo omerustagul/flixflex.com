@@ -36,7 +36,7 @@ export function FlixFlexNavbar({ siteSettings = {} }: FlixFlexNavbarProps) {
           "fixed top-0 inset-x-0 z-50",
           "transition-all duration-300",
           scrolled
-            ? "bg-[var(--background)]/85 backdrop-blur-md border-b border-[var(--border)]"
+            ? "bg-[var(--background)]/65 backdrop-blur-md border-b border-[var(--border)]"
             : "bg-transparent"
         )}
       >

@@ -68,7 +68,7 @@ export function HamburgerNavbar({ siteSettings = {} }: HamburgerNavbarProps) {
           "fixed top-0 inset-x-0 z-50",
           "transition-all duration-300",
           scrolled
-            ? "bg-[var(--background)]/85 backdrop-blur-md border-b border-[var(--border)]"
+            ? "bg-[var(--background)]/65 backdrop-blur-md border-b border-[var(--border)]"
             : "bg-white/[0.03] backdrop-blur-xl border-b border-white/[0.06]"
         )}
       >
