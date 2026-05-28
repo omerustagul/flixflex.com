@@ -343,7 +343,7 @@ export default function MediaPage() {
             </div>
             <button
               onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
-              className="w-10 h-10 flex items-center justify-center bg-[#f7f7f5] border border-[#CCCCCC] ff-shape-button text-[#666666] hover:text-[#ff4fd8] transition-all"
+              className="ff-shape-container w-10 h-10 flex items-center justify-center bg-[#f7f7f5] border border-[#CCCCCC] ff-shape-button text-[#666666] hover:text-[#ff4fd8] transition-all"
             >
               {sortOrder === "asc" ? <SortAsc size={16} /> : <SortDesc size={16} />}
             </button>

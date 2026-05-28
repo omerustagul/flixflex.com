@@ -198,7 +198,7 @@ export function PortfolioVerticalScrollSection({
   }, [scrollWidth, speed])
 
   return (
-    <section className="relative bg-[var(--background)] text-[var(--foreground)] py-20 md:py-28 overflow-hidden">
+    <section className="relative bg-[var(--background)] text-[var(--foreground)] py-16 md:py-20 overflow-hidden">
       {/* Subtle background texture */}
       <div
         aria-hidden
@@ -238,7 +238,7 @@ export function PortfolioVerticalScrollSection({
         <div
           ref={containerRef}
           className={cn(
-            "flex gap-6 py-4 px-6 w-max",
+            "flex gap-6 py-4 px-6 mb-8 w-max",
             scrollWidth > 0 && "animate-marquee-bounce",
             pauseOnHover && "group-hover/marquee:[animation-play-state:paused]"
           )}

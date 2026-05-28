@@ -81,7 +81,7 @@ export function BlogTemplateClassic({ post, related }: ClassicTemplateProps) {
 
           {/* Author strip */}
           <div className="flex items-center gap-3 pb-8 mb-8 border-b border-[var(--border)]">
-            <span className="w-10 h-10 flex items-center justify-center text-sm font-bold text-white bg-[var(--ff-purple)] flex-shrink-0">
+            <span className="ff-shape-container w-10 h-10 flex items-center justify-center text-sm font-bold text-white bg-[var(--ff-purple)] flex-shrink-0">
               {post.author.initials}
             </span>
             <div>

@@ -76,7 +76,7 @@ export function WhyUs() {
             >
               <span
                 className={cn(
-                  "w-10 h-10 flex items-center justify-center shrink-0",
+                  "ff-shape-container w-10 h-10 flex items-center justify-center shrink-0",
                   "border border-[var(--ff-purple)]/30 bg-[var(--ff-purple)]/10",
                   "group-hover:bg-[var(--ff-purple)]/10 transition-colors duration-200"
                 )}

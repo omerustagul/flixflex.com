@@ -32,7 +32,7 @@ export function ProcessSteps({ steps }: ProcessStepsProps) {
           <div className="flex flex-col items-center flex-shrink-0">
             <span
               className={cn(
-                "w-10 h-10 flex items-center justify-center flex-shrink-0",
+                "ff-shape-container w-10 h-10 flex items-center justify-center flex-shrink-0",
                 "border border-[var(--border)] bg-[var(--surface)]",
                 "font-mono text-[11px] font-bold tracking-[0.1em]",
                 "text-[var(--foreground-faint)]",

@@ -42,6 +42,7 @@ import {
   contactFormPropsSchema,
   parallaxPropsSchema,
   portfolioVerticalScrollPropsSchema,
+  appointmentCardPropsSchema,
 } from "@/types/page-builder"
 
 // ── Category Labels ───────────────────────────────
@@ -308,6 +309,14 @@ export const SECTION_REGISTRY: Record<string, SectionMeta> = {
     icon: ArrowLeftRight,
     defaultProps: portfolioVerticalScrollPropsSchema.parse({}),
     description: "Sonsuz döngü marquee dikey portfolyo kartları",
+  },
+  "appointment-card": {
+    type: "appointment-card",
+    label: "Ön Görüşme Randevu Kartı",
+    category: "Dönüşüm",
+    icon: Zap,
+    defaultProps: appointmentCardPropsSchema.parse({}),
+    description: "Ön görüşme randevusu alma popup'ını açan kart",
   },
 }
 

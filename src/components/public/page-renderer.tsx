@@ -22,6 +22,7 @@ import {
   ImageTextSection,
   VideoEmbedSection,
   BlogListClient,
+  AppointmentCardSection,
 } from "@/components/public"
 import type { Service } from "@/components/public/sections/services-data"
 import { PortfolioHero } from "@/app/(public)/portfolio/_components/portfolio-hero"
@@ -281,6 +282,17 @@ const SECTION_RENDERERS: Partial<Record<SectionType, (
           </div>
         )}
       </ParallaxScrolling>
+    )
+  },
+  "appointment-card": (s) => {
+    const p = s.props as any
+    return (
+      <AppointmentCardSection
+        eyebrow={p.eyebrow}
+        headline={p.headline}
+        description={p.description}
+        ctaLabel={p.ctaLabel}
+      />
     )
   },
 }

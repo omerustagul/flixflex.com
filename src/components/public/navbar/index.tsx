@@ -10,6 +10,8 @@ import { FlixFlexLogo } from "./logo"
 import { DesktopNav } from "./desktop-nav"
 import { MobileMenu } from "./mobile-menu"
 import { NAV_LINKS } from "./nav-data"
+import { useUIStore } from "@/lib/ui-store"
+
 
 interface FlixFlexNavbarProps {
   siteSettings?: Record<string, string>
@@ -19,6 +21,8 @@ export function FlixFlexNavbar({ siteSettings = {} }: FlixFlexNavbarProps) {
   const [scrolled, setScrolled] = React.useState(false)
   const [mobileOpen, setMobileOpen] = React.useState(false)
   const { scrollY } = useScroll()
+  const setAppointmentModalOpen = useUIStore((state) => state.setAppointmentModalOpen)
+
 
   useMotionValueEvent(scrollY, "change", (y) => {
     setScrolled(y > 12)
@@ -66,11 +70,12 @@ export function FlixFlexNavbar({ siteSettings = {} }: FlixFlexNavbarProps) {
                 <ThemeToggle />
               </div>
 
-              <Link
-                href="/iletisim"
+              <button
+                type="button"
+                onClick={() => setAppointmentModalOpen(true)}
                 className={cn(
                   "ff-shape-button",
-                  "group hidden md:inline-flex items-center justify-center gap-1.5",
+                  "group hidden md:inline-flex items-center justify-center gap-1.5 cursor-pointer",
                   "px-4 py-2 text-[11px] font-medium transition-all duration-300",
                   scrolled
                     ? "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)] hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)] hover:shadow-[0_4px_20px_rgba(161,52,255,0.4)]"
@@ -82,7 +87,7 @@ export function FlixFlexNavbar({ siteSettings = {} }: FlixFlexNavbarProps) {
                   size={14}
                   className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 />
-              </Link>
+              </button>
 
               {/* Mobile burger */}
               <button

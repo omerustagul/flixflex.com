@@ -106,14 +106,14 @@ export default function AyarlarPage() {
     <div className="px-6 md:px-10 py-8 md:py-12">
       {/* ── Header ────────────────────────────── */}
       <header className="mb-10 md:mb-14">
-        <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[var(--ff-purple)] mb-3">
+        <p className="text-[11px] font-semibold text-[#FF4FD8] mb-3">
           — Ayarlar —
         </p>
-        <h1 className="font-display text-2xl font-extrabold leading-tight tracking-tight text-[var(--foreground)] mb-3">
+        <h1 className="font-display text-2xl font-extrabold leading-tight tracking-tight text-[#0D0D0D] mb-3">
           Sistem{" "}
-          <span className="text-[var(--ff-purple)]">yapılandırması</span>
+          <span className="text-[#FF4FD8]">yapılandırması</span>
         </h1>
-        <p className="text-[var(--foreground-muted)] text-base md:text-lg max-w-2xl leading-relaxed">
+        <p className="text-[] text-base md:text-lg max-w-2xl leading-relaxed">
           FlixFlex platformunun temel davranışlarını buradan yönet. Her modülün
           kendi alt ayar sayfası vardır.
         </p>
@@ -123,8 +123,8 @@ export default function AyarlarPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
         {TILES.map((tile) => {
           const Icon = tile.icon
-          const className = `ff-shape-container group relative flex flex-col gap-4 p-6 md:p-7 bg-[var(--background)] border border-[var(--border)] transition-colors duration-200 ${tile.href
-            ? "hover:bg-[var(--surface)] cursor-pointer"
+          const className = `ff-shape-container group relative flex flex-col gap-4 p-6 md:p-7 bg-[#F0F0F0] border border-[#CCCCCC] transition-colors duration-200 ${tile.href
+            ? "hover:bg-[#F7F7F5] cursor-pointer"
             : "cursor-default opacity-90"
             }`
 
@@ -132,13 +132,13 @@ export default function AyarlarPage() {
             <>
               {/* Top row */}
               <div className="flex items-start justify-between gap-3">
-                <span className="ff-shape-button w-10 h-10 flex items-center justify-center bg-[var(--surface)] border border-[var(--border)] text-[var(--foreground-muted)] group-hover:bg-[var(--ff-purple)] group-hover:border-[var(--ff-purple)] group-hover:text-white transition-colors duration-200">
+                <span className="ff-shape-button w-10 h-10 flex items-center justify-center bg-[#F0F0F0] border border-[#CCCCCC] text-[#0D0D0D] group-hover:bg-[var(--ff-purple)] group-hover:border-[var(--ff-purple)] group-hover:text-white transition-colors duration-200">
                   <Icon size={18} strokeWidth={1.75} />
                 </span>
                 <div className="flex items-center gap-2">
                   <StatusBadge status={tile.status} />
                   {!tile.href && (
-                    <span className="text-[9px] font-semibold tracking-[0.12em] uppercase text-[var(--foreground-faint)] border border-[var(--border)] px-2 py-0.5">
+                    <span className="text-[9px] font-semibold text-[#0D0D0D] border border-[#CCCCCC] px-2 py-0.5">
                       Yakında
                     </span>
                   )}
@@ -147,17 +147,17 @@ export default function AyarlarPage() {
 
               {/* Title + desc */}
               <div className="flex flex-col gap-1.5">
-                <h3 className="font-display text-lg font-bold text-[var(--foreground)] tracking-tight">
+                <h3 className="font-display text-lg font-bold text-[#0D0D0D] tracking-tight">
                   {tile.title}
                 </h3>
-                <p className="text-sm text-[var(--foreground-muted)] leading-relaxed">
+                <p className="text-sm text-[#0D0D0D] leading-relaxed">
                   {tile.description}
                 </p>
               </div>
 
               {/* Bottom action */}
               {tile.href && (
-                <div className="mt-auto pt-2 flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.12em] uppercase text-[var(--foreground-faint)] group-hover:text-[var(--ff-purple)] transition-colors duration-200">
+                <div className="mt-auto pt-2 flex items-center gap-1.5 text-[11px] font-semibold text-[#0D0D0D] group-hover:text-[var(--ff-purple)] transition-colors duration-200">
                   <span>Düzenle</span>
                   <ArrowUpRight
                     size={12}
@@ -186,12 +186,12 @@ export default function AyarlarPage() {
       </div>
 
       {/* ── Helper note ───────────────────────── */}
-      <div className="ff-shape-container mt-10 p-5 border border-[var(--border)] bg-[var(--surface)] flex items-start gap-3">
-        <Settings size={18} className="text-[var(--ff-purple)] shrink-0 mt-0.5" />
-        <div className="text-sm text-[var(--foreground-muted)] leading-relaxed">
+      <div className="ff-shape-container items-center justify-content mt-10 p-2 px-4 border border-[#CCCCCC] bg-[#F0F0F0] flex items-start gap-3">
+        <Settings size={14} className="text-[#FF4FD8] shrink-0 mt-0.5" />
+        <div className="text-xs text-[#0D0D0D] leading-relaxed">
           <p>
             Ayar modülleri kademeli olarak ekleniyor.{" "}
-            <span className="text-[var(--foreground)]">
+            <span className="text-[#0D0D0D]">
               Veritabanı bağlandıktan sonra
             </span>{" "}
             her tile aktif hale gelecek ve değerleri kalıcı olarak DB&apos;de saklanacak.

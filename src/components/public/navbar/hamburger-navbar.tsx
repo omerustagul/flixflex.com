@@ -9,6 +9,8 @@ import { ThemeToggle } from "@/components/ui"
 import { cn } from "@/lib/utils"
 import { FlixFlexLogo } from "./logo"
 import { NAV_LINKS } from "./nav-data"
+import { useUIStore } from "@/lib/ui-store"
+
 
 // ═══════════════════════════════════════════════════════════
 // HamburgerNavbar — alternative public navbar variant
@@ -29,6 +31,8 @@ export function HamburgerNavbar({ siteSettings = {} }: HamburgerNavbarProps) {
   const [open, setOpen] = React.useState(false)
   const { scrollY } = useScroll()
   const pathname = usePathname()
+  const setAppointmentModalOpen = useUIStore((state) => state.setAppointmentModalOpen)
+
 
   useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 12))
 
@@ -217,10 +221,14 @@ export function HamburgerNavbar({ siteSettings = {} }: HamburgerNavbarProps) {
               {/* Footer */}
               <div className="border-t border-[var(--border)] px-6 md:px-10 xl:px-16 py-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div className="flex items-center gap-4">
-                  <Link
-                    href="/iletisim"
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setOpen(false)
+                      setAppointmentModalOpen(true)}
+                    }
                     className={cn(
-                      "ff-shape-button h-11 group inline-flex items-center justify-center gap-2.5",
+                      "ff-shape-button h-11 group inline-flex items-center justify-center gap-2.5 cursor-pointer",
                       "px-6 py-3 text-[12px] font-medium",
                       "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
                       "hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)]",
@@ -229,7 +237,7 @@ export function HamburgerNavbar({ siteSettings = {} }: HamburgerNavbarProps) {
                   >
                     Randevu Oluştur
                     <ArrowUpRight size={14} />
-                  </Link>
+                  </button>
                   <ThemeToggle />
                 </div>
                 <p className="text-[11px] tracking-[0.2em] text-[var(--foreground-faint)]">

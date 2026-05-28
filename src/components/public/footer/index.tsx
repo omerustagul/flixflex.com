@@ -9,9 +9,13 @@ import { FOOTER_COLUMNS, SOCIAL_LINKS } from "./footer-data"
 import { SocialIcon } from "./social-icon"
 import { BackToTop } from "./back-to-top"
 import { FlixFlexLogo } from "../navbar/logo"
+import { useUIStore } from "@/lib/ui-store"
+
 
 export function FlixFlexFooter({ siteSettings = {} }: { siteSettings?: Record<string, string> }) {
+  const setAppointmentModalOpen = useUIStore((state) => state.setAppointmentModalOpen)
   return (
+
     <>
       <footer
         className={cn(
@@ -61,15 +65,16 @@ export function FlixFlexFooter({ siteSettings = {} }: { siteSettings?: Record<st
                 <span className="text-[var(--ff-purple)]">Birlikte büyüyelim.</span>
               </h2>
             </div>
-            <Link
-              href="/iletisim"
+            <button
+              type="button"
+              onClick={() => setAppointmentModalOpen(true)}
               className={cn(
                 "ff-shape-button",
-                "group inline-flex items-center justify-center h-9 gap-3",
+                "group inline-flex items-center justify-center h-9 gap-3 cursor-pointer",
                 "px-10 py-5 text-[15px] font-medium",
                 "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
                 "hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)]",
-                "hover:shadow-[0_4px_24px_var(--ff-purple)/40%]",
+                "hover:shadow-[0_4px_24px_rgba(161,52,255,0.4)]",
                 "transition-all duration-200 whitespace-nowrap shrink-0"
               )}
             >
@@ -78,7 +83,7 @@ export function FlixFlexFooter({ siteSettings = {} }: { siteSettings?: Record<st
                 size={18}
                 className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               />
-            </Link>
+            </button>
           </motion.div>
 
           {/* ── Mid: brand + columns ───────────────── */}

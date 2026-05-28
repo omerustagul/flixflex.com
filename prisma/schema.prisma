@@ -257,3 +257,30 @@ model CustomFont {
 
   @@map("custom_fonts")
 }
+
+model Appointment {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String
+  subject     String   @default("Ön Görüşme")
+  date        DateTime
+  notes       String?
+  status      String   @default("pending") // pending, approved, cancelled, completed
+  isRead      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("appointments")
+}
+
+model BlockedSlot {
+  id        String   @id @default(cuid())
+  date      DateTime @unique
+  reason    String?
+  createdAt DateTime @default(now())
+
+  @@map("blocked_slots")
+}
+
+

@@ -1,4 +1,4 @@
-import { FlixFlexFooter } from "@/components/public"
+import { FlixFlexFooter, AppointmentModal } from "@/components/public"
 import { ThemedNavbar } from "@/components/public/navbar/themed-navbar"
 import { PageTransition } from "@/components/shared/page-transition"
 import { LoadingScreen } from "@/components/shared/loading-screen"
@@ -29,6 +29,8 @@ export default async function PublicLayout({
         </main>
       </PageTransition>
       <FlixFlexFooter siteSettings={siteSettings} />
+      <AppointmentModal />
     </>
   )
 }
+

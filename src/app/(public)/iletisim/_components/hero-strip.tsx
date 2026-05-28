@@ -100,11 +100,11 @@ export function HeroStrip() {
           >
             <Clock size={16} className="text-[var(--ff-purple)] shrink-0" />
             <div className="text-[12px]">
-              <span className="font-semibold text-[var(--foreground)] uppercase tracking-wider">
-                24 Saat
+              <span className="font-semibold text-[var(--foreground)]">
+                12 Saat
               </span>{" "}
               <span className="text-[var(--foreground-muted)]">
-                içinde yanıt garantisi · İstanbul, TR
+                içinde kesin yanıt veriyoruz · Farkımızı deneyimleyin.
               </span>
             </div>
             <span className="w-1.5 h-1.5 bg-[#16a34a] animate-pulse shrink-0" />

@@ -37,6 +37,8 @@ export type SectionType =
   | "portfolio-vertical-scroll"
   | "hero-animated-video"
   | "parallax"
+  | "appointment-card"
+
 
 // ── Generic Section Block ─────────────────────────
 export type SectionTransition = "normal" | "sticky" | "parallax" | "overlap"
@@ -234,6 +236,15 @@ export const parallaxPropsSchema = z.object({
     .optional(),
 })
 
+export const appointmentCardPropsSchema = z.object({
+  eyebrow: z.string().default("Hızlı Randevu"),
+  headline: z.string().default("Ön Görüşme Randevusu Alın"),
+  description: z.string().default("Projelerinizi, hedeflerinizi ve nasıl yardımcı olabileceğimizi konuşmak üzere hemen ücretsiz bir ön görüşme randevusu oluşturun."),
+  ctaLabel: z.string().default("Randevu Al"),
+  hideMobileDock: z.boolean().default(false),
+})
+
+
 // ── Section Prop Type Inference ───────────────────
 export type HeroProps = z.infer<typeof heroPropsSchema>
 export type HeroVideoProps = z.infer<typeof heroVideoPropsSchema>
@@ -283,4 +294,6 @@ export const SECTION_SCHEMAS: Record<SectionType, z.ZodObject<z.ZodRawShape>> = 
   "hero-animated-video": heroAnimatedVideoPropsSchema,
   "parallax": parallaxPropsSchema,
   "portfolio-vertical-scroll": portfolioVerticalScrollPropsSchema,
+  "appointment-card": appointmentCardPropsSchema,
 }
+

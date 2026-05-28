@@ -102,7 +102,7 @@ export function BlogTemplateEditorial({ post, related }: EditorialTemplateProps)
 
           {/* Author */}
           <div className="flex items-center gap-3 mt-8">
-            <span className="w-10 h-10 flex items-center justify-center text-sm font-bold text-white bg-[rgba(0,0,0,0.3)] border border-white/20 flex-shrink-0">
+            <span className="ff-shape-container w-10 h-10 flex items-center justify-center text-sm font-bold text-white bg-[rgba(0,0,0,0.3)] border border-white/20 flex-shrink-0">
               {post.author.initials}
             </span>
             <div>

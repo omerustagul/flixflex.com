@@ -72,36 +72,12 @@ export function ServicesSection({ services, headline, subheadline }: ServicesSec
                 </div>
               ))}
             </div>
-            {/* ── Mobile horizontal scroll carousel ── */}
-            <div
-              className={cn(
-                "md:hidden",
-                "-mx-6 px-6",
-                "flex gap-4 overflow-x-auto",
-                "snap-x snap-mandatory",
-                "pb-4",
-                "[&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-              )}
-            >
-              {services.map((service, i) => (
-                <div
-                  key={service.slug}
-                  className={cn(
-                    "snap-start flex-shrink-0",
-                    "w-[80vw] min-w-[260px] max-w-[320px]"
-                  )}
-                >
-                  <ServiceCard service={service} index={i} />
-                </div>
-              ))}
-            </div>
           </div>
         </div>
         {/* ── Mobile horizontal scroll carousel ── */}
         <div
           className={cn(
             "md:hidden",
-            "-mx-6 px-6",
             "flex gap-4 overflow-x-auto",
             "snap-x snap-mandatory",
             "pb-4",

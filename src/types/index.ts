@@ -52,6 +52,8 @@ export type SectionType =
   | "contact-form"
   | "blog-grid"
   | "spacer"
+  | "appointment-card"
+
 
 export interface SectionBlock {
   id:      string

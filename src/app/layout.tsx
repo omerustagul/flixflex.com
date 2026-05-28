@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/shared/theme-provider"
 import { FFCursor } from "@/components/ui"
 import { ActivePaletteStyle } from "@/lib/colors/palette-provider"
 import { cn } from "@/lib/utils";
+import { Toaster } from "sonner"
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -65,8 +66,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <ThemeProvider serverTheme={theme} enableSystem={false}>
           <FFCursor />
           {children}
+          <Toaster position="bottom-right" theme={theme} expand={false} richColors />
         </ThemeProvider>
       </body>
     </html>
   )
 }
+

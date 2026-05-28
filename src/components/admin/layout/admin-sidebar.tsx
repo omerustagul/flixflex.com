@@ -19,6 +19,7 @@ import {
   LogOut,
   HardDrive,
   ExternalLink,
+  CalendarDays,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { SessionUser } from "@/lib/auth/types"
@@ -26,6 +27,7 @@ import type { SessionUser } from "@/lib/auth/types"
 // ── Nav items ─────────────────────────────────────
 const NAV_ITEMS = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard, exact: true },
+  { label: "Randevular", href: "/admin/randevular", icon: CalendarDays, exact: false },
   { label: "Sayfalar", href: "/admin/sayfalar", icon: FileText, exact: false },
   { label: "Portfolyo", href: "/admin/portfolyo", icon: BriefcaseBusiness, exact: false },
   { label: "Hizmetler", href: "/admin/hizmetler", icon: Sparkles, exact: false },

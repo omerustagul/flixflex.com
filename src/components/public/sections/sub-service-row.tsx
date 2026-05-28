@@ -90,8 +90,8 @@ export function SubServiceRow({ iconKey, label, href }: SubServiceRowProps) {
           <span
             className={cn(
               "ff-shape-container flex h-8 w-8 shrink-0 items-center justify-center rounded-lg",
-              "bg-[var(--surface)]",
-              "text-[var(--foreground-muted)]",
+              "bg-[var(--ff-charcoal)]",
+              "text-[#0D0D0D]",
               "transition-colors duration-200",
               "group-hover/link:text-[var(--ff-purple)]"
             )}
