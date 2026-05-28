@@ -56,7 +56,7 @@ export function ServicesPageClient({ items }: { items: ServiceCardItem[] }) {
       ) : (
         <div className="ff-shape-container bg-[#f7f7f5] border border-[#CCCCCC] overflow-hidden">
           <table className="w-full">
-            <thead className="border-b border-[#CCCCCC] text-left">
+            <thead className="bg-[#dadada] border-b border-[#CCCCCC] text-left">
               <tr>
                 <th className="px-4 py-3 text-[10px] font-bold text-[#666666]">Hizmet</th>
                 <th className="px-4 py-3 text-[10px] font-bold text-[#666666]">Hiyerarşi</th>

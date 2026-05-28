@@ -81,12 +81,12 @@ function SortableItem({
       style={style}
       className={cn(
         "group flex items-center gap-2 h-16 px-3 py-3",
-        "border-b transition-all duration-150 cursor-pointer",
+        "transition-all duration-150 cursor-pointer",
         "select-none",
         isDragging && "opacity-30",
         isSelected
-          ? "border-[#ff4fd8] bg-[#ff4fd8]/0.1"
-          : "border-[#CCCCCC] bg-[#f7f7f5] hover:border-[#ff4fd8]/0.4",
+          ? "border-[#ff4fd8] bg-[#FF4FD8]/10"
+          : "border-[#CCCCCC] bg-[#f7f7f5] hover:bg-[#FF4FD8]/10 hover:border-[#FF4FD8]/40",
         !section.visible && "opacity-50"
       )}
       onClick={() => onSelect(section.id)}

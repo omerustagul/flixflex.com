@@ -11,6 +11,7 @@ import {
 } from "framer-motion"
 import MuxPlayer from "@mux/mux-player-react"
 import { cn } from "@/lib/utils"
+import { useMediaQuery } from "@/hooks/use-media-query"
 
 // ═══════════════════════════════════════════════════════════
 // AnimatedVideoHero — Context-based scroll-driven video hero
@@ -82,7 +83,7 @@ export function VideoHeroProvider({
   children,
   className,
   offset = ["start start", "end start"],
-  heightClass = "h-[80vh] md:h-[100svh]",
+  heightClass = "h-[100dvh]",
 }: VideoHeroProviderProps) {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
@@ -100,7 +101,7 @@ export function VideoHeroProvider({
       <section
         ref={containerRef}
         className={cn(
-          "relative w-screen left-1/2 -translate-x-1/2 overflow-hidden bg-black",
+          "relative w-screen left-1/2 -translate-x-1/2 overflow-hidden bg-transparent",
           heightClass,
           className,
         )}
@@ -113,8 +114,10 @@ export function VideoHeroProvider({
 
 // ── HeroVideo (background) ──────────────────────────────────
 interface HeroVideoProps {
-  /** Video source URL or Mux playbackId */
+  /** Video source URL or Mux playbackId (desktop) */
   videoUrl?: string
+  /** Video source URL or Mux playbackId for mobile (optional, falls back to videoUrl) */
+  videoUrlMobile?: string
   /** Poster image before video loads */
   posterUrl?: string
   /** Dark overlay strength 0–1 (default: 0.5) */
@@ -124,44 +127,39 @@ interface HeroVideoProps {
 
 export function HeroVideo({
   videoUrl = "/hero-background.mp4",
+  videoUrlMobile,
   posterUrl,
   overlayStrength = 0.5,
   className,
 }: HeroVideoProps) {
   const { scrollYProgress } = useVideoHero()
   const shouldReduce = useReducedMotion()
+  const isMobileViewport = useMediaQuery("(max-width: 767px)")
 
   // ── Scroll-driven transforms ──────────────────────────
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"])
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
   const scale = useTransform(
     scrollYProgress,
-    [0, 0.4, 0.8, 1],
-    [1, 1.15, 0.9, 1],
+    [1, 0.4, 0.8, 1],
+    [1, 0.5, 1, 1.5],
   )
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
 
+  // ── Active video URL: mobile override if provided ─────
+  const activeVideoUrl =
+    isMobileViewport && videoUrlMobile ? videoUrlMobile : videoUrl
+
   // ── Video source detection ────────────────────────────
   const isMux =
-    videoUrl.includes("mux.com") ||
-    (!videoUrl.includes("/") && videoUrl.length > 10)
-  const { playbackId, src } = getMuxData(videoUrl)
+    activeVideoUrl.includes("mux.com") ||
+    (!activeVideoUrl.includes("/") && activeVideoUrl.length > 10)
+  const { playbackId, src } = getMuxData(activeVideoUrl)
 
   return (
     <motion.div
       style={shouldReduce ? {} : { y, scale, opacity }}
       className={cn("absolute inset-0 z-0 h-full w-full", className)}
     >
-      {/* Dark overlay */}
-      <div
-        className="absolute inset-0 z-10"
-        style={{ background: `rgba(0,0,0,${overlayStrength})` }}
-      />
-
-      {/* Bottom gradient fade */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/20 to-transparent" />
-
-      {/* Top gradient fade */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
 
       {/* Video wrapper */}
       <div className="relative h-full w-full overflow-hidden">
@@ -175,9 +173,16 @@ export function HeroVideo({
             playsInline
             poster={posterUrl}
             nohotkeys
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ objectFit: "cover", width: "100%", height: "100%" }}
             streamType="on-demand"
+            className="absolute inset-0 w-full h-full"
+            style={{
+              width: "100%",
+              height: "100%",
+              // MuxPlayer shadow DOM CSS variables — bu değişkenler
+              // shadow boundary'yi aşarak iç <video> elementine ulaşır.
+              ["--media-object-fit" as string]: "cover",
+              ["--media-object-position" as string]: "center center",
+            }}
           />
         ) : (
           <video
@@ -207,7 +212,7 @@ export function HeroContent({ children, className }: HeroContentProps) {
   const { scrollYProgress } = useVideoHero()
   const shouldReduce = useReducedMotion()
 
-  const translateY = useTransform(scrollYProgress, [0, 0.6], ["0%", "30%"])
+  const translateY = useTransform(scrollYProgress, [0, 0.6], ["0%", "100%"])
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.6], [1, 1, 0])
 
   return (

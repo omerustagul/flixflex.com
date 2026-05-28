@@ -207,29 +207,49 @@ function MediaField({ name, value, onChange }: FieldProps) {
     name.toLowerCase().includes("video") ||
     name.toLowerCase().includes("videourl")
 
+  const currentUrl = typeof value === "string" ? value : ""
+  const fileName = currentUrl ? currentUrl.split("/").pop() ?? currentUrl : ""
+
   return (
     <div>
       <FieldLabel name={name} />
-      <div className="flex gap-2">
-        <input
-          value={typeof value === "string" ? value : ""}
-          onChange={(e) => onChange(e.target.value)}
-          className={cn(
-            "ff-shape-container flex-1 px-3 py-2 text-[11px]",
-            "bg-[#f7f7f5] border border-[#CCCCCC]",
-            "text-[#333333] outline-none focus:border-[#ff4fd8] transition-all duration-150"
-          )}
-          placeholder="URL girin veya seçin..."
-        />
-        <button
-          type="button"
-          onClick={() => setIsOpen(true)}
-          className="ff-shape-button w-9 h-9 shrink-0 border border-[#CCCCCC] flex items-center justify-center hover:bg-[#f0f0f0] text-[#666666] hover:text-[#ff4fd8] transition-all"
-          title="Medyadan Seç"
-        >
-          {isVideo ? <Video size={14} /> : <ImageIcon size={14} />}
-        </button>
-      </div>
+
+      {/* Seçili dosya göstergesi */}
+      {fileName && (
+        <div className={cn(
+          "ff-shape-container flex items-center gap-2 px-3 py-1.5 mb-2",
+          "bg-[#f7f7f5] border border-[#CCCCCC]"
+        )}>
+          <span className="text-[#ff4fd8] shrink-0">
+            {isVideo ? <Video size={11} /> : <ImageIcon size={11} />}
+          </span>
+          <span className="text-[10px] text-[#333333] truncate flex-1">{fileName}</span>
+          <button
+            type="button"
+            onClick={() => onChange("")}
+            className="text-[#999999] hover:text-[#e03434] transition-colors shrink-0"
+            title="Kaldır"
+          >
+            <X size={11} />
+          </button>
+        </div>
+      )}
+
+      {/* Medya kütüphanesi butonu */}
+      <button
+        type="button"
+        onClick={() => setIsOpen(true)}
+        className={cn(
+          "ff-shape-button w-full h-9 flex items-center justify-center gap-2",
+          "border border-dashed border-[#CCCCCC]",
+          "text-[11px] font-semibold text-[#666666]",
+          "hover:border-[#ff4fd8] hover:text-[#ff4fd8] hover:bg-[#ff4fd8]/5",
+          "transition-all duration-150"
+        )}
+      >
+        {isVideo ? <Video size={13} /> : <ImageIcon size={13} />}
+        {isVideo ? "Video Seç" : "Görsel Seç"}
+      </button>
 
       {isOpen && (
         <MediaPicker

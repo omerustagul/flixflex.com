@@ -339,7 +339,6 @@
 
   .ff-card:hover {
     border-color: var(--ff-purple-border);
-    box-shadow: 0 4px 30px var(--background-alt);
   }
 
   .ff-input {
@@ -539,6 +538,7 @@
 @utility scrollbar-none {
   -ms-overflow-style: none;
   scrollbar-width: none;
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -548,6 +548,7 @@
   0% {
     transform: translate3d(-50%, 0, 0);
   }
+
   100% {
     transform: translate3d(0, 0, 0);
   }
@@ -557,6 +558,7 @@
   0% {
     transform: translate3d(0, 0, 0);
   }
+
   100% {
     transform: translate3d(-50%, 0, 0);
   }
@@ -566,6 +568,7 @@
   0% {
     transform: translate3d(0, 0, 0);
   }
+
   100% {
     transform: translate3d(calc(-1 * var(--scroll-width)), 0, 0);
   }

@@ -105,7 +105,7 @@ export function FlixFlexFooter({ siteSettings = {} }: { siteSettings?: Record<st
               {/* Contact mini */}
               <ul className="space-y-2.5 text-sm">
                 <li className="flex items-center gap-2 text-[var(--foreground-muted)]">
-                  <Mail size={14} className="text-[var(--ff-purple)]" />
+                  <Mail size={14} className="text-[var(--ff-charcoal)]" />
                   <a
                     href="mailto:hello@flixflex.com"
                     className="hover:text-[var(--foreground)] transition-colors"
@@ -114,7 +114,7 @@ export function FlixFlexFooter({ siteSettings = {} }: { siteSettings?: Record<st
                   </a>
                 </li>
                 <li className="flex items-center gap-2 text-[var(--foreground-muted)]">
-                  <MapPin size={14} className="text-[var(--ff-purple)]" />
+                  <MapPin size={14} className="text-[var(--ff-charcoal)]" />
                   <span>Levent, İstanbul · Türkiye</span>
                 </li>
               </ul>

@@ -214,9 +214,10 @@ export const contactFormPropsSchema = z.object({
 })
 
 export const heroAnimatedVideoPropsSchema = z.object({
-  headline: z.string().optional(),
-  subheadline: z.string().optional(),
-  videoSrc: z.string().optional(),
+  headline:        z.string().optional(),
+  subheadline:     z.string().optional(),
+  videoSrc:        z.string().optional(),
+  videoSrcMobile:  z.string().optional(),
   clipPathVariant: z.enum(["inset", "circle", "none"]).optional(),
 })
 

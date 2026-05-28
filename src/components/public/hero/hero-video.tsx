@@ -77,17 +77,13 @@ export function HeroVideoSection({
   return (
     <section
       ref={containerRef}
-      className="relative h-[100vh] md:h-[100svh] w-screen left-1/2 -translate-x-1/2 overflow-hidden bg-black"
+      className="relative h-[100vh] md:h-[100svh] w-screen left-1/2 -translate-x-1/2 overflow-hidden bg-transparent"
     >
       {/* ── Background Video Container ───────────────── */}
       <motion.div
         style={{ y, scale, opacity }}
         className="absolute inset-0 z-0 h-full w-full"
       >
-        <div className="absolute inset-0 bg-black/50 z-10" /> {/* Overlay 1 */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10" /> {/* Bottom Fade */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent z-10" /> {/* Top Fade */}
-
         <div className="relative h-full w-full overflow-hidden">
           {isMux || src ? (
             <MuxPlayer

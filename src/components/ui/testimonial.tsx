@@ -79,11 +79,11 @@ export function TestimonialCarousel({
             className="cursor-grab active:cursor-grabbing"
           >
             {/* Card */}
-            <div className="border border-[rgba(161,52,255,0.25)] bg-[var(--surface)] p-8 md:p-10 relative">
+            <div className="ff-shape-container border border-[rgba(255, 52, 197, 0.25)] bg-[var(--surface)] p-4 md:p-6 relative">
               {/* Quote icon */}
               <Quote
                 size={32}
-                className="absolute top-6 right-8 text-[var(--ff-purple)] opacity-20"
+                className="absolute top-6 right-8 text-[var(--ff-charcoal)] opacity-20"
                 aria-hidden
               />
 
@@ -95,7 +95,7 @@ export function TestimonialCarousel({
                       key={i}
                       className={cn(
                         "text-lg",
-                        i < t.rating! ? "text-[var(--ff-purple)]" : "text-[var(--border)]"
+                        i < t.rating! ? "text-[var(--ff-charcoal)]" : "text-[var(--border)]"
                       )}
                     >
                       ★
@@ -115,10 +115,10 @@ export function TestimonialCarousel({
                   <img
                     src={t.avatar}
                     alt={t.name}
-                    className="w-12 h-12 object-cover grayscale"
+                    className="w-10 h-10 object-cover grayscale"
                   />
                 ) : (
-                  <div className="w-12 h-12 bg-[var(--ff-purple)] flex items-center justify-center text-white font-bold text-lg">
+                  <div className="ff-shape-container w-10 h-10 bg-[var(--ff-charcoal)] flex items-center justify-center text-[#0d0d0d] font-bold text-lg">
                     {t.name[0]}
                   </div>
                 )}
@@ -150,7 +150,7 @@ export function TestimonialCarousel({
               className={cn(
                 "h-0.5 transition-all duration-300",
                 i === current
-                  ? "w-8 bg-[var(--ff-purple)]"
+                  ? "w-8 bg-[var(--ff-charcoal)]"
                   : "w-4 bg-[var(--border)] hover:bg-[rgba(161,52,255,0.4)]"
               )}
               aria-label={`${i + 1}. referans`}

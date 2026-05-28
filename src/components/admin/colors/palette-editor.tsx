@@ -276,7 +276,7 @@ function LivePreview({
       >
         <p
           className="text-[13px] font-bold mb-2"
-          style={{ color: "#FFFFFF", fontFamily: "var(--font-display)" }}
+          style={{ color: "#0d0d0d", fontFamily: "var(--font-display)" }}
         >
           Dijital Reklamda Yeni Dönem
         </p>

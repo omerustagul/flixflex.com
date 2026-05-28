@@ -14,7 +14,7 @@ interface AdminLayoutShellProps {
 
 export function AdminLayoutShell({ user, siteLogo, logoHeight, children }: AdminLayoutShellProps) {
   return (
-    <div className="flex min-h-screen bg-theme-background text-[var(--foreground)]">
+    <div className="flex min-h-screen bg-[#F7F7F5] text-[var(--foreground)]">
       {/* Fixed left sidebar */}
       <AdminSidebar
         user={user}

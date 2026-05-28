@@ -88,7 +88,7 @@ export default async function SayfalarPage() {
       {/* Table */}
       <div className="ff-shape-container border border-[#CCCCCC]">
         {/* Table head */}
-        <div className="grid grid-cols-[1fr_160px_120px_140px_180px] gap-0 border-b border-[#CCCCCC] px-4 py-2">
+        <div className="grid grid-cols-[1fr_160px_120px_140px_180px] gap-0 bg-[#dadada] border-b border-[#CCCCCC] px-4 py-2">
           {["Başlık", "Slug", "Durum", "Güncelleme", "İşlemler"].map((h) => (
             <span
               key={h}

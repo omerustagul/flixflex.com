@@ -72,7 +72,7 @@ export function HeroSection({
               )}
             >
               <span className="w-1.5 h-1.5 bg-[var(--ff-purple)] animate-pulse" />
-              <span className="text-[10px] uppercase tracking-[0.18em] font-medium text-[var(--ff-purple)]">
+              <span className="text-[11px] font-medium text-[var(--ff-purple)]">
                 Next-Gen Reklam Ajansı · 2026
               </span>
             </motion.div>

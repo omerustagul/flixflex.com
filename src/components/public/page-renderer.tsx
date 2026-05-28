@@ -236,7 +236,10 @@ const SECTION_RENDERERS: Partial<Record<SectionType, (
     const p = s.props as any
     return (
       <VideoHeroProvider>
-        <AnimatedVideoHero.Video videoUrl={p.videoSrc} />
+        <AnimatedVideoHero.Video
+          videoUrl={p.videoSrc}
+          videoUrlMobile={p.videoSrcMobile}
+        />
         <AnimatedVideoHero.Content>
           <div className="flex flex-col items-center gap-4">
             {p.headline && (
