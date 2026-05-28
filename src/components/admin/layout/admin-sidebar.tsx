@@ -78,7 +78,7 @@ export function AdminSidebar({ user, siteLogo, logoHeight }: AdminSidebarProps) 
         <div
           className={cn(
             "flex items-center border-b border-[var(--ff-purple)]/10",
-            "h-[8vh] px-4 shrink-0",
+            "h-[8vh] px-6 shrink-0",
             collapsed ? "justify-center" : "justify-start"
           )}
         >

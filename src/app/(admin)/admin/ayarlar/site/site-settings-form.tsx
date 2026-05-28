@@ -41,74 +41,82 @@ export function SiteSettingsForm({ initialSettings, saveAction }: SiteSettingsFo
   return (
     <form onSubmit={handleSave} className="space-y-8">
       {/* ── Section: Genel ──────────────────── */}
-      <section className="ff-card p-6 md:p-8 space-y-6">
-        <div className="flex items-center gap-3 pb-4 border-b border-[var(--border)]">
-          <Globe size={18} className="text-[var(--ff-purple)]" />
-          <h2 className="font-display text-lg font-bold">Genel Bilgiler</h2>
+      <section className="ff-card bg-[#f7f7f5] border border-[#CCCCCC] p-6 md:p-8 space-y-6">
+        <div className="flex items-center gap-3 pb-4 border-b border-[#CCCCCC]">
+          <Globe size={18} className="text-[#ff4fd8]" />
+          <h2 className="font-display text-lg text-[#333333] font-bold">Genel Bilgiler</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <label className="text-[11px] font-bold text-[var(--foreground-muted)]">Site Adı</label>
+            <label className="text-[11px] font-bold text-[#333333]">Site Adı</label>
             <FFInput
               value={settings.site_name || ""}
               onChange={(e) => updateSetting("site_name", e.target.value)}
               placeholder="Örn: FlixFlex"
+              className="w-full h-9 bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-[11px] font-bold text-[var(--foreground-muted)]">Slogan (Tagline)</label>
+            <label className="text-[11px] font-bold text-[#333333]">Slogan (Tagline)</label>
             <FFInput
               value={settings.site_tagline || ""}
               onChange={(e) => updateSetting("site_tagline", e.target.value)}
               placeholder="Örn: Next-Gen Reklam Ajansı"
+              className="w-full h-9 bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-[11px] font-bold text-[var(--foreground-muted)]">E-posta</label>
+            <label className="text-[11px] font-bold text-[#333333]">E-posta</label>
             <FFInput
               value={settings.site_email || ""}
               onChange={(e) => updateSetting("site_email", e.target.value)}
               placeholder="merhaba@domain.com"
+              className="w-full h-9 bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-[11px] font-bold text-[var(--foreground-muted)]">Telefon</label>
+            <label className="text-[11px] font-bold text-[#333333]">Telefon</label>
             <FFInput
               value={settings.site_phone || ""}
               onChange={(e) => updateSetting("site_phone", e.target.value)}
               placeholder="+90 ..."
+              className="w-full h-9 bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]"
             />
           </div>
           <div className="space-y-2 md:col-span-2">
-            <label className="text-[11px] font-bold text-[var(--foreground-muted)]">Adres</label>
+            <label className="text-[11px] font-bold text-[#333333]">Adres</label>
             <FFTextarea
               value={settings.site_address || ""}
               onChange={(e) => updateSetting("site_address", e.target.value)}
               placeholder="Şirket merkezi adresi..."
+              className="w-full bg-transparent border border-[#CCCCCC] p-3 text-sm text-[#333333] placeholder:text-[#999999] focus:outline-none focus:border-[#ff4fd8] transition-colors resize-y"
               rows={3}
             />
           </div>
           <div className="space-y-2">
-            <label className="text-[11px] font-bold text-[var(--foreground-muted)]">Çalışma Saatleri</label>
+            <label className="text-[11px] font-bold text-[#333333]">Çalışma Saatleri</label>
             <FFInput
               value={settings.site_working_hours || ""}
               onChange={(e) => updateSetting("site_working_hours", e.target.value)}
               placeholder="Örn: Pzt - Cum: 09:00 - 18:00"
+              className="w-full h-9 bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-[11px] font-bold text-[var(--foreground-muted)]">Vergi Dairesi / No</label>
+            <label className="text-[11px] font-bold text-[#333333]">Vergi Dairesi / No</label>
             <div className="grid grid-cols-2 gap-2">
               <FFInput
                 value={settings.site_tax_office || ""}
                 onChange={(e) => updateSetting("site_tax_office", e.target.value)}
                 placeholder="Daire"
+                className="w-full h-9 bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]"
               />
               <FFInput
                 value={settings.site_tax_number || ""}
                 onChange={(e) => updateSetting("site_tax_number", e.target.value)}
                 placeholder="Numara"
+                className="w-full h-9 bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]"
               />
             </div>
           </div>
@@ -116,10 +124,10 @@ export function SiteSettingsForm({ initialSettings, saveAction }: SiteSettingsFo
       </section>
 
       {/* ── Section: Görsel ─────────────────── */}
-      <section className="ff-card p-6 md:p-8 space-y-6">
-        <div className="flex items-center gap-3 pb-4 border-b border-[var(--border)]">
+      <section className="ff-card bg-[#f7f7f5] border border-[#CCCCCC] p-6 md:p-8 space-y-6">
+        <div className="flex items-center gap-3 pb-4 border-b border-[#CCCCCC]">
           <ImageIcon size={18} className="text-[var(--ff-purple)]" />
-          <h2 className="font-display text-lg font-bold">Marka Görselleri</h2>
+          <h2 className="font-display text-lg text-[#333333] font-bold">Marka Görselleri</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
@@ -144,7 +152,7 @@ export function SiteSettingsForm({ initialSettings, saveAction }: SiteSettingsFo
             onChange={(url) => updateSetting("site_favicon", url)}
           />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 border-t border-[var(--border)] pt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 border-t border-[#cccccc] pt-8">
           <div className="space-y-4">
             <FFSlider
               label="Masaüstü Logo Yüksekliği"
@@ -177,27 +185,28 @@ export function SiteSettingsForm({ initialSettings, saveAction }: SiteSettingsFo
       </section>
 
       {/* ── Section: SEO ────────────────────── */}
-      <section className="ff-card p-6 md:p-8 space-y-6">
-        <div className="flex items-center gap-3 pb-4 border-b border-[var(--border)]">
+      <section className="ff-card bg-[#f7f7f5] border border-[#CCCCCC] p-6 md:p-8 space-y-6">
+        <div className="flex items-center gap-3 pb-4 border-b border-[#CCCCCC]">
           <Search size={18} className="text-[var(--ff-purple)]" />
-          <h2 className="font-display text-lg font-bold">SEO & Meta</h2>
+          <h2 className="font-display text-lg text-[#333333] font-bold">SEO & Meta</h2>
         </div>
 
         <div className="space-y-6">
           <div className="space-y-2">
-            <label className="text-[11px] font-bold text-[var(--foreground-muted)]">Global Meta Başlığı</label>
+            <label className="text-[11px] font-bold text-[#333333]">Global Meta Başlığı</label>
             <FFInput
               value={settings.site_meta_title || ""}
               onChange={(e) => updateSetting("site_meta_title", e.target.value)}
               placeholder="Arama sonuçlarında görünecek başlık"
+              className="w-full h-9 bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-[11px] font-bold text-[var(--foreground-muted)]">Global Meta Açıklaması</label>
+            <label className="text-[11px] font-bold text-[#333333]">Global Meta Açıklaması</label>
             <textarea
               value={settings.site_meta_description || ""}
               onChange={(e) => updateSetting("site_meta_description", e.target.value)}
-              className="ff-shape-container w-full min-h-[100px] bg-[var(--surface)] border border-[var(--border)] p-3 text-sm text-[var(--foreground)] focus:outline-none focus:border-[var(--ff-purple)] transition-colors resize-y"
+              className="ff-shape-container w-full min-h-[100px] bg-transparent border border-[#CCCCCC] p-3 text-sm text-[#333333] placeholder:text-[#999999] focus:outline-none focus:border-[#ff4fd8] transition-colors resize-y"
               placeholder="Site hakkında kısa açıklama..."
             />
           </div>
@@ -205,27 +214,29 @@ export function SiteSettingsForm({ initialSettings, saveAction }: SiteSettingsFo
       </section>
 
       {/* ── Section: Sosyal ─────────────────── */}
-      <section className="ff-card p-6 md:p-8 space-y-6">
-        <div className="flex items-center gap-3 pb-4 border-b border-[var(--border)]">
-          <Layout size={18} className="text-[var(--ff-purple)]" />
-          <h2 className="font-display text-lg font-bold">Sosyal Medya</h2>
+      <section className="ff-card bg-[#f7f7f5] border border-[#CCCCCC] p-6 md:p-8 space-y-6">
+        <div className="flex items-center gap-3 pb-4 border-b border-[#CCCCCC]">
+          <Layout size={18} className="text-[#FF4FD8]" />
+          <h2 className="font-display text-lg text-[#333333] font-bold">Sosyal Medya</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <label className="text-[11px] font-bold text-[var(--foreground-muted)]">Instagram</label>
+            <label className="text-[11px] font-bold text-[#333333]">Instagram</label>
             <FFInput
               value={settings.social_instagram || ""}
               onChange={(e) => updateSetting("social_instagram", e.target.value)}
               placeholder="https://instagram.com/..."
+              className="w-full h-9 bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-[11px] font-bold text-[var(--foreground-muted)]">LinkedIn</label>
+            <label className="text-[11px] font-bold text-[#333333]">LinkedIn</label>
             <FFInput
               value={settings.social_linkedin || ""}
               onChange={(e) => updateSetting("social_linkedin", e.target.value)}
               placeholder="https://linkedin.com/company/..."
+              className="w-full h-9 bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]"
             />
           </div>
         </div>

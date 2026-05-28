@@ -1260,7 +1260,7 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
         className={cn(
           "ff-shape-container sticky bottom-2 z-10 flex items-center justify-center w-full gap-3 py-4 px-6 transition-all",
           "bg-[#f7f7f5]/60 backdrop-blur-sm border border-[#E0E0E0]/50  ",
-          isDirty && "border-[#E0E0E0] shadow-[0_-4px_20px_rgba(161,52,255,0.1)]",
+          isDirty && "border-[#E0E0E0] shadow-[0_-4px_20px_rgba(255, 79, 216,0.1)]",
         )}
       >
         {isDirty && (

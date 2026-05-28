@@ -24,7 +24,7 @@ function ValueCard({ value, index }: { value: Value; index: number }) {
           "bg-[var(--surface-elevated)] border border-[var(--border)]",
           "p-6 md:p-8",
           "transition-[border-color] duration-300",
-          "hover:border-[rgba(161,52,255,0.45)]"
+          "hover:border-[rgba(255, 79, 216,0.45)]"
         )}
       >
         {/* Purple top border on hover */}
@@ -44,7 +44,7 @@ function ValueCard({ value, index }: { value: Value; index: number }) {
             "text-[var(--foreground-muted)]",
             "transition-[background-color,border-color,color,box-shadow] duration-300",
             "group-hover:bg-[var(--ff-purple)] group-hover:border-[var(--ff-purple)] group-hover:text-white",
-            "group-hover:shadow-[0_0_20px_rgba(161,52,255,0.4)]"
+            "group-hover:shadow-[0_0_20px_rgba(255, 79, 216,0.4)]"
           )}
         >
           <Icon size={20} strokeWidth={1.75} />
@@ -108,7 +108,7 @@ export function ValuesSection() {
         className="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle at 100% 0%, rgba(161,52,255,0.07) 0%, transparent 55%)",
+            "radial-gradient(circle at 100% 0%, rgba(255, 79, 216,0.07) 0%, transparent 55%)",
         }}
       />
 

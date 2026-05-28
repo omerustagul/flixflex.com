@@ -56,7 +56,7 @@ export default async function BlogPage() {
             className="absolute top-0 right-0 w-[40rem] h-[32rem] pointer-events-none"
             style={{
               background:
-                "radial-gradient(circle, rgba(161,52,255,0.15) 0%, transparent 60%)",
+                "radial-gradient(circle, rgba(255, 79, 216,0.15) 0%, transparent 60%)",
               filter: "blur(60px)",
             }}
           />

@@ -118,7 +118,7 @@ export function MobileNavbar({
                     "ff-shape-button",
                     "flex items-center justify-center transition-colors duration-200",
                     variant === "dock" ? "w-8 h-8" : "w-10 h-10",
-                    active && "bg-[rgba(161,52,255,0.1)]"
+                    active && "bg-[rgba(255, 79, 216,0.1)]"
                   )}
                 >
                   <Icon size={variant === "dock" ? 17 : 19} strokeWidth={1.75} />

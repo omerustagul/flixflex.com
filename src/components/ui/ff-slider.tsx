@@ -34,14 +34,14 @@ export function FFSlider({ className, label, unit, ...props }: FFSliderProps) {
         )}
         {...props}
       >
-        <SliderPrimitive.Track className="bg-[var(--surface-muted)] relative grow h-[6px] rounded-full border border-[var(--border)]">
-          <SliderPrimitive.Range className="absolute bg-gradient-to-r from-[var(--ff-purple)] to-[var(--ff-purple)] h-full rounded-full" />
+        <SliderPrimitive.Track className="bg-[#FF4FD8]/10 relative grow h-[6px] rounded-full border border-[#FF4FD8]/30">
+          <SliderPrimitive.Range className="absolute bg-gradient-to-r from-[#ff4fd8] to-[#ff4fd8] h-full rounded-full" />
         </SliderPrimitive.Track>
         <SliderPrimitive.Thumb
           className={cn(
-            "block w-5 h-5 bg-white border-2 border-[var(--ff-purple)] shadow-lg transition-all ff-shape-button",
-            "hover:scale-120 hover:shadow-[var(--ff-purple)]/20 active:scale-95",
-            "focus:outline-none focus:ring-2 focus:ring-[var(--ff-purple)]/50"
+            "block w-5 h-5 bg-white border-2 border-[#ff4fd8] shadow-lg transition-all ff-shape-button",
+            "hover:scale-120 hover:shadow-[#ff4fd8] active:scale-95",
+            "focus:outline-none focus:ring-2 focus:ring-[#ff4fd8]/50"
           )}
           aria-label="Değer seç"
         />

@@ -26,7 +26,7 @@ export default function AdminDashboardPage() {
 
       {/* Quick actions + AI status */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        <div className="bg-[#f7f7f5] border border-[#E0E0E0] p-4 xl:col-span-2">
+        <div className="ff-shape-container bg-[#f7f7f5] border border-[#E0E0E0] p-4 xl:col-span-2">
           <QuickActions />
         </div>
         <div>

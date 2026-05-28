@@ -40,7 +40,7 @@ export function HeroSection({
         className="absolute -top-40 -right-40 w-[40rem] h-[40rem] rounded-full pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle, rgba(161,52,255,0.22) 0%, transparent 60%)",
+            "radial-gradient(circle, rgba(255, 79, 216,0.22) 0%, transparent 60%)",
           filter: "blur(50px)",
         }}
       />
@@ -67,7 +67,7 @@ export function HeroSection({
               transition={{ duration: 0.5, delay: 0.1 }}
               className={cn(
                 "ff-shape-container inline-flex items-center gap-2 mb-7",
-                "border border-[rgba(161,52,255,0.3)] bg-[rgba(161,52,255,0.08)]",
+                "border border-[rgba(255, 79, 216,0.3)] bg-[rgba(255, 79, 216,0.08)]",
                 "px-3 py-1.5"
               )}
             >
@@ -145,7 +145,7 @@ export function HeroSection({
                   "px-8 py-4 text-sm font-medium uppercase tracking-[0.05em]",
                   "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
                   "hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)]",
-                  "hover:shadow-[0_4px_24px_rgba(161,52,255,0.45)]",
+                  "hover:shadow-[0_4px_24px_rgba(255, 79, 216,0.45)]",
                   "transition-all duration-200"
                 )}
               >

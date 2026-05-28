@@ -299,13 +299,13 @@
   }
 
   .ff-btn-secondary {
-    background-color: var(--ff-charcoal);
+    background-color: var(--ff-purple);
     color: #fff;
-    border-color: var(--ff-charcoal);
+    border-color: var(--ff-purple);
   }
 
   .ff-btn-secondary:hover {
-    background-color: var(--ff-charcoal-light);
+    background-color: var(--ff-purple-muted);
   }
 
   .ff-btn-outline {

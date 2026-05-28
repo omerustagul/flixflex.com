@@ -63,9 +63,9 @@ function ScrollCard({
         scale,
         // FlixFlex: mor glow shadow
         boxShadow:
-          "0 0 0 1px rgba(161,52,255,0.3), 0 20px 60px rgba(161,52,255,0.2), 0 60px 80px rgba(0,0,0,0.4)",
+          "0 0 0 1px rgba(255, 79, 216,0.3), 0 20px 60px rgba(255, 79, 216,0.2), 0 60px 80px rgba(0,0,0,0.4)",
       }}
-      className="mx-auto h-[30rem] md:h-[40rem] w-full border-2 border-[rgba(161,52,255,0.35)] p-2 md:p-4 bg-[#111111]"
+      className="mx-auto h-[30rem] md:h-[40rem] w-full border-2 border-[rgba(255, 79, 216,0.35)] p-2 md:p-4 bg-[#111111]"
     >
       <div className="h-full w-full overflow-hidden bg-[#0C0C0C] md:p-4">
         {children}

@@ -82,8 +82,8 @@ const config: Config = {
           "100%": { opacity: "1" },
         },
         "ff-pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 15px rgba(161,52,255,0.2)" },
-          "50%":       { boxShadow: "0 0 40px rgba(161,52,255,0.5)" },
+          "0%, 100%": { boxShadow: "0 0 15px rgba(255, 79, 216,0.2)" },
+          "50%":       { boxShadow: "0 0 40px rgba(255, 79, 216,0.5)" },
         },
         "ff-float": {
           "0%, 100%": { transform: "translateY(0)" },
@@ -124,11 +124,11 @@ const config: Config = {
       },
       // ── Box Shadows ──────────────────────────────
       boxShadow: {
-        "ff-glow":    "0 0 30px rgba(161,52,255,0.35)",
-        "ff-glow-sm": "0 0 15px rgba(161,52,255,0.2)",
-        "ff-glow-lg": "0 0 60px rgba(161,52,255,0.3), 0 0 120px rgba(161,52,255,0.15)",
-        "ff-card":    "0 4px 30px rgba(161,52,255,0.08)",
-        "ff-card-hover": "0 8px 40px rgba(161,52,255,0.15)",
+        "ff-glow":    "0 0 30px rgba(255, 79, 216,0.35)",
+        "ff-glow-sm": "0 0 15px rgba(255, 79, 216,0.2)",
+        "ff-glow-lg": "0 0 60px rgba(255, 79, 216,0.3), 0 0 120px rgba(255, 79, 216,0.15)",
+        "ff-card":    "0 4px 30px rgba(255, 79, 216,0.08)",
+        "ff-card-hover": "0 8px 40px rgba(255, 79, 216,0.15)",
       },
       // ── Backdrop Blur ────────────────────────────
       backdropBlur: {

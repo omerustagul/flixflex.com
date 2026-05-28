@@ -50,6 +50,7 @@ export function ChangePasswordForm({ userId }: ChangePasswordFormProps) {
         label="Yeni Şifre"
         type="password"
         placeholder="En az 8 karakter"
+        className="bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-sm text-[#333333] placeholder:text-[#999999]"
         error={errors.password?.message}
         disabled={isSubmitting}
         {...register("password")}
@@ -68,11 +69,12 @@ export function ChangePasswordForm({ userId }: ChangePasswordFormProps) {
 
       <div className="flex items-center justify-between gap-3 pt-1">
         <FFButton
+        className="flex items-center gap-1.5 bg-[#ff4fd8] hover:bg-[#e03eb5] border border-[#ff4fd8] text-white"
           type="submit"
           variant="secondary"
           size="sm"
           loading={isSubmitting}
-          leftIcon={<KeyRound className="w-3.5 h-3.5" />}
+          leftIcon={<KeyRound className="w-3.5 h-3.5 mr-2" />}
         >
           Şifreyi Güncelle
         </FFButton>
@@ -80,13 +82,12 @@ export function ChangePasswordForm({ userId }: ChangePasswordFormProps) {
         {/* Password reset email stub */}
         <button
           type="button"
-          className="flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.07em] uppercase
-                     text-[var(--foreground-muted)] hover:text-[var(--ff-purple)] transition-colors"
+          className="ff-shape-button flex items-center gap-1.5 h-9 bg-transparent border border-[#ff4fd8] text-[11px] font-semibold text-[#ff4fd8] hover:text-[#e03eb5] px-3 py-1.5 transition-colors"
           onClick={() => {
             alert("Şifre sıfırlama maili gönderme özelliği henüz aktif değil. (TODO: Resend/SMTP entegrasyonu)")
           }}
         >
-          <Send className="w-3 h-3" />
+          <Send className="w-3 h-3 mr-2" />
           Sıfırlama Maili Gönder
         </button>
       </div>

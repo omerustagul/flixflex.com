@@ -38,7 +38,7 @@ export function ProjectHero({ project }: ProjectHeroProps) {
         aria-hidden
         className="absolute -top-40 right-0 w-[36rem] h-[36rem] pointer-events-none"
         style={{
-          background: `radial-gradient(ellipse, rgba(161,52,255,0.12) 0%, transparent 65%)`,
+          background: `radial-gradient(ellipse, rgba(255, 79, 216,0.12) 0%, transparent 65%)`,
           filter: "blur(60px)",
         }}
       />

@@ -27,13 +27,13 @@ export default async function EntegrasyonlarPage() {
   return (
     <div className="px-6 md:px-10 py-8 md:py-12">
       <header className="mb-10">
-        <p className="text-[11px] font-semibold text-[var(--ff-purple)] mb-3">
-          — Ayarlar —
+        <p className="text-[11px] font-semibold text-[#FF4FD8] mb-3">
+          Ayarlar
         </p>
-        <h1 className="font-display text-2xl font-extrabold leading-tight tracking-tight text-[var(--foreground)] mb-3">
-          Sistem <span className="text-[var(--ff-purple)]">Entegrasyonları</span>
+        <h1 className="font-display text-2xl font-extrabold leading-tight tracking-tight text-[#333333] mb-3">
+          Sistem <span className="text-[#FF4FD8]">Entegrasyonları</span>
         </h1>
-        <p className="text-[var(--foreground-muted)] text-sm max-w-2xl leading-relaxed">
+        <p className="text-[#666666] text-sm max-w-2xl leading-relaxed">
           Platformun dış dünya ile bağlantılarını buradan yönetin.
           AI modelleri, pazarlama araçları ve analiz servislerini tek bir merkezden yapılandırın.
         </p>

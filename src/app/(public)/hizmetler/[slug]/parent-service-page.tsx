@@ -48,7 +48,7 @@ export function ParentServicePage({ service, services, serviceIndex }: ParentSer
           className="absolute top-0 left-0 w-[600px] h-[400px] pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse at 0% 0%, rgba(161,52,255,0.12) 0%, transparent 60%)",
+              "radial-gradient(ellipse at 0% 0%, rgba(255, 79, 216,0.12) 0%, transparent 60%)",
           }}
         />
 
@@ -220,7 +220,7 @@ function ChildServiceCard({ child }: { child: Service }) {
       className={cn(
         "ff-shape-container group relative bg-[var(--surface-elevated)] border border-[var(--border)]",
         "p-6 transition-all duration-300 hover:border-[var(--ff-purple-border)]",
-        "hover:shadow-[0_0_40px_rgba(161,52,255,0.12)]",
+        "hover:shadow-[0_0_40px_rgba(255, 79, 216,0.12)]",
         "flex flex-col"
       )}
     >

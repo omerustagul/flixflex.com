@@ -127,14 +127,14 @@ function PulseSeparator() {
           "absolute top-1/2 -translate-y-1/2",
           "w-12 h-12 flex items-center justify-center",
           "bg-[var(--background)] border border-[var(--ff-purple)]",
-          "shadow-[0_0_40px_rgba(161,52,255,0.45)]"
+          "shadow-[0_0_40px_rgba(255, 79, 216,0.45)]"
         )}
         animate={{
           rotate: 45,
           boxShadow: [
-            "0 0 20px rgba(161,52,255,0.3)",
-            "0 0 50px rgba(161,52,255,0.6)",
-            "0 0 20px rgba(161,52,255,0.3)",
+            "0 0 20px rgba(255, 79, 216,0.3)",
+            "0 0 50px rgba(255, 79, 216,0.6)",
+            "0 0 20px rgba(255, 79, 216,0.3)",
           ],
         }}
         transition={{

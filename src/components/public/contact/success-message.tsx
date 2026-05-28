@@ -45,7 +45,7 @@ export function SuccessMessage({ refCode, onReset }: SuccessMessageProps) {
         <span
           className={cn(
             "w-20 h-20 flex items-center justify-center",
-            "bg-[rgba(161,52,255,0.1)] border border-[rgba(161,52,255,0.35)]"
+            "bg-[rgba(255, 79, 216,0.1)] border border-[rgba(255, 79, 216,0.35)]"
           )}
         >
           <CheckCircle2 size={40} className="text-[var(--ff-purple)]" strokeWidth={1.5} />

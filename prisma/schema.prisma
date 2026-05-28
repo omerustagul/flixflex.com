@@ -266,6 +266,7 @@ model Appointment {
   subject     String   @default("Ön Görüşme")
   date        DateTime
   notes       String?
+  meetLink    String?
   status      String   @default("pending") // pending, approved, cancelled, completed
   isRead      Boolean  @default(false)
   createdAt   DateTime @default(now())

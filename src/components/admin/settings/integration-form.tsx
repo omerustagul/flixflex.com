@@ -62,21 +62,21 @@ export function IntegrationForm({ initialData }: { initialData: IntegrationsData
     <div className="space-y-16 pb-20">
       {/* ── SECTION: AI SERVISLERI ────────────────────────────────────────── */}
       <section className="space-y-6">
-        <header className="flex items-center gap-3 pb-2 border-b border-[var(--border)]">
+        <header className="flex items-center gap-3 pb-2 border-b border-[#CCCCCC]">
           <Sparkles size={20} className="text-[var(--ff-purple)]" />
-          <h2 className="font-display text-xl font-bold text-[var(--foreground)]">Yapay Zeka (AI) Servisleri</h2>
+          <h2 className="font-display text-xl font-bold text-[#333333]">Yapay Zeka (AI) Servisleri</h2>
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Anthropic */}
-          <div className="ff-shape-container p-6 bg-[var(--background)] border border-[var(--border)] flex flex-col justify-between">
+          <div className="ff-shape-container p-6 bg-[#F7F7F5] border border-[#CCCCCC] flex flex-col justify-between">
             <div className="flex items-center gap-3 mb-6">
               <div className="ff-shape-button w-10 h-10 flex items-center justify-center bg-[var(--ff-purple)/0.1] text-[var(--ff-purple)] border border-[var(--ff-purple)/0.2]">
                 <Plug size={20} />
               </div>
               <div>
-                <h3 className="font-display text-base font-bold text-[var(--foreground)]">Anthropic (Claude)</h3>
-                <p className="text-[10px] text-[var(--foreground-muted)] uppercase tracking-widest font-semibold">Ana Sağlayıcı</p>
+                <h3 className="font-display text-base font-bold text-[#333333]">Anthropic (Claude)</h3>
+                <p className="text-[10px] text-[#666666] uppercase tracking-widest font-semibold">Ana Sağlayıcı</p>
               </div>
               {data.anthropicKey && <CheckCircle2 size={16} className="ml-auto text-green-500" />}
             </div>
@@ -84,20 +84,21 @@ export function IntegrationForm({ initialData }: { initialData: IntegrationsData
               label="Anthropic API Key"
               type="password"
               placeholder="sk-ant-..."
+              className="bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]"
               value={data.anthropicKey}
               onChange={(e) => setData({ ...data, anthropicKey: e.target.value })}
             />
           </div>
 
           {/* OpenAI */}
-          <div className="ff-shape-container p-6 bg-[var(--background)] border border-[var(--border)] flex flex-col justify-between">
+          <div className="ff-shape-container p-6 bg-[#F7F7F5] border border-[#CCCCCC] flex flex-col justify-between">
             <div className="flex items-center gap-3 mb-6">
               <div className="ff-shape-button w-10 h-10 flex items-center justify-center bg-green-500/10 text-green-500 border border-green-500/20">
                 <Plug size={20} />
               </div>
               <div>
-                <h3 className="font-display text-base font-bold text-[var(--foreground)]">OpenAI (GPT)</h3>
-                <p className="text-[10px] text-[var(--foreground-muted)] uppercase tracking-widest font-semibold">Alternatif</p>
+                <h3 className="font-display text-base font-bold text-[#333333]">OpenAI (GPT)</h3>
+                <p className="text-[10px] text-[#666666] uppercase tracking-widest font-semibold">Alternatif</p>
               </div>
               {data.openaiKey && <CheckCircle2 size={16} className="ml-auto text-green-500" />}
             </div>
@@ -105,20 +106,21 @@ export function IntegrationForm({ initialData }: { initialData: IntegrationsData
               label="OpenAI API Key"
               type="password"
               placeholder="sk-..."
+              className="bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]"
               value={data.openaiKey}
               onChange={(e) => setData({ ...data, openaiKey: e.target.value })}
             />
           </div>
 
           {/* Gemini */}
-          <div className="ff-shape-container p-6 bg-[var(--background)] border border-[var(--border)] flex flex-col justify-between">
+          <div className="ff-shape-container p-6 bg-[#F7F7F5] border border-[#CCCCCC] flex flex-col justify-between">
             <div className="flex items-center gap-3 mb-6">
               <div className="ff-shape-button w-10 h-10 flex items-center justify-center bg-blue-500/10 text-blue-500 border border-blue-500/20">
                 <Plug size={20} />
               </div>
               <div>
-                <h3 className="font-display text-base font-bold text-[var(--foreground)]">Google Gemini</h3>
-                <p className="text-[10px] text-[var(--foreground-muted)] uppercase tracking-widest font-semibold">Multimodal</p>
+                <h3 className="font-display text-base font-bold text-[#333333]">Google Gemini</h3>
+                <p className="text-[10px] text-[#666666] uppercase tracking-widest font-semibold">Multimodal</p>
               </div>
               {data.geminiKey && <CheckCircle2 size={16} className="ml-auto text-green-500" />}
             </div>
@@ -126,31 +128,32 @@ export function IntegrationForm({ initialData }: { initialData: IntegrationsData
               label="Google AI Key"
               type="password"
               placeholder="AIza..."
+              className="bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]" 
               value={data.geminiKey}
               onChange={(e) => setData({ ...data, geminiKey: e.target.value })}
             />
           </div>
 
           {/* Default Model */}
-          <div className="ff-shape-container p-6 bg-[var(--surface)] border border-[var(--border)] flex flex-col justify-between">
+          <div className="ff-shape-container p-6 bg-[#F7F7F5] border border-[#CCCCCC] flex flex-col justify-between">
             <div className="flex items-center gap-3 mb-6">
-              <div className="ff-shape-button w-10 h-10 flex items-center justify-center bg-[var(--foreground)]/5 text-[var(--foreground)] border border-[var(--border)]">
+              <div className="ff-shape-button w-10 h-10 flex items-center justify-center bg-[#333333]/5 text-[#333333] border border-[#CCCCCC]">
                 <KeyRound size={20} />
               </div>
               <div>
-                <h3 className="font-display text-base font-bold text-[var(--foreground)]">Varsayılan Model</h3>
-                <p className="text-[10px] text-[var(--foreground-muted)] uppercase tracking-widest font-semibold">Global Seçim</p>
+                <h3 className="font-display text-base font-bold text-[#333333]">Varsayılan Model</h3>
+                <p className="text-[10px] text-[#666666] uppercase tracking-widest font-semibold">Global Seçim</p>
               </div>
             </div>
             <div className="space-y-2">
-              <label className="text-[11px] font-semibold tracking-[0.08em] uppercase text-[var(--foreground-muted)]">Model Seçimi</label>
+              <label className="text-[11px] font-semibold tracking-[0.08em] uppercase text-[#666666]">Model Seçimi</label>
               <select
                 value={data.defaultModel}
                 onChange={(e) => setData({ ...data, defaultModel: e.target.value })}
                 className={cn(
-                  "ff-shape-button w-full bg-[var(--background)] border border-[var(--border)]",
-                  "px-4 py-3 text-sm text-[var(--foreground)] outline-none",
-                  "focus:border-[var(--ff-purple)] focus:ring-[var(--ff-purple)]/50 focus:ring-1",
+                  "ff-shape-button w-full bg-[#FFFFFF] border border-[#CCCCCC]",
+                  "px-4 py-3 text-sm text-[#333333] outline-none",
+                  "focus:border-[#8B5CF6] focus:ring-[#8B5CF6]/50 focus:ring-1",
                 )}
               >
                 <optgroup label="Anthropic">
@@ -174,46 +177,49 @@ export function IntegrationForm({ initialData }: { initialData: IntegrationsData
 
       {/* ── SECTION: ANALIZ & IZLEME ──────────────────────────────────────── */}
       <section className="space-y-6">
-        <header className="flex items-center gap-3 pb-2 border-b border-[var(--border)]">
+        <header className="flex items-center gap-3 pb-2 border-b border-[#CCCCCC]">
           <BarChart3 size={20} className="text-blue-500" />
-          <h2 className="font-display text-xl font-bold text-[var(--foreground)]">Analiz & İzleme</h2>
+          <h2 className="font-display text-xl font-bold text-[#333333]">Analiz & İzleme</h2>
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="ff-shape-container p-6 bg-[var(--background)] border border-[var(--border)]">
+          <div className="ff-shape-container p-6 bg-[#F7F7F5] border border-[#CCCCCC]">
             <div className="flex items-center gap-3 mb-4">
               <Globe size={18} className="text-orange-500" />
-              <h3 className="font-display text-sm font-bold text-[var(--foreground)]">Google Analytics</h3>
+              <h3 className="font-display text-sm font-bold text-[#333333]">Google Analytics</h3>
             </div>
             <FFInput
               label="Measurement ID"
               placeholder="G-XXXXXXXXXX"
+              className="bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]"
               value={data.gaMeasurementId}
               onChange={(e) => setData({ ...data, gaMeasurementId: e.target.value })}
             />
           </div>
 
-          <div className="ff-shape-container p-6 bg-[var(--background)] border border-[var(--border)]">
+          <div className="ff-shape-container p-6 bg-[#F7F7F5] border border-[#CCCCCC]">
             <div className="flex items-center gap-3 mb-4">
               <Globe size={18} className="text-blue-600" />
-              <h3 className="font-display text-sm font-bold text-[var(--foreground)]">Google Tag Manager</h3>
+              <h3 className="font-display text-sm font-bold text-[#333333]">Google Tag Manager</h3>
             </div>
             <FFInput
               label="GTM Container ID"
               placeholder="GTM-XXXXXXX"
+              className="bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]"
               value={data.gtmId}
               onChange={(e) => setData({ ...data, gtmId: e.target.value })}
             />
           </div>
 
-          <div className="ff-shape-container p-6 bg-[var(--background)] border border-[var(--border)]">
+          <div className="ff-shape-container p-6 bg-[#F7F7F5] border border-[#CCCCCC]">
             <div className="flex items-center gap-3 mb-4">
               <Share2 size={18} className="text-blue-500" />
-              <h3 className="font-display text-sm font-bold text-[var(--foreground)]">Meta Pixel</h3>
+              <h3 className="font-display text-sm font-bold text-[#333333]">Meta Pixel</h3>
             </div>
             <FFInput
               label="Pixel ID"
               placeholder="1234567890..."
+              className="bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]"
               value={data.pixelId}
               onChange={(e) => setData({ ...data, pixelId: e.target.value })}
             />
@@ -223,37 +229,39 @@ export function IntegrationForm({ initialData }: { initialData: IntegrationsData
 
       {/* ── SECTION: PAZARLAMA & E-POSTA ───────────────────────────────────── */}
       <section className="space-y-6">
-        <header className="flex items-center gap-3 pb-2 border-b border-[var(--border)]">
+        <header className="flex items-center gap-3 pb-2 border-b border-[#CCCCCC]">
           <Mail size={20} className="text-orange-500" />
-          <h2 className="font-display text-xl font-bold text-[var(--foreground)]">Pazarlama & E-Posta</h2>
+          <h2 className="font-display text-xl font-bold text-[#333333]">Pazarlama & E-Posta</h2>
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="ff-shape-container p-6 bg-[var(--background)] border border-[var(--border)]">
+          <div className="ff-shape-container p-6 bg-[#F7F7F5] border border-[#CCCCCC]">
             <div className="flex items-center gap-3 mb-4">
               <Mail size={18} className="text-green-500" />
-              <h3 className="font-display text-sm font-bold text-[var(--foreground)]">Resend</h3>
+              <h3 className="font-display text-sm font-bold text-[#333333]">Resend</h3>
               {data.resendApiKey && <CheckCircle2 size={14} className="ml-auto text-green-500" />}
             </div>
             <FFInput
               label="Resend API Key"
               type="password"
               placeholder="re_..."
+              className="bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]"
               value={data.resendApiKey}
               onChange={(e) => setData({ ...data, resendApiKey: e.target.value })}
               hint="Sistem e-postaları için ana sağlayıcı."
             />
           </div>
 
-          <div className="ff-shape-container p-6 bg-[var(--background)] border border-[var(--border)]">
+          <div className="ff-shape-container p-6 bg-[#F7F7F5] border border-[#CCCCCC]">
             <div className="flex items-center gap-3 mb-4">
-              <Share2 size={18} className="text-[var(--ff-purple)]" />
-              <h3 className="font-display text-sm font-bold text-[var(--foreground)]">Mailchimp</h3>
+              <Share2 size={18} className="text-[#333333]" />
+              <h3 className="font-display text-sm font-bold text-[#333333]">Mailchimp</h3>
             </div>
             <FFInput
               label="Mailchimp API Key"
               type="password"
               placeholder="API Key"
+              className="bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]"
               value={data.mailchimpKey}
               onChange={(e) => setData({ ...data, mailchimpKey: e.target.value })}
               hint="Bülten ve kampanya yönetimi için."
@@ -263,8 +271,8 @@ export function IntegrationForm({ initialData }: { initialData: IntegrationsData
       </section>
 
       {/* ── Footer Actions ───────────────────── */}
-      <div className="ff-shape-container sticky bottom-4 z-20 flex items-center justify-end gap-4 p-4 bg-[var(--background)]/80 backdrop-blur-md border border-[var(--border)] shadow-xl">
-        <p className="mr-auto text-[11px] text-[var(--foreground-muted)] hidden md:block italic">
+      <div className="ff-shape-container sticky bottom-4 z-20 flex items-center justify-end gap-4 p-4 bg-[#F7F7F5]/80 backdrop-blur-md border border-[#CCCCCC]">
+        <p className="mr-auto text-[11px] text-[#666666] hidden md:block italic">
           * Değişiklikleri kaydetmeyi unutmayın.
         </p>
         <FFButton

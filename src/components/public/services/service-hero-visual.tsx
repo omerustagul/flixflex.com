@@ -34,9 +34,9 @@ export function ServiceHeroVisual({ slug, index }: ServiceHeroVisualProps) {
           className="absolute inset-0"
           animate={{
             boxShadow: [
-              "inset 0 0 0px rgba(161,52,255,0)",
-              "inset 0 0 40px rgba(161,52,255,0.15)",
-              "inset 0 0 0px rgba(161,52,255,0)",
+              "inset 0 0 0px rgba(255, 79, 216,0)",
+              "inset 0 0 40px rgba(255, 79, 216,0.15)",
+              "inset 0 0 0px rgba(255, 79, 216,0)",
             ],
           }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -51,9 +51,9 @@ export function ServiceHeroVisual({ slug, index }: ServiceHeroVisualProps) {
           )}
           animate={{
             boxShadow: [
-              "0 0 0px rgba(161,52,255,0)",
-              "0 0 30px rgba(161,52,255,0.35)",
-              "0 0 0px rgba(161,52,255,0)",
+              "0 0 0px rgba(255, 79, 216,0)",
+              "0 0 30px rgba(255, 79, 216,0.35)",
+              "0 0 0px rgba(255, 79, 216,0)",
             ],
           }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
@@ -83,8 +83,8 @@ export function ServiceHeroVisual({ slug, index }: ServiceHeroVisualProps) {
             aria-hidden
             className={`absolute w-4 h-4 ${pos}`}
             style={{
-              borderTop: "1px solid rgba(161,52,255,0.4)",
-              borderLeft: "1px solid rgba(161,52,255,0.4)",
+              borderTop: "1px solid rgba(255, 79, 216,0.4)",
+              borderLeft: "1px solid rgba(255, 79, 216,0.4)",
             }}
           />
         ))}

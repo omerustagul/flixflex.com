@@ -172,7 +172,7 @@ function DragGhost({ section }: { section: SectionBlock }) {
       className={cn(
         "flex items-center gap-2 px-3 py-3",
         "border border-[#ff4fd8] bg-[#ff4fd8]/0.12]",
-        "shadow-[0_8px_32px_rgba(161,52,255,0.25)]",
+        "shadow-[0_8px_32px_rgba(255, 79, 216,0.25)]",
         "w-72 opacity-90"
       )}
     >

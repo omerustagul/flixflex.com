@@ -60,7 +60,7 @@ export function LoadingScreen() {
             className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                "radial-gradient(circle at center, rgba(161,52,255,0.22) 0%, transparent 60%)",
+                "radial-gradient(circle at center, rgba(255, 79, 216,0.22) 0%, transparent 60%)",
               filter: "blur(40px)",
             }}
           />

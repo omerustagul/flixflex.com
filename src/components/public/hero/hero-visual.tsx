@@ -18,7 +18,7 @@ export function HeroVisual({ className }: { className?: string }) {
     >
       {/* Outer rotating frame */}
       <motion.div
-        className="ff-shape-container absolute inset-0 border border-[rgba(161,52,255,0.25)]"
+        className="ff-shape-container absolute inset-0 border border-[rgba(255, 79, 216,0.25)]"
         initial={{ rotate: 0, opacity: 0 }}
         animate={{ rotate: 8, opacity: 1 }}
         transition={{ duration: 1.2, delay: 0.6 }}
@@ -40,7 +40,7 @@ export function HeroVisual({ className }: { className?: string }) {
         className={cn(
           "ff-shape-container absolute inset-8 bg-[var(--surface-elevated)]",
           "border border-[var(--border)]",
-          "shadow-[0_25px_80px_-20px_rgba(161,52,255,0.35)]",
+          "shadow-[0_25px_80px_-20px_rgba(255, 79, 216,0.35)]",
           "flex flex-col"
         )}
       >
@@ -136,7 +136,7 @@ export function HeroVisual({ className }: { className?: string }) {
         className={cn(
           "ff-shape-container absolute -top-3 -right-3 z-10",
           "px-3 py-2 bg-[var(--ff-purple)] text-white",
-          "shadow-[0_10px_30px_rgba(161,52,255,0.4)]",
+          "shadow-[0_10px_30px_rgba(255, 79, 216,0.4)]",
           "flex items-center gap-1.5"
         )}
       >

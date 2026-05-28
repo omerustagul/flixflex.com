@@ -195,7 +195,7 @@ export function StorySection() {
               className="absolute -bottom-8 -right-8 w-32 h-32 pointer-events-none opacity-60"
               style={{
                 background:
-                  "radial-gradient(circle at 100% 100%, rgba(161,52,255,0.2) 0%, transparent 70%)",
+                  "radial-gradient(circle at 100% 100%, rgba(255, 79, 216,0.2) 0%, transparent 70%)",
               }}
             />
           </motion.div>

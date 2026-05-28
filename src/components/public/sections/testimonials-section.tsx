@@ -85,7 +85,7 @@ export function TestimonialsSection() {
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[56rem] h-[56rem] pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse, rgba(161,52,255,0.1) 0%, transparent 65%)",
+            "radial-gradient(ellipse, rgba(255, 79, 216,0.1) 0%, transparent 65%)",
           filter: "blur(60px)",
         }}
       />
@@ -96,7 +96,7 @@ export function TestimonialsSection() {
         className="absolute -top-20 right-0 w-[32rem] h-[32rem] pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle, rgba(161,52,255,0.08) 0%, transparent 60%)",
+            "radial-gradient(circle, rgba(255, 79, 216,0.08) 0%, transparent 60%)",
           filter: "blur(48px)",
         }}
       />

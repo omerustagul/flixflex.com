@@ -11,7 +11,7 @@ function ContactDecor() {
     <div aria-hidden className="relative h-48 w-full mt-8 overflow-hidden">
       {/* Outer border box */}
       <motion.div
-        className="ff-shape-container absolute inset-4 border border-[rgba(161,52,255,0.22)]"
+        className="ff-shape-container absolute inset-4 border border-[rgba(255, 79, 216,0.22)]"
         initial={{ rotate: 0, opacity: 0 }}
         animate={{ rotate: 6, opacity: 1 }}
         transition={{ duration: 1.0, delay: 0.5 }}
@@ -32,7 +32,7 @@ function ContactDecor() {
           "ff-shape-container absolute inset-12 bg-[var(--surface-elevated)]",
           "border border-[var(--border)]",
           "flex flex-col items-center justify-center gap-2",
-          "shadow-[0_16px_48px_-12px_rgba(161,52,255,0.25)]"
+          "shadow-[0_16px_48px_-12px_rgba(255, 79, 216,0.25)]"
         )}
       >
         {/* Pulsing dot + label */}
@@ -62,7 +62,7 @@ function ContactDecor() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(161,52,255,0.08) 0%, transparent 70%)",
+            "radial-gradient(ellipse at center, rgba(255, 79, 216,0.08) 0%, transparent 70%)",
         }}
       />
     </div>
@@ -186,7 +186,7 @@ export function ContactInfo() {
         variants={fadeInUp}
         className={cn(
           "ff-shape-container flex items-center h-fit gap-3 px-4 py-2 mb-8",
-          "border-l-2 border-l-[var(--ff-purple)] bg-[rgba(161,52,255,0.06)]",
+          "border-l-2 border-l-[var(--ff-purple)] bg-[rgba(255, 79, 216,0.06)]",
           "border border-[var(--ff-purple)]/18"
         )}
       >

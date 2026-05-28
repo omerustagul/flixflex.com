@@ -135,7 +135,7 @@ function ServiceCard({ item }: { item: ServiceCardItem }) {
       <div className="absolute inset-x-0 top-0 h-px bg-[#ff4fd8] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
       <div className="flex items-start justify-between gap-3">
-        <div className="ff-shape-button w-10 h-10 flex items-center justify-center shrink-0" style={{ background: "rgba(161,52,255,0.1)" }}>
+        <div className="ff-shape-button w-10 h-10 flex items-center justify-center shrink-0" style={{ background: "rgba(255, 79, 216,0.1)" }}>
           <Icon size={18} className="text-[#ff4fd8]" />
         </div>
         <div className="flex items-center gap-1.5">

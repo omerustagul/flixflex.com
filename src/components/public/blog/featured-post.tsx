@@ -15,8 +15,8 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
         "group relative w-full overflow-hidden",
         "border border-[var(--border)]",
         "transition-[border-color,box-shadow] duration-300",
-        "hover:border-[rgba(161,52,255,0.5)]",
-        "hover:shadow-[0_12px_60px_rgba(161,52,255,0.12)]"
+        "hover:border-[rgba(255, 79, 216,0.5)]",
+        "hover:shadow-[0_12px_60px_rgba(255, 79, 216,0.12)]"
       )}
     >
       {/* Full-width gradient background */}
@@ -112,7 +112,7 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
                 "px-6 py-3 text-sm font-medium",
                 "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
                 "hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)]",
-                "hover:shadow-[0_4px_24px_rgba(161,52,255,0.5)]",
+                "hover:shadow-[0_4px_24px_rgba(255, 79, 216,0.5)]",
                 "transition-all duration-200 self-start sm:self-auto"
               )}
             >

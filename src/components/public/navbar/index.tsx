@@ -78,7 +78,7 @@ export function FlixFlexNavbar({ siteSettings = {} }: FlixFlexNavbarProps) {
                   "group hidden md:inline-flex items-center justify-center gap-1.5 cursor-pointer",
                   "px-4 py-2 text-[11px] font-medium transition-all duration-300",
                   scrolled
-                    ? "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)] hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)] hover:shadow-[0_4px_20px_rgba(161,52,255,0.4)]"
+                    ? "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)] hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)] hover:shadow-[0_4px_20px_rgba(255, 79, 216,0.4)]"
                     : "bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 hover:border-white/40"
                 )}
               >

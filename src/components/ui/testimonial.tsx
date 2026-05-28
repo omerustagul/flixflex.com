@@ -151,7 +151,7 @@ export function TestimonialCarousel({
                 "h-0.5 transition-all duration-300",
                 i === current
                   ? "w-8 bg-[var(--ff-charcoal)]"
-                  : "w-4 bg-[var(--border)] hover:bg-[rgba(161,52,255,0.4)]"
+                  : "w-4 bg-[var(--border)] hover:bg-[rgba(255, 79, 216,0.4)]"
               )}
               aria-label={`${i + 1}. referans`}
             />

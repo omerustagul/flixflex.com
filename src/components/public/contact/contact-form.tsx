@@ -311,7 +311,7 @@ export function ContactForm() {
                 "block w-[18px] h-[18px] border border-[var(--border)]",
                 "bg-[var(--surface)] transition-colors duration-150",
                 "peer-checked:bg-[var(--ff-purple)] peer-checked:border-[var(--ff-purple)]",
-                "peer-focus-visible:shadow-[0_0_0_3px_rgba(161,52,255,0.2)]",
+                "peer-focus-visible:shadow-[0_0_0_3px_rgba(255, 79, 216,0.2)]",
                 "group-hover:border-[var(--ff-purple)]",
                 errors.consent && "border-red-500"
               )}
@@ -365,7 +365,7 @@ export function ContactForm() {
             "px-8 py-4 text-[13px] font-medium",
             "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
             "hover:bg-[var(--ff-purple)] hover:border-[var(--ff-purple)]",
-            "hover:shadow-[0_4px_32px_rgba(161,52,255,0.5)]",
+            "hover:shadow-[0_4px_32px_rgba(255, 79, 216,0.5)]",
             "transition-all duration-200",
             "disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none"
           )}

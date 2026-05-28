@@ -33,7 +33,7 @@ export default async function UserDetailPage({ params }: Props) {
   if (!prisma) {
     return (
       <div className="px-6 md:px-10 py-8">
-        <p className="text-sm text-[var(--foreground-muted)]">
+        <p className="text-sm text-[#888888]">
           Veritabanı bağlantısı kurulamadı.
         </p>
       </div>
@@ -71,7 +71,7 @@ export default async function UserDetailPage({ params }: Props) {
       {/* Back link */}
       <Link
         href="/admin/kullanicilar"
-        className="ff-shape-button inline-flex items-center gap-1.5 text-sm text-[var(--foreground-muted)] hover:text-[var(--foreground)] transition-colors"
+        className="ff-shape-button inline-flex items-center gap-1.5 text-sm text-[#888888] hover:text-[#333333] transition-colors"
       >
         <ChevronLeft className="w-4 h-4" />
         Kullanıcılara Dön
@@ -82,20 +82,20 @@ export default async function UserDetailPage({ params }: Props) {
         <div className="flex items-center gap-4">
           {/* Avatar */}
           <div
-            className="w-12 h-12 flex items-center justify-center text-sm font-bold text-white flex-shrink-0"
-            style={{ background: "var(--ff-purple)" }}
+            className="ff-shape-button w-12 h-12 flex items-center justify-center text-sm font-bold text-white flex-shrink-0"
+            style={{ background: "#FF4FD8" }}
           >
             {initials}
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="font-display text-2xl font-bold text-[var(--foreground)]">
+              <h1 className="font-display text-xl font-bold text-[#333333] truncate">
                 {user.name ?? user.email}
               </h1>
               {isSelf && <FFBadge variant="purple">Siz</FFBadge>}
               {!user.isActive && <FFBadge variant="error">Pasif</FFBadge>}
             </div>
-            <p className="text-sm text-[var(--foreground-muted)] mt-0.5">{user.email}</p>
+            <p className="text-xs text-[#888888] mt-0.5">{user.email}</p>
           </div>
         </div>
 
@@ -111,10 +111,10 @@ export default async function UserDetailPage({ params }: Props) {
         <div className="xl:col-span-2 space-y-6">
           {/* Edit form */}
           <section className="space-y-3">
-            <h2 className="text-xs font-semibold text-[var(--foreground-muted)]">
+            <h2 className="text-xs font-semibold text-[#888888]">
               Bilgileri Düzenle
             </h2>
-            <FFContainer border="subtle" padding="lg">
+            <FFContainer className="bg-[#f7f7f5] border border-[#CCCCCC]" border="subtle" padding="lg">
               <UserForm
                 roles={roles}
                 initial={{
@@ -130,10 +130,10 @@ export default async function UserDetailPage({ params }: Props) {
 
           {/* Password section */}
           <section className="space-y-3">
-            <h2 className="text-xs font-semibold text-[var(--foreground-muted)]">
+            <h2 className="text-xs font-semibold text-[#888888]">
               Şifre Değiştir
             </h2>
-            <FFContainer border="subtle" padding="lg">
+            <FFContainer className="bg-[#f7f7f5] border border-[#CCCCCC]" border="subtle" padding="lg">
               <ChangePasswordForm userId={user.id} />
             </FFContainer>
           </section>
@@ -143,19 +143,19 @@ export default async function UserDetailPage({ params }: Props) {
         <div className="space-y-6">
           {/* Meta info */}
           <section className="space-y-3">
-            <h2 className="text-xs font-semibold text-[var(--foreground-muted)]">
+            <h2 className="text-xs font-semibold text-[#888888]">
               Hesap Bilgileri
             </h2>
-            <FFContainer border="subtle" padding="md">
+            <FFContainer className="bg-[#f7f7f5] border border-[#CCCCCC]" border="subtle" padding="md">
               <dl className="space-y-3">
                 <div>
-                  <dt className="text-[10px] font-semibold text-[var(--foreground-muted)]">Rol</dt>
+                  <dt className="text-[10px] font-semibold text-[#888888]">Rol</dt>
                   <dd className="mt-1">
                     <FFBadge variant="outline">{user.role.name}</FFBadge>
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-[10px] font-semibold text-[var(--foreground-muted)]">Durum</dt>
+                  <dt className="text-[10px] font-semibold text-[#888888]">Durum</dt>
                   <dd className="mt-1">
                     <FFBadge variant={user.isActive ? "success" : "error"}>
                       {user.isActive ? "Aktif" : "Pasif"}
@@ -163,8 +163,8 @@ export default async function UserDetailPage({ params }: Props) {
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-[10px] font-semibold text-[var(--foreground-muted)]">Son Giriş</dt>
-                  <dd className="mt-1 text-sm text-[var(--foreground-muted)]">
+                  <dt className="text-[10px] font-semibold text-[#888888]">Son Giriş</dt>
+                  <dd className="mt-1 text-sm text-[#888888]">
                     {user.lastLogin ? (
                       <span title={formatDate(user.lastLogin)}>
                         {formatRelativeTime(user.lastLogin)}
@@ -175,8 +175,8 @@ export default async function UserDetailPage({ params }: Props) {
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-[10px] font-semibold text-[var(--foreground-muted)]">Kayıt Tarihi</dt>
-                  <dd className="mt-1 text-sm text-[var(--foreground-muted)]">
+                  <dt className="text-[10px] font-semibold text-[#888888]">Kayıt Tarihi</dt>
+                  <dd className="mt-1 text-sm text-[#888888]">
                     {formatDate(user.createdAt)}
                   </dd>
                 </div>
@@ -186,15 +186,15 @@ export default async function UserDetailPage({ params }: Props) {
 
           {/* Audit log */}
           <section className="space-y-3">
-            <h2 className="text-xs font-semibold text-[var(--foreground-muted)] flex items-center gap-2">
+            <h2 className="text-xs font-semibold text-[#888888] flex items-center gap-2">
               <Activity className="w-3.5 h-3.5" />
               Son Aktiviteler
             </h2>
-            <FFContainer border="subtle" padding="none">
+            <FFContainer className="bg-[#f7f7f5] border border-[#CCCCCC]" border="subtle" padding="none">
               {auditLogs.length === 0 ? (
                 <div className="px-5 py-8 text-center">
-                  <Clock className="w-6 h-6 text-[var(--foreground-faint)] mx-auto mb-2" />
-                  <p className="text-xs text-[var(--foreground-faint)]">
+                  <Clock className="w-6 h-6 text-[#888888] mx-auto mb-2" />
+                  <p className="text-xs text-[#888888]">
                     Aktivite kaydı bulunamadı
                   </p>
                 </div>
@@ -202,12 +202,12 @@ export default async function UserDetailPage({ params }: Props) {
                 <ul className="divide-y divide-[var(--border)]">
                   {auditLogs.map((log: { id: string; action: string; createdAt: Date }) => (
                     <li key={log.id} className="px-5 py-3 flex items-start gap-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--ff-purple)] mt-1.5 flex-shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#FF4FD8] mt-1.5 flex-shrink-0" />
                       <div className="min-w-0">
-                        <p className="text-xs font-medium text-[var(--foreground)] truncate">
+                        <p className="text-xs font-medium text-[#888888] truncate">
                           {log.action}
                         </p>
-                        <p className="text-[10px] text-[var(--foreground-faint)] mt-0.5">
+                        <p className="text-[10px] text-[#888888] mt-0.5">
                           {formatRelativeTime(log.createdAt)}
                         </p>
                       </div>

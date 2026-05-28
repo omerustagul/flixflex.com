@@ -72,7 +72,7 @@ export function AppointmentCardSection({
                 "px-8 py-4 text-[13px] font-semibold cursor-pointer",
                 "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
                 "hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)]",
-                "hover:shadow-[0_4px_24px_rgba(161,52,255,0.4)]",
+                "hover:shadow-[0_4px_24px_rgba(255, 79, 216,0.4)]",
                 "transition-all duration-200 whitespace-nowrap"
               )}
             >

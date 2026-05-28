@@ -290,7 +290,7 @@ export default function MediaPage() {
   const sortedFolders = sortItems(folders)
 
   return (
-    <div className="p-6 md:p-10 py-8 mx-auto max-w-[1600px]">
+    <div className="p-6 md:p-10 py-8 mx-auto">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
         <div>

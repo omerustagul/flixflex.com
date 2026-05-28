@@ -56,9 +56,9 @@ export default async function AIDashboardPage() {
       <section
         className={cn(
           "ff-shape-container relative overflow-hidden",
-          "bg-gradient-to-br from-[#ff4fd8]/10 via-[#ff4fd8]/30 to-[#ff4fd8]/50",
-          "border border-[rgba(161,52,255,0.35)]",
-          "p-8 md:p-12"
+          "bg-gradient-to-br from-[#ff4fd8]/30 via-[#ff4fd8]/10 to-[#ff4fd8]/3",
+          "border border-[#FF4FD8]/10",
+          "p-4 md:p-6"
         )}
       >
         <div
@@ -84,7 +84,7 @@ export default async function AIDashboardPage() {
           </p>
 
           {/* Key status pill */}
-          <div className="ff-shape-button mt-6 inline-flex items-center gap-2 px-3 py-1.5 border border-[var(--border)] bg-[var(--surface)]">
+          <div className="ff-shape-button mt-6 inline-flex items-center gap-2 px-3 py-1.5 border border-[#cccccc] bg-[#f0f0f0] text-[12px]">
             <KeyRound size={13} className={keyConfigured ? "text-green-500" : "text-yellow-500"} />
             <span className="text-[12px] font-medium text-[#888888]">
               ANTHROPIC_API_KEY:
@@ -169,12 +169,12 @@ interface StatCardProps {
 }
 function StatCard({ icon: Icon, label, value, hint }: StatCardProps) {
   return (
-    <div className="ff-shape-container bg-[#ff4fd8]/10 border border-[#ff4fd8]/30 p-5">
+    <div className="ff-shape-container bg-[#F0F0F0] hover:bg-[#ff4fd8]/20 hover:border-[#ff4fd8]/50 border border-[#cccccc] p-5">
       <div className="flex items-center justify-between mb-3">
         <span className="text-[11px] font-semibold text-[#0d0d0d]">
           {label}
         </span>
-        <div className="w-8 h-8 flex items-center justify-center bg-[#ff4fd8]/10">
+        <div className="ff-shape-button w-8 h-8 flex items-center justify-center">
           <Icon size={15} className="text-[#ff4fd8]" />
         </div>
       </div>
@@ -200,8 +200,8 @@ function QuickAction({ href, icon: Icon, title, desc, primary }: QuickActionProp
       className={cn(
         "ff-shape-container group block p-5 border transition-all duration-200",
         primary
-          ? "bg-[#ff4fd8]/10 border-[#ff4fd8]/30 hover:bg-[#ff4fd8]/20 hover:border-[#ff4fd8]/50"
-          : "bg-[#ff4fd8]/10 border-[#ff4fd8]/30 hover:bg-[#ff4fd8]/20 hover:border-[#ff4fd8]/50"
+          ? "bg-[#F0F0F0] border-[#CCCCCC] hover:bg-[#ff4fd8]/20 hover:border-[#ff4fd8]/50"
+          : "bg-[#F0F0F0] border-[#CCCCCC] hover:bg-[#ff4fd8]/20 hover:border-[#ff4fd8]/50"
       )}
     >
       <div className="flex items-center justify-between mb-3">

@@ -96,7 +96,7 @@ function Card({ item, index }: { item: PortfolioItem; index: number }) {
       href={`/portfolio/${item.slug}`}
       className={cn(
         "group relative flex-shrink-0 w-[280px] md:w-[320px] aspect-[3/4]",
-        "ff-shape-container shadow-lg cursor-pointer select-none",
+        "ff-shape-container border border-[var(--border)]/40 cursor-pointer select-none",
         "snap-center transition-all duration-300 hover:shadow-xl"
       )}
     >
@@ -109,7 +109,7 @@ function Card({ item, index }: { item: PortfolioItem; index: number }) {
           loading="lazy"
         />
         {/* Dark contrast gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-transparent transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-transparent transition-opacity duration-300" />
       </div>
 
       {/* Card Content / Metadata */}

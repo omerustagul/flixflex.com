@@ -41,7 +41,7 @@ export function FlixFlexFooter({ siteSettings = {} }: { siteSettings?: Record<st
           className="absolute -top-32 left-1/3 w-[40rem] h-[40rem] rounded-full pointer-events-none"
           style={{
             background:
-              "radial-gradient(circle, rgba(161,52,255,0.18) 0%, transparent 60%)",
+              "radial-gradient(circle, rgba(255, 79, 216,0.18) 0%, transparent 60%)",
             filter: "blur(40px)",
           }}
         />
@@ -74,7 +74,7 @@ export function FlixFlexFooter({ siteSettings = {} }: { siteSettings?: Record<st
                 "px-10 py-5 text-[15px] font-medium",
                 "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
                 "hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)]",
-                "hover:shadow-[0_4px_24px_rgba(161,52,255,0.4)]",
+                "hover:shadow-[0_4px_24px_rgba(255, 79, 216,0.4)]",
                 "transition-all duration-200 whitespace-nowrap shrink-0"
               )}
             >

@@ -15,7 +15,7 @@ export default function NotFound() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(161,52,255,0.18) 0%, transparent 60%)",
+            "radial-gradient(ellipse at center, rgba(255, 79, 216,0.18) 0%, transparent 60%)",
           filter: "blur(60px)",
         }}
       />
@@ -56,7 +56,7 @@ export default function NotFound() {
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href="/"
-            className="ff-shape-button group inline-flex items-center justify-center h-9 gap-2.5 px-3 text-xs font-medium bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)] hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)] hover:shadow-[0_4px_24px_rgba(161,52,255,0.45)] transition-all duration-200"
+            className="ff-shape-button group inline-flex items-center justify-center h-9 gap-2.5 px-3 text-xs font-medium bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)] hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)] hover:shadow-[0_4px_24px_rgba(255, 79, 216,0.45)] transition-all duration-200"
           >
             <Home size={14} />
             Ana Sayfaya Dön

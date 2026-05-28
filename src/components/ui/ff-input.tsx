@@ -50,7 +50,7 @@ const FFInput = React.forwardRef<HTMLInputElement, FFInputProps>(
               "placeholder:text-[var(--foreground-faint)]",
               "py-3 border outline-none rounded-none",
               "transition-all duration-150",
-              "focus:shadow-[0_0_0_3px_rgba(161,52,255,0.12)]",
+              "focus:shadow-[0_0_0_3px_rgba(255, 79, 216,0.12)]",
               error && "border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(220,38,38,0.1)]",
               variantClasses[variant],
               leftIcon ? "pl-10" : "pl-4",

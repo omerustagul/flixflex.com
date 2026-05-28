@@ -129,10 +129,10 @@ export const pageEnter: Variants = {
 
 // ── Card Hover ────────────────────────────────────
 export const cardHover = {
-  rest:  { scale: 1, boxShadow: "0 0 0px rgba(161,52,255,0)" },
+  rest:  { scale: 1, boxShadow: "0 0 0px rgba(255, 79, 216,0)" },
   hover: {
     scale: 1.01,
-    boxShadow: "0 8px 40px rgba(161,52,255,0.15)",
+    boxShadow: "0 8px 40px rgba(255, 79, 216,0.15)",
     transition: { duration: 0.25, ease: ease.smooth },
   },
 }
@@ -141,9 +141,9 @@ export const cardHover = {
 export const purpleGlowPulse = {
   animate: {
     boxShadow: [
-      "0 0 0px rgba(161,52,255,0)",
-      "0 0 30px rgba(161,52,255,0.4)",
-      "0 0 0px rgba(161,52,255,0)",
+      "0 0 0px rgba(255, 79, 216,0)",
+      "0 0 30px rgba(255, 79, 216,0.4)",
+      "0 0 0px rgba(255, 79, 216,0)",
     ],
     transition: { duration: 2.5, repeat: Infinity, ease: "easeInOut" },
   },

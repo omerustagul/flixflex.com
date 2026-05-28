@@ -145,7 +145,7 @@ export function AdminTopbar({ user }: AdminTopbarProps) {
                 {/* AI Assistant Suggestion */}
                 <div className="p-4 border-b border-[#E0E0E0] hover:bg-[#F7F7F5] transition-colors cursor-pointer group">
                   <div className="flex gap-3">
-                    <div className="w-8 h-8 rounded-full bg-[rgba(161,52,255,0.1)] flex items-center justify-center shrink-0 border border-[rgba(161,52,255,0.2)]">
+                    <div className="w-8 h-8 rounded-full bg-[rgba(255, 79, 216,0.1)] flex items-center justify-center shrink-0 border border-[rgba(255, 79, 216,0.2)]">
                       <Search size={14} className="text-[#ff4fd8]" />
                     </div>
                     <div className="space-y-1">

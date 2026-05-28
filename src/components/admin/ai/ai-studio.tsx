@@ -378,7 +378,7 @@ function ProgressStrip({ current }: { current: StepId }) {
               className={cn(
                 "w-7 h-7 flex items-center justify-center text-[11px] font-bold font-display",
                 active && "bg-[var(--ff-purple)] text-white",
-                done && "bg-[rgba(161,52,255,0.2)] text-[var(--ff-purple)] border border-[var(--ff-purple)]",
+                done && "bg-[rgba(255, 79, 216, 0.2)] text-[var(--ff-purple)] border border-[var(--ff-purple)]",
                 !active && !done && "bg-[var(--surface)] text-[var(--foreground-faint)] border border-[var(--border)]"
               )}
             >
@@ -431,7 +431,7 @@ function Step1Topic({
             "w-full bg-[var(--surface)] border border-[var(--border)]",
             "px-4 py-3 text-[15px] text-[var(--foreground)] resize-y",
             "placeholder:text-[var(--foreground-faint)] outline-none",
-            "focus:border-[var(--ff-purple)] focus:shadow-[0_0_0_3px_rgba(161,52,255,0.12)]"
+            "focus:border-[var(--ff-purple)] focus:shadow-[0_0_0_3px_rgba(255, 79, 216, 0.12)]"
           )}
         />
         <p className="text-[11px] text-[var(--foreground-faint)]">
@@ -518,7 +518,7 @@ function Step2Title({
                 className={cn(
                   "w-full text-left p-4 flex items-start gap-3 border transition-all",
                   active
-                    ? "bg-[rgba(161,52,255,0.08)] border-[var(--ff-purple)]"
+                    ? "bg-[rgba(255, 79, 216, 0.08)] border-[var(--ff-purple)]"
                     : "bg-[var(--surface)] border-[var(--border)] hover:border-[var(--ff-purple)]"
                 )}
               >
@@ -564,7 +564,7 @@ function Step2Title({
             "w-full bg-[var(--surface)] border border-[var(--border)]",
             "px-4 py-3 text-[15px] text-[var(--foreground)] outline-none",
             "placeholder:text-[var(--foreground-faint)]",
-            "focus:border-[var(--ff-purple)] focus:shadow-[0_0_0_3px_rgba(161,52,255,0.12)]",
+            "focus:border-[var(--ff-purple)] focus:shadow-[0_0_0_3px_rgba(255, 79, 216, 0.12)]",
             titleMode === "custom" && custom.length > 0 && "border-[var(--ff-purple)]"
           )}
         />
@@ -1034,7 +1034,7 @@ function Step6Publish({
                   className={cn(
                     "w-full text-left p-3 border transition-colors",
                     active
-                      ? "bg-[rgba(161,52,255,0.08)] border-[var(--ff-purple)]"
+                      ? "bg-[rgba(255, 79, 216, 0.08)] border-[var(--ff-purple)]"
                       : "bg-[var(--surface-elevated)] border-[var(--border)] hover:border-[var(--ff-purple)]"
                   )}
                 >

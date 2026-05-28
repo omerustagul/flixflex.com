@@ -76,7 +76,7 @@ export function PortfolioHero({
         className="absolute -top-32 -left-32 w-[40rem] h-[32rem] pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse, rgba(161,52,255,0.14) 0%, transparent 65%)",
+            "radial-gradient(ellipse, rgba(255, 79, 216,0.14) 0%, transparent 65%)",
           filter: "blur(60px)",
         }}
       />
@@ -135,7 +135,7 @@ export function PortfolioHero({
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.9, delay: 1.0, ease: ease.entering }}
           style={{ transformOrigin: "left" }}
-          className="mt-16 h-px w-full bg-gradient-to-r from-[var(--ff-purple)] via-[rgba(161,52,255,0.3)] to-transparent"
+          className="mt-16 h-px w-full bg-gradient-to-r from-[var(--ff-purple)] via-[rgba(255, 79, 216,0.3)] to-transparent"
         />
       </div>
     </section>

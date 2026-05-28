@@ -89,6 +89,7 @@ export function UserForm({ roles, initial }: UserFormProps) {
       <FFInput
         label="Ad Soyad"
         placeholder="Kullanıcının tam adı"
+        className="bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-sm text-[#333333] placeholder:text-[#999999]"
         error={errors.name?.message}
         disabled={isSubmitting}
         {...register("name")}
@@ -98,6 +99,7 @@ export function UserForm({ roles, initial }: UserFormProps) {
         label="E-posta"
         type="email"
         placeholder="ornek@fliflex.com"
+        className="bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-sm text-[#333333] placeholder:text-[#999999]"
         error={errors.email?.message}
         disabled={isSubmitting}
         {...register("email")}
@@ -105,7 +107,7 @@ export function UserForm({ roles, initial }: UserFormProps) {
 
       {/* Role select */}
       <div className="flex flex-col gap-1.5">
-        <label className="text-[11px] font-semibold tracking-[0.08em] uppercase text-[var(--foreground-muted)]">
+        <label className="text-[11px] font-semibold text-[#888888]">
           Rol
         </label>
         <Controller
@@ -117,6 +119,7 @@ export function UserForm({ roles, initial }: UserFormProps) {
               onValueChange={field.onChange}
               disabled={isSubmitting}
               placeholder="Rol seçin..."
+              triggerClassName="bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-sm text-[#333333]"
               ariaLabel="Rol"
               error={!!errors.roleId}
             >
@@ -141,6 +144,7 @@ export function UserForm({ roles, initial }: UserFormProps) {
           label="Şifre"
           type="password"
           placeholder="En az 8 karakter"
+          className="bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-sm text-[#333333] placeholder:text-[#999999]"
           error={(errors as { password?: { message?: string } }).password?.message}
           disabled={isSubmitting}
           {...register("password" as keyof FormData)}
@@ -152,16 +156,16 @@ export function UserForm({ roles, initial }: UserFormProps) {
           <input
             type="checkbox"
             id="sendInviteEmail"
-            className="w-4 h-4 accent-[var(--ff-purple)]"
+            className="ff-shape-button rounded-full w-4 h-4 accent-[#FF4FD8]"
             {...register("sendInviteEmail" as keyof FormData)}
           />
           <label
             htmlFor="sendInviteEmail"
-            className="text-sm text-[var(--foreground-muted)] flex items-center gap-2 cursor-pointer"
+            className="text-sm text-[#888888] flex items-center gap-2 cursor-pointer"
           >
             <Mail className="w-3.5 h-3.5" />
             Davet e-postası gönder
-            <span className="text-[10px] text-[var(--foreground-faint)] border border-[var(--border)] px-1.5 py-0.5">
+            <span className="text-[10px] text-[#888888] border border-[#CCCCCC] px-1.5 py-0.5">
               yakında
             </span>
           </label>
@@ -177,14 +181,14 @@ export function UserForm({ roles, initial }: UserFormProps) {
       {isEdit && (
         <div className="flex items-center gap-3">
           <input
+            className="ff-shape-button rounded-full w-4 h-4 bg-transparent border border-[#FF4FD8] accent-[#FF4FD8]"
             type="checkbox"
             id="isActive"
-            className="w-4 h-4 accent-[var(--ff-purple)]"
             {...register("isActive" as keyof FormData)}
           />
           <label
             htmlFor="isActive"
-            className="text-sm text-[var(--foreground-muted)] cursor-pointer"
+            className="text-sm text-[#888888] cursor-pointer"
           >
             Hesap aktif
           </label>

@@ -183,7 +183,7 @@ export function ServicesSection({ services }: ServicesSectionProps) {
                         <span className={cn(
                           "ff-shape-container flex items-center justify-center w-10 h-10 shrink-0 transition-all duration-300",
                           isActive
-                            ? "bg-[var(--ff-purple)] text-white shadow-[0_0_20px_rgba(161,52,255,0.3)]"
+                            ? "bg-[var(--ff-purple)] text-white shadow-[0_0_20px_rgba(255, 79, 216,0.3)]"
                             : "bg-[var(--surface-elevated)] text-[var(--foreground-muted)] group-hover:text-[var(--ff-purple)]"
                         )}>
                           {Icon ? <Icon size={16} strokeWidth={2} /> : <span className="text-xs font-mono font-bold">{String(i + 1).padStart(2, "0")}</span>}

@@ -25,7 +25,7 @@ export function ServiceCta({ serviceTitle }: ServiceCtaProps) {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(161,52,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(161,52,255,0.07) 1px, transparent 1px)",
+            "linear-gradient(rgba(255, 79, 216,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 79, 216,0.07) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
         }}
       />
@@ -35,7 +35,7 @@ export function ServiceCta({ serviceTitle }: ServiceCtaProps) {
         aria-hidden
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[48rem] h-[24rem] pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse, rgba(161,52,255,0.2) 0%, transparent 65%)",
+          background: "radial-gradient(ellipse, rgba(255, 79, 216,0.2) 0%, transparent 65%)",
           filter: "blur(64px)",
         }}
       />
@@ -48,8 +48,8 @@ export function ServiceCta({ serviceTitle }: ServiceCtaProps) {
             aria-hidden
             className={`absolute w-5 h-5 ${pos}`}
             style={{
-              borderTop: "1px solid rgba(161,52,255,0.45)",
-              borderLeft: "1px solid rgba(161,52,255,0.45)",
+              borderTop: "1px solid rgba(255, 79, 216,0.45)",
+              borderLeft: "1px solid rgba(255, 79, 216,0.45)",
             }}
           />
         ))}
@@ -99,7 +99,7 @@ export function ServiceCta({ serviceTitle }: ServiceCtaProps) {
                 "px-10 py-5 h-9 text-[15px] font-medium",
                 "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
                 "hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)]",
-                "hover:shadow-[0_4px_32px_rgba(161,52,255,0.5)]",
+                "hover:shadow-[0_4px_32px_rgba(255, 79, 216,0.5)]",
                 "transition-all duration-200"
               )}
             >

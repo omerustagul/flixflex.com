@@ -103,6 +103,7 @@ export function BlogList({ initialPosts }: BlogListProps) {
         </div>
         <div className="flex items-center gap-2">
           <FFButton
+           className="bg-transparent border-[#ff4fd8] text-[#ff4fd8] hover:text-white hover:bg-[#ff4fd8]/90 hover:border-[#ff4fd8]/90"
             variant="outline"
             leftIcon={<Plus size={13} />}
             onClick={() => router.push("/admin/blog/yeni")}
@@ -119,7 +120,7 @@ export function BlogList({ initialPosts }: BlogListProps) {
       </div>
 
       {/* Filters */}
-      <div className="ff-shape-container bg-[var(--surface-elevated)] border border-[var(--border)] p-4 space-y-4">
+      <div className="ff-shape-container bg-[#f7f7f5] border border-[#cccccc] p-4 space-y-4">
         {/* Status pills */}
         <div className="flex items-center justify-between gap-3 flex-wrap">
           <div className="flex items-center gap-1.5">
@@ -133,8 +134,8 @@ export function BlogList({ initialPosts }: BlogListProps) {
                   className={cn(
                     "ff-shape-button px-3 py-1.5 text-[11px] border transition-colors",
                     active
-                      ? "bg-[var(--ff-purple)] text-white border-[var(--ff-purple)]"
-                      : "bg-transparent text-[var(--foreground-muted)] border-[var(--border)] hover:border-[var(--ff-purple)]"
+                      ? "bg-[#ff4fd8] text-white border-[#ff4fd8]"
+                      : "bg-transparent text-[#666666] border-[#cccccc] hover:border-[#ff4fd8]"
                   )}
                 >
                   {f.label}
@@ -144,14 +145,14 @@ export function BlogList({ initialPosts }: BlogListProps) {
           </div>
 
           {/* AI toggle */}
-          <label className="inline-flex items-center gap-2 text-[12px] text-[var(--foreground-muted)] cursor-pointer">
+          <label className="inline-flex items-center gap-2 text-[12px] text-[#666666] cursor-pointer">
             <input
               type="checkbox"
               checked={aiOnly}
               onChange={(e) => setAIOnly(e.target.checked)}
-              className="accent-[var(--ff-purple)]"
+              className="accent-[#ff4fd8]"
             />
-            <Sparkles size={12} className="text-[var(--ff-purple)]" />
+            <Sparkles size={12} className="text-[#ff4fd8]" />
             Sadece AI üretimi
           </label>
         </div>
@@ -175,23 +176,23 @@ export function BlogList({ initialPosts }: BlogListProps) {
 
           <div className="relative flex-1 min-w-[200px]">
             <Search
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--foreground-faint)]"
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-[#666666]"
               size={13}
             />
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Başlık veya slug ara..."
-              className="ff-shape-container w-full h-9 bg-[var(--surface)] border border-[var(--border)] pl-9 pr-3 py-2 text-[13px] text-[var(--foreground)] outline-none focus:border-[var(--ff-purple)]"
+              className="ff-shape-container w-full h-9 bg-[#f7f7f5] border border-[#cccccc] pl-9 pr-3 py-2 text-[13px] text-[#666666] outline-none focus:border-[#ff4fd8]"
             />
           </div>
         </div>
       </div>
 
       {/* Table */}
-      <div className="ff-shape-container bg-[var(--surface-elevated)] border border-[var(--border)] overflow-hidden">
+      <div className="ff-shape-container bg-[#f7f7f5] border border-[#cccccc] overflow-hidden">
         <table className="w-full">
-          <thead className="border-b border-[var(--border)]">
+          <thead className="border-b border-[#cccccc]">
             <tr className="text-left">
               <Th>Başlık</Th>
               <Th>Kategori</Th>
@@ -204,28 +205,28 @@ export function BlogList({ initialPosts }: BlogListProps) {
             {filtered.map((p) => (
               <tr
                 key={p.id}
-                className="border-b border-[var(--border)] last:border-0 hover:bg-[rgba(161,52,255,0.04)] transition-colors"
+                className="border-b border-[#cccccc] last:border-0 hover:bg-[rgba(255, 79, 216,0.04)] transition-colors"
               >
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-2">
                     {p.aiGenerated && (
                       <span title="AI tarafından üretildi">
-                        <Sparkles size={12} className="text-[var(--ff-purple)] shrink-0" />
+                        <Sparkles size={12} className="text-[#ff4fd8] shrink-0" />
                       </span>
                     )}
                     <Link
                       href={`/admin/blog/${p.slug}`}
-                      className="text-[13px] font-medium text-[var(--foreground)] hover:text-[var(--ff-purple)] transition-colors"
+                      className="text-[13px] font-medium text-[#666666] hover:text-[#ff4fd8] transition-colors"
                     >
                       {p.title}
                     </Link>
                   </div>
-                  <p className="text-[11px] font-mono text-[var(--foreground-faint)] mt-0.5">
+                  <p className="text-[11px] font-mono text-[#666666] mt-0.5">
                     /{p.slug}
                   </p>
                 </td>
                 <td className="px-4 py-3">
-                  <span className="text-[11px] uppercase tracking-[0.08em] text-[var(--foreground-muted)]">
+                  <span className="text-[11px] text-[#666666]">
                     {p.category}
                   </span>
                 </td>
@@ -241,7 +242,7 @@ export function BlogList({ initialPosts }: BlogListProps) {
                     {p.status === "published" ? "Yayında" : "Taslak"}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-[11px] text-[var(--foreground-muted)]">
+                <td className="px-4 py-3 text-[11px] text-[#666666]">
                   {formatDate(p.publishedAt)}
                 </td>
                 <td className="px-4 py-3">
@@ -290,7 +291,7 @@ function Th({ children, align = "left" }: { children: React.ReactNode; align?: "
   return (
     <th
       className={cn(
-        "px-4 py-3 text-[10px] uppercase tracking-[0.08em] font-semibold text-[var(--foreground-faint)]",
+        "px-4 py-3 text-[10px] uppercase tracking-[0.08em] font-semibold text-[#666666]",
         align === "right" && "text-right"
       )}
     >
@@ -321,10 +322,10 @@ function IconBtn({
       title={label}
       className={cn(
         "ff-shape-button w-8 h-8 flex items-center justify-center border transition-colors",
-        "bg-[var(--bg-primary)] border-[var(--border)] text-[var(--foreground-muted)]",
+        "bg-[#f7f7f5] border-[#cccccc] text-[#666666]",
         danger
           ? "hover:border-red-500 hover:text-red-500"
-          : "hover:border-[var(--ff-purple)] hover:text-[var(--ff-purple)]",
+          : "hover:border-[#ff4fd8] hover:text-[#ff4fd8]",
         disabled && "opacity-40 cursor-not-allowed"
       )}
     >

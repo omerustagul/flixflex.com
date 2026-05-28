@@ -40,7 +40,7 @@ export function ServicesSection({ services, headline, subheadline }: ServicesSec
         className="absolute top-0 right-0 w-[380px] h-[380px] pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle at 100% 0%, rgba(161,52,255,0.08) 0%, transparent 60%)",
+            "radial-gradient(circle at 100% 0%, rgba(255, 79, 216,0.08) 0%, transparent 60%)",
         }}
       />
 

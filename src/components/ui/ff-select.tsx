@@ -177,7 +177,7 @@ const FFSelectItem = React.forwardRef<
         "px-3 py-2 pr-9 text-sm",
         "outline-none rounded-none",
         "transition-colors duration-100",
-        "data-[highlighted]:bg-[rgba(161,52,255,0.1)] data-[highlighted]:text-[var(--ff-purple)]",
+        "data-[highlighted]:bg-[rgba(255, 79, 216,0.1)] data-[highlighted]:text-[var(--ff-purple)]",
         "data-[state=checked]:text-[var(--ff-purple)] data-[state=checked]:font-medium",
         "data-[disabled]:opacity-40 data-[disabled]:cursor-not-allowed",
         className
@@ -192,7 +192,7 @@ const FFSelectItem = React.forwardRef<
       <span className="flex flex-col gap-0.5 flex-1 min-w-0">
         <RxSelect.ItemText>{children}</RxSelect.ItemText>
         {hint && (
-          <span className="text-[10px] text-[var(--foreground-faint)] uppercase tracking-[0.1em]">
+          <span className="text-[10px] text-[var(--foreground-faint)]">
             {hint}
           </span>
         )}
@@ -215,7 +215,7 @@ const FFSelectLabel = React.forwardRef<
   <RxSelect.Label
     ref={ref}
     className={cn(
-      "px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.15em]",
+      "px-3 py-2 text-[10px] font-semibold",
       "text-[var(--foreground-faint)]",
       className
     )}

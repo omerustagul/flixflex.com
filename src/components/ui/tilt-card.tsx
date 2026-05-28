@@ -36,7 +36,7 @@ const GLASS_CLASSES = [
   "bg-[var(--surface-elevated)] border border-[var(--border)]",
   "transition-[border-color,box-shadow] duration-300",
   "hover:border-[var(--ff-purple)]/40",
-  "hover:shadow-[0_8px_40px_rgba(161,52,255,0.12)]",
+  "hover:shadow-[0_8px_40px_rgba(255, 79, 216,0.12)]",
 ] as const
 
 export function TiltCard({

@@ -40,8 +40,8 @@ function GeometricGrid({ dark }: { dark: boolean }) {
       aria-hidden
       className="absolute inset-0 pointer-events-none"
       style={{
-        backgroundImage: `linear-gradient(${dark ? "rgba(161,52,255,0.07)" : "rgba(161,52,255,0.05)"
-          } 1px, transparent 1px), linear-gradient(90deg, ${dark ? "rgba(161,52,255,0.07)" : "rgba(161,52,255,0.05)"
+        backgroundImage: `linear-gradient(${dark ? "rgba(255, 79, 216,0.07)" : "rgba(255, 79, 216,0.05)"
+          } 1px, transparent 1px), linear-gradient(90deg, ${dark ? "rgba(255, 79, 216,0.07)" : "rgba(255, 79, 216,0.05)"
           } 1px, transparent 1px)`,
         backgroundSize: "48px 48px",
       }}
@@ -58,7 +58,7 @@ function AuraBlobs({ dark }: { dark: boolean }) {
         aria-hidden
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[64rem] h-[32rem] pointer-events-none"
         style={{
-          background: `radial-gradient(ellipse, rgba(161,52,255,${dark ? "0.22" : "0.1"
+          background: `radial-gradient(ellipse, rgba(255, 79, 216,${dark ? "0.22" : "0.1"
             }) 0%, transparent 65%)`,
           filter: "blur(64px)",
         }}
@@ -68,7 +68,7 @@ function AuraBlobs({ dark }: { dark: boolean }) {
         aria-hidden
         className="absolute -bottom-16 -left-16 w-[28rem] h-[28rem] pointer-events-none"
         style={{
-          background: `radial-gradient(circle, rgba(161,52,255,${dark ? "0.14" : "0.06"
+          background: `radial-gradient(circle, rgba(255, 79, 216,${dark ? "0.14" : "0.06"
             }) 0%, transparent 60%)`,
           filter: "blur(48px)",
         }}
@@ -93,8 +93,8 @@ function CornerAccents() {
           aria-hidden
           className={cn("absolute w-5 h-5 pointer-events-none", cls)}
           style={{
-            borderTop: "1px solid rgba(161,52,255,0.45)",
-            borderLeft: "1px solid rgba(161,52,255,0.45)",
+            borderTop: "1px solid rgba(255, 79, 216,0.45)",
+            borderLeft: "1px solid rgba(255, 79, 216,0.45)",
           }}
         />
       ))}
@@ -197,7 +197,7 @@ export function CTASection({
                 "px-10 py-5 h-9 text-[15px] font-medium",
                 "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
                 "hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)]",
-                "hover:shadow-[0_4px_32px_rgba(161,52,255,0.5)]",
+                "hover:shadow-[0_4px_32px_rgba(255, 79, 216,0.5)]",
                 "transition-all duration-200 whitespace-nowrap"
               )}
             >

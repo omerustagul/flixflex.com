@@ -98,7 +98,7 @@ export default async function ServiceDetailPage({
           className="absolute top-0 left-0 w-[600px] h-[400px] pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse at 0% 0%, rgba(161,52,255,0.12) 0%, transparent 60%)",
+              "radial-gradient(ellipse at 0% 0%, rgba(255, 79, 216,0.12) 0%, transparent 60%)",
           }}
         />
 

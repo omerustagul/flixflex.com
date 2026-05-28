@@ -100,10 +100,10 @@ export function ContainerTextScroll({
         }
         className={cn(
           "ff-shape-container relative w-full max-w-4xl mx-auto",
-          "bg-[var(--surface-elevated)] border border-[rgba(161,52,255,0.25)]",
+          "bg-[var(--surface-elevated)] border border-[rgba(255, 79, 216,0.25)]",
           "p-8 md:p-12 lg:p-16",
           // Purple glow border + depth shadow
-          "shadow-[0_0_0_1px_rgba(161,52,255,0.15),0_20px_60px_rgba(161,52,255,0.08),0_40px_80px_rgba(0,0,0,0.3)]",
+          "shadow-[0_0_0_1px_rgba(255, 79, 216,0.15),0_20px_60px_rgba(255, 79, 216,0.08),0_40px_80px_rgba(0,0,0,0.3)]",
         )}
       >
         {/* ── Inner purple glow aura ─────────────────────── */}
@@ -112,7 +112,7 @@ export function ContainerTextScroll({
           className="absolute -inset-1 rounded-[inherit] pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse at center, rgba(161,52,255,0.06) 0%, transparent 70%)",
+              "radial-gradient(ellipse at center, rgba(255, 79, 216,0.06) 0%, transparent 70%)",
           }}
         />
 

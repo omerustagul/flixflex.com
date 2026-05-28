@@ -38,7 +38,7 @@ export function ProjectGallery({ gradient, accentColor, title }: GalleryProps) {
           transition={{ duration: 0.5, delay: i * 0.07, ease: ease.smooth }}
           className={cn(
             "ff-shape-container relative overflow-hidden border border-[var(--border)]",
-            "hover:border-[rgba(161,52,255,0.4)] transition-colors duration-300",
+            "hover:border-[rgba(255, 79, 216,0.4)] transition-colors duration-300",
             block.className
           )}
           style={{ opacity: OPACITY_VARIANTS[i] }}

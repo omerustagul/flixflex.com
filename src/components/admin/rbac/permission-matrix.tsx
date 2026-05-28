@@ -360,7 +360,7 @@ export function PermissionMatrix({
           <motion.div
             className="sticky bottom-0 left-0 right-0 flex items-center justify-between
                        px-6 py-4 bg-[var(--surface)] border-t border-[var(--ff-purple)/40]
-                       shadow-[0_-4px_24px_rgba(161,52,255,0.12)]"
+                       shadow-[0_-4px_24px_rgba(255, 79, 216,0.12)]"
             initial={{ y: 60, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 60, opacity: 0 }}

@@ -55,7 +55,7 @@ export default async function HizmetlerPage() {
             className="absolute top-0 left-0 w-[500px] h-[500px] pointer-events-none"
             style={{
               background:
-                "radial-gradient(circle at 0% 0%, rgba(161,52,255,0.1) 0%, transparent 60%)",
+                "radial-gradient(circle at 0% 0%, rgba(255, 79, 216,0.1) 0%, transparent 60%)",
             }}
           />
 

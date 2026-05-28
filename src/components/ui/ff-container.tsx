@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 const borderVariants: Record<string, string> = {
   none:     "border-0",
   subtle:   "border border-[var(--border)]",
-  purple:   "border border-[rgba(161,52,255,0.35)]",
+  purple:   "border border-[rgba(255, 79, 216,0.35)]",
   charcoal: "border border-[#323232]",
   white:    "border border-white/20",
 }
@@ -18,7 +18,7 @@ const bgVariants: Record<string, string> = {
   default:  "bg-[var(--surface-elevated)]",
   dark:     "bg-[#111111]",
   charcoal: "bg-[#323232]",
-  purple:   "bg-[rgba(161,52,255,0.08)]",
+  purple:   "bg-[rgba(255, 79, 216,0.08)]",
   glass:    "bg-white/5 backdrop-blur-sm",
   transparent: "bg-transparent",
 }
@@ -68,8 +68,8 @@ const FFContainer = React.forwardRef<HTMLDivElement, FFContainerProps>(
       borderVariants[border],
       bgVariants[bg],
       paddingVariants[padding],
-      glow && "shadow-[0_0_30px_rgba(161,52,255,0.25)]",
-      hoverGlow && "hover:shadow-[0_0_30px_rgba(161,52,255,0.25)] hover:border-[rgba(161,52,255,0.35)]",
+      glow && "shadow-[0_0_30px_rgba(255, 79, 216,0.25)]",
+      hoverGlow && "hover:shadow-[0_0_30px_rgba(255, 79, 216,0.25)] hover:border-[rgba(255, 79, 216,0.35)]",
       className
     )
 
@@ -130,7 +130,7 @@ const FFCard = React.forwardRef<HTMLDivElement, FFCardProps>(
       hoverGlow={hover}
       className={cn(
         "cursor-default",
-        hover && "hover:border-[rgba(161,52,255,0.35)] transition-all duration-300",
+        hover && "hover:border-[rgba(255, 79, 216,0.35)] transition-all duration-300",
         className
       )}
       {...props}

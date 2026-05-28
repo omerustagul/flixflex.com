@@ -33,7 +33,7 @@ function OfferCard({ offer, index }: { offer: Offer; index: number }) {
           "relative flex-shrink-0 w-[240px] md:w-[300px] h-[400px] md:h-[480px]",
           "cursor-pointer overflow-hidden",
           "!border-0 !bg-transparent",
-          "hover:!shadow-[0_0_50px_rgba(161,52,255,0.25)]"
+          "hover:!shadow-[0_0_50px_rgba(255, 79, 216,0.25)]"
         )}
         tiltLimit={12}
         scale={1.03}

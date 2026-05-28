@@ -42,7 +42,7 @@ export function FlixFlexLogo({ className, size = "md", logoUrl, logoHeight, tran
               "relative flex items-center justify-center",
               "bg-[var(--ff-purple)] text-white font-bold tracking-tight",
               "transition-shadow duration-300",
-              "group-hover:shadow-[0_0_20px_rgba(161,52,255,0.5)]",
+              "group-hover:shadow-[0_0_20px_rgba(255, 79, 216,0.5)]",
               s.mark
             )}
             whileHover={{ rotate: -6 }}

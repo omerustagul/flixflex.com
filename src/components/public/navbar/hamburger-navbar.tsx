@@ -131,7 +131,7 @@ export function HamburgerNavbar({ siteSettings = {} }: HamburgerNavbarProps) {
               className="absolute inset-0 pointer-events-none"
               style={{
                 background:
-                  "radial-gradient(ellipse at top right, rgba(161,52,255,0.18) 0%, transparent 60%)",
+                  "radial-gradient(ellipse at top right, rgba(255, 79, 216,0.18) 0%, transparent 60%)",
               }}
             />
             {/* Grid pattern */}

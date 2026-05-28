@@ -81,8 +81,8 @@ export function SubServiceRow({ iconKey, label, href }: SubServiceRowProps) {
           "group/link flex items-center justify-between gap-3 py-2.5",
           "text-[13px] font-semibold text-[var(--foreground)]",
           "transition-colors duration-200",
-          "hover:text-[var(--ff-purple)]",
-          "focus-visible:outline-[var(--ff-purple)]"
+          "hover:text-[var(--ff-charcoal)]",
+          "focus-visible:outline-[var(--ff-charcoal)] focus-visible:outline-2 focus-visible:outline-offset-2",
         )}
       >
         {/* Icon + label */}
@@ -93,7 +93,6 @@ export function SubServiceRow({ iconKey, label, href }: SubServiceRowProps) {
               "bg-[var(--ff-charcoal)]",
               "text-[#0D0D0D]",
               "transition-colors duration-200",
-              "group-hover/link:text-[var(--ff-purple)]"
             )}
           >
             <Icon size={15} strokeWidth={1.75} />
@@ -108,7 +107,7 @@ export function SubServiceRow({ iconKey, label, href }: SubServiceRowProps) {
           className={cn(
             "shrink-0 text-[var(--foreground-faint)]",
             "transition-all duration-200",
-            "group-hover/link:text-[var(--ff-purple)]",
+            "group-hover/link:text-[var(--ff-charcoal)]",
             "group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
           )}
         />

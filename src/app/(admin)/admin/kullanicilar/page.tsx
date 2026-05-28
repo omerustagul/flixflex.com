@@ -97,6 +97,7 @@ export default async function UsersPage({ searchParams }: Props) {
           name="q"
           defaultValue={q}
           placeholder="Ad veya e-posta ara..."
+          className="bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-xs text-[#333333] placeholder:text-[#999999]"
           leftIcon={<Search className="w-4 h-4" />}
         />
       </form>
@@ -127,7 +128,7 @@ export default async function UsersPage({ searchParams }: Props) {
       ) : (
         <div className="ff-shape-container border border-[#CCCCCC] overflow-hidden">
           {/* Table header */}
-          <div className="grid grid-cols-[auto_1fr_1fr_auto_auto_auto_auto] gap-4 px-6 py-3 bg-[var(--background)] border-b border-[var(--border)] items-center">
+          <div className="grid grid-cols-[auto_1fr_1fr_auto_auto_auto_auto] gap-4 px-3 py-2 bg-[#dadada] border-b border-[#CCCCCC] items-center">
             <span className="text-[10px] font-semibold text-[#888888] w-8" />
             <span className="text-[10px] font-semibold text-[#888888]">Kullanıcı</span>
             <span className="text-[10px] font-semibold text-[#888888]">E-posta</span>
@@ -145,13 +146,13 @@ export default async function UsersPage({ searchParams }: Props) {
               <div
                 key={user.id}
                 className="grid grid-cols-[auto_1fr_1fr_auto_auto_auto_auto] gap-4 px-6 py-4
-                           border-b border-[var(--border)] last:border-b-0 hover:bg-[var(--surface)]
+                           border-b border-[#CCCCCC] last:border-b-0 hover:bg-[#F7F7F5] transition-colors duration-100
                            transition-colors items-center"
               >
                 {/* Avatar */}
                 <div
-                  className="w-8 h-8 flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                  style={{ background: "var(--ff-purple)" }}
+                  className="ff-shape-button w-8 h-8 flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
+                  style={{ background: "#FF4FD8" }}
                 >
                   {initials}
                 </div>
@@ -159,7 +160,7 @@ export default async function UsersPage({ searchParams }: Props) {
                 {/* Name */}
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium text-[var(--foreground)] truncate">
+                    <span className="text-sm font-medium text-[#333333] truncate">
                       {user.name ?? "—"}
                     </span>
                     {isSelf && (
@@ -169,7 +170,7 @@ export default async function UsersPage({ searchParams }: Props) {
                 </div>
 
                 {/* Email */}
-                <span className="text-xs text-[var(--foreground)] truncate">
+                <span className="text-xs text-[#333333] truncate">
                   {user.email}
                 </span>
 
@@ -188,7 +189,7 @@ export default async function UsersPage({ searchParams }: Props) {
                 </div>
 
                 {/* Last login */}
-                <span className="text-xs text-[var(--foreground)] whitespace-nowrap">
+                <span className="text-xs text-[#333333] whitespace-nowrap">
                   {user.lastLogin ? formatRelativeTime(user.lastLogin) : "Hiç"}
                 </span>
 
@@ -199,6 +200,7 @@ export default async function UsersPage({ searchParams }: Props) {
                       variant="ghost"
                       size="sm"
                       leftIcon={<Edit2 className="w-3.5 h-3.5 mr-2" />}
+                      className="flex items-center justify-center bg-transparent hover:bg-transparent border-none text-xs text-[#FF4FD8] hover:text-[#dd2bb7] hover:transition-colors duration-200"
                     >
                       Düzenle
                     </FFButton>

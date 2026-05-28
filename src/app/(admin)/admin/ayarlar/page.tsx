@@ -40,6 +40,7 @@ const TILES: SettingsTile[] = [
     title: "E-posta",
     description: "Gönderim adresi, Resend entegrasyonu, şablonlar.",
     icon: Mail,
+    href: "/admin/ayarlar/email",
     status: hasEnv("RESEND_API_KEY") ? "ok" : "missing",
   },
   {
@@ -92,7 +93,7 @@ function StatusBadge({ status }: { status?: SettingsTile["status"] }) {
   const s = map[status]
   return (
     <span
-      className="ff-shape-button inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em]"
+      className="ff-shape-button h-6 items-center justify-center inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-semibold"
       style={{ backgroundColor: s.bg, color: s.fg, border: `1px solid ${s.fg}33` }}
     >
       <span className="w-1.5 h-1.5" style={{ backgroundColor: s.fg }} />
@@ -107,13 +108,13 @@ export default function AyarlarPage() {
       {/* ── Header ────────────────────────────── */}
       <header className="mb-10 md:mb-14">
         <p className="text-[11px] font-semibold text-[#FF4FD8] mb-3">
-          — Ayarlar —
+          Ayarlar
         </p>
-        <h1 className="font-display text-2xl font-extrabold leading-tight tracking-tight text-[#0D0D0D] mb-3">
+        <h1 className="font-display text-2xl font-extrabold leading-tight tracking-tight text-[#0D0D0D] mb-1">
           Sistem{" "}
           <span className="text-[#FF4FD8]">yapılandırması</span>
         </h1>
-        <p className="text-[] text-base md:text-lg max-w-2xl leading-relaxed">
+        <p className="text-[#0D0D0D] text-base md:text-xs max-w-2xl leading-relaxed">
           FlixFlex platformunun temel davranışlarını buradan yönet. Her modülün
           kendi alt ayar sayfası vardır.
         </p>
@@ -138,7 +139,7 @@ export default function AyarlarPage() {
                 <div className="flex items-center gap-2">
                   <StatusBadge status={tile.status} />
                   {!tile.href && (
-                    <span className="text-[9px] font-semibold text-[#0D0D0D] border border-[#CCCCCC] px-2 py-0.5">
+                    <span className="ff-shape-button flex h-6 items-center justify-center text-[9px] font-semibold text-[#0D0D0D] border border-[#CCCCCC] px-2 py-0.5">
                       Yakında
                     </span>
                   )}

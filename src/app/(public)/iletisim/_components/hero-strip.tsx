@@ -24,7 +24,7 @@ export function HeroStrip() {
         className="absolute -top-32 -right-32 w-[44rem] h-[44rem] pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle, rgba(161,52,255,0.18) 0%, transparent 60%)",
+            "radial-gradient(circle, rgba(255, 79, 216,0.18) 0%, transparent 60%)",
           filter: "blur(60px)",
         }}
       />

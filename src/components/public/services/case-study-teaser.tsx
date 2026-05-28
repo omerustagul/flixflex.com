@@ -25,8 +25,8 @@ export function CaseStudyTeaser({ serviceTitle }: CaseStudyTeaserProps) {
           "border border-[var(--border)]",
           "overflow-hidden",
           "transition-[border-color,box-shadow] duration-300",
-          "hover:border-[rgba(161,52,255,0.35)]",
-          "hover:shadow-[0_4px_40px_rgba(161,52,255,0.12)]"
+          "hover:border-[rgba(255, 79, 216,0.35)]",
+          "hover:shadow-[0_4px_40px_rgba(255, 79, 216,0.12)]"
         )}
       >
         {/* Visual side */}
@@ -42,7 +42,7 @@ export function CaseStudyTeaser({ serviceTitle }: CaseStudyTeaserProps) {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(135deg, rgba(161,52,255,0.15) 0%, rgba(161,52,255,0.05) 50%, transparent 100%)",
+                "linear-gradient(135deg, rgba(255, 79, 216,0.15) 0%, rgba(255, 79, 216,0.05) 50%, transparent 100%)",
             }}
           />
           {/* Grid */}

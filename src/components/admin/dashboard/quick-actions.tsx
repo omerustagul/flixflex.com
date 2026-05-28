@@ -37,7 +37,7 @@ const ACTIONS = [
 export function QuickActions() {
   return (
     <div>
-      <h2 className="font-display text-[13px] font-bold uppercase tracking-[0.08em] text-[var(--foreground-muted)] mb-4">
+      <h2 className="font-display text-[13px] font-bold text-[#666666] mb-4">
         Hızlı İşlemler
       </h2>
       <motion.div
@@ -53,7 +53,7 @@ export function QuickActions() {
               <Link href={action.href}>
                 <TiltCard
                   variant="glass"
-                  className="flex flex-row items-start justify-between vertical-align: middle bg-[#ff4fd8]/10 border border-[#ff4fd8]/30 gap-3 p-4 overflow-hidden"
+                  className="flex flex-row items-start justify-between vertical-align: middle bg-[#F0F0F0] border border-[#cccccc]/30 gap-3 p-4 overflow-hidden"
                 >
                   {/* Left accent on hover */}
                   <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-[#ff4fd8] opacity-0 group-hover:opacity-100 transition-opacity duration-200" />

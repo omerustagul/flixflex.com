@@ -53,7 +53,7 @@ function ComparisonRow({
             "border border-[var(--ff-purple)]/30 bg-[var(--ff-purple)]/10 text-[var(--ff-purple)]",
             "transition-[background-color,border-color,box-shadow] duration-300",
             "group-hover:bg-[var(--ff-purple)] group-hover:border-[var(--ff-purple)]",
-            "group-hover:shadow-[0_0_12px_rgba(161,52,255,0.2)]"
+            "group-hover:shadow-[0_0_12px_rgba(255, 79, 216,0.2)]"
           )}
         >
           <span className="font-mono text-[9px] md:text-[10px] font-semibold text-[var(--ff-purple)] whitespace-nowrap">
@@ -76,7 +76,7 @@ function ComparisonRow({
             "shrink-0 w-6 h-6 flex items-center justify-center",
             "bg-[var(--ff-purple)] border border-[var(--ff-purple)] text-white",
             "transition-[box-shadow] duration-300",
-            "group-hover:shadow-[0_0_14px_rgba(161,52,255,0.5)]"
+            "group-hover:shadow-[0_0_14px_rgba(255, 79, 216,0.5)]"
           )}
         >
           <Check size={12} strokeWidth={2.5} />
@@ -104,7 +104,7 @@ export function WhyUsSection() {
         className="absolute inset-y-0 left-0 w-[40%] pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 80% at 0% 50%, rgba(161,52,255,0.04) 0%, transparent 100%)",
+            "radial-gradient(ellipse 60% 80% at 0% 50%, rgba(255, 79, 216,0.04) 0%, transparent 100%)",
         }}
       />
       {/* Subtle purple right accent */}
@@ -113,7 +113,7 @@ export function WhyUsSection() {
         className="absolute inset-y-0 right-0 w-[40%] pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 80% at 100% 50%, rgba(161,52,255,0.06) 0%, transparent 100%)",
+            "radial-gradient(ellipse 60% 80% at 100% 50%, rgba(255, 79, 216,0.06) 0%, transparent 100%)",
         }}
       />
 
@@ -205,7 +205,7 @@ export function WhyUsSection() {
               "px-8 py-4 text-sm font-medium uppercase tracking-[0.05em]",
               "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
               "hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)]",
-              "hover:shadow-[0_4px_24px_rgba(161,52,255,0.45)]",
+              "hover:shadow-[0_4px_24px_rgba(255, 79, 216,0.45)]",
               "transition-all duration-200"
             )}
           >

@@ -149,7 +149,7 @@ export function ManifestoSection() {
         className="absolute -top-60 -left-60 w-[60rem] h-[60rem] pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle, rgba(161,52,255,0.14) 0%, transparent 65%)",
+            "radial-gradient(circle, rgba(255, 79, 216,0.14) 0%, transparent 65%)",
           filter: "blur(60px)",
         }}
       />
@@ -159,7 +159,7 @@ export function ManifestoSection() {
         className="absolute -bottom-40 -right-40 w-[50rem] h-[50rem] pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle, rgba(161,52,255,0.10) 0%, transparent 60%)",
+            "radial-gradient(circle, rgba(255, 79, 216,0.10) 0%, transparent 60%)",
           filter: "blur(60px)",
         }}
       />

@@ -9,7 +9,7 @@ const badgeVariants: Record<string, string> = {
   success: "ff-shape-container bg-green-500/10 border-green-500/30 text-green-500",
   warning: "ff-shape-container bg-amber-500/10 border-amber-500/30 text-amber-500",
   error: "bg-red-500/10 border-red-500/30 text-red-500",
-  ai: "bg-[rgba(161,52,255,0.15)] border-[rgba(161,52,255,0.4)] text-[#C266FF]",
+  ai: "bg-[rgba(255, 79, 216,0.15)] border-[rgba(255, 79, 216,0.4)] text-[#C266FF]",
 }
 
 export interface FFBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {

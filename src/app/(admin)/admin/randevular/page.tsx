@@ -21,10 +21,12 @@ interface Appointment {
   subject: string
   date: string
   notes: string | null
+  meetLink?: string | null
   status: "pending" | "approved" | "cancelled" | "completed"
   isRead: boolean
   createdAt: string
 }
+
 
 interface BlockedSlot {
   id: string
@@ -42,6 +44,7 @@ export default function AdminAppointmentsPage() {
   const [search, setSearch] = React.useState<string>("")
   const [statusFilter, setStatusFilter] = React.useState<string>("all")
   const [selectedNotes, setSelectedNotes] = React.useState<string | null>(null)
+  const [resendingEmailId, setResendingEmailId] = React.useState<string | null>(null)
 
   // Calendar Blocker States
   const [calendarDate, setCalendarDate] = React.useState<Date>(new Date())
@@ -117,17 +120,59 @@ export default function AdminAppointmentsPage() {
       })
 
       if (res.ok) {
-        toast.success("Randevu güncellendi.")
+        const json = await res.json()
+        const updatedApp = json.data || { ...appointments.find(a => a.id === id), ...updates }
+
         // Local update
         setAppointments((prev) =>
-          prev.map((app) => (app.id === id ? { ...app, ...updates } as Appointment : app))
+          prev.map((app) => (app.id === id ? { ...app, ...updatedApp } as Appointment : app))
         )
+
+        // Check if approval mail status needs warning
+        if (updates.status === "approved") {
+          if (json.emailSent) {
+            toast.success("Randevu onaylandı ve bilgilendirme e-postası gönderildi.")
+          } else {
+            toast.warning(`Randevu onaylandı fakat e-posta gönderilemedi! Hata: ${json.emailError || "Entegrasyon pasif veya SMTP ayarları hatalı."}`)
+          }
+        } else {
+          toast.success("Randevu güncellendi.")
+        }
       } else {
-        toast.error("Güncelleme yapılamadı.")
+        const errorJson = await res.json().catch(() => ({}))
+        toast.error(errorJson.error || "Güncelleme yapılamadı.")
       }
     } catch (err) {
       console.error(err)
       toast.error("Bağlantı hatası.")
+    }
+  }
+
+  const handleResendEmail = async (id: string) => {
+    setResendingEmailId(id)
+    try {
+      const res = await fetch(`/api/appointments/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ resendEmail: true }),
+      })
+
+      if (res.ok) {
+        const json = await res.json()
+        if (json.emailSent) {
+          toast.success("Bilgilendirme e-postası tekrar gönderildi.")
+        } else {
+          toast.warning(`E-posta gönderilemedi! Hata: ${json.emailError || "Entegrasyon pasif veya SMTP ayarları hatalı."}`)
+        }
+      } else {
+        const errorJson = await res.json().catch(() => ({}))
+        toast.error(errorJson.error || "E-posta gönderimi başarısız.")
+      }
+    } catch (err) {
+      console.error(err)
+      toast.error("Bağlantı hatası.")
+    } finally {
+      setResendingEmailId(null)
     }
   }
 
@@ -330,8 +375,8 @@ export default function AdminAppointmentsPage() {
                     {filteredAppointments.map((app) => (
                       <React.Fragment key={app.id}>
                         <tr className={cn(
-                          "hover:bg-[#FBFBF9] transition-colors",
-                          !app.isRead && "bg-[var(--ff-purple)]/5 font-medium"
+                          "transition-colors",
+                          !app.isRead ? "bg-[#ff4fd8]/10 font-medium hover:bg-[#ff4fd8]/15" : "hover:bg-[#FBFBF9]"
                         )}>
                           <td className="p-2">
                             <button
@@ -418,6 +463,14 @@ export default function AdminAppointmentsPage() {
                               <>
                                 <button
                                   type="button"
+                                  onClick={() => handleResendEmail(app.id)}
+                                  disabled={resendingEmailId === app.id}
+                                  className="ff-shape-button px-2.5 py-1 text-[10px] bg-[#A134FF] hover:bg-[#8b23e3] disabled:opacity-50 text-white cursor-pointer"
+                                >
+                                  {resendingEmailId === app.id ? "Gönderiliyor..." : "Tekrar Mail Gönder"}
+                                </button>
+                                <button
+                                  type="button"
                                   onClick={() => handleUpdateAppointment(app.id, { status: "completed" })}
                                   className="ff-shape-button px-2.5 py-1 text-[10px] bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
                                 >
@@ -439,11 +492,28 @@ export default function AdminAppointmentsPage() {
                         {selectedNotes === app.id && (
                           <tr>
                             <td colSpan={6} className="bg-[#FAFAFA] p-4 border-t border-b border-[#E0E0E0]">
-                              <div className="max-w-2xl text-xs space-y-2">
-                                <p className="font-bold text-[#666666] uppercase tracking-wider text-[10px]">Açıklama / Talep Notu:</p>
-                                <p className="text-[#333333] leading-relaxed bg-white border border-[#E8E8E8] p-3 ff-shape-container whitespace-pre-wrap">
-                                  {app.notes || "Herhangi bir açıklama girilmemiş."}
-                                </p>
+                              <div className="max-w-2xl text-xs space-y-4">
+                                <div className="space-y-1">
+                                  <p className="font-bold text-[#666666] uppercase tracking-wider text-[10px]">Açıklama / Talep Notu:</p>
+                                  <p className="text-[#333333] leading-relaxed bg-white border border-[#E8E8E8] p-3 ff-shape-container whitespace-pre-wrap">
+                                    {app.notes || "Herhangi bir açıklama girilmemiş."}
+                                  </p>
+                                </div>
+                                {app.meetLink && (
+                                  <div className="space-y-1">
+                                    <p className="font-bold text-[#666666] uppercase tracking-wider text-[10px]">Toplantı Linki (Google Meet):</p>
+                                    <div className="flex items-center gap-2">
+                                      <a
+                                        href={app.meetLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-[var(--ff-purple)] font-semibold hover:underline"
+                                      >
+                                        {app.meetLink}
+                                      </a>
+                                    </div>
+                                  </div>
+                                )}
                               </div>
                             </td>
                           </tr>
