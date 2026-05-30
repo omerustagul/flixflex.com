@@ -32,7 +32,7 @@ export function AiStatusWidget() {
 
   return (
     <div className="h-full">
-      <h2 className="font-display text-[13px] font-bold uppercase tracking-[0.08em] text-[var(--foreground-muted)] mb-4">
+      <h2 className="font-display text-[13px] font-bold text-[#666666] mb-4">
         AI Blog Motoru
       </h2>
 

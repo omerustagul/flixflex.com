@@ -54,19 +54,20 @@ export function PasswordForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       <div className="space-y-1.5">
-        <label className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--foreground-muted)]">
+        <label className="text-[11px] font-semibold text-[#666666]">
           Mevcut Şifre
         </label>
         <div className="relative">
           <FFInput
             type={showCurrent ? "text" : "password"}
+            className="bg-transparent border border-[#cccccc] focus:border-[#ff4fd8] text-[#333333] placeholder:text-[#999999]"
             autoComplete="current-password"
             {...register("currentPassword")}
           />
           <button
             type="button"
             onClick={() => setShowCurrent((v) => !v)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--foreground-faint)] hover:text-[var(--ff-purple)]"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-[#666666] hover:text-[#ff4fd8]"
             aria-label={showCurrent ? "Şifreyi gizle" : "Şifreyi göster"}
           >
             {showCurrent ? <EyeOff size={14} /> : <Eye size={14} />}
@@ -79,19 +80,20 @@ export function PasswordForm() {
 
       <div className="grid md:grid-cols-2 gap-5">
         <div className="space-y-1.5">
-          <label className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--foreground-muted)]">
+          <label className="text-[11px] font-semibold text-[#666666]">
             Yeni Şifre
           </label>
           <div className="relative">
             <FFInput
               type={showNew ? "text" : "password"}
+              className="bg-transparent border border-[#cccccc] focus:border-[#ff4fd8] text-[#333333] placeholder:text-[#999999]"
               autoComplete="new-password"
               {...register("newPassword")}
             />
             <button
               type="button"
               onClick={() => setShowNew((v) => !v)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--foreground-faint)] hover:text-[var(--ff-purple)]"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#666666] hover:text-[#ff4fd8]"
               aria-label={showNew ? "Şifreyi gizle" : "Şifreyi göster"}
             >
               {showNew ? <EyeOff size={14} /> : <Eye size={14} />}
@@ -103,11 +105,12 @@ export function PasswordForm() {
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--foreground-muted)]">
+          <label className="text-[11px] font-semibold text-[#666666]">
             Yeni Şifre (Tekrar)
           </label>
           <FFInput
             type={showNew ? "text" : "password"}
+            className="bg-transparent border border-[#cccccc] focus:border-[#ff4fd8] text-[#333333] placeholder:text-[#999999]"
             autoComplete="new-password"
             {...register("confirmPassword")}
           />
@@ -117,7 +120,7 @@ export function PasswordForm() {
         </div>
       </div>
 
-      <p className="text-xs text-[var(--foreground-faint)] leading-relaxed">
+      <p className="text-xs text-[#6666666] leading-relaxed">
         En az 8 karakter. Güçlü bir şifre için harf + sayı + sembol kullanın.
       </p>
 
@@ -150,10 +153,10 @@ export function PasswordForm() {
         type="submit"
         disabled={isSubmitting}
         className={cn(
-          "inline-flex items-center justify-center gap-2 px-6 py-3",
-          "text-[12px] font-medium uppercase tracking-[0.07em]",
-          "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
-          "hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)]",
+          "ff-shape-container inline-flex items-center justify-center gap-2 px-6 py-3",
+          "text-[12px] font-medium",
+          "bg-[#ff4fd8] text-white border border-[#ff4fd8]",
+          "hover:bg-[#ff4fd8]/80 hover:border-[#ff4fd8]/80",
           "disabled:opacity-40 disabled:cursor-not-allowed",
           "transition-all duration-200"
         )}

@@ -48,68 +48,68 @@ export default async function ProfilPage() {
       {/* ── Header ────────────────────────────── */}
       <header className="mb-10">
         <p className="text-[11px] font-semibold text-[var(--ff-purple)] mb-3">
-          — Profil —
+          Profil
         </p>
-        <h1 className="font-display text-xl md:text-2xl font-extrabold leading-tight tracking-tight text-[var(--foreground)] mb-2">
-          Hesabını <span className="text-[var(--ff-purple)]">yönet</span>
+        <h1 className="font-display text-xl md:text-2xl font-extrabold leading-tight tracking-tight text-[#666666] mb-2">
+          Hesabını <span className="text-[#ff4fd8]">yönet</span>
         </h1>
-        <p className="text-xs text-[var(--foreground-muted)] text-base leading-relaxed">
+        <p className="text-xs text-[#666666] text-base leading-relaxed">
           Kişisel bilgilerini ve şifreni buradan güncelle.
         </p>
       </header>
 
       {/* ── Identity card ─────────────────────── */}
-      <section className="ff-shape-container mb-10 grid md:grid-cols-[auto_1fr] gap-6 items-start p-6 border border-[var(--border)] bg-[var(--surface)]">
+      <section className="ff-shape-container mb-10 grid md:grid-cols-[auto_1fr] gap-6 items-start p-6 border border-[#cccccc] bg-[#f7f7f5]">
         {/* Avatar */}
-        <div className="ff-shape-button w-16 h-16 flex items-center justify-center bg-[var(--ff-purple)] text-white font-display font-extrabold text-lg tracking-tight">
+        <div className="ff-shape-button w-16 h-16 flex items-center justify-center bg-[#ff4fd8] text-white font-display font-extrabold text-lg tracking-tight">
           {initials(user.name, user.email)}
         </div>
 
         {/* Info grid */}
         <div className="grid sm:grid-cols-2 gap-4 text-sm">
           <div className="flex items-start gap-2">
-            <User size={14} className="text-[var(--ff-purple)] mt-0.5" />
+            <User size={14} className="text-[#ff4fd8] mt-0.5" />
             <div>
-              <p className="text-[10px] text-[var(--foreground-faint)] mb-0.5">
+              <p className="text-[10px] text-[#666666] mb-0.5">
                 Ad Soyad
               </p>
-              <p className="text-[var(--foreground)] font-medium">
+              <p className="text-[#333333] font-medium">
                 {user.name ?? "—"}
               </p>
             </div>
           </div>
 
           <div className="flex items-start gap-2">
-            <Mail size={14} className="text-[var(--ff-purple)] mt-0.5" />
+            <Mail size={14} className="text-[#ff4fd8] mt-0.5" />
             <div>
-              <p className="text-[10px] text-[var(--foreground-faint)] mb-0.5">
+              <p className="text-[10px] text-[#666666] mb-0.5">
                 E-posta
               </p>
-              <p className="text-[var(--foreground)] font-medium break-all">
+              <p className="text-[#333333] font-medium break-all">
                 {user.email}
               </p>
             </div>
           </div>
 
           <div className="flex items-start gap-2">
-            <Shield size={14} className="text-[var(--ff-purple)] mt-0.5" />
+            <Shield size={14} className="text-[#ff4fd8] mt-0.5" />
             <div>
-              <p className="text-[10px] text-[var(--foreground-faint)] mb-0.5">
+              <p className="text-[10px] text-[#666666] mb-0.5">
                 Rol
               </p>
-              <p className="text-[var(--foreground)] font-medium">
+              <p className="text-[#333333] font-medium">
                 {user.role.name}
               </p>
             </div>
           </div>
 
           <div className="flex items-start gap-2">
-            <Clock size={14} className="text-[var(--ff-purple)] mt-0.5" />
+            <Clock size={14} className="text-[#ff4fd8] mt-0.5" />
             <div>
-              <p className="text-[10px] text-[var(--foreground-faint)] mb-0.5">
+              <p className="text-[10px] text-[#666666] mb-0.5">
                 Son giriş
               </p>
-              <p className="text-[var(--foreground)] font-medium">
+              <p className="text-[#333333] font-medium">
                 {user.lastLogin
                   ? formatRelativeTime(user.lastLogin)
                   : "Henüz hiç"}
@@ -120,10 +120,10 @@ export default async function ProfilPage() {
       </section>
 
       {/* ── Form: Personal info ───────────────── */}
-      <section className="ff-shape-container mb-10 p-6 md:p-8 border border-[var(--border)]">
+      <section className="ff-shape-container mb-10 p-6 md:p-8 border border-[#cccccc]">
         <div className="flex items-center gap-2 mb-6">
-          <User size={16} className="text-[var(--ff-purple)]" />
-          <h2 className="font-display text-xl font-bold text-[var(--foreground)]">
+          <User size={16} className="text-[#ff4fd8]" />
+          <h2 className="font-display text-xl font-bold text-[#333333]">
             Kişisel Bilgiler
           </h2>
         </div>
@@ -138,10 +138,10 @@ export default async function ProfilPage() {
       </section>
 
       {/* ── Form: Password ────────────────────── */}
-      <section className="ff-shape-container mb-10 p-6 md:p-8 border border-[var(--border)]">
+      <section className="ff-shape-container mb-10 p-6 md:p-8 border border-[#cccccc]">
         <div className="flex items-center gap-2 mb-6">
-          <KeyRound size={16} className="text-[var(--ff-purple)]" />
-          <h2 className="font-display text-xl font-bold text-[var(--foreground)]">
+          <KeyRound size={16} className="text-[#ff4fd8]" />
+          <h2 className="font-display text-xl font-bold text-[#333333]">
             Şifre Değiştir
           </h2>
         </div>
@@ -149,7 +149,7 @@ export default async function ProfilPage() {
       </section>
 
       {/* ── Footer note ───────────────────────── */}
-      <p className="text-xs text-[var(--foreground-faint)]">
+      <p className="text-xs text-[#666666]">
         Hesap oluşturuldu: {formatDate(user.createdAt)}
       </p>
     </div>

@@ -73,19 +73,19 @@ export function ProfileForm({ initial }: ProfileFormProps) {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       <div className="grid md:grid-cols-2 gap-5">
         <div className="space-y-1.5">
-          <label className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--foreground-muted)]">
+          <label className="text-[11px] font-semibold text-[#666666]">
             Ad Soyad
           </label>
-          <FFInput {...register("name")} placeholder="Burhan Cal" />
+          <FFInput {...register("name")} placeholder="Burhan Cal" className="bg-transparent border border-[#cccccc] focus:border-[#ff4fd8] text-[#333333] placeholder:text-[#999999]" />
           {errors.name && (
             <p className="text-xs text-[#dc2626]">{errors.name.message}</p>
           )}
         </div>
         <div className="space-y-1.5">
-          <label className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--foreground-muted)]">
+          <label className="text-[11px] font-semibold text-[#666666]">
             E-posta
           </label>
-          <FFInput type="email" {...register("email")} placeholder="ornek@flixflex.com" />
+          <FFInput type="email" {...register("email")} placeholder="ornek@flixflex.com" className="bg-transparent border border-[#cccccc] focus:border-[#ff4fd8] text-[#333333] placeholder:text-[#999999]" />
           {errors.email && (
             <p className="text-xs text-[#dc2626]">{errors.email.message}</p>
           )}
@@ -93,12 +93,13 @@ export function ProfileForm({ initial }: ProfileFormProps) {
       </div>
 
       <div className="space-y-1.5">
-        <label className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--foreground-muted)]">
+        <label className="text-[11px] font-semibold text-[#666666]">
           Profil Görseli URL (opsiyonel)
         </label>
         <FFInput
           {...register("image")}
           placeholder="https://..."
+          className="bg-transparent border border-[#cccccc] focus:border-[#ff4fd8] text-[#333333] placeholder:text-[#999999]"
           autoComplete="off"
         />
         {errors.image && (
@@ -135,10 +136,10 @@ export function ProfileForm({ initial }: ProfileFormProps) {
         type="submit"
         disabled={isSubmitting || !isDirty}
         className={cn(
-          "inline-flex items-center justify-center gap-2 px-6 py-3",
-          "text-[12px] font-medium uppercase tracking-[0.07em]",
-          "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
-          "hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)]",
+          "ff-shape-container inline-flex items-center justify-center gap-2 px-6 py-3",
+          "text-[12px] font-medium",
+          "bg-[#ff4fd8] text-white border border-[#ff4fd8]",
+          "hover:bg-[#dc2db6] hover:border-[#dc2db6]",
           "disabled:opacity-40 disabled:cursor-not-allowed",
           "transition-all duration-200"
         )}

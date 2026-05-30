@@ -243,7 +243,7 @@ export function AdminTopbar({ user }: AdminTopbarProps) {
                 <p className="text-[11px] text-[#666666] truncate mt-0.5">
                   {user.email}
                 </p>
-                <span className="inline-block mt-1.5 text-[9px] font-semibold px-2 py-0.5 bg-[#ff4fd8]/12 text-[#ff4fd8] border border-[#ff4fd8]/25">
+                <span className="ff-shape-button inline-block mt-1.5 text-[9px] font-semibold px-2 py-0.5 bg-[#ff4fd8]/12 text-[#ff4fd8] border border-[#ff4fd8]/25">
                   {user.role}
                 </span>
               </div>
