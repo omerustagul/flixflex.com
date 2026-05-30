@@ -64,7 +64,13 @@ export default auth((req) => {
     return NextResponse.redirect(loginUrl)
   }
 
-  return NextResponse.next()
+  const requestHeaders = new Headers(req.headers)
+  requestHeaders.set("x-is-admin", "true")
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    }
+  })
 })
 
 // ── Matcher ─────────────────────────────────────────────

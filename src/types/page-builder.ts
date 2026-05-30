@@ -221,6 +221,7 @@ export const heroAnimatedVideoPropsSchema = z.object({
   videoSrc:        z.string().optional(),
   videoSrcMobile:  z.string().optional(),
   clipPathVariant: z.enum(["inset", "circle", "none"]).optional(),
+  hideMobileDock:  z.boolean().default(false),
 })
 
 export const parallaxPropsSchema = z.object({

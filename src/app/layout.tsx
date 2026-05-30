@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { Syne, DM_Sans, Geist } from "next/font/google"
-import { cookies } from "next/headers"
+import { cookies, headers } from "next/headers"
 import "./globals.css"
 import { ThemeProvider } from "@/components/shared/theme-provider"
 import { FFCursor } from "@/components/ui"
@@ -39,10 +39,13 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const heads = await headers()
+  const isAdmin = heads.get("x-is-admin") === "true"
+
   const cookieStore = await cookies()
   const themeCookie = cookieStore.get("theme")?.value
-  // Accept only known values; fall back to "dark"
-  const theme: "dark" | "light" = themeCookie === "light" ? "light" : "dark"
+  // Accept only known values; fall back to "dark", force "light" for admin
+  const theme: "dark" | "light" = isAdmin ? "light" : (themeCookie === "light" ? "light" : "dark")
 
   return (
     <html

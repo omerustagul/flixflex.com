@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { usePathname } from "next/navigation"
 
 type Theme = "dark" | "light"
 
@@ -49,6 +50,9 @@ export function ThemeProvider({
   // that would occur if we seeded from localStorage (which is unavailable on
   // the server and may differ from the cookie).
   const [theme, setThemeState] = React.useState<Theme>(serverTheme)
+  const pathname = usePathname()
+  const isAdmin = pathname?.startsWith("/admin")
+  const activeTheme = isAdmin ? "light" : theme
 
   // After mount, if localStorage has a more-recent preference than the cookie
   // (e.g. user changed theme offline before cookie synced), honour it.
@@ -83,9 +87,9 @@ export function ThemeProvider({
       }
     }
 
-    applyTheme(theme)
+    applyTheme(activeTheme)
     return cleanup
-  }, [theme, disableTransitionOnChange])
+  }, [activeTheme, disableTransitionOnChange])
 
   // Sync across tabs via storage event
   React.useEffect(() => {
@@ -117,12 +121,12 @@ export function ThemeProvider({
 
   const value = React.useMemo<ThemeContextValue>(
     () => ({
-      theme,
+      theme: activeTheme,
       setTheme,
-      resolvedTheme: theme,
+      resolvedTheme: activeTheme,
       themes: ["light", "dark"],
     }),
-    [theme, setTheme]
+    [activeTheme, setTheme]
   )
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
