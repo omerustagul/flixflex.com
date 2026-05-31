@@ -128,7 +128,7 @@ export default async function UsersPage({ searchParams }: Props) {
       ) : (
         <div className="ff-shape-container border border-[#CCCCCC] overflow-hidden">
           {/* Table header */}
-          <div className="grid grid-cols-[auto_1fr_1fr_auto_auto_auto_auto] gap-4 px-3 py-2 bg-[#dadada] border-b border-[#CCCCCC] items-center">
+          <div className="grid grid-cols-[auto_1fr_1fr_auto_auto_auto_auto] gap-4 px-3 py-2 bg-[#f2f2f2] border-b border-[#CCCCCC] items-center">
             <span className="text-[10px] font-semibold text-[#888888] w-8" />
             <span className="text-[10px] font-semibold text-[#888888]">Kullanıcı</span>
             <span className="text-[10px] font-semibold text-[#888888]">E-posta</span>

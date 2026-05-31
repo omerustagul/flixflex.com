@@ -32,8 +32,8 @@ export default function NotFound() {
       />
 
       <div className="relative z-10 text-center max-w-2xl">
-        <p className="text-[11px] font-semibold tracking-[0.22em] text-[var(--ff-purple)] mb-6">
-          — Hata 404 —
+        <p className="text-[11px] font-semibold text-[var(--ff-purple)] mb-6">
+          Sayfa Bulunamadı
         </p>
 
         <p
@@ -48,7 +48,7 @@ export default function NotFound() {
           <span className="text-[var(--foreground-muted)]">kaybolmuş.</span>
         </h1>
 
-        <p className="mt-5 text-base md:text-lg text-[var(--foreground-muted)] max-w-md mx-auto leading-relaxed">
+        <p className="mt-5 text-base md:text-md text-[var(--foreground-muted)] max-w-md mx-auto leading-relaxed">
           Aradığın URL artık burada değil ya da hiç olmadı. Domine edeceğin
           başka yerler var — devam et.
         </p>

@@ -21,7 +21,8 @@ import {
   Layout,
   Newspaper,
   Phone,
-  ArrowLeftRight,
+  BetweenVerticalEnd,
+  PhoneCall,
   type LucideIcon,
 } from "lucide-react"
 import type { SectionType } from "@/types/page-builder"
@@ -80,7 +81,7 @@ export const SECTION_REGISTRY: Record<string, SectionMeta> = {
   },
   "hero-animated-video": {
     type: "hero-animated-video",
-    label: "Animasyonlu Video Hero",
+    label: "Video Hero",
     category: "Hero & Banner",
     icon: Video,
     defaultProps: heroAnimatedVideoPropsSchema.parse({}),
@@ -304,17 +305,17 @@ export const SECTION_REGISTRY: Record<string, SectionMeta> = {
   },
   "portfolio-vertical-scroll": {
     type: "portfolio-vertical-scroll",
-    label: "Dikey Kart Yatay Akış",
+    label: "Yatay Portfolyo",
     category: "Portföy & Medya",
-    icon: ArrowLeftRight,
+    icon: BetweenVerticalEnd,
     defaultProps: portfolioVerticalScrollPropsSchema.parse({}),
     description: "Sonsuz döngü marquee dikey portfolyo kartları",
   },
   "appointment-card": {
     type: "appointment-card",
-    label: "Ön Görüşme Randevu Kartı",
+    label: "Randevu Kartı",
     category: "Dönüşüm",
-    icon: Zap,
+    icon: PhoneCall,
     defaultProps: appointmentCardPropsSchema.parse({}),
     description: "Ön görüşme randevusu alma popup'ını açan kart",
   },

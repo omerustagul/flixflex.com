@@ -54,12 +54,13 @@ export function NewPageForm() {
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify({ title: title.trim(), slug: slug.trim(), description }),
       })
-      const json = await res.json() as { success: boolean; data?: { id: string }; error?: string }
+      const json = await res.json() as { success: boolean; data?: { id: string; slug: string }; error?: string }
       if (!res.ok || !json.success) {
         setError(json.error ?? "Sayfa oluşturulamadı")
         return
       }
-      router.push(`/admin/sayfalar/${json.data!.id}/edit`)
+      const pageSlug = json.data!.slug === "/" ? "home" : json.data!.slug
+      router.push(`/admin/sayfalar/${pageSlug}/edit`)
     } catch (err) {
       setError("Bir hata oluştu. Lütfen tekrar deneyin.")
       console.error(err)

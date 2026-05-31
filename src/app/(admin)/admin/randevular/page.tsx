@@ -362,7 +362,7 @@ export default function AdminAppointmentsPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse text-xs">
                   <thead>
-                    <tr className="bg-[#dadada] border-b border-[#cccccc] text-[#666666] font-bold">
+                    <tr className="bg-[#f2f2f2] border-b border-[#cccccc] text-[#666666] font-bold">
                       <th className="p-2 w-8"></th>
                       <th className="p-2">Müşteri Bilgileri</th>
                       <th className="p-2">Konu</th>
@@ -528,7 +528,7 @@ export default function AdminAppointmentsPage() {
         </div>
       ) : (
         /* TAKVİM & SAAT KİLİTLEME TAB'I */
-        <div className="grid lg:grid-cols-12 gap-8 items-start">
+        <div className="grid lg:grid-cols-12 gap-4 items-start">
           {/* Left Column: Calendar UI */}
           <div className="lg:col-span-5 bg-white border border-[#E0E0E0] p-6 ff-shape-container space-y-6">
             <div className="flex items-center justify-between border-b border-[#E0E0E0] pb-4">

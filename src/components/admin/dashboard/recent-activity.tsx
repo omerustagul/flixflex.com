@@ -76,7 +76,7 @@ export function RecentActivity() {
         {/* Table header */}
         <div className={cn(
           "hidden md:grid grid-cols-[2fr_3fr_1fr] gap-4",
-          "px-3 py-2 bg-[#dadada] border-b border-[#cccccc]",
+          "px-3 py-2 bg-[#f2f2f2] border-b border-[#cccccc]",
           "text-[10px] font-bold text-[#0d0d0d]"
         )}>
           <span>Kullanıcı</span>

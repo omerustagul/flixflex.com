@@ -88,7 +88,7 @@ export default async function SayfalarPage() {
       {/* Table */}
       <div className="ff-shape-container border border-[#CCCCCC]">
         {/* Table head */}
-        <div className="grid grid-cols-[1fr_160px_120px_140px_180px] gap-0 bg-[#dadada] border-b border-[#CCCCCC] px-4 py-2">
+        <div className="grid grid-cols-[1fr_160px_120px_140px_180px] gap-0 bg-[#f2f2f2] border-b border-[#CCCCCC] px-4 py-2">
           {["Başlık", "Slug", "Durum", "Güncelleme", "İşlemler"].map((h) => (
             <span
               key={h}
@@ -150,7 +150,7 @@ export default async function SayfalarPage() {
               {/* Actions */}
               <div className="flex items-end gap-1">
                 <Link
-                  href={`/admin/sayfalar/${page.id}/edit`}
+                  href={`/admin/sayfalar/${page.slug === "/" ? "home" : page.slug}/edit`}
                   className="ff-shape-button w-9 h-9 flex items-center justify-center border border-[#CCCCCC] text-[#666666] hover:border-[#ff4fd8] hover:text-[#ff4fd8] transition-colors duration-150"
                   title="Düzenle"
                 >

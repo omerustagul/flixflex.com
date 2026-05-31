@@ -61,55 +61,63 @@ export default async function ProfilPage() {
       {/* ── Identity card ─────────────────────── */}
       <section className="ff-shape-container mb-10 grid md:grid-cols-[auto_1fr] gap-6 items-start p-6 border border-[#cccccc] bg-[#f7f7f5]">
         {/* Avatar */}
-        <div className="ff-shape-button w-16 h-16 flex items-center justify-center bg-[#ff4fd8] text-white font-display font-extrabold text-lg tracking-tight">
+        <div className="ff-shape-button w-10 h-10 flex items-center justify-center bg-[#ff4fd8]/10 border border-[#ff4fd8]/30 text-[#ff4fd8] font-display font-extrabold text-md tracking-tight">
           {initials(user.name, user.email)}
         </div>
 
         {/* Info grid */}
-        <div className="grid sm:grid-cols-2 gap-4 text-sm">
+        <div className="items-center grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-sm">
           <div className="flex items-start gap-2">
-            <User size={14} className="text-[#ff4fd8] mt-0.5" />
             <div>
-              <p className="text-[10px] text-[#666666] mb-0.5">
-                Ad Soyad
-              </p>
-              <p className="text-[#333333] font-medium">
+               <div className="flex items-start gap-1">
+               <User size={14} className="text-[#ff4fd8]" />
+               <p className="font-bold text-[11px] text-[#666666] mb-0.5">
+                 Ad Soyad
+               </p>
+              </div>
+              <p className="text-[#333333] font-medium mt-1">
                 {user.name ?? "—"}
               </p>
             </div>
           </div>
 
           <div className="flex items-start gap-2">
-            <Mail size={14} className="text-[#ff4fd8] mt-0.5" />
             <div>
-              <p className="text-[10px] text-[#666666] mb-0.5">
-                E-posta
-              </p>
-              <p className="text-[#333333] font-medium break-all">
-                {user.email}
-              </p>
+               <div className="flex items-start gap-1">
+                 <Mail size={14} className="text-[#ff4fd8]" />
+                 <p className="font-bold text-[10px] text-[#666666] mb-0.5">
+                 E-posta
+                 </p>
+                </div>
+                <p className="text-[#333333] font-medium break-all mt-1">
+                  {user.email}
+                </p>
             </div>
           </div>
 
           <div className="flex items-start gap-2">
-            <Shield size={14} className="text-[#ff4fd8] mt-0.5" />
             <div>
-              <p className="text-[10px] text-[#666666] mb-0.5">
+                <div className="flex items-start gap-1">
+                 <Shield size={14} className="text-[#ff4fd8]" />
+                 <p className="font-bold text-[10px] text-[#666666] mb-0.5">
                 Rol
-              </p>
-              <p className="text-[#333333] font-medium">
+                 </p>
+                </div>
+              <p className="text-[#333333] font-medium mt-1">
                 {user.role.name}
               </p>
             </div>
           </div>
 
           <div className="flex items-start gap-2">
-            <Clock size={14} className="text-[#ff4fd8] mt-0.5" />
             <div>
-              <p className="text-[10px] text-[#666666] mb-0.5">
-                Son giriş
-              </p>
-              <p className="text-[#333333] font-medium">
+                <div className="flex items-start gap-1">
+                 <Clock size={14} className="text-[#ff4fd8]" />
+                 <p className="font-bold text-[10px] text-[#666666] mb-0.5">
+                  Son giriş
+                 </p>
+                </div>
+                <p className="text-[#333333] font-medium mt-1">
                 {user.lastLogin
                   ? formatRelativeTime(user.lastLogin)
                   : "Henüz hiç"}

@@ -110,7 +110,7 @@ const FFButton = React.forwardRef<HTMLButtonElement, FFButtonProps>(
         {/* Content */}
         <span
           className={cn(
-            "inline-flex items-center gap-0",
+            "inline-flex items-center gap-2",
             loading && "opacity-0"
           )}
         >

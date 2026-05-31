@@ -43,7 +43,7 @@ export function ServicesContent({ items }: { items: ServiceCardItem[] }) {
       ) : (
         <div className="ff-shape-container bg-[#f7f7f5] border border-[#cccccc] overflow-hidden">
           <table className="w-full">
-            <thead className="bg-[#dadada] border-b border-[#cccccc] text-left">
+            <thead className="bg-[#f2f2f2] border-b border-[#cccccc] text-left">
               <tr>
                 <th className="px-4 py-3 text-[10px] font-bold text-[#666666]">Hizmet</th>
                 <th className="px-4 py-3 text-[10px] font-bold text-[#666666]">Bağlı Portfolyo</th>
@@ -55,7 +55,7 @@ export function ServicesContent({ items }: { items: ServiceCardItem[] }) {
               {items.map((item) => (
                 <tr key={item.id} className="border-b border-[#cccccc] last:border-0 hover:bg-[#f7f7f5] transition-colors">
                   <td className="px-4 py-3">
-                    <Link href={`/admin/hizmetler/${item.id}`} className="text-[13px] font-semibold hover:text-[#ff4fd8] transition-colors">
+                    <Link href={`/admin/hizmetler/${item.slug}`} className="text-[13px] font-semibold hover:text-[#ff4fd8] transition-colors">
                       {item.title}
                     </Link>
                     <p className="text-[11px] text-[#666666] mt-0.5">/hizmetler/{item.slug}</p>
@@ -71,7 +71,7 @@ export function ServicesContent({ items }: { items: ServiceCardItem[] }) {
                       <Link href={`/hizmetler/${item.slug}`} target="_blank" className="ff-shape-button border border-[#cccccc] w-7 h-7 flex items-center justify-center hover:border-[#ff4fd8] text-[#666666] hover:text-[#ff4fd8] transition-colors">
                         <ExternalLink size={12} />
                       </Link>
-                      <Link href={`/admin/hizmetler/${item.id}`} className="ff-shape-button border border-[#cccccc] w-7 h-7 flex items-center justify-center hover:border-[#ff4fd8] text-[#666666] hover:text-[#ff4fd8] transition-colors">
+                      <Link href={`/admin/hizmetler/${item.slug}`} className="ff-shape-button border border-[#cccccc] w-7 h-7 flex items-center justify-center hover:border-[#ff4fd8] text-[#666666] hover:text-[#ff4fd8] transition-colors">
                         <Pencil size={12} />
                       </Link>
                     </div>
@@ -106,7 +106,7 @@ function ServiceCard({ item }: { item: ServiceCardItem }) {
 
       <div className="mt-3 space-y-2 flex-1">
         <Link
-          href={`/admin/hizmetler/${item.id}`}
+          href={`/admin/hizmetler/${item.slug}`}
           className="text-sm font-semibold text-[#333333] hover:text-[#ff4fd8] transition-colors line-clamp-1"
         >
           {item.title}
@@ -129,7 +129,7 @@ function ServiceCard({ item }: { item: ServiceCardItem }) {
             <ExternalLink size={12} />
           </Link>
           <Link
-            href={`/admin/hizmetler/${item.id}`}
+            href={`/admin/hizmetler/${item.slug}`}
             className="ff-shape-button border border-[#cccccc] w-7 h-7 flex items-center justify-center hover:border-[#ff4fd8] text-[#666666] hover:text-[#ff4fd8] transition-colors"
           >
             <Pencil size={12} />

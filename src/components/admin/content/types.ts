@@ -45,6 +45,9 @@ export interface AdminServiceRecord {
   metaTitle?: string | null
   metaDescription?: string | null
   parentId?: string | null
+  coverImage?: string | null
+  accentColor?: string | null
+  gradient?: string | null
   children?: AdminServiceRecord[]
   parent?: { id: string; title: string } | null
   portfolios?: AdminPortfolioRecord[]

@@ -124,7 +124,7 @@ export default function AyarlarPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
         {TILES.map((tile) => {
           const Icon = tile.icon
-          const className = `ff-shape-container group relative flex flex-col gap-4 p-6 md:p-7 bg-[#F0F0F0] border border-[#CCCCCC] transition-colors duration-200 ${tile.href
+          const className = `ff-shape-container group relative flex flex-col gap-4 p-3 <md:p-4></md:p-4> bg-[#F0F0F0] border border-[#CCCCCC] transition-colors duration-200 ${tile.href
             ? "hover:bg-[#F7F7F5] cursor-pointer"
             : "cursor-default opacity-90"
             }`
@@ -148,10 +148,10 @@ export default function AyarlarPage() {
 
               {/* Title + desc */}
               <div className="flex flex-col gap-1.5">
-                <h3 className="font-display text-lg font-bold text-[#0D0D0D] tracking-tight">
+                <h3 className="font-display text-md font-bold text-[#0D0D0D] tracking-tight">
                   {tile.title}
                 </h3>
-                <p className="text-sm text-[#0D0D0D] leading-relaxed">
+                <p className="text-xs text-[#0D0D0D] leading-relaxed">
                   {tile.description}
                 </p>
               </div>
@@ -187,7 +187,7 @@ export default function AyarlarPage() {
       </div>
 
       {/* ── Helper note ───────────────────────── */}
-      <div className="ff-shape-container items-center justify-content mt-10 p-2 px-4 border border-[#CCCCCC] bg-[#F0F0F0] flex items-start gap-3">
+      <div className="ff-shape-container items-center justify-content mt-4 p-2 px-4 border border-[#CCCCCC] bg-[#F0F0F0] flex items-start gap-3">
         <Settings size={14} className="text-[#FF4FD8] shrink-0 mt-0.5" />
         <div className="text-xs text-[#0D0D0D] leading-relaxed">
           <p>

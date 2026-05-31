@@ -54,6 +54,9 @@ export interface Service {
   /** Nested child services (from DB hierarchy via mapService) */
   children?: Service[]
   relatedPortfolio?: import("./portfolio-data").PortfolioItem[]
+  coverImage?: string | null
+  accentColor?: string | null
+  gradient?: string | null
 }
 
 export const SERVICES: Service[] = [

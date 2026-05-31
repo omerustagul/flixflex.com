@@ -29,6 +29,9 @@ type ServiceMapInput = {
   parentId: string | null
   children?: ServiceMapInput[]
   portfolios?: PortfolioWithServices[]
+  coverImage?: string | null
+  accentColor?: string | null
+  gradient?: string | null
 }
 
 const DEFAULT_GRADIENT = "from-[#1A1A1A] via-[#2A1A3A] to-[#3D1A5C]"
@@ -113,6 +116,9 @@ export function mapService(item: ServiceMapInput, depth: number = 0): PublicServ
       : [],
     deliverables: asStringArray(item.deliverables),
     parentId: item.parentId ?? undefined,
+    coverImage: item.coverImage || null,
+    accentColor: item.accentColor || null,
+    gradient: item.gradient || null,
     children: depth < MAX_DEPTH && item.children?.length
       ? item.children.map((child) => mapService(child, depth + 1))
       : [],
@@ -266,21 +272,7 @@ export async function getPublishedServiceBySlug(
     return {
       ...service,
       parentId: row.parentId,
-      children: row.children.length > 0 ? row.children.map((c) => ({
-        id: c.id,
-        slug: c.slug,
-        title: c.title,
-        description: c.description ?? "",
-        body: c.body ?? "",
-        iconKey: c.icon,
-        features: c.features,
-        processSteps: Array.isArray(c.processSteps) ? (c.processSteps as unknown as PublicService["processSteps"]) : [],
-        deliverables: c.deliverables,
-        relatedPortfolio: c.portfolios
-          .filter((p) => p.isPublished)
-          .sort((a, b) => a.order - b.order)
-          .map(mapPortfolio),
-      })) : undefined,
+      children: row.children.length > 0 ? row.children.map((c) => mapService(c)) : undefined,
     }
   } catch (err) {
     console.error('[getPublishedServiceBySlug] DB error:', err)

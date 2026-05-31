@@ -263,7 +263,7 @@ export function AIStudio({ keyConfigured, defaultModel }: AIStudioProps) {
 
       {/* Key warning */}
       {!keyConfigured && (
-        <div className="mb-6 flex items-start gap-3 p-4 bg-yellow-500/10 border border-yellow-500/40">
+        <div className="ff-shape-container mb-6 flex items-center justify-start gap-3 h-9 px-4 bg-yellow-500/10 border border-yellow-500/40">
           <AlertTriangle className="text-yellow-500 shrink-0 mt-0.5" size={16} />
           <div className="text-[12px] text-yellow-500">
             <strong>ANTHROPIC_API_KEY tanımlı değil.</strong> Arayüz çalışmaya devam eder
@@ -274,7 +274,7 @@ export function AIStudio({ keyConfigured, defaultModel }: AIStudioProps) {
 
       {/* Error banner */}
       {error && (
-        <div className="mb-6 flex items-start justify-between gap-3 p-4 bg-red-500/10 border border-red-500/40">
+        <div className="ff-shape-container mb-6 flex items-center justify-start gap-3 h-9 px-4 bg-red-500/10 border border-red-500/40">
           <div className="flex items-start gap-3">
             <AlertTriangle className="text-red-500 shrink-0 mt-0.5" size={16} />
             <p className="text-[12px] text-red-500">{error}</p>
@@ -376,7 +376,7 @@ function ProgressStrip({ current }: { current: StepId }) {
           <li key={s.id} className="flex items-center gap-2 shrink-0">
             <span
               className={cn(
-                "w-7 h-7 flex items-center justify-center text-[11px] font-bold font-display",
+                "ff-shape-container w-7 h-7 flex items-center justify-center text-[11px] font-bold font-display",
                 active && "bg-[var(--ff-purple)] text-white",
                 done && "bg-[rgba(255, 79, 216, 0.2)] text-[var(--ff-purple)] border border-[var(--ff-purple)]",
                 !active && !done && "bg-[var(--surface)] text-[var(--foreground-faint)] border border-[var(--border)]"
@@ -428,7 +428,7 @@ function Step1Topic({
           placeholder="Örn: 'TikTok algoritması 2026', 'B2B SaaS lead generation', 'rebranding süreci'..."
           rows={5}
           className={cn(
-            "w-full bg-[var(--surface)] border border-[var(--border)]",
+            "ff-shape-container w-full bg-[var(--surface)] border border-[var(--border)]",
             "px-4 py-3 text-[15px] text-[var(--foreground)] resize-y",
             "placeholder:text-[var(--foreground-faint)] outline-none",
             "focus:border-[var(--ff-purple)] focus:shadow-[0_0_0_3px_rgba(255, 79, 216, 0.12)]"
@@ -447,7 +447,7 @@ function Step1Topic({
         </FFButton>
       </div>
 
-      <aside className="bg-[var(--surface)] border border-[var(--border)] p-5 h-fit">
+      <aside className="ff-shape-container bg-[var(--surface)] border border-[var(--border)] p-5 h-fit">
         <h3 className="font-display font-bold text-[var(--foreground)] mb-2">
           İpuçları
         </h3>
@@ -561,7 +561,7 @@ function Step2Title({
           }}
           placeholder="Kendi başlığını buraya yaz..."
           className={cn(
-            "w-full bg-[var(--surface)] border border-[var(--border)]",
+            "ff-shape-container w-full bg-[var(--surface)] border border-[var(--border)]",
             "px-4 py-3 text-[15px] text-[var(--foreground)] outline-none",
             "placeholder:text-[var(--foreground-faint)]",
             "focus:border-[var(--ff-purple)] focus:shadow-[0_0_0_3px_rgba(255, 79, 216, 0.12)]",

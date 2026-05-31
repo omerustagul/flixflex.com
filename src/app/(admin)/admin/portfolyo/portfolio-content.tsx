@@ -53,7 +53,7 @@ export function PortfolioContent({ items }: { items: PortfolioCardItem[] }) {
       ) : (
         <div className="ff-shape-container bg-[#f7f7f5] border border-[#CCCCCC] overflow-hidden">
           <table className="w-full">
-            <thead className="bg-[#dadada] border-b border-[#CCCCCC] text-left">
+            <thead className="bg-[#f2f2f2] border-b border-[#CCCCCC] text-left">
               <tr>
                 <th className="px-4 py-3 text-[10px] font-bold text-[#666666]">Proje</th>
                 <th className="px-4 py-3 text-[10px] font-bold text-[#666666]">Hizmetler</th>
@@ -65,7 +65,7 @@ export function PortfolioContent({ items }: { items: PortfolioCardItem[] }) {
               {items.map((item) => (
                 <tr key={item.id} className="border-b border-[#CCCCCC] last:border-0 hover:bg-[#f7f7f5] transition-colors">
                   <td className="px-4 py-3">
-                    <Link href={`/admin/portfolyo/${item.id}`} className="text-[13px] font-semibold hover:text-[#ff4fd8] transition-colors">
+                    <Link href={`/admin/portfolyo/${item.slug}`} className="text-[13px] font-semibold hover:text-[#ff4fd8] transition-colors">
                       {item.title}
                     </Link>
                     <p className="text-[11px] text-[#666666] mt-0.5">
@@ -87,7 +87,7 @@ export function PortfolioContent({ items }: { items: PortfolioCardItem[] }) {
                       <Link href={`/portfolio/${item.slug}`} target="_blank" className="ff-shape-button border border-[#CCCCCC] w-7 h-7 flex items-center justify-center hover:border-[#ff4fd8] text-[#666666] hover:text-[#ff4fd8] transition-colors">
                         <ExternalLink size={12} />
                       </Link>
-                      <Link href={`/admin/portfolyo/${item.id}`} className="ff-shape-button border border-[#CCCCCC] w-7 h-7 flex items-center justify-center hover:border-[#ff4fd8] text-[#666666] hover:text-[#ff4fd8] transition-colors">
+                      <Link href={`/admin/portfolyo/${item.slug}`} className="ff-shape-button border border-[#CCCCCC] w-7 h-7 flex items-center justify-center hover:border-[#ff4fd8] text-[#666666] hover:text-[#ff4fd8] transition-colors">
                         <Pencil size={12} />
                       </Link>
                     </div>
@@ -130,8 +130,8 @@ function PortfolioCard({ item }: { item: PortfolioCardItem }) {
       <div className="p-4 space-y-3">
         <div>
           <Link
-            href={`/admin/portfolyo/${item.id}`}
-            className="text-sm font-semibold text-[#666666] hover:text-[#ff4fd8] transition-colors line-clamp-1"
+            href={`/admin/portfolyo/${item.slug}`}
+            className="text-sm font-semibold text-[#666666] hover:text-[#ff4fd8] transition-colors line-clamp-1 block"
           >
             {item.title}
           </Link>
@@ -165,7 +165,7 @@ function PortfolioCard({ item }: { item: PortfolioCardItem }) {
               <ExternalLink size={12} />
             </Link>
             <Link
-              href={`/admin/portfolyo/${item.id}`}
+              href={`/admin/portfolyo/${item.slug}`}
               className="ff-shape-button border border-[#CCCCCC] w-7 h-7 flex items-center justify-center hover:border-[#ff4fd8] text-[#666666] hover:text-[#ff4fd8] transition-colors"
             >
               <Pencil size={12} />
