@@ -9,7 +9,7 @@ export default async function EditServicePage({ params }: { params: Promise<{ sl
   if (!prisma) notFound()
   const { slug } = await params
   const [item, allServices] = await Promise.all([
-    prisma.service.findUnique({ where: { slug }, include: { portfolios: true } }),
+    prisma.service.findUnique({ where: { slug }, include: { portfolios: true, children: true } }),
     prisma.service.findMany({ select: { id: true, title: true, slug: true }, orderBy: { order: "asc" } }),
   ])
   if (!item) notFound()

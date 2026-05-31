@@ -3,8 +3,10 @@
 import * as React from "react"
 import type { LucideIcon } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useState, useMemo } from "react"
-import { Plus, Pencil, ExternalLink, Layers, ChevronRight } from "lucide-react"
+import * as Dialog from "@radix-ui/react-dialog"
+import { Plus, Pencil, ExternalLink, Layers, ChevronRight, Trash2, X, Loader2 } from "lucide-react"
 import * as LucideIcons from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ViewToggle, type ViewMode } from "@/components/admin/view-toggle"
@@ -24,6 +26,13 @@ type ServiceCardItem = {
 
 export function ServicesPageClient({ items }: { items: ServiceCardItem[] }) {
   const [viewMode, setViewMode] = useState<ViewMode>("grid")
+  const router = useRouter()
+
+  // Deletion States
+  const [deleteOpen, setDeleteOpen] = useState(false)
+  const [serviceToDelete, setServiceToDelete] = useState<ServiceCardItem | null>(null)
+  const [deleteLoading, setDeleteLoading] = useState(false)
+  const [deleteError, setDeleteError] = useState<string | null>(null)
 
   // Group services hierarchically
   const { mainServices, getChildren, orphanedServices } = useMemo(() => {
@@ -38,8 +47,14 @@ export function ServicesPageClient({ items }: { items: ServiceCardItem[] }) {
     }
   }, [items])
 
+  const triggerDelete = (item: ServiceCardItem) => {
+    setServiceToDelete(item)
+    setDeleteError(null)
+    setDeleteOpen(true)
+  }
+
   return (
-    <div className="px-6 md:px-10 py-8 space-y-6 mx-auto">
+    <div className="px-6 md:px-10 py-8 space-y-6 max-w-7xl mx-auto">
       {/* Page Header */}
       <div className="flex items-end justify-between gap-4 flex-wrap border-b border-[#E0E0E0] pb-5">
         <div>
@@ -77,6 +92,7 @@ export function ServicesPageClient({ items }: { items: ServiceCardItem[] }) {
                   key={item.id} 
                   item={item} 
                   childrenList={children} 
+                  onDelete={triggerDelete}
                 />
               )
             })}
@@ -92,6 +108,7 @@ export function ServicesPageClient({ items }: { items: ServiceCardItem[] }) {
                     key={item.id} 
                     item={item} 
                     childrenList={[]} 
+                    onDelete={triggerDelete}
                   />
                 ))}
               </div>
@@ -109,7 +126,7 @@ export function ServicesPageClient({ items }: { items: ServiceCardItem[] }) {
                 <th className="px-5 py-3 text-[10px] font-bold text-[#666666] uppercase tracking-wider w-24">Durum</th>
                 <th className="px-5 py-3 text-[10px] font-bold text-[#666666] uppercase tracking-wider w-32">Portfolyo</th>
                 <th className="px-5 py-3 text-[10px] font-bold text-[#666666] uppercase tracking-wider w-20">Sıra</th>
-                <th className="px-5 py-3 text-[10px] font-bold text-[#666666] uppercase tracking-wider text-right w-28">Aksiyonlar</th>
+                <th className="px-5 py-3 text-[10px] font-bold text-[#666666] uppercase tracking-wider text-right w-36">Aksiyonlar</th>
               </tr>
             </thead>
             <tbody>
@@ -118,7 +135,7 @@ export function ServicesPageClient({ items }: { items: ServiceCardItem[] }) {
                 return (
                   <React.Fragment key={mainItem.id}>
                     {/* Parent Row */}
-                    <ServiceRow item={mainItem} isChild={false} />
+                    <ServiceRow item={mainItem} isChild={false} onDelete={triggerDelete} />
                     
                     {/* Child Rows */}
                     {children.map((childItem) => (
@@ -126,6 +143,7 @@ export function ServicesPageClient({ items }: { items: ServiceCardItem[] }) {
                         key={childItem.id} 
                         item={childItem} 
                         isChild={true} 
+                        onDelete={triggerDelete}
                       />
                     ))}
                   </React.Fragment>
@@ -138,12 +156,104 @@ export function ServicesPageClient({ items }: { items: ServiceCardItem[] }) {
                   key={orphanItem.id} 
                   item={orphanItem} 
                   isChild={false} 
+                  onDelete={triggerDelete}
                 />
               ))}
             </tbody>
           </table>
         </div>
       )}
+
+      {/* ── Dialog: Confirm Deletion Modal ── */}
+      <Dialog.Root open={deleteOpen} onOpenChange={setDeleteOpen}>
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm" />
+          <Dialog.Content className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-white border border-[#E0E0E0] p-6 shadow-2xl ff-shape-container animate-ff-fadeIn overflow-hidden">
+            <Dialog.Close asChild>
+              <button 
+                className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center text-[#666666] hover:text-[#333333] transition-colors" 
+                aria-label="Kapat"
+              >
+                <X size={14} />
+              </button>
+            </Dialog.Close>
+
+            <div className="ff-shape-button w-10 h-10 flex items-center justify-center border border-red-500/30 bg-red-500/10 mb-4">
+              <Trash2 size={18} className="text-red-500" />
+            </div>
+
+            <Dialog.Title className="text-base font-extrabold text-[#333333] mb-2">
+              Hizmeti Sil
+            </Dialog.Title>
+
+            {serviceToDelete && (
+              <>
+                {/* Hierarchy block check */}
+                {getChildren(serviceToDelete.id).length > 0 ? (
+                  <div className="space-y-4">
+                    <Dialog.Description className="text-xs text-[#666666] leading-relaxed">
+                      <strong className="text-[#333333]">{serviceToDelete.title}</strong> hizmetine bağlı alt hizmetler bulunmaktadır. 
+                      Veri bütünlüğünü korumak adına, alt hizmetleri olan bir ana hizmetin silinmesine izin verilmez.
+                    </Dialog.Description>
+                    <div className="p-3 bg-amber-50 border border-amber-200 text-amber-800 text-xs font-semibold ff-shape-container leading-relaxed">
+                      Lütfen önce bu hizmete bağlı alt uzmanlık alanlarını silin veya başka bir ana hizmete bağlayın.
+                    </div>
+                    <div className="flex items-center justify-end gap-3 pt-2">
+                      <Dialog.Close asChild>
+                        <button className="ff-shape-button px-5 h-9 bg-[#f7f7f5] border border-[#CCCCCC] text-[#666666] text-[11px] font-bold hover:bg-[#ff4fd8]/5 hover:text-[#ff4fd8] transition-colors">
+                          Kapat
+                        </button>
+                      </Dialog.Close>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    <Dialog.Description className="text-xs text-[#666666] leading-relaxed">
+                      <strong className="text-[#333333]">{serviceToDelete.title}</strong> hizmetini silmek istediğinize emin misiniz? Bu işlem geri alınamaz ve bu hizmete bağlı tüm veriler silinir.
+                    </Dialog.Description>
+
+                    {deleteError && (
+                      <div className="p-2.5 bg-red-50 border border-red-200 text-red-500 text-xs font-semibold ff-shape-container">
+                        {deleteError}
+                      </div>
+                    )}
+
+                    <div className="flex items-center justify-end gap-3 pt-2">
+                      <Dialog.Close asChild>
+                        <button className="ff-shape-button px-5 h-9 border border-[#CCCCCC] bg-[#f7f7f5] text-[#666666] text-[11px] font-bold hover:bg-[#ff4fd8]/5 hover:text-[#ff4fd8] transition-colors" disabled={deleteLoading}>
+                          Vazgeç
+                        </button>
+                      </Dialog.Close>
+                      <button
+                        onClick={async () => {
+                          setDeleteLoading(true)
+                          setDeleteError(null)
+                          try {
+                            const res = await fetch(`/api/services/${serviceToDelete.id}`, { method: "DELETE" })
+                            const json = await res.json()
+                            if (!res.ok || !json.ok) throw new Error(json.message ?? "Silme işlemi başarısız")
+                            setDeleteOpen(false)
+                            router.refresh()
+                          } catch (err) {
+                            setDeleteError(err instanceof Error ? err.message : String(err))
+                          } finally {
+                            setDeleteLoading(false)
+                          }
+                        }}
+                        disabled={deleteLoading}
+                        className="ff-shape-button inline-flex items-center gap-1.5 px-6 h-9 bg-red-500 hover:bg-red-600 text-white text-[11px] font-bold transition-colors shadow-sm disabled:opacity-50"
+                      >
+                        {deleteLoading ? <Loader2 className="animate-spin" size={12} /> : <Trash2 size={12} />}
+                        Hizmeti Sil
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
     </div>
   )
 }
@@ -151,12 +261,20 @@ export function ServicesPageClient({ items }: { items: ServiceCardItem[] }) {
 /* ── SUPPORTING COMPONENTS ───────────────────────── */
 
 // Grid view Main Service Card containing child lists
-function MainServiceCard({ item, childrenList }: { item: ServiceCardItem; childrenList: ServiceCardItem[] }) {
+function MainServiceCard({ 
+  item, 
+  childrenList, 
+  onDelete 
+}: { 
+  item: ServiceCardItem
+  childrenList: ServiceCardItem[]
+  onDelete: (item: ServiceCardItem) => void 
+}) {
   const Icon = (LucideIcons as unknown as Record<string, LucideIcon>)[item.icon] ?? LucideIcons.Globe
 
   return (
     <div className={cn(
-      "ff-shape-container group relative bg-[#f7f7f5] border border-[#E0E0E0] p-6",
+      "ff-shape-container group relative bg-white border border-[#E0E0E0] p-6 shadow-sm",
       "transition-all duration-300 hover:border-[#ff4fd8]/50 hover:shadow-md flex flex-col justify-between"
     )}>
       {/* Top section */}
@@ -217,7 +335,7 @@ function MainServiceCard({ item, childrenList }: { item: ServiceCardItem; childr
                       </Link>
                     </div>
 
-                    <div className="flex items-center gap-1.5 shrink-0">
+                    <div className="flex items-center gap-1 shrink-0">
                       {/* Sub Status Dot */}
                       <span 
                         className={cn("w-1.5 h-1.5 rounded-full shrink-0", child.isPublished ? "bg-green-500" : "bg-orange-400")} 
@@ -232,6 +350,16 @@ function MainServiceCard({ item, childrenList }: { item: ServiceCardItem; childr
                       >
                         <Pencil size={9} />
                       </Link>
+                      
+                      {/* Delete button */}
+                      <button
+                        type="button"
+                        onClick={() => onDelete(child)}
+                        className="w-5 h-5 flex items-center justify-center border border-[#CCCCCC] hover:border-red-500/50 hover:bg-red-500/10 text-[#888888] hover:text-red-500 transition-colors ff-shape-button"
+                        title="Alt Hizmeti Sil"
+                      >
+                        <Trash2 size={9} />
+                      </button>
                     </div>
                   </div>
                 )
@@ -266,6 +394,14 @@ function MainServiceCard({ item, childrenList }: { item: ServiceCardItem; childr
           >
             <Pencil size={11} />
           </Link>
+          <button
+            type="button"
+            onClick={() => onDelete(item)}
+            className="ff-shape-button border border-[#E0E0E0] w-7 h-7 flex items-center justify-center hover:border-red-500/55 hover:bg-red-500/10 text-[#666666] hover:text-red-500 transition-colors bg-white shadow-sm"
+            title="Hizmeti Sil"
+          >
+            <Trash2 size={11} />
+          </button>
         </div>
       </div>
     </div>
@@ -273,7 +409,15 @@ function MainServiceCard({ item, childrenList }: { item: ServiceCardItem; childr
 }
 
 // Table view Row component
-function ServiceRow({ item, isChild }: { item: ServiceCardItem; isChild: boolean }) {
+function ServiceRow({ 
+  item, 
+  isChild, 
+  onDelete 
+}: { 
+  item: ServiceCardItem
+  isChild: boolean
+  onDelete: (item: ServiceCardItem) => void 
+}) {
   const Icon = (LucideIcons as unknown as Record<string, LucideIcon>)[item.icon] ?? LucideIcons.Globe
 
   return (
@@ -345,6 +489,14 @@ function ServiceRow({ item, isChild }: { item: ServiceCardItem; isChild: boolean
           >
             <Pencil size={11} />
           </Link>
+          <button
+            type="button"
+            onClick={() => onDelete(item)}
+            className="ff-shape-button border border-[#E0E0E0] bg-white w-7 h-7 flex items-center justify-center hover:border-red-500/50 hover:bg-red-500/10 text-[#666666] hover:text-red-500 transition-colors shadow-sm"
+            title="Hizmeti Sil"
+          >
+            <Trash2 size={11} />
+          </button>
         </div>
       </td>
     </tr>

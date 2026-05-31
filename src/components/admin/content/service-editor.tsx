@@ -97,6 +97,9 @@ export function ServiceEditor({ mode, initial, allServices }: ServiceEditorProps
   const [slugDirty, setSlugDirty] = React.useState(Boolean(initial?.slug))
   const [iconPickerOpen, setIconPickerOpen] = React.useState(false)
   const [iconSearch, setIconSearch] = React.useState("")
+  const [deleteOpen, setDeleteOpen] = React.useState(false)
+  const [deleteLoading, setDeleteLoading] = React.useState(false)
+  const [deleteError, setDeleteError] = React.useState<string | null>(null)
   
   const [form, setForm] = React.useState(() => ({
     title: initial?.title ?? "",
@@ -126,6 +129,9 @@ export function ServiceEditor({ mode, initial, allServices }: ServiceEditorProps
   const availableParents = React.useMemo(() => {
     return allServices.filter((s) => s.id !== initial?.id)
   }, [allServices, initial?.id])
+
+  const children = Array.isArray(initial?.children) ? initial.children : []
+  const hasChildren = children.length > 0
 
   React.useEffect(() => {
     if (mode === "new" && form.title && !slugDirty) {
@@ -204,6 +210,20 @@ export function ServiceEditor({ mode, initial, allServices }: ServiceEditorProps
         </div>
         
         <div className="flex gap-2">
+          {mode === "edit" && (
+            <button
+              type="button"
+              className="ff-shape-button px-4 h-9 border border-red-500/20 hover:border-red-500/40 text-red-500 hover:bg-red-500/10 font-bold text-[12px] flex items-center gap-1.5 transition-all disabled:opacity-50"
+              disabled={busy}
+              onClick={() => {
+                setDeleteError(null)
+                setDeleteOpen(true)
+              }}
+            >
+              <Trash2 size={13} />
+              Sil
+            </button>
+          )}
           <button 
             type="button"
             className="ff-shape-button px-5 h-9 border border-[#CCCCCC] text-[#666666] hover:text-[#ff4fd8] hover:border-[#ff4fd8]/30 bg-white font-bold text-[12px] flex items-center gap-2 transition-colors disabled:opacity-50" 
@@ -576,6 +596,93 @@ export function ServiceEditor({ mode, initial, allServices }: ServiceEditorProps
               </button>
             </div>
 
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
+
+      {/* ── Dialog: Confirm Deletion Modal ── */}
+      <Dialog.Root open={deleteOpen} onOpenChange={setDeleteOpen}>
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200" />
+          <Dialog.Content className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-white border border-[#E0E0E0] p-6 shadow-2xl ff-shape-container animate-in zoom-in-95 duration-200 overflow-hidden outline-none">
+            <Dialog.Close asChild>
+              <button 
+                className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center text-[#666666] hover:text-[#333333] transition-colors" 
+                aria-label="Kapat"
+              >
+                <X size={14} />
+              </button>
+            </Dialog.Close>
+
+            <div className="ff-shape-button w-10 h-10 flex items-center justify-center border border-red-500/30 bg-red-500/10 mb-4">
+              <Trash2 size={18} className="text-red-500" />
+            </div>
+
+            <Dialog.Title className="text-base font-extrabold text-[#333333] mb-2">
+              Hizmeti Sil
+            </Dialog.Title>
+
+            {hasChildren ? (
+              <div className="space-y-4">
+                <Dialog.Description className="text-xs text-[#666666] leading-relaxed">
+                  <strong className="text-[#333333]">{form.title}</strong> hizmetine bağlı alt hizmetler bulunmaktadır. 
+                  Veri bütünlüğünü korumak adına, alt hizmetleri olan bir ana hizmetin silinmesine izin verilmez.
+                </Dialog.Description>
+                <div className="p-3 bg-amber-50 border border-amber-200 text-amber-800 text-xs font-semibold ff-shape-container leading-relaxed">
+                  Lütfen önce bu hizmete bağlı alt uzmanlık alanlarını silin veya başka bir ana hizmete bağlayın.
+                </div>
+                <div className="flex items-center justify-end gap-3 pt-2">
+                  <Dialog.Close asChild>
+                    <button className="ff-shape-button px-5 h-9 bg-[#f7f7f5] border border-[#CCCCCC] text-[#666666] text-[11px] font-bold hover:bg-[#ff4fd8]/5 hover:text-[#ff4fd8] transition-colors">
+                      Kapat
+                    </button>
+                  </Dialog.Close>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <Dialog.Description className="text-xs text-[#666666] leading-relaxed">
+                  <strong className="text-[#333333]">{form.title}</strong> hizmetini silmek istediğinize emin misiniz? Bu işlem geri alınamaz ve bu hizmete bağlı tüm veriler silinir.
+                </Dialog.Description>
+
+                {deleteError && (
+                  <div className="p-2.5 bg-red-50 border border-red-200 text-red-500 text-xs font-semibold ff-shape-container">
+                    {deleteError}
+                  </div>
+                )}
+
+                <div className="flex items-center justify-end gap-3 pt-2">
+                  <Dialog.Close asChild>
+                    <button className="ff-shape-button px-5 h-9 border border-[#CCCCCC] bg-[#f7f7f5] text-[#666666] text-[11px] font-bold hover:bg-[#ff4fd8]/5 hover:text-[#ff4fd8] transition-colors" disabled={deleteLoading}>
+                      Vazgeç
+                    </button>
+                  </Dialog.Close>
+                  <button
+                    onClick={async () => {
+                      setDeleteLoading(true)
+                      setDeleteError(null)
+                      try {
+                        const res = await fetch(`/api/services/${initial!.id}`, { method: "DELETE" })
+                        const json = await res.json()
+                        if (!res.ok || !json.ok) throw new Error(json.message ?? "Silme işlemi başarısız")
+                        setDeleteOpen(false)
+                        router.push("/admin/hizmetler")
+                        router.refresh()
+                      } catch (err) {
+                        setDeleteError(err instanceof Error ? err.message : String(err))
+                      } finally {
+                        setDeleteLoading(false)
+                      }
+                    }}
+                    disabled={deleteLoading}
+                    className="ff-shape-button inline-flex items-center gap-1.5 px-6 h-9 bg-red-500 hover:bg-red-600 text-white text-[11px] font-bold transition-colors shadow-sm disabled:opacity-50"
+                  >
+                    {deleteLoading ? <Loader2 className="animate-spin" size={12} /> : <Trash2 size={12} />}
+                    Hizmeti Sil
+                  </button>
+                </div>
+              </div>
+            )}
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>
