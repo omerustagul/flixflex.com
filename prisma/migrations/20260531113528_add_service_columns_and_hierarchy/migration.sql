@@ -1,17 +1,18 @@
 -- AlterTable
-ALTER TABLE "media" ADD COLUMN     "folderId" TEXT;
+ALTER TABLE "media" ADD COLUMN IF NOT EXISTS "folderId" TEXT;
 
 -- AlterTable
-ALTER TABLE "portfolio_items" ADD COLUMN     "clientLogo" TEXT;
+ALTER TABLE "portfolio_items" ADD COLUMN IF NOT EXISTS "clientLogo" TEXT;
 
 -- AlterTable
-ALTER TABLE "services" ADD COLUMN     "accentColor" TEXT,
-ADD COLUMN     "coverImage" TEXT,
-ADD COLUMN     "gradient" TEXT,
-ADD COLUMN     "parentId" TEXT;
+ALTER TABLE "services" 
+ADD COLUMN IF NOT EXISTS "accentColor" TEXT,
+ADD COLUMN IF NOT EXISTS "coverImage" TEXT,
+ADD COLUMN IF NOT EXISTS "gradient" TEXT,
+ADD COLUMN IF NOT EXISTS "parentId" TEXT;
 
 -- CreateTable
-CREATE TABLE "media_folders" (
+CREATE TABLE IF NOT EXISTS "media_folders" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "parentId" TEXT,
@@ -22,7 +23,7 @@ CREATE TABLE "media_folders" (
 );
 
 -- CreateTable
-CREATE TABLE "appointments" (
+CREATE TABLE IF NOT EXISTS "appointments" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
@@ -40,7 +41,7 @@ CREATE TABLE "appointments" (
 );
 
 -- CreateTable
-CREATE TABLE "blocked_slots" (
+CREATE TABLE IF NOT EXISTS "blocked_slots" (
     "id" TEXT NOT NULL,
     "date" TIMESTAMP(3) NOT NULL,
     "reason" TEXT,
@@ -50,16 +51,41 @@ CREATE TABLE "blocked_slots" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "media_folders_name_parentId_key" ON "media_folders"("name", "parentId");
+CREATE UNIQUE INDEX IF NOT EXISTS "media_folders_name_parentId_key" ON "media_folders"("name", "parentId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "blocked_slots_date_key" ON "blocked_slots"("date");
+CREATE UNIQUE INDEX IF NOT EXISTS "blocked_slots_date_key" ON "blocked_slots"("date");
 
 -- AddForeignKey
-ALTER TABLE "services" ADD CONSTRAINT "services_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "services"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM information_schema.table_constraints 
+        WHERE constraint_name = 'services_parentId_fkey'
+    ) THEN
+        ALTER TABLE "services" ADD CONSTRAINT "services_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "services"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+    END IF;
+END $$;
 
 -- AddForeignKey
-ALTER TABLE "media" ADD CONSTRAINT "media_folderId_fkey" FOREIGN KEY ("folderId") REFERENCES "media_folders"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM information_schema.table_constraints 
+        WHERE constraint_name = 'media_folderId_fkey'
+    ) THEN
+        ALTER TABLE "media" ADD CONSTRAINT "media_folderId_fkey" FOREIGN KEY ("folderId") REFERENCES "media_folders"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+    END IF;
+END $$;
 
 -- AddForeignKey
-ALTER TABLE "media_folders" ADD CONSTRAINT "media_folders_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "media_folders"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM information_schema.table_constraints 
+        WHERE constraint_name = 'media_folders_parentId_fkey'
+    ) THEN
+        ALTER TABLE "media_folders" ADD CONSTRAINT "media_folders_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "media_folders"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+    END IF;
+END $$;
+
