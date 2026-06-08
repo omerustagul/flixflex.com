@@ -188,7 +188,7 @@ export function FlixFlexFooter({ siteSettings = {} }: { siteSettings?: Record<st
             {/* Locale */}
             <div className="flex items-center gap-2 text-[11px] text-[var(--foreground-faint)]">
               <span className="ff-shape-container w-1.5 h-1.5 bg-[var(--ff-purple)] animate-pulse" />
-              <span>FlixFlex · İzmir, Türkiye</span>
+              <span>FlixFlex · İstanbul, Türkiye</span>
             </div>
           </div>
         </div>

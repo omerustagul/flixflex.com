@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "cdn.pixabay.com" },
       { protocol: "https", hostname: "ferf1mheo22r9ira.public.blob.vercel-storage.com" },
       { protocol: "https", hostname: "image.mux.com" },
+      { protocol: "https", hostname: "me7aitdbxq.ufs.sh" },
     ],
     formats: ["image/avif", "image/webp"],
   },
@@ -26,6 +27,9 @@ const nextConfig: NextConfig = {
 
   // ── Headers ──────────────────────────────────────
   async headers() {
+    const isDev = process.env.NODE_ENV === "development"
+    const wsRules = isDev ? "ws: wss: ws://* wss://* " : ""
+
     return [
       {
         source: "/(.*)",
@@ -54,7 +58,7 @@ const nextConfig: NextConfig = {
               "font-src 'self' https://fonts.gstatic.com data:; " +
               "img-src 'self' data: blob: https:; " +
               "media-src 'self' blob: https://*.mux.com; " +
-              "connect-src 'self' https://*.mux.com https://*.litix.io https://api.anthropic.com; " +
+              `connect-src 'self' ${wsRules}https://*.mux.com https://*.litix.io https://api.anthropic.com; ` +
               "frame-ancestors 'none';",
           },
         ],

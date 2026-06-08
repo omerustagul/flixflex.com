@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { useState, useEffect } from "react"
 
 interface PageTransitionProps {
   children: React.ReactNode
@@ -11,6 +12,11 @@ interface PageTransitionProps {
 
 export function PageTransition({ children, className }: PageTransitionProps) {
   const pathname = usePathname()
+  const [animationDone, setAnimationDone] = useState(false)
+
+  useEffect(() => {
+    setAnimationDone(false)
+  }, [pathname])
 
   return (
     <AnimatePresence mode="wait" initial={false}>
@@ -23,8 +29,9 @@ export function PageTransition({ children, className }: PageTransitionProps) {
           duration: 0.35,
           ease: [0.25, 0.1, 0.25, 1],
         }}
+        onAnimationComplete={() => setAnimationDone(true)}
         className={cn("min-h-screen", className)}
-        style={{ transformStyle: "preserve-3d" }}
+        style={animationDone ? { transform: "none" } : { transformStyle: "preserve-3d" }}
       >
         {children}
       </motion.div>

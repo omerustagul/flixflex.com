@@ -51,3 +51,18 @@ export { ContainerScroll }      from "./container-scroll-animation"
 // ── Interaction Components ───────────────────────
 export { TiltCard }             from "./tilt-card"
 export type { TiltCardProps }   from "./tilt-card"
+
+export { PoemAnimation }        from "./3d-animation"
+export type { PoemAnimationProps } from "./3d-animation"
+
+export { WovenLightHero }       from "./woven-light-hero"
+export type { WovenLightHeroProps } from "./woven-light-hero"
+
+export { ScrollExpandMedia }    from "./scroll-expansion-hero"
+export type { ScrollExpandMediaProps } from "./scroll-expansion-hero"
+
+export { FlowArt, FlowSection } from "./story-scroll"
+export type { FlowArtProps, FlowSectionProps } from "./story-scroll"
+
+
+

@@ -38,10 +38,16 @@ export type SectionType =
   | "hero-animated-video"
   | "parallax"
   | "appointment-card"
+  | "poem-animation"
+  | "woven-light-hero"
+  | "scroll-expansion-hero"
+  | "modern-manifesto"
+
+
 
 
 // ── Generic Section Block ─────────────────────────
-export type SectionTransition = "normal" | "sticky" | "parallax" | "overlap"
+export type SectionTransition = "normal" | "sticky" | "parallax" | "overlap" | "story-scroll"
 
 export interface SectionBlock<T = Record<string, unknown>> {
   id: string
@@ -245,6 +251,62 @@ export const appointmentCardPropsSchema = z.object({
   hideMobileDock: z.boolean().default(false),
 })
 
+export const poemAnimationPropsSchema = z.object({
+  poemHTML: z.string().default(`
+    <p>The <span>love</span> between Ayla and Leo ignited in the old courtyard, each morning their swords clashed under dawn’s glow, faces streaked with <span>dust</span> and sweat; they <span>danced</span> between parries, every laugh a spark of joy against uncertain hearts. She stepped forward with <span>courage</span>, he met her gaze with open warmth, two souls seeking a shared <span>triumph</span> in their vulnerability. When blades slipped and one <span>faltered</span>, the other caught them—forearms brushing, pulses aligned in a daring heartbeat. In failure they found grace; in triumph they discovered unity. Each moment spent <span>daring</span> to trust the other built a bond impervious to fear. At dusk, they sheathed their swords, stepping from the <span>arena</span> hand in hand, knowing love blooms not through perfection, but by <span>daring greatly</span> together.</p>
+  `),
+  backgroundImageUrl: z.string().default("https://i.ibb.co/q3XSxR9W/20250831-120144.jpg"),
+  boyImageUrl: z.string().default("https://i.ibb.co/Y4FKvK38/20250831-113022.png"),
+  hideMobileDock: z.boolean().default(false),
+})
+
+export type PoemAnimationProps = z.infer<typeof poemAnimationPropsSchema>
+
+export const wovenLightHeroPropsSchema = z.object({
+  headline: z.string().default("Woven by Light"),
+  subheadline: z.string().default("An interactive tapestry of light and motion, crafted with code and creativity."),
+  ctaLabel: z.string().default("Explore the Weave"),
+  ctaHref: z.string().default("/explore"),
+})
+
+export type WovenLightHeroProps = z.infer<typeof wovenLightHeroPropsSchema>
+
+export const scrollExpandMediaPropsSchema = z.object({
+  mediaType: z.enum(["video", "image"]).default("video"),
+  mediaSrc: z.string().default("https://me7aitdbxq.ufs.sh/f/2wsMIGDMQRdYuZ5R8ahEEZ4aQK56LizRdfBSqeDMsmUIrJN1"),
+  posterSrc: z.string().default("https://images.pexels.com/videos/5752729/space-earth-universe-cosmos-5752729.jpeg"),
+  bgImageSrc: z.string().default("https://me7aitdbxq.ufs.sh/f/2wsMIGDMQRdYMNjMlBUYHaeYpxduXPVNwf8mnFA61L7rkcoS"),
+  title: z.string().default("Immersive Video Experience"),
+  date: z.string().default("Cosmic Journey"),
+  scrollToExpand: z.string().default("Scroll to Expand Demo"),
+  textBlend: z.boolean().default(true),
+  description: z.string().default("This is a demonstration of the ScrollExpandMedia component. As you scroll, the media expands to fill more of the screen, creating an immersive experience."),
+})
+
+export type ScrollExpandMediaProps = z.infer<typeof scrollExpandMediaPropsSchema>
+
+export const modernManifestoPropsSchema = z.object({
+  leftText: z.string().default("WE ARE [media1] BBDO WE [media2] DO BIG [media3] THINGS"),
+  mediaUrl1: z.string().default("https://assets.mixkit.co/videos/preview/mixkit-girl-in-neon-sign-light-looking-at-camera-34293-large.mp4"),
+  mediaType1: z.enum(["video", "image"]).default("video"),
+  mediaUrl2: z.string().default("https://assets.mixkit.co/videos/preview/mixkit-hands-holding-and-using-smartphone-40742-large.mp4"),
+  mediaType2: z.enum(["video", "image"]).default("video"),
+  mediaUrl3: z.string().default("https://assets.mixkit.co/videos/preview/mixkit-waves-breaking-in-the-ocean-1527-large.mp4"),
+  mediaType3: z.enum(["video", "image"]).default("video"),
+  rightContent: z.string().default("<p>We solve big problems with strategy and creative that make a big impact.</p><p>We work with brands and marketers that have the biggest ambitions.</p><p>We hire big talent and bring them big opportunities that build boundless careers.</p>"),
+  ctaLabel: z.string().default("CONTACT US"),
+  ctaHref: z.string().default("/iletisim"),
+  backgroundColor: z.string().default("#FF0000"),
+  textColor: z.string().default("#FFFFFF"),
+  accentColor: z.string().default("#FFFFFF"),
+  hideMobileDock: z.boolean().default(false),
+})
+
+export type ModernManifestoProps = z.infer<typeof modernManifestoPropsSchema>
+
+
+
+
 
 // ── Section Prop Type Inference ───────────────────
 export type HeroProps = z.infer<typeof heroPropsSchema>
@@ -296,5 +358,9 @@ export const SECTION_SCHEMAS: Record<SectionType, z.ZodObject<z.ZodRawShape>> = 
   "parallax": parallaxPropsSchema,
   "portfolio-vertical-scroll": portfolioVerticalScrollPropsSchema,
   "appointment-card": appointmentCardPropsSchema,
+  "poem-animation": poemAnimationPropsSchema,
+  "woven-light-hero": wovenLightHeroPropsSchema,
+  "scroll-expansion-hero": scrollExpandMediaPropsSchema,
+  "modern-manifesto": modernManifestoPropsSchema,
 }
 

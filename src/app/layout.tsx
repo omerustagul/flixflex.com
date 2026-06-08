@@ -24,8 +24,16 @@ const dmSans = DM_Sans({
   display: "swap",
 })
 
+const metadataBaseUrl = process.env.NEXT_PUBLIC_APP_URL
+  ? process.env.NEXT_PUBLIC_APP_URL
+  : process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "https://flixflex.com"
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
+  metadataBase: new URL(metadataBaseUrl),
   title: { default: "FlixFlex — Next-Gen Reklam Ajansı", template: "%s | FlixFlex" },
   description: "Hız. Güç. Esneklik. FlixFlex ile markanızı büyütün.",
   openGraph: {

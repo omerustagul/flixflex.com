@@ -23,6 +23,7 @@ import {
   VideoEmbedSection,
   BlogListClient,
   AppointmentCardSection,
+  ModernManifestoSection,
 } from "@/components/public"
 import type { Service } from "@/components/public/sections/services-data"
 import { PortfolioHero } from "@/app/(public)/portfolio/_components/portfolio-hero"
@@ -35,6 +36,8 @@ import { DemoOfferCarousel, OfferCarousel } from "@/components/ui/offer-carousel
 import { DemoProjectShowcase } from "@/components/ui/project-showcase"
 import { AnimatedVideoHero, VideoHeroProvider } from "@/components/public/hero/animated-video-hero"
 import { ParallaxScrolling } from "@/components/public/parallax-scrolling"
+import { PoemAnimation, WovenLightHero, ScrollExpandMedia, FlowArt, FlowSection } from "@/components/ui"
+import { SectionWrapper } from "./section-wrapper"
 import { cn } from "@/lib/utils"
 import { useUIStore } from "@/lib/ui-store"
 import { ArrowRight } from "lucide-react"
@@ -295,11 +298,76 @@ const SECTION_RENDERERS: Partial<Record<SectionType, (
       />
     )
   },
+  "poem-animation": (s) => {
+    const p = s.props as any
+    return (
+      <PoemAnimation
+        poemHTML={p.poemHTML}
+        backgroundImageUrl={p.backgroundImageUrl}
+        boyImageUrl={p.boyImageUrl}
+      />
+    )
+  },
+  "woven-light-hero": (s) => {
+    const p = s.props as any
+    return (
+      <WovenLightHero
+        headline={p.headline}
+        subheadline={p.subheadline}
+        ctaLabel={p.ctaLabel}
+        ctaHref={p.ctaHref}
+      />
+    )
+  },
+  "scroll-expansion-hero": (s) => {
+    const p = s.props as any
+    return (
+      <ScrollExpandMedia
+        mediaType={p.mediaType}
+        mediaSrc={p.mediaSrc}
+        posterSrc={p.posterSrc}
+        bgImageSrc={p.bgImageSrc}
+        title={p.title}
+        date={p.date}
+        scrollToExpand={p.scrollToExpand}
+        textBlend={p.textBlend}
+      >
+        {p.description && (
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="text-lg text-black dark:text-white leading-relaxed">
+              {p.description}
+            </p>
+          </div>
+        )}
+      </ScrollExpandMedia>
+    )
+  },
+  "modern-manifesto": (s) => {
+    const p = s.props as any
+    return (
+      <ModernManifestoSection
+        leftText={p.leftText}
+        mediaUrl1={p.mediaUrl1}
+        mediaType1={p.mediaType1}
+        mediaUrl2={p.mediaUrl2}
+        mediaType2={p.mediaType2}
+        mediaUrl3={p.mediaUrl3}
+        mediaType3={p.mediaType3}
+        rightContent={p.rightContent}
+        ctaLabel={p.ctaLabel}
+        ctaHref={p.ctaHref}
+        backgroundColor={p.backgroundColor}
+        textColor={p.textColor}
+        accentColor={p.accentColor}
+        hideMobileDock={p.hideMobileDock}
+      />
+    )
+  },
 }
 
 export function PageRenderer({ sections, portfolioItems, servicesItems }: PageRendererProps) {
   const { setMobileDockVisible } = useUIStore()
-  const sectionRefs = React.useRef<Map<string, HTMLDivElement>>(new Map())
+  const sectionRefs = React.useRef<Map<string, HTMLElement>>(new Map())
   const intersectionRatios = React.useRef<Map<string, number>>(new Map())
 
   const visibleSections = React.useMemo(() => {
@@ -351,32 +419,101 @@ export function PageRenderer({ sections, portfolioItems, servicesItems }: PageRe
 
   if (visibleSections.length === 0) return null
 
+  // Group contiguous sections that are part of the story scroll sequence.
+  const groups = visibleSections.reduce((acc, section, idx) => {
+    const isStoryScrollSelf = section.transition === "story-scroll"
+    const prevSection = idx > 0 ? visibleSections[idx - 1] : null
+    const isStoryScrollPrev = prevSection?.transition === "story-scroll"
+    
+    const inStoryScroll = isStoryScrollSelf || isStoryScrollPrev
+
+    let lastGroup = acc[acc.length - 1]
+    const targetType = inStoryScroll ? "story-scroll" : "normal"
+
+    if (!lastGroup || lastGroup.type !== targetType) {
+      lastGroup = { type: targetType, sections: [] }
+      acc.push(lastGroup)
+    }
+
+    lastGroup.sections.push(section)
+    return acc
+  }, [] as Array<{ type: "normal" | "story-scroll"; sections: SectionBlock[] }>)
+
+  // Helper to determine if a section type is a full-bleed hero
+  const isFullBleed = (type: string) => {
+    return [
+      "hero",
+      "hero-video",
+      "hero-animated-video",
+      "woven-light-hero",
+      "scroll-expansion-hero",
+      "poem-animation",
+      "parallax",
+      "modern-manifesto"
+    ].includes(type)
+  }
+
   return (
     <>
-      {visibleSections.map((section) => {
-        const renderer = SECTION_RENDERERS[section.type]
-        if (!renderer) {
+      {groups.map((group, groupIdx) => {
+        if (group.type === "story-scroll") {
           return (
-            <div key={section.id} className="py-20 text-center border-y border-dashed border-[var(--border)]">
-              <p className="text-xs text-[var(--foreground-faint)] uppercase tracking-widest">
-                Section Type Not Implemented: {section.type}
-              </p>
-            </div>
+            <FlowArt key={`story-group-${groupIdx}`}>
+              {group.sections.map((section) => {
+                const renderer = SECTION_RENDERERS[section.type]
+                if (!renderer) return null
+
+                return (
+                  <FlowSection
+                    key={section.id}
+                    id={section.id}
+                    data-section-id={section.id}
+                    ref={(el) => {
+                      if (el) sectionRefs.current.set(section.id, el)
+                      else sectionRefs.current.delete(section.id)
+                    }}
+                    fullBleed={isFullBleed(section.type)}
+                  >
+                    {renderer(section, { portfolioItems, servicesItems })}
+                  </FlowSection>
+                )
+              })}
+            </FlowArt>
           )
         }
 
+        // Normal render using SectionWrapper
         return (
-          <div
-            key={section.id}
-            data-section-id={section.id}
-            ref={(el) => {
-              if (el) sectionRefs.current.set(section.id, el)
-              else sectionRefs.current.delete(section.id)
-            }}
-            className="w-full"
-          >
-            {renderer(section, { portfolioItems, servicesItems })}
-          </div>
+          <React.Fragment key={`normal-group-${groupIdx}`}>
+            {group.sections.map((section) => {
+              const renderer = SECTION_RENDERERS[section.type]
+              if (!renderer) {
+                return (
+                  <div key={section.id} className="py-20 text-center border-y border-dashed border-[var(--border)]">
+                    <p className="text-xs text-[var(--foreground-faint)] uppercase tracking-widest">
+                      Section Type Not Implemented: {section.type}
+                    </p>
+                  </div>
+                )
+              }
+
+              return (
+                <div
+                  key={section.id}
+                  data-section-id={section.id}
+                  ref={(el) => {
+                    if (el) sectionRefs.current.set(section.id, el)
+                    else sectionRefs.current.delete(section.id)
+                  }}
+                  className="w-full"
+                >
+                  <SectionWrapper section={section} index={section.order}>
+                    {renderer(section, { portfolioItems, servicesItems })}
+                  </SectionWrapper>
+                </div>
+              )
+            })}
+          </React.Fragment>
         )
       })}
     </>

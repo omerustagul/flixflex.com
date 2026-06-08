@@ -50,7 +50,7 @@ const FFInput = React.forwardRef<HTMLInputElement, FFInputProps>(
               "placeholder:text-[var(--foreground-faint)]",
               "py-3 border outline-none rounded-none",
               "transition-all duration-150",
-              "focus:shadow-[0_0_0_3px_rgba(255, 79, 216,0.12)]",
+              "focus:shadow-[0_0_0_3px_var(--ff-purple-muted)]",
               error && "border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(220,38,38,0.1)]",
               variantClasses[variant],
               leftIcon ? "pl-10" : "pl-4",
@@ -112,7 +112,7 @@ const FFTextarea = React.forwardRef<HTMLTextAreaElement, FFTextareaProps>(
             "bg-[var(--surface)] border border-[var(--border)]",
             "px-4 py-3 outline-none rounded-none resize-y min-h-[120px]",
             "transition-all duration-150",
-            "focus:border-[var(--ff-purple)] focus:shadow-[0_0_0_3px_rgba(var(--ff-purple),0.12)]",
+            "focus:border-[var(--ff-purple)] focus:shadow-[0_0_0_3px_var(--ff-purple-muted)]",
             error && "border-red-500 focus:border-red-500",
             className
           )}

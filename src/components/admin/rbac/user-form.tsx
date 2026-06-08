@@ -98,7 +98,7 @@ export function UserForm({ roles, initial }: UserFormProps) {
       <FFInput
         label="E-posta"
         type="email"
-        placeholder="ornek@fliflex.com"
+        placeholder="ornek@flixflex.com"
         className="bg-transparent border border-[#CCCCCC] focus:border-[#ff4fd8] text-sm text-[#333333] placeholder:text-[#999999]"
         error={errors.email?.message}
         disabled={isSubmitting}

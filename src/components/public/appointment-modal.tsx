@@ -32,7 +32,7 @@ export function AppointmentModal() {
   // Calendar states
   const [currentDate, setCurrentDate] = React.useState<Date>(new Date())
   const [selectedDay, setSelectedDay] = React.useState<number | null>(null)
-  
+
   // Booked & Blocked slots from backend
   const [availability, setAvailability] = React.useState<{ booked: string[]; blocked: string[] }>({
     booked: [],
@@ -133,11 +133,11 @@ export function AppointmentModal() {
     const checkDate = new Date(currentYear, currentMonth, dayNum)
     const today = new Date()
     today.setHours(0, 0, 0, 0)
-    
+
     // Weekend check
     const dayOfWeek = checkDate.getDay()
     if (dayOfWeek === 0 || dayOfWeek === 6) return false
-    
+
     return checkDate >= today
   }
 
@@ -317,7 +317,7 @@ export function AppointmentModal() {
                   <div className="p-6 md:p-8 flex flex-col h-full overflow-hidden">
                     {/* Header */}
                     <div className="mb-6">
-                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[var(--ff-purple)]/10 border border-[var(--ff-purple)]/20 text-[10px] font-semibold text-[var(--ff-purple)] mb-3 tracking-widest uppercase">
+                      <div className="ff-shape-container inline-flex items-center gap-1.5 px-2.5 py-1 bg-[var(--ff-purple)]/10 border border-[var(--ff-purple)]/20 text-[10px] font-semibold text-[var(--ff-purple)] mb-3 tracking-widest uppercase">
                         <Sparkles size={10} />
                         Ön Görüşme Randevusu — Adım {step} / 3
                       </div>

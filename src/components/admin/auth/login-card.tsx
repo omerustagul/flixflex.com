@@ -110,192 +110,164 @@ export function LoginCard() {
 
   return (
     <div className="relative w-full max-w-[420px] mx-auto px-4">
-      {/* Animated traveling-light border */}
-      <TravelingBorder />
-
       <motion.div
         variants={fadeInUp}
         initial="hidden"
         animate="visible"
         className={cn(
           "ff-shape-container relative z-10",
-          "bg-[var(--background)] border border-[var(--border)]",
-          "p-8 md:p-10"
+          "bg-[var(--border)]",
+          "p-[1px]"
         )}
       >
-        {/* Logo */}
-        <div className="flex items-center justify-center mb-8">
-          <span className="font-display font-extrabold text-3xl tracking-tight text-[var(--foreground)]">
-            Flix<span className="text-[var(--ff-purple)]">Flex</span>
-          </span>
-        </div>
+        {/* Rotating border beam */}
+        <div
+          className="absolute w-[200%] h-[200%] top-[-50%] left-[-50%] pointer-events-none z-0 animate-[spin_4s_linear_infinite]"
+          style={{
+            background: "conic-gradient(from 0deg, transparent 55%, var(--ff-purple) 90%, transparent 100%)",
+          }}
+        />
 
-        {/* Heading */}
-        <div className="mb-8 text-center">
-          <h1 className="font-display text-xl font-bold text-[var(--foreground)]">
-            Admin Girişi
-          </h1>
-          <p className="text-[13px] text-[var(--foreground-muted)] mt-1.5">
-            FlixFlex yönetim paneline erişin
-          </p>
-        </div>
+        {/* Inner Card Content */}
+        <div className="ff-shape-container relative z-10 w-full h-full bg-[var(--background)] p-8 md:p-10">
+          {/* Logo */}
+          <div className="flex items-center justify-center mb-8">
+            <span className="font-display font-extrabold text-3xl tracking-tight text-[var(--foreground)]">
+              Flix<span className="text-[var(--ff-purple)]">Flex</span>
+            </span>
+          </div>
 
-        {/* Error */}
-        {error && (
-          <motion.div
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            className={cn(
-              "flex items-start gap-2.5 mb-6",
-              "bg-red-500/10 border border-red-500/30",
-              "px-4 py-3 text-[13px] text-red-400"
-            )}
-            role="alert"
-            aria-live="polite"
-          >
-            <AlertCircle size={15} className="shrink-0 mt-0.5" />
-            <span>{error}</span>
-          </motion.div>
-        )}
+          {/* Heading */}
+          <div className="mb-8 text-center">
+            <h1 className="font-display text-xl font-bold text-[var(--foreground)]">
+              Admin Girişi
+            </h1>
+            <p className="text-[13px] text-[var(--foreground-muted)] mt-1.5">
+              FlixFlex yönetim paneline erişin
+            </p>
+          </div>
 
-        <form onSubmit={handleSubmit} noValidate className="space-y-5">
-          <FFInput
-            label="E-posta"
-            type="email"
-            placeholder="ornek@eposta.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            leftIcon={<Mail size={15} />}
-            autoComplete="email"
-            disabled={loading}
-          />
+          {/* Error */}
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={cn(
+                "flex items-start gap-2.5 mb-6",
+                "bg-red-500/10 border border-red-500/30",
+                "px-4 py-3 text-[13px] text-red-400"
+              )}
+              role="alert"
+              aria-live="polite"
+            >
+              <AlertCircle size={15} className="shrink-0 mt-0.5" />
+              <span>{error}</span>
+            </motion.div>
+          )}
 
-          <FFInput
-            label="Şifre"
-            type={showPassword ? "text" : "password"}
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            leftIcon={<Lock size={15} />}
-            rightIcon={
+          <form onSubmit={handleSubmit} noValidate className="space-y-5">
+            <FFInput
+              label="E-posta"
+              type="email"
+              placeholder="ornek@eposta.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              leftIcon={<Mail size={15} />}
+              autoComplete="email"
+              disabled={loading}
+            />
+
+            <FFInput
+              label="Şifre"
+              type={showPassword ? "text" : "password"}
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              leftIcon={<Lock size={15} />}
+              rightIcon={
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((v) => !v)}
+                  className="text-[var(--foreground-faint)] hover:text-[var(--foreground)] transition-colors"
+                  aria-label={showPassword ? "Şifreyi gizle" : "Şifreyi göster"}
+                >
+                  {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+                </button>
+              }
+              autoComplete="current-password"
+              disabled={loading}
+            />
+
+            {/* Remember me */}
+            <label className="flex items-center gap-3 cursor-pointer group">
               <button
                 type="button"
-                onClick={() => setShowPassword((v) => !v)}
-                className="text-[var(--foreground-faint)] hover:text-[var(--foreground)] transition-colors"
-                aria-label={showPassword ? "Şifreyi gizle" : "Şifreyi göster"}
+                role="checkbox"
+                aria-checked={rememberMe}
+                onClick={() => setRememberMe((v) => !v)}
+                className={cn(
+                  "w-4 h-4 border border-[var(--border)] flex items-center justify-center shrink-0 rounded-full transition-colors duration-150",
+                  rememberMe
+                    ? "bg-[var(--ff-purple)] border-[var(--ff-purple)]"
+                    : "bg-[var(--background)] group-hover:border-[var(--ff-purple)]"
+                )}
               >
-                {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+                {rememberMe && (
+                  <svg
+                    width="9"
+                    height="7"
+                    viewBox="0 0 9 7"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden
+                  >
+                    <path
+                      d="M1 3L3.5 5.5L8 1"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      strokeLinecap="square"
+                    />
+                  </svg>
+                )}
               </button>
-            }
-            autoComplete="current-password"
-            disabled={loading}
-          />
+              <span className="text-[13px] text-[var(--foreground-muted)] select-none">
+                Beni hatırla
+              </span>
+            </label>
 
-          {/* Remember me */}
-          <label className="flex items-center gap-3 cursor-pointer group">
+            {/* Submit */}
             <button
-              type="button"
-              role="checkbox"
-              aria-checked={rememberMe}
-              onClick={() => setRememberMe((v) => !v)}
+              type="submit"
+              disabled={loading}
               className={cn(
-                "w-4 h-4 border border-[var(--border)] flex items-center justify-center shrink-0 rounded-full transition-colors duration-150",
-                rememberMe
-                  ? "bg-[var(--ff-purple)] border-[var(--ff-purple)]"
-                  : "bg-[var(--background)] group-hover:border-[var(--ff-purple)]"
+                "ff-shape-button w-full relative flex items-center justify-center gap-2",
+                "py-3 text-[13px] font-medium uppercase tracking-[0.07em]",
+                "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
+                "hover:bg-[var(--ff-purple-dark)] hover:border-[var(--ff-purple-dark)]",
+                "hover:shadow-[0_4px_24px_rgba(var(--ff-purple)/40)]",
+                "disabled:opacity-50 disabled:cursor-not-allowed",
+                "transition-all duration-200 active:scale-[0.98]"
               )}
             >
-              {rememberMe && (
-                <svg
-                  width="9"
-                  height="7"
-                  viewBox="0 0 9 7"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden
-                >
-                  <path
-                    d="M1 3L3.5 5.5L8 1"
-                    stroke="white"
-                    strokeWidth="1.5"
-                    strokeLinecap="square"
+              {loading ? (
+                <>
+                  <span
+                    className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                    style={{ animation: "spin 0.7s linear infinite" }}
                   />
-                </svg>
+                  Giriş yapılıyor...
+                </>
+              ) : (
+                "Giriş Yap"
               )}
             </button>
-            <span className="text-[13px] text-[var(--foreground-muted)] select-none">
-              Beni hatırla
-            </span>
-          </label>
+          </form>
 
-          {/* Submit */}
-          <button
-            type="submit"
-            disabled={loading}
-            className={cn(
-              "ff-shape-button w-full relative flex items-center justify-center gap-2",
-              "py-3 text-[13px] font-medium uppercase tracking-[0.07em]",
-              "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
-              "hover:bg-[var(--ff-purple-dark)] hover:border-[var(--ff-purple-dark)]",
-              "hover:shadow-[0_4px_24px_rgba(var(--ff-purple)/40)]",
-              "disabled:opacity-50 disabled:cursor-not-allowed",
-              "transition-all duration-200 active:scale-[0.98]"
-            )}
-          >
-            {loading ? (
-              <>
-                <span
-                  className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
-                  style={{ animation: "spin 0.7s linear infinite" }}
-                />
-                Giriş yapılıyor...
-              </>
-            ) : (
-              "Giriş Yap"
-            )}
-          </button>
-        </form>
-
-        <p className="mt-8 text-center text-[11px] text-[var(--foreground-faint)]">
-          FlixFlex Yönetim Paneli | Sürüm v2.0
-        </p>
+          <p className="mt-8 text-center text-[11px] text-[var(--foreground-faint)]">
+            FlixFlex Yönetim Paneli | Sürüm v2.0
+          </p>
+        </div>
       </motion.div>
-    </div>
-  )
-}
-
-// ── Traveling light border ────────────────────────
-function TravelingBorder() {
-  return (
-    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-      {/* Top edge — left to right */}
-      <motion.div
-        className="absolute top-0 left-0 h-px bg-gradient-to-r from-transparent via-[var(--ff-purple)] to-transparent"
-        style={{ width: "60%" }}
-        animate={{ x: ["−100%", "266%"] }}
-        transition={{ duration: 2.8, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
-      />
-      {/* Right edge — top to bottom */}
-      <motion.div
-        className="absolute top-0 right-0 w-px bg-gradient-to-b from-transparent via-[var(--ff-purple)] to-transparent"
-        style={{ height: "60%" }}
-        animate={{ y: ["-100%", "266%"] }}
-        transition={{ duration: 2.8, repeat: Infinity, ease: "linear", delay: 0.7, repeatDelay: 1 }}
-      />
-      {/* Bottom edge — right to left */}
-      <motion.div
-        className="absolute bottom-0 right-0 h-px bg-gradient-to-l from-transparent via-[var(--ff-purple)] to-transparent"
-        style={{ width: "60%" }}
-        animate={{ x: ["100%", "-266%"] }}
-        transition={{ duration: 2.8, repeat: Infinity, ease: "linear", delay: 1.4, repeatDelay: 1 }}
-      />
-      {/* Left edge — bottom to top */}
-      <motion.div
-        className="absolute bottom-0 left-0 w-px bg-gradient-to-t from-transparent via-[var(--ff-purple)] to-transparent"
-        style={{ height: "60%" }}
-        animate={{ y: ["100%", "-266%"] }}
-        transition={{ duration: 2.8, repeat: Infinity, ease: "linear", delay: 2.1, repeatDelay: 1 }}
-      />
     </div>
   )
 }

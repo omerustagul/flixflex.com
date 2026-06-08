@@ -14,11 +14,11 @@ export const metadata: Metadata = {
     title: "Portfolyo — FlixFlex",
     description:
       "Branding, performans, web ve içerik alanlarında teslim ettiğimiz 150+ projeye göz atın.",
-    url: "https://fliflex.com/portfolio",
+    url: "https://flixflex.com/portfolio",
     type: "website",
   },
   alternates: {
-    canonical: "https://fliflex.com/portfolio",
+    canonical: "https://flixflex.com/portfolio",
   },
 }
 

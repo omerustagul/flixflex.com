@@ -1111,7 +1111,7 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
                         type="file"
                         accept=".ttf"
                         onChange={(e) => setNewFontFile(e.target.files?.[0] || null)}
-                        className="ff-shape-button border border-[#E0E0E0] w-full text-xs text-[#666666] file:mr-4 file:py-2 file:px-4 file:ff-shape-button file:border-0 file:text-xs file:font-semibold file:bg-[#8B1FE8] file:text-white hover:file:bg-[#8B1FE8]"
+                        className="ff-shape-button border border-[#E0E0E0] w-full text-xs text-[#666666] file:mr-4 file:py-2 file:px-4 file:ff-shape-button file:border-0 file:text-xs file:font-semibold file:bg-[#ff4fd8] file:text-white hover:file:bg-[#ff4fd8]/90 transition-all"
                       />
                     </div>
                   </div>
@@ -1119,7 +1119,7 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
                     type="button"
                     onClick={handleFontUpload}
                     disabled={uploadingFont || !newFontFile || !newFontName}
-                    className="ff-shape-button px-6 py-2.5 bg-[#8B1FE8] text-white text-[11px] font-bold disabled:opacity-40"
+                    className="ff-shape-button px-6 py-2.5 bg-[#ff4fd8] text-white text-[11px] font-bold disabled:opacity-40"
                   >
                     {uploadingFont ? "Yükleniyor..." : "Fontu Sisteme Ekle"}
                   </button>
@@ -1171,7 +1171,7 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
                         type="range" min="12" max="120"
                         value={settings.fontHeadingSize}
                         onChange={(e) => patchSettings({ fontHeadingSize: parseInt(e.target.value) })}
-                        className="flex-1 accent-[var(--ff-purple)]"
+                        className="flex-1 bg-[#f7f7f5] accent-[var(--ff-purple)]"
                       />
                       <button onClick={() => patchSettings({ fontHeadingSize: Math.min(120, settings.fontHeadingSize + 1) })} className="ff-shape-button w-8 h-8 flex items-center justify-center bg-[#ff4fd8] border border-[#E0E0E0] hover:bg-[#dc2db6]"><Plus size={14} /></button>
                     </div>

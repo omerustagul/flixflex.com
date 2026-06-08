@@ -34,7 +34,7 @@ export function ThemeToggle({ className, size = "md" }: ThemeToggleProps) {
       className={cn(
         "ff-shape-button relative flex items-center justify-center",
         "bg-foreground/10 border border-foreground/30 backdrop-blur-sm text-[var(--foreground-muted)]",
-        "hover:border-var(--ff-purple) hover:text-var(--ff-purple)",
+        "hover:border-[var(--ff-purple)] hover:text-[var(--ff-purple)]",
         "transition-all duration-200",
         size === "sm" ? "w-9 h-9" : "w-9 h-9",
         className

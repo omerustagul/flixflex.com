@@ -60,3 +60,4 @@ scratch/
 .opencode/
 .npmrc
 .env*.local
+/secret.txt

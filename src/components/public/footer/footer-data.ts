@@ -7,16 +7,16 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
   {
     title: "Hizmetler",
     links: [
-      { label: "Marka Stratejisi",    href: "/hizmetler/marka-stratejisi" },
-      { label: "Performans Reklamı",  href: "/hizmetler/performans-reklami" },
-      { label: "Web & UX Tasarım",    href: "/hizmetler/web-tasarim" },
-      { label: "İçerik & Yaratıcılık", href: "/hizmetler/icerik" },
+      { label: "Marka Stratejisi",    href: "/hizmetler/marka-kimligi" },
+      { label: "Performans Reklamı",  href: "/hizmetler/performans-pazarlamasi" },
+      { label: "Web & UX Tasarım",    href: "/hizmetler/web-ve-dijital" },
+      { label: "İçerik & Yaratıcılık", href: "/hizmetler/icerik-uretimi" },
     ],
   },
   {
     title: "Keşfet",
     links: [
-      { label: "İşlerimiz",   href: "/isler"      },
+      { label: "İşlerimiz",   href: "/portfolio"   },
       { label: "Blog",         href: "/blog"       },
       { label: "Hakkımızda",   href: "/hakkimizda" },
       { label: "Kariyer",      href: "/kariyer"    },
@@ -34,10 +34,10 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
   {
     title: "Yasal",
     links: [
-      { label: "Gizlilik Politikası",   href: "/yasal/gizlilik" },
-      { label: "Kullanım Şartları",     href: "/yasal/kullanim" },
-      { label: "Çerez Tercihleri",      href: "/yasal/cerezler"  },
-      { label: "KVKK",                   href: "/yasal/kvkk"      },
+      { label: "Gizlilik Politikası",   href: "/gizlilik-politikasi" },
+      { label: "Kullanım Şartları",     href: "/kullanim-sartlari" },
+      { label: "Çerez Tercihleri",      href: "/cerez-politikasi"  },
+      { label: "KVKK",                   href: "/kvkk-aydinlatma-metni" },
     ],
   },
 ]

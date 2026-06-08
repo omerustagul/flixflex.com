@@ -14,7 +14,7 @@ interface SectionWrapperProps {
 export function SectionWrapper({ section, index, children }: SectionWrapperProps) {
   const transition = section.transition || "normal"
   const isPinned = !!section.stickyPin
-  
+
   const ref = React.useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -71,8 +71,8 @@ export function SectionWrapper({ section, index, children }: SectionWrapperProps
   }
 
   return (
-    <div 
-      ref={ref} 
+    <div
+      ref={ref}
       style={getStyles()}
       className={cn(
         "transition-shadow duration-500",

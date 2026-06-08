@@ -9,14 +9,14 @@ const variantClasses: Record<string, string> = {
   primary:
     "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)] " +
     "hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)] " +
-    "hover:shadow-[0_4px_24px_rgba(var(--ff-purple),0.45)]",
+    "hover:shadow-[0_4px_24px_rgb(var(--ff-purple)/0.45)]",
   secondary:
     "bg-[#323232] text-white border border-[#323232] " +
     "hover:bg-[#484848] hover:border-[#484848]",
   outline:
     "bg-transparent text-[var(--ff-charcoal)] border border-[var(--ff-charcoal)] " +
-    "hover:bg-[rgba(var(--ff-charcoal),0.1)] " +
-    "hover:shadow-[0_0_20px_rgba(var(--ff-charcoal),0.15)]",
+    "hover:bg-[rgb(var(--ff-charcoal)/0.1)] " +
+    "hover:shadow-[0_0_20px_rgb(var(--ff-charcoal)/0.15)]",
   ghost:
     "bg-transparent text-[var(--foreground)] border border-transparent " +
     "hover:bg-[var(--surface)] hover:text-[var(--ff-purple)]",

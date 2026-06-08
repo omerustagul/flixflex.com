@@ -90,7 +90,7 @@ function FFSelect({
           "outline-none transition-[border-color,box-shadow,background-color] duration-150",
           "data-[placeholder]:text-[var(--foreground-faint)]",
           "hover:border-[var(--border-strong)]",
-          "focus:border-[var(--ff-purple)] focus:shadow-[0_0_0_3px_rgba(var(--ff-purple),0.12)]",
+          "focus:border-[var(--ff-purple)] focus:shadow-[0_0_0_3px_var(--ff-purple-muted)]",
           "data-[state=open]:border-[var(--ff-purple)]",
           "disabled:opacity-50 disabled:cursor-not-allowed",
           "rounded-none",
@@ -177,7 +177,7 @@ const FFSelectItem = React.forwardRef<
         "px-3 py-2 pr-9 text-sm",
         "outline-none rounded-none",
         "transition-colors duration-100",
-        "data-[highlighted]:bg-[rgba(255, 79, 216,0.1)] data-[highlighted]:text-[var(--ff-purple)]",
+        "data-[highlighted]:bg-[rgb(var(--ff-purple)/0.1)] data-[highlighted]:text-[var(--ff-purple)]",
         "data-[state=checked]:text-[var(--ff-purple)] data-[state=checked]:font-medium",
         "data-[disabled]:opacity-40 data-[disabled]:cursor-not-allowed",
         className

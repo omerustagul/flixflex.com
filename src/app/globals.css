@@ -2,6 +2,7 @@
 /* CSS variables: --font-syne, --font-dm-sans (auto-injected by next/font) */
 
 @import "tailwindcss";
+@import "tw-animate-css";
 
 /* Bridge: keep the v3-style tailwind.config.ts working under v4 */
 @config "../../tailwind.config.ts";
@@ -572,4 +573,270 @@
   100% {
     transform: translate3d(calc(-1 * var(--scroll-width)), 0, 0);
   }
+}
+
+/* ── 3D Poem Animation Scoped Styles ────────────────── */
+@keyframes left {
+  100% {
+    margin-left: -54000px;
+  }
+}
+
+@keyframes back {
+  100% {
+    margin-left: -54870px;
+  }
+}
+
+@keyframes right {
+  100% {
+    margin-left: -55740px;
+  }
+}
+
+@keyframes filter-animation {
+  0%, 100% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(100deg);
+  }
+}
+
+@keyframes zoom-in {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(2.5);
+  }
+}
+
+@keyframes blur {
+  0% {
+    filter: blur(0px);
+  }
+  100% {
+    filter: blur(3px);
+  }
+}
+
+@keyframes brightness {
+  0% {
+    filter: brightness(1) contrast(1);
+  }
+  100% {
+    filter: brightness(0.8) contrast(1.3);
+  }
+}
+
+@keyframes text-glow {
+  0%, 100% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+}
+
+.poem-animation-hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black;
+  width: 100%;
+  min-height: 600px;
+  padding: 40px 0;
+}
+
+.poem-animation-hero .card {
+  display: flex;
+  align-items: center;
+  width: 1280px;
+  height: 720px;
+  margin: 0;
+  justify-content: center;
+}
+
+.poem-animation-hero .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0;
+  max-width: none;
+}
+
+.poem-animation-hero .container-full,
+.poem-animation-hero .content {
+  width: 1000px;
+  height: 562px;
+}
+
+.poem-animation-hero .backgroundImage {
+  position: absolute;
+  width: 1000px;
+  top: 0;
+  left: 0;
+}
+
+.poem-animation-hero .boyImage {
+  position: absolute;
+  width: 1000px;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  animation: 200s linear infinite blur;
+}
+
+.poem-animation-hero .content {
+  position: relative;
+  overflow: hidden;
+  border-radius: 40px;
+  animation: 200s linear infinite brightness;
+}
+
+.poem-animation-hero .container-full,
+.poem-animation-hero .face {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.poem-animation-hero .container-full {
+  margin: 0;
+  justify-content: center;
+  transform: scale(1);
+  animation: 200s linear infinite zoom-in;
+}
+
+.poem-animation-hero .cube,
+.poem-animation-hero .face {
+  width: 870px;
+  height: 190px;
+}
+
+.poem-animation-hero .cube {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 480px;
+  perspective-origin: 51% 70%;
+}
+
+.poem-animation-hero .face,
+.poem-animation-hero .hue {
+  position: absolute;
+}
+
+.poem-animation-hero .face {
+  background: transparent;
+  border: 0 solid #000;
+  opacity: 0.5;
+}
+
+.poem-animation-hero .bottom,
+.poem-animation-hero .top {
+  width: 870px;
+  height: 870px;
+}
+
+.poem-animation-hero .face p {
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: "Bebas Neue", var(--font-display), sans-serif;
+  font-weight: 400;
+  font-size: calc(6em + (190px / 10) * 0.7);
+  padding-top: 20px;
+  color: #fff;
+  line-height: 1;
+}
+
+.poem-animation-hero .face p span {
+  color: var(--ff-purple, #FF4FD8);
+}
+
+.poem-animation-hero .front {
+  transform: translateZ(435px);
+  display: none;
+}
+
+.poem-animation-hero .back {
+  transform: translateZ(-435px) rotateY(180deg) scaleX(-1);
+}
+
+.poem-animation-hero .left {
+  transform: translateX(-435px) rotateY(-90deg) scaleX(-1);
+}
+
+.poem-animation-hero .right {
+  transform: translateX(435px) rotateY(90deg) scaleX(-1);
+}
+
+.poem-animation-hero .top {
+  transform: translateY(-435px) rotateX(90deg) scaleY(-1);
+}
+
+.poem-animation-hero .bottom {
+  transform: translateY(-245px) rotateX(-90deg) scaleY(-1);
+}
+
+.poem-animation-hero .left p {
+  margin-left: 480px;
+  animation: 200s linear infinite left;
+}
+
+.poem-animation-hero .back p {
+  margin-left: -390px;
+  animation: 200s linear infinite back;
+}
+
+.poem-animation-hero .right p {
+  margin-left: -1260px;
+  animation: 200s linear infinite right;
+}
+
+.poem-animation-hero .hue {
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: overlay;
+  background: radial-gradient(ellipse at center, #1e5799 0%, #7db9e8 100%);
+  opacity: 1;
+}
+
+.poem-animation-hero .hue.animated {
+  animation: 8s infinite filter-animation;
+}
+
+.poem-animation-hero .container-reflect {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 380px;
+  filter: blur(10px);
+}
+
+.poem-animation-hero .container-reflect .cube {
+  perspective-origin: 51% -30%;
+}
+
+.poem-animation-hero .container-reflect .back {
+  transform: translateZ(-435px) rotateY(180deg) scaleX(-1) scaleY(-1);
+}
+
+.poem-animation-hero .container-reflect .left {
+  transform: translateX(-435px) rotateY(-90deg) scaleX(-1) scaleY(-1);
+}
+
+.poem-animation-hero .container-reflect .right {
+  transform: translateX(435px) rotateY(90deg) scaleX(-1) scaleY(-1);
+}
+
+.poem-animation-hero .container-reflect p {
+  transform: scaleY(70%);
 }

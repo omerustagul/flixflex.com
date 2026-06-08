@@ -83,7 +83,7 @@ function GradientPicker({
         className="h-20 w-full ff-shape-container border border-[#CCCCCC] flex items-center justify-center text-white text-[10px] font-bold shadow-inner relative overflow-hidden"
       >
         <div className="absolute inset-0 bg-[#f7f7f5]/10" />
-        <span className="relative z-10 drop-shadow-md tracking-wider">CANLI ÖNİZLEME GRADIENTİ</span>
+        <span className="relative z-10 drop-shadow-md tracking-wider">Canlı Önizleme Gradienti</span>
       </div>
 
       {/* Grid of Preset Gradients */}
@@ -441,7 +441,7 @@ export function PortfolioEditor({ mode, initial, services }: PortfolioEditorProp
     images: initial?.images ?? [],
     tags: initial?.tags ?? [],
     year: initial?.year ?? new Date().getFullYear(),
-    gradient: initial?.gradient ?? "from-[#0D0D1A] via-[#1A1A2E] to-[#16213E]",
+    gradient: initial?.gradient ?? PRESET_GRADIENTS[0].class,
     accentColor: initial?.accentColor ?? "var(--ff-purple)",
     tall: initial?.tall ?? false,
     narrativeParagraphs: Array.isArray(initial?.narrativeParagraphs)

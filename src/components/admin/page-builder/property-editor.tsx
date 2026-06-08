@@ -53,6 +53,17 @@ function FieldLabel({ name }: { name: string }) {
     answer: "Cevap",
     showMap: "Harita Göster",
     primaryColor: "Ana Renk",
+    leftText: "Sol Manifesto Metni ([media1-3] içerir)",
+    mediaUrl1: "1. Medya URL / Dosya",
+    mediaType1: "1. Medya Tipi",
+    mediaUrl2: "2. Medya URL / Dosya",
+    mediaType2: "2. Medya Tipi",
+    mediaUrl3: "3. Medya URL / Dosya",
+    mediaType3: "3. Medya Tipi",
+    rightContent: "Sağ Açıklama Metni (HTML)",
+    backgroundColor: "Arka Plan Rengi",
+    textColor: "Yazı Rengi",
+    accentColor: "Vurgu Rengi",
   }
 
   const label = labels[name] || name
@@ -201,11 +212,17 @@ function ColorField({ name, value, onChange }: FieldProps) {
   )
 }
 
-function MediaField({ name, value, onChange }: FieldProps) {
+interface MediaFieldProps extends FieldProps {
+  sectionType?: string
+  sectionProps?: Record<string, unknown>
+}
+
+function MediaField({ name, value, onChange, sectionType, sectionProps }: MediaFieldProps) {
   const [isOpen, setIsOpen] = React.useState(false)
   const isVideo =
     name.toLowerCase().includes("video") ||
-    name.toLowerCase().includes("videourl")
+    name.toLowerCase().includes("videourl") ||
+    (sectionType === "scroll-expansion-hero" && name === "mediaSrc" && sectionProps?.mediaType === "video")
 
   const currentUrl = typeof value === "string" ? value : ""
   const fileName = currentUrl ? currentUrl.split("/").pop() ?? currentUrl : ""
@@ -308,6 +325,8 @@ export function PropertyEditor() {
   const selectSection = usePageBuilder((s) => s.selectSection)
   const updateSectionProps = usePageBuilder((s) => s.updateSectionProps)
 
+  const updateSectionTransition = usePageBuilder((s) => s.updateSectionTransition)
+
   const section = page?.sections.find((s) => s.id === selectedSectionId)
 
   const handleChange = useCallback(
@@ -363,40 +382,180 @@ export function PropertyEditor() {
 
       {/* Fields */}
       <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-4">
-        {Object.entries(shape).map(([fieldName, fieldDef]) => {
-          const fDef = fieldDef as Record<string, unknown>
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const innerDef = (fDef as any)._def ?? fDef
-          const fieldType = inferFieldType(innerDef)
-          const currentVal = props[fieldName]
+        {Object.entries(shape)
+          .filter(([fieldName]) => fieldName !== "hideMobileDock")
+          .map(([fieldName, fieldDef]) => {
+            const fDef = fieldDef as Record<string, unknown>
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const innerDef = (fDef as any)._def ?? fDef
+            const fieldType = inferFieldType(innerDef)
+            const currentVal = props[fieldName]
 
-          // Skip complex/array types for now — render them as JSON textarea
-          if (fieldType === "array" || fieldType === "object") {
-            return (
-              <div key={fieldName}>
-                <FieldLabel name={fieldName} />
-                <textarea
-                  value={JSON.stringify(currentVal, null, 2)}
-                  onChange={(e) => {
-                    try {
-                      handleChange(fieldName, JSON.parse(e.target.value))
-                    } catch {
-                      // invalid JSON — don't update
-                    }
-                  }}
-                  rows={5}
-                  className={cn(
-                    "ff-shape-container w-full px-3 py-2 text-[11px] font-mono resize-y",
-                    "bg-[#f7f7f5] border border-[#CCCCCC]",
-                    "text-[#333333]",
-                    "outline-none focus:border-[#ff4fd8] transition-colors duration-150"
-                  )}
+            // Skip complex/array types for now — render them as JSON textarea
+            if (fieldType === "array" || fieldType === "object") {
+              return (
+                <div key={fieldName}>
+                  <FieldLabel name={fieldName} />
+                  <textarea
+                    value={JSON.stringify(currentVal, null, 2)}
+                    onChange={(e) => {
+                      try {
+                        handleChange(fieldName, JSON.parse(e.target.value))
+                      } catch {
+                        // invalid JSON — don't update
+                      }
+                    }}
+                    rows={5}
+                    className={cn(
+                      "ff-shape-container w-full px-3 py-2 text-[11px] font-mono resize-y",
+                      "bg-[#f7f7f5] border border-[#CCCCCC]",
+                      "text-[#333333]",
+                      "outline-none focus:border-[#ff4fd8] transition-colors duration-150"
+                    )}
+                  />
+                </div>
+              )
+            }
+
+            if (fieldType === "boolean") {
+              return (
+                <BooleanField
+                  key={fieldName}
+                  name={fieldName}
+                  value={currentVal}
+                  schema={innerDef}
+                  onChange={(v) => handleChange(fieldName, v)}
                 />
-              </div>
-            )
-          }
+              )
+            }
 
-          if (fieldType === "boolean") {
+            if (fieldType === "select") {
+              const options = getEnumOptions(innerDef)
+              return (
+                <SelectField
+                  key={fieldName}
+                  name={fieldName}
+                  value={currentVal}
+                  schema={innerDef}
+                  options={options}
+                  onChange={(v) => handleChange(fieldName, v)}
+                />
+              )
+            }
+
+            if (fieldType === "number") {
+              return (
+                <NumberField
+                  key={fieldName}
+                  name={fieldName}
+                  value={currentVal}
+                  schema={innerDef}
+                  onChange={(v) => handleChange(fieldName, v)}
+                />
+              )
+            }
+
+            // Check for color fields by naming convention
+            if (
+              fieldName.toLowerCase().includes("color") ||
+              fieldName.toLowerCase().includes("colour")
+            ) {
+              return (
+                <ColorField
+                  key={fieldName}
+                  name={fieldName}
+                  value={currentVal}
+                  schema={innerDef}
+                  onChange={(v) => handleChange(fieldName, v)}
+                />
+              )
+            }
+
+            // Media fields (detect by name)
+            if (
+              fieldName.toLowerCase().includes("image") ||
+              fieldName.toLowerCase().includes("video") ||
+              fieldName.toLowerCase().includes("url") ||
+              fieldName.toLowerCase().includes("src") ||
+              fieldName.toLowerCase().includes("cover") ||
+              fieldName.toLowerCase().includes("thumbnail")
+            ) {
+              // Exceptions that should stay as plain text
+              const isPlainLink = fieldName.toLowerCase().includes("link") && !fieldName.toLowerCase().includes("image")
+
+              if (!isPlainLink) {
+                return (
+                  <MediaField
+                    key={fieldName}
+                    name={fieldName}
+                    value={currentVal}
+                    schema={innerDef}
+                    sectionType={section.type}
+                    sectionProps={props}
+                    onChange={(v) => handleChange(fieldName, v)}
+                  />
+                )
+              }
+            }
+
+            // Long text fields
+            if (
+              fieldName === "body" ||
+              fieldName === "description" ||
+              fieldName === "content" ||
+              fieldName === "rightContent" ||
+              fieldName.toLowerCase().includes("description")
+            ) {
+              return (
+                <TextareaField
+                  key={fieldName}
+                  name={fieldName}
+                  value={currentVal}
+                  schema={innerDef}
+                  onChange={(v) => handleChange(fieldName, v)}
+                />
+              )
+            }
+
+            return (
+              <TextField
+                key={fieldName}
+                name={fieldName}
+                value={currentVal}
+                schema={innerDef}
+                onChange={(v) => handleChange(fieldName, v)}
+              />
+            )
+          })}
+
+        {/* Scroll Transition */}
+        <div>
+          <label className="text-[10px] font-semibold text-[#666666] block mb-1">
+            Scroll Geçiş Türü
+          </label>
+          <FFSelect
+            value={section.transition || "normal"}
+            onValueChange={(val) => updateSectionTransition(section.id, val as any)}
+            size="sm"
+            ariaLabel="scroll-transition-type"
+          >
+            <FFSelectItem value="normal">Normal</FFSelectItem>
+            <FFSelectItem value="sticky">Sticky</FFSelectItem>
+            <FFSelectItem value="parallax">Parallax</FFSelectItem>
+            <FFSelectItem value="overlap">Overlap</FFSelectItem>
+            <FFSelectItem value="story-scroll">Story Scroll</FFSelectItem>
+          </FFSelect>
+        </div>
+
+        {/* Render hideMobileDock toggle at the absolute bottom if present */}
+        {Object.entries(shape)
+          .filter(([fieldName]) => fieldName === "hideMobileDock")
+          .map(([fieldName, fieldDef]) => {
+            const fDef = fieldDef as Record<string, unknown>
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const innerDef = (fDef as any)._def ?? fDef
+            const currentVal = props[fieldName]
+
             return (
               <BooleanField
                 key={fieldName}
@@ -406,103 +565,7 @@ export function PropertyEditor() {
                 onChange={(v) => handleChange(fieldName, v)}
               />
             )
-          }
-
-          if (fieldType === "select") {
-            const options = getEnumOptions(innerDef)
-            return (
-              <SelectField
-                key={fieldName}
-                name={fieldName}
-                value={currentVal}
-                schema={innerDef}
-                options={options}
-                onChange={(v) => handleChange(fieldName, v)}
-              />
-            )
-          }
-
-          if (fieldType === "number") {
-            return (
-              <NumberField
-                key={fieldName}
-                name={fieldName}
-                value={currentVal}
-                schema={innerDef}
-                onChange={(v) => handleChange(fieldName, v)}
-              />
-            )
-          }
-
-          // Check for color fields by naming convention
-          if (
-            fieldName.toLowerCase().includes("color") ||
-            fieldName.toLowerCase().includes("colour")
-          ) {
-            return (
-              <ColorField
-                key={fieldName}
-                name={fieldName}
-                value={currentVal}
-                schema={innerDef}
-                onChange={(v) => handleChange(fieldName, v)}
-              />
-            )
-          }
-
-          // Media fields (detect by name)
-          if (
-            fieldName.toLowerCase().includes("image") ||
-            fieldName.toLowerCase().includes("video") ||
-            fieldName.toLowerCase().includes("url") ||
-            fieldName.toLowerCase().includes("src") ||
-            fieldName.toLowerCase().includes("cover") ||
-            fieldName.toLowerCase().includes("thumbnail")
-          ) {
-            // Exceptions that should stay as plain text
-            const isPlainLink = fieldName.toLowerCase().includes("link") && !fieldName.toLowerCase().includes("image")
-
-            if (!isPlainLink) {
-              return (
-                <MediaField
-                  key={fieldName}
-                  name={fieldName}
-                  value={currentVal}
-                  schema={innerDef}
-                  onChange={(v) => handleChange(fieldName, v)}
-                />
-              )
-            }
-          }
-
-          // Long text fields
-          if (
-            fieldName === "body" ||
-            fieldName === "description" ||
-            fieldName === "content" ||
-            fieldName.toLowerCase().includes("description")
-          ) {
-            return (
-              <TextareaField
-                key={fieldName}
-                name={fieldName}
-                value={currentVal}
-                schema={innerDef}
-                onChange={(v) => handleChange(fieldName, v)}
-              />
-            )
-          }
-
-          return (
-            <TextField
-              key={fieldName}
-              name={fieldName}
-              value={currentVal}
-              schema={innerDef}
-              onChange={(v) => handleChange(fieldName, v)}
-            />
-          )
-        })}
+          })}
       </div>
     </div>
   )

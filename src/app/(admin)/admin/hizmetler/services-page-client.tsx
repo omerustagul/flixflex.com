@@ -54,7 +54,7 @@ export function ServicesPageClient({ items }: { items: ServiceCardItem[] }) {
   }
 
   return (
-    <div className="px-6 md:px-10 py-8 space-y-6 max-w-7xl mx-auto">
+    <div className="px-6 md:px-10 py-8 space-y-6 mx-auto">
       {/* Page Header */}
       <div className="flex items-end justify-between gap-4 flex-wrap border-b border-[#E0E0E0] pb-5">
         <div>
@@ -274,7 +274,7 @@ function MainServiceCard({
 
   return (
     <div className={cn(
-      "ff-shape-container group relative bg-white border border-[#E0E0E0] p-6 shadow-sm",
+      "ff-shape-container group relative bg-[#f7f7f5] border border-[#E0E0E0] p-6",
       "transition-all duration-300 hover:border-[#ff4fd8]/50 hover:shadow-md flex flex-col justify-between"
     )}>
       {/* Top section */}
@@ -382,14 +382,14 @@ function MainServiceCard({
           <Link
             href={`/hizmetler/${item.slug}`}
             target="_blank"
-            className="ff-shape-button border border-[#E0E0E0] w-7 h-7 flex items-center justify-center hover:border-[#ff4fd8] text-[#666666] hover:text-[#ff4fd8] transition-colors bg-white shadow-sm"
+            className="ff-shape-button border border-[#ff4fd8] w-7 h-7 flex items-center justify-center hover:border-[#ff4fd8] text-[#ff4fd8] hover:text-white transition-colors bg-transparent hover:bg-[#ff4fd8]"
             title="Public Sayfayı Gör"
           >
             <ExternalLink size={11} />
           </Link>
           <Link
             href={`/admin/hizmetler/${item.slug}`}
-            className="ff-shape-button border border-[#E0E0E0] w-7 h-7 flex items-center justify-center hover:border-[#ff4fd8] text-[#666666] hover:text-[#ff4fd8] transition-colors bg-white shadow-sm"
+            className="ff-shape-button border border-[#ff4fd8] w-7 h-7 flex items-center justify-center hover:border-[#ff4fd8] text-[#ff4fd8] hover:text-white transition-colors bg-transparent hover:bg-[#ff4fd8]"
             title="Hizmeti Düzenle"
           >
             <Pencil size={11} />
@@ -397,7 +397,7 @@ function MainServiceCard({
           <button
             type="button"
             onClick={() => onDelete(item)}
-            className="ff-shape-button border border-[#E0E0E0] w-7 h-7 flex items-center justify-center hover:border-red-500/55 hover:bg-red-500/10 text-[#666666] hover:text-red-500 transition-colors bg-white shadow-sm"
+            className="ff-shape-button border border-red-500 w-7 h-7 flex items-center justify-center hover:border-red-500 text-white hover:text-white transition-colors bg-red-500 hover:bg-red-600"
             title="Hizmeti Sil"
           >
             <Trash2 size={11} />

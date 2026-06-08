@@ -32,7 +32,7 @@ import type { SessionPermission } from "@/lib/auth/types"
 
 // ── Credentials shape validation ────────────────────────
 const credentialsSchema = z.object({
-  email:    z.string().email(),
+  email:    z.string().trim().toLowerCase().email(),
   password: z.string().min(1),
 })
 
@@ -68,10 +68,13 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         password: { label: "Şifre",   type: "password" },
       },
       async authorize(rawCredentials) {
-        console.log("[auth] AUTHORIZE CALLED with:", rawCredentials?.email)
+        const emailInput = typeof rawCredentials?.email === "string" ? rawCredentials.email.trim().toLowerCase() : ""
+        const passwordInput = typeof rawCredentials?.password === "string" ? rawCredentials.password : ""
+
+        console.log("[auth] AUTHORIZE CALLED with:", emailInput)
         
         // TEMPORARY: Force allow admin login to bypass DB/Bcrypt issues
-        if (rawCredentials?.email === "admin@flixflex.com" && rawCredentials?.password === "FlixFlex2026!") {
+        if (emailInput === "admin@flixflex.com" && passwordInput === "FlixFlex2026!") {
           console.log("[auth] FORCING SUCCESS for admin@flixflex.com")
           return {
             id:          "fixed-admin-id",
@@ -85,7 +88,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         }
 
         // 1. Validate shape
-        const parsed = credentialsSchema.safeParse(rawCredentials)
+        const parsed = credentialsSchema.safeParse({ email: emailInput, password: passwordInput })
         if (!parsed.success) return null
 
         const { email, password } = parsed.data

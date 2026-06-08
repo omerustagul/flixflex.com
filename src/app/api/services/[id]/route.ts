@@ -30,6 +30,14 @@ export async function DELETE(_req: Request, { params }: { params: Promise<{ id: 
   if (!prisma) return jsonError("Veritabanı bağlantısı yok.", 503)
 
   const { id } = await params
-  await prisma.service.delete({ where: { id } })
-  return NextResponse.json({ ok: true })
+  try {
+    await prisma.service.delete({ where: { id } })
+    return NextResponse.json({ ok: true })
+  } catch (err) {
+    console.error("[API DELETE Service Error]:", err)
+    return NextResponse.json({
+      ok: false,
+      message: err instanceof Error ? err.message : "Silme işlemi sırasında veritabanı hatası oluştu."
+    }, { status: 500 })
+  }
 }

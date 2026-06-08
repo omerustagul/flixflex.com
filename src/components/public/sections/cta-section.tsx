@@ -244,7 +244,7 @@ export function CTASection({
               className="ff-shape-button w-1.5 h-1.5 bg-[var(--ff-purple)] animate-pulse"
               aria-hidden
             />
-            <span>Şu an müsaitiz · <span>İzmir, Türkiye</span></span>
+            <span>Şu an müsaitiz · <span>İstanbul, Türkiye</span></span>
           </motion.div>
         </motion.div>
       </div>

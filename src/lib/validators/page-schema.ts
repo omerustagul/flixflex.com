@@ -8,11 +8,13 @@
 import { z } from "zod"
 
 export const sectionBlockSchema = z.object({
-  id:      z.string(),
-  type:    z.string(),
-  props:   z.record(z.string(), z.unknown()),
-  order:   z.number(),
-  visible: z.boolean().optional().default(true),
+  id:          z.string(),
+  type:        z.string(),
+  props:       z.record(z.string(), z.unknown()),
+  order:       z.number(),
+  visible:     z.boolean().optional().default(true),
+  transition:  z.enum(["normal", "sticky", "parallax", "overlap", "story-scroll"]).optional(),
+  stickyPin:   z.boolean().optional(),
 })
 
 export const createPageSchema = z.object({

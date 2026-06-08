@@ -37,11 +37,11 @@ export async function generateMetadata({
     openGraph: {
       title: `${project.title} — ${project.client}`,
       description: project.description,
-      url: `https://fliflex.com/portfolio/${slug}`,
+      url: `https://flixflex.com/portfolio/${slug}`,
       type: "article",
     },
     alternates: {
-      canonical: `https://fliflex.com/portfolio/${slug}`,
+      canonical: `https://flixflex.com/portfolio/${slug}`,
     },
   }
 }

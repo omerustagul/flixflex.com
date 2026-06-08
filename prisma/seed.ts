@@ -345,6 +345,106 @@ const DEMO_PAGES = [
       { id: "ct4", type: "faq", order: 3, visible: true, props: {} },
     ],
   },
+  {
+    slug: "kariyer",
+    title: "Kariyer",
+    description: "FlixFlex'te kariyer ve açık pozisyonlar",
+    isPublished: true,
+    sections: [
+      {
+        id: "kar1",
+        type: "text-content",
+        order: 0,
+        visible: true,
+        props: {
+          headline: "Bizimle Çalışın",
+          body: "<p class='mb-6 text-lg text-[var(--foreground-muted)]'>FlixFlex olarak hız, güç ve esnekliğe inanan kreatif yeteneklerle çalışmak istiyoruz. Eğer siz de dijital dünyayı domine etmek istiyorsanız bizimle iletişime geçin.</p><h3 class='text-2xl font-bold mt-12 mb-6 text-[var(--foreground)]'>Açık Pozisyonlar</h3><ul class='list-disc pl-6 space-y-3 text-[var(--foreground-muted)]'><li>Senior React Developer (Remote)</li><li>Performance Marketing Specialist</li><li>Art Director</li></ul><p class='mt-10'>Başvurularınız için özgeçmişinizi <a href='mailto:hello@flixflex.com' class='text-[var(--ff-purple)] hover:underline'>hello@flixflex.com</a> adresine gönderebilirsiniz.</p>",
+          alignment: "left",
+          maxWidthProse: true,
+        },
+      },
+    ],
+  },
+  {
+    slug: "gizlilik-politikasi",
+    title: "Gizlilik Politikası",
+    description: "Gizlilik politikamız ve veri güvenliği",
+    isPublished: true,
+    sections: [
+      {
+        id: "gp1",
+        type: "text-content",
+        order: 0,
+        visible: true,
+        props: {
+          headline: "Gizlilik Politikası",
+          body: "<p class='mb-6 text-lg text-[var(--foreground-muted)]'>FlixFlex olarak kişisel verilerinizin güvenliği hususuna azami hassasiyet göstermekteyiz. Bu bilinçle, ajans olarak hizmetlerimizden faydalanan kişilere ait her türlü kişisel verilerin 6698 sayılı Kişisel Verilerin Korunması Kanunu'na uygun olarak işlenmesine ve muhafaza edilmesine önem veriyoruz.</p><p class='mb-4 text-[var(--foreground-muted)]'>Kişisel verileriniz, ajansımız tarafından sunulan ürün ve hizmetlerin geliştirilmesi, müşteri ilişkilerinin yönetilmesi ve yasal yükümlülüklerin yerine getirilmesi amacıyla işlenmektedir.</p>",
+          alignment: "left",
+          maxWidthProse: true,
+        },
+      },
+    ],
+  },
+  {
+    slug: "kullanim-sartlari",
+    title: "Kullanım Şartları",
+    description: "Kullanım şartları ve kurallar",
+    isPublished: true,
+    sections: [
+      {
+        id: "ks1",
+        type: "text-content",
+        order: 0,
+        visible: true,
+        props: {
+          headline: "Kullanım Şartları",
+          body: "<p class='mb-6 text-lg text-[var(--foreground-muted)]'>FlixFlex web sitesine erişiminiz veya siteyi kullanımınız, bu kullanım şartlarını kabul ettiğiniz anlamına gelir. Bu şartları kabul etmiyorsanız lütfen siteyi kullanmayınız.</p><p class='mb-4 text-[var(--foreground-muted)]'>Bu web sitesinde yer alan tüm görsel, yazılı ve dijital içeriklerin telif hakları FlixFlex'e aittir. İzinsiz kopyalanması veya kullanılması yasaktır.</p>",
+          alignment: "left",
+          maxWidthProse: true,
+        },
+      },
+    ],
+  },
+  {
+    slug: "cerez-politikasi",
+    title: "Çerez Politikası",
+    description: "Çerez politikası ve tercihleriniz",
+    isPublished: true,
+    sections: [
+      {
+        id: "cp1",
+        type: "text-content",
+        order: 0,
+        visible: true,
+        props: {
+          headline: "Çerez Politikası",
+          body: "<p class='mb-6 text-lg text-[var(--foreground-muted)]'>Web sitemizde, kullanıcı deneyiminizi geliştirmek ve site trafiğini analiz etmek amacıyla çerezler kullanılmaktadır. Sitemizi ziyaret ederek çerez kullanımını kabul etmiş olursunuz.</p><p class='mb-4 text-[var(--foreground-muted)]'>Çerezler, tarayıcınız tarafından bilgisayarınıza veya mobil cihazınıza kaydedilen küçük veri dosyalarıdır. Çerez tercihlerinizi tarayıcı ayarlarınızdan değiştirebilirsiniz.</p>",
+          alignment: "left",
+          maxWidthProse: true,
+        },
+      },
+    ],
+  },
+  {
+    slug: "kvkk-aydinlatma-metni",
+    title: "KVKK Aydınlatma Metni",
+    description: "Kişisel verilerin korunması aydınlatma metni",
+    isPublished: true,
+    sections: [
+      {
+        id: "kvkk1",
+        type: "text-content",
+        order: 0,
+        visible: true,
+        props: {
+          headline: "KVKK Aydınlatma Metni",
+          body: "<p class='mb-6 text-lg text-[var(--foreground-muted)]'>Bu metin, 6698 sayılı Kişisel Verilerin Korunması Kanunu uyarınca, FlixFlex tarafından kişisel verilerinizin işlenme amaçları, hukuki sebepleri ve haklarınız konusunda sizi bilgilendirmek amacıyla hazırlanmıştır.</p><p class='mb-4 text-[var(--foreground-muted)]'>Veri sahibi olarak Kanun'un 11. maddesinde belirtilen haklarınızı kullanmak için ajansımızla her zaman iletişime geçebilirsiniz.</p>",
+          alignment: "left",
+          maxWidthProse: true,
+        },
+      },
+    ],
+  },
 ]
 
 // ── Site Settings ─────────────────────────────────
@@ -403,19 +503,24 @@ async function main() {
       },
     })
 
-    // Reconcile permissions idempotently: delete current, re-add.
-    // Cheaper and safer than diffing per (resource,action) — and
-    // the role's permission table is tiny.
-    await prisma.permission.deleteMany({ where: { roleId: role.id } })
+    // Reconcile permissions: only add missing permissions to avoid wiping out
+    // any custom permissions the user configured in the dashboard.
     if (permissions.length > 0) {
-      await prisma.permission.createMany({
-        data: permissions.map((p) => ({
-          roleId:   role.id,
-          resource: p.resource,
-          action:   p.action,
-        })),
-        skipDuplicates: true,
-      })
+      const existingPerms = await prisma.permission.findMany({ where: { roleId: role.id } })
+      const missingPerms = permissions.filter((p) => 
+        !existingPerms.some((ep) => ep.resource === p.resource && ep.action === p.action)
+      )
+
+      if (missingPerms.length > 0) {
+        await prisma.permission.createMany({
+          data: missingPerms.map((p) => ({
+            roleId:   role.id,
+            resource: p.resource,
+            action:   p.action,
+          })),
+          skipDuplicates: true,
+        })
+      }
     }
 
     createdRoles[roleDef.name] = role.id
@@ -428,13 +533,7 @@ async function main() {
 
   const adminUser = await prisma.user.upsert({
     where:  { email: ADMIN_EMAIL },
-    update: {
-      // Always rotate the password on seed re-run so dev/staging
-      // resets work predictably. Production should use SEED_ADMIN_PASSWORD.
-      password: passwordHash,
-      roleId:   createdRoles["Super Admin"],
-      isActive: true,
-    },
+    update: {}, // Preserve custom admin credentials and state
     create: {
       email:    ADMIN_EMAIL,
       name:     "FlixFlex Admin",
@@ -507,7 +606,7 @@ async function main() {
   for (const service of DEMO_SERVICES) {
     await prisma.service.upsert({
       where: { slug: service.slug },
-      update: service,
+      update: {}, // Preserve custom services modifications
       create: service,
     })
     console.log(`  ✓ ${service.title}`)
@@ -519,10 +618,7 @@ async function main() {
     const { serviceSlugs, ...portfolioData } = item
     await prisma.portfolioItem.upsert({
       where:  { slug: item.slug },
-      update: {
-        ...portfolioData,
-        services: { set: serviceSlugs.map((slug) => ({ slug })) },
-      },
+      update: {}, // Preserve custom portfolio items modifications
       create: {
         ...portfolioData,
         services: { connect: serviceSlugs.map((slug) => ({ slug })) },
@@ -536,9 +632,7 @@ async function main() {
   for (const page of DEMO_PAGES) {
     await prisma.page.upsert({
       where:  { slug: page.slug },
-      update: {
-        sections: page.sections,
-      },
+      update: {}, // Preserve custom page content if page already exists
       create: page,
     })
     console.log(`  ✓ ${page.title}`)

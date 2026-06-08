@@ -23,6 +23,8 @@ import {
   Phone,
   BetweenVerticalEnd,
   PhoneCall,
+  Sparkles,
+  Expand,
   type LucideIcon,
 } from "lucide-react"
 import type { SectionType } from "@/types/page-builder"
@@ -44,6 +46,10 @@ import {
   parallaxPropsSchema,
   portfolioVerticalScrollPropsSchema,
   appointmentCardPropsSchema,
+  poemAnimationPropsSchema,
+  wovenLightHeroPropsSchema,
+  scrollExpandMediaPropsSchema,
+  modernManifestoPropsSchema,
 } from "@/types/page-builder"
 
 // ── Category Labels ───────────────────────────────
@@ -318,6 +324,38 @@ export const SECTION_REGISTRY: Record<string, SectionMeta> = {
     icon: PhoneCall,
     defaultProps: appointmentCardPropsSchema.parse({}),
     description: "Ön görüşme randevusu alma popup'ını açan kart",
+  },
+  "poem-animation": {
+    type: "poem-animation",
+    label: "3D Şiir Hero",
+    category: "Hero & Banner",
+    icon: Rocket,
+    defaultProps: poemAnimationPropsSchema.parse({}),
+    description: "3D dönen şiir küpü ve arkaplan görselleri içeren animasyonlu hero bölümü",
+  },
+  "woven-light-hero": {
+    type: "woven-light-hero",
+    label: "3D Woven Light Hero",
+    category: "Hero & Banner",
+    icon: Sparkles,
+    defaultProps: wovenLightHeroPropsSchema.parse({}),
+    description: "Three.js ile yapılmış etkileşimli 3D ışık örgüsü ve Framer Motion başlığı içeren hero bölümü",
+  },
+  "scroll-expansion-hero": {
+    type: "scroll-expansion-hero",
+    label: "Scroll Expansion Hero",
+    category: "Hero & Banner",
+    icon: Expand,
+    defaultProps: scrollExpandMediaPropsSchema.parse({}),
+    description: "Scroll ettikçe genişleyen video veya görsel içeren dinamik ve interaktif hero bölümü",
+  },
+  "modern-manifesto": {
+    type: "modern-manifesto",
+    label: "Modern Manifesto",
+    category: "İçerik",
+    icon: Sparkles,
+    defaultProps: modernManifestoPropsSchema.parse({}),
+    description: "Büyük yazı tipleriyle bütünleşik video veya resim pill'leri içeren manifesto bölümü",
   },
 }
 

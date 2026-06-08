@@ -27,7 +27,6 @@ interface ParallaxProviderProps {
 export function ParallaxProvider({ children }: ParallaxProviderProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const lenisRef = React.useRef<any>(null)
-  const rafIdRef = React.useRef<number>(0)
 
   React.useLayoutEffect(() => {
     // SSR guard
@@ -40,19 +39,18 @@ export function ParallaxProvider({ children }: ParallaxProviderProps) {
     })
 
     // Sync Lenis scroll updates with GSAP ScrollTrigger
-    instance.on("scroll", ScrollTrigger.update)
+    instance.on("scroll", () => ScrollTrigger.update())
 
-    // Render loop
-    function raf(time: number) {
-      instance.raf(time)
-      rafIdRef.current = requestAnimationFrame(raf)
+    // Sync Lenis with GSAP Ticker for butter-smooth rendering
+    const updateLenis = (time: number) => {
+      instance.raf(time * 1000)
     }
-    rafIdRef.current = requestAnimationFrame(raf)
+    gsap.ticker.add(updateLenis)
 
     lenisRef.current = instance
 
     return () => {
-      cancelAnimationFrame(rafIdRef.current)
+      gsap.ticker.remove(updateLenis)
       instance.destroy()
       lenisRef.current = null
     }

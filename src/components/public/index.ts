@@ -77,4 +77,5 @@ export type { BlogPost, BlogCategory } from "./blog/blog-data"
 
 export { AppointmentModal } from "./appointment-modal"
 export { AppointmentCardSection } from "./sections/appointment-card-section"
+export { ModernManifestoSection } from "./sections/modern-manifesto"
 
