@@ -192,9 +192,11 @@ export function PortfolioVerticalScrollSection({
 
   const marqueeDuration = useMemo(() => {
     if (scrollWidth === 0) return "20s"
-    const baseSpeed = speed === "slow" ? 0.015 : speed === "fast" ? 0.05 : 0.03
-    const duration = scrollWidth * (1 / (baseSpeed * 100))
-    return `${Math.max(10, Math.min(120, duration))}s`
+    const pixelsPerSecond = speed === "slow" ? 25 : speed === "fast" ? 180 : 60
+    const duration = scrollWidth / pixelsPerSecond
+    const minClamped = speed === "fast" ? 6 : speed === "normal" ? 12 : 20
+    const maxClamped = speed === "fast" ? 30 : speed === "normal" ? 75 : 150
+    return `${Math.max(minClamped, Math.min(maxClamped, duration))}s`
   }, [scrollWidth, speed])
 
   return (
