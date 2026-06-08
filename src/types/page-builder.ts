@@ -222,12 +222,12 @@ export const contactFormPropsSchema = z.object({
 })
 
 export const heroAnimatedVideoPropsSchema = z.object({
-  headline:        z.string().optional(),
-  subheadline:     z.string().optional(),
-  videoSrc:        z.string().optional(),
-  videoSrcMobile:  z.string().optional(),
+  headline: z.string().optional(),
+  subheadline: z.string().optional(),
+  videoSrc: z.string().optional(),
+  videoSrcMobile: z.string().optional(),
   clipPathVariant: z.enum(["inset", "circle", "none"]).optional(),
-  hideMobileDock:  z.boolean().default(false),
+  hideMobileDock: z.boolean().default(false),
 })
 
 export const parallaxPropsSchema = z.object({
@@ -294,11 +294,11 @@ export const modernManifestoPropsSchema = z.object({
   mediaUrl3: z.string().default("https://assets.mixkit.co/videos/preview/mixkit-waves-breaking-in-the-ocean-1527-large.mp4"),
   mediaType3: z.enum(["video", "image"]).default("video"),
   rightContent: z.string().default("<p>We solve big problems with strategy and creative that make a big impact.</p><p>We work with brands and marketers that have the biggest ambitions.</p><p>We hire big talent and bring them big opportunities that build boundless careers.</p>"),
-  ctaLabel: z.string().default("CONTACT US"),
+  ctaLabel: z.string().default("Birlikte Çalışalım"),
   ctaHref: z.string().default("/iletisim"),
-  backgroundColor: z.string().default("#FF0000"),
-  textColor: z.string().default("#FFFFFF"),
-  accentColor: z.string().default("#FFFFFF"),
+  backgroundColor: z.string().default("#fafafa"),
+  textColor: z.string().default("#171717"),
+  accentColor: z.string().default("#0d0d0d"),
   hideMobileDock: z.boolean().default(false),
 })
 

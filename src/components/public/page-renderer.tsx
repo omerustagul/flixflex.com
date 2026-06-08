@@ -497,9 +497,12 @@ export function PageRenderer({ sections, portfolioItems, servicesItems }: PageRe
                 )
               }
 
+              const globalIdx = visibleSections.indexOf(section)
               return (
-                <div
+                <SectionWrapper
                   key={section.id}
+                  section={section}
+                  index={globalIdx}
                   data-section-id={section.id}
                   ref={(el) => {
                     if (el) sectionRefs.current.set(section.id, el)
@@ -507,10 +510,8 @@ export function PageRenderer({ sections, portfolioItems, servicesItems }: PageRe
                   }}
                   className="w-full"
                 >
-                  <SectionWrapper section={section} index={section.order}>
-                    {renderer(section, { portfolioItems, servicesItems })}
-                  </SectionWrapper>
-                </div>
+                  {renderer(section, { portfolioItems, servicesItems })}
+                </SectionWrapper>
               )
             })}
           </React.Fragment>

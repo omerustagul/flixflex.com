@@ -1,4 +1,4 @@
-import { FlixFlexFooter, AppointmentModal } from "@/components/public"
+import { FlixFlexFooter, AppointmentModal, ParallaxProvider } from "@/components/public"
 import { ThemedNavbar } from "@/components/public/navbar/themed-navbar"
 import { PageTransition } from "@/components/shared/page-transition"
 import { LoadingScreen } from "@/components/shared/loading-screen"
@@ -20,7 +20,7 @@ export default async function PublicLayout({
   const siteSettings = settingsData.reduce((acc, s) => ({ ...acc, [s.key]: s.value }), {} as Record<string, string>)
 
   return (
-    <>
+    <ParallaxProvider>
       <LoadingScreen />
       <ThemedNavbar />
       <PageTransition>
@@ -30,7 +30,7 @@ export default async function PublicLayout({
       </PageTransition>
       <FlixFlexFooter siteSettings={siteSettings} />
       <AppointmentModal />
-    </>
+    </ParallaxProvider>
   )
 }
 

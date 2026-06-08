@@ -1,85 +1,77 @@
 "use client"
 
 import * as React from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
 import type { SectionBlock } from "@/types/page-builder"
 import { cn } from "@/lib/utils"
 
-interface SectionWrapperProps {
+export interface SectionWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
   section: SectionBlock
   index: number
   children: React.ReactNode
 }
 
-export function SectionWrapper({ section, index, children }: SectionWrapperProps) {
-  const transition = section.transition || "normal"
-  const isPinned = !!section.stickyPin
+export const SectionWrapper = React.forwardRef<HTMLDivElement, SectionWrapperProps>(
+  ({ section, index, children, className, style, ...props }, ref) => {
+    const transition = section.transition || "normal"
+    const isPinned = !!section.stickyPin
 
-  const ref = React.useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  })
-
-  /**
-   * Z-INDEX STRATEJİSİ (Yenilendi):
-   * - Bölümler sıralı olarak yükselen z-index değerlerine sahip olmalı.
-   * - Böylece her yeni bölüm bir öncekinin "üstünde" kalır.
-   */
-  const getStyles = (): React.CSSProperties => {
-    const base: React.CSSProperties = {
-      position: "relative",
-      width: "100%",
-      zIndex: 10 + index, // Her bölüm bir öncekinden üstte
-      backgroundColor: "var(--background)",
-    }
-
-    // STICKY veya STICKY PIN (Sabitleme)
-    if (transition === "sticky" || isPinned) {
-      return {
-        ...base,
-        position: "sticky",
-        top: 0,
-        height: transition === "sticky" ? "100vh" : "auto",
-        overflow: "hidden",
-        // Sticky Pin olan bölümlerin üzerine binilebilmesi için z-index'i koruyoruz
+    /**
+     * Z-INDEX STRATEJİSİ:
+     * - Bölümler sıralı olarak yükselen z-index değerlerine sahip olmalı.
+     * - Böylece her yeni bölüm bir öncekinin "üstünde" kalır.
+     */
+    const getStyles = (): React.CSSProperties => {
+      const base: React.CSSProperties = {
+        position: "relative",
+        width: "100%",
+        zIndex: 10 + index, // Her bölüm bir öncekinden üstte
+        backgroundColor: "var(--background)",
+        ...style,
       }
-    }
 
-    // OVERLAP (Üzerine Binme)
-    if (transition === "overlap") {
-      return {
-        ...base,
-        boxShadow: "0 -20px 50px rgba(0,0,0,0.15)", // Üstteki bölümün gölgesi
+      // STICKY / STICKY PIN veya PARALLAX DECK (Kart Yığılma Geçişi)
+      if (transition === "sticky" || transition === "parallax" || isPinned) {
+        const isParallax = transition === "parallax"
+        return {
+          ...base,
+          position: "sticky",
+          top: 0,
+          height: (transition === "sticky" || isParallax) ? "100vh" : "auto",
+          overflow: "hidden",
+          borderTopLeftRadius: (isParallax && index > 0) ? "24px" : "0",
+          borderTopRightRadius: (isParallax && index > 0) ? "24px" : "0",
+          boxShadow: (isParallax && index > 0) ? "0 -20px 40px rgba(0,0,0,0.15)" : "none",
+        }
       }
+
+      // OVERLAP (Üzerine Binme)
+      if (transition === "overlap") {
+        return {
+          ...base,
+          boxShadow: "0 -20px 50px rgba(0,0,0,0.15)", // Üstteki bölümün gölgesi
+        }
+      }
+
+      return base
     }
 
-    return base
+    return (
+      <div
+        ref={ref}
+        style={getStyles()}
+        className={cn(
+          "transition-shadow duration-500 w-full",
+          (transition === "sticky" || transition === "parallax" || (isPinned && transition !== "normal")) && 
+          "flex items-center justify-center",
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </div>
+    )
   }
+)
 
-  const renderInner = () => {
-    if (transition === "parallax") {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"])
-      return (
-        <motion.div style={{ y }} className="w-full">
-          {children}
-        </motion.div>
-      )
-    }
-    return children
-  }
+SectionWrapper.displayName = "SectionWrapper"
 
-  return (
-    <div
-      ref={ref}
-      style={getStyles()}
-      className={cn(
-        "transition-shadow duration-500",
-        (transition === "sticky" || (isPinned && transition !== "normal")) && "flex items-center justify-center"
-      )}
-    >
-      {renderInner()}
-    </div>
-  )
-}

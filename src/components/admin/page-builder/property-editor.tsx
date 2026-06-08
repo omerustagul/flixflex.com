@@ -60,7 +60,7 @@ function FieldLabel({ name }: { name: string }) {
     mediaType2: "2. Medya Tipi",
     mediaUrl3: "3. Medya URL / Dosya",
     mediaType3: "3. Medya Tipi",
-    rightContent: "Sağ Açıklama Metni (HTML)",
+    rightContent: "Sağ Açıklama Metni (Yeni satır destekler)",
     backgroundColor: "Arka Plan Rengi",
     textColor: "Yazı Rengi",
     accentColor: "Vurgu Rengi",
@@ -110,6 +110,74 @@ function TextareaField({ name, value, onChange }: FieldProps) {
           "outline-none focus:border-[#ff4fd8] transition-colors duration-150"
         )}
       />
+    </div>
+  )
+}
+
+function ManifestoTextEditor({ name, value, onChange }: FieldProps) {
+  const textareaRef = React.useRef<HTMLTextAreaElement>(null)
+  const valStr = typeof value === "string" ? value : ""
+
+  const insertMediaToken = (tokenNumber: number) => {
+    const textarea = textareaRef.current
+    if (!textarea) return
+
+    const start = textarea.selectionStart
+    const end = textarea.selectionEnd
+    const token = `[media${tokenNumber}]`
+
+    const newValue = valStr.substring(0, start) + token + valStr.substring(end)
+    onChange(newValue)
+
+    // Focus back and set cursor position after the inserted token
+    setTimeout(() => {
+      textarea.focus()
+      const newCursorPos = start + token.length
+      textarea.setSelectionRange(newCursorPos, newCursorPos)
+    }, 0)
+  }
+
+  return (
+    <div className="flex flex-col gap-1.5">
+      <FieldLabel name={name} />
+      <textarea
+        ref={textareaRef}
+        value={valStr}
+        onChange={(e) => onChange(e.target.value)}
+        rows={4}
+        className={cn(
+          "ff-shape-container w-full px-3 py-2 text-[12px] resize-y min-h-[80px]",
+          "bg-[#f7f7f5] border border-[#CCCCCC]",
+          "text-[#333333] placeholder:text-[#666666]",
+          "outline-none focus:border-[#ff4fd8] transition-colors duration-150"
+        )}
+        placeholder="Manifesto metnini girin..."
+      />
+
+      {/* Quick insert media buttons */}
+      <div className="flex items-center gap-1.5 mt-1">
+        {[1, 2, 3].map((num) => {
+          const hasToken = valStr.includes(`[media${num}]`)
+          return (
+            <button
+              key={num}
+              type="button"
+              onClick={() => insertMediaToken(num)}
+              className={cn(
+                "ff-shape-button px-2.5 py-1 text-[10px] font-semibold border transition-all duration-150",
+                hasToken
+                  ? "bg-[#ff4fd8]/5 border-[#ff4fd8] text-[#ff4fd8]"
+                  : "bg-white border-[#CCCCCC] text-[#666666] hover:border-[#ff4fd8] hover:text-[#ff4fd8]"
+              )}
+            >
+              + Medya {num}
+            </button>
+          )
+        })}
+      </div>
+      <p className="text-[9px] text-[#999999] leading-normal mt-0.5">
+        Metin içerisinde görsel/videoların görüneceği yerlere tıklayıp yukarıdaki butonlarla medya alanları yerleştirebilirsiniz.
+      </p>
     </div>
   )
 }
@@ -193,14 +261,18 @@ function ColorField({ name, value, onChange }: FieldProps) {
           type="color"
           value={typeof value === "string" ? value : "#ff4d8d"}
           onChange={(e) => onChange(e.target.value)}
-          className="ff-shape-button w-8 h-8 border border-[#CCCCCC] cursor-pointer bg-transparent p-0"
+          className={cn(
+            "w-10 h-10 rounded-full border border-[#CCCCCC] cursor-pointer bg-transparent p-0 overflow-hidden shrink-0",
+            "[&::-webkit-color-swatch-wrapper]:p-0 [&::-webkit-color-swatch]:border-none [&::-webkit-color-swatch]:rounded-full",
+            "[&::-moz-color-swatch]:border-none [&::-moz-color-swatch]:rounded-full"
+          )}
         />
         <input
           type="text"
           value={typeof value === "string" ? value : ""}
           onChange={(e) => onChange(e.target.value)}
           className={cn(
-            "flex-1 px-3 py-2 text-[12px]",
+            "ff-shape-container flex-1 px-3 py-2 text-[12px]",
             "bg-[#f7f7f5] border border-[#CCCCCC]",
             "text-[#333333]",
             "outline-none focus:border-[#ff4fd8] transition-colors duration-150"
@@ -388,8 +460,21 @@ export function PropertyEditor() {
             const fDef = fieldDef as Record<string, unknown>
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const innerDef = (fDef as any)._def ?? fDef
-            const fieldType = inferFieldType(innerDef)
             const currentVal = props[fieldName]
+
+            if (fieldName === "leftText" && section.type === "modern-manifesto") {
+              return (
+                <ManifestoTextEditor
+                  key={fieldName}
+                  name={fieldName}
+                  value={currentVal}
+                  schema={innerDef as { description?: string }}
+                  onChange={(v) => handleChange(fieldName, v)}
+                />
+              )
+            }
+
+            const fieldType = inferFieldType(innerDef)
 
             // Skip complex/array types for now — render them as JSON textarea
             if (fieldType === "array" || fieldType === "object") {
@@ -535,7 +620,7 @@ export function PropertyEditor() {
           </label>
           <FFSelect
             value={section.transition || "normal"}
-            onValueChange={(val) => updateSectionTransition(section.id, val as any)}
+            onValueChange={(val) => updateSectionTransition(section.id, val as "normal" | "sticky" | "parallax" | "overlap" | "story-scroll")}
             size="sm"
             ariaLabel="scroll-transition-type"
           >

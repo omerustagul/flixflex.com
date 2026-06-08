@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "randomuser.me" },
       { protocol: "https", hostname: "*.supabase.co" },
       { protocol: "https", hostname: "cdn.pixabay.com" },
-      { protocol: "https", hostname: "ferf1mheo22r9ira.public.blob.vercel-storage.com" },
+      { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
       { protocol: "https", hostname: "image.mux.com" },
       { protocol: "https", hostname: "me7aitdbxq.ufs.sh" },
     ],

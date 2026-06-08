@@ -1,8 +1,14 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"
 
 import * as React from "react"
-import { motion } from "framer-motion"
+import { motion, useInView, useMotionValue, useSpring, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
+import { ArrowUpRight, Maximize2, X, Play, Pause } from "lucide-react"
+
+// ═══════════════════════════════════════════════════
+// ModernManifestoSection — Next-Gen Inline Edition
+// ═══════════════════════════════════════════════════
 
 export interface ModernManifestoProps {
   leftText?: string
@@ -21,29 +27,257 @@ export interface ModernManifestoProps {
   hideMobileDock?: boolean
 }
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    },
-  },
+/* ── Segment Types & Parsing ─────────────────────── */
+
+interface TextSegment {
+  type: "text"
+  value: string
 }
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+interface MediaSegment {
+  type: "media"
+  index: 1 | 2 | 3
+}
+
+type Segment = TextSegment | MediaSegment
+
+// Custom parser that preserves trailing/leading spaces around media tags
+function parseSegments(raw: string): Segment[] {
+  const segments: Segment[] = []
+  const regex = /\[media([123])\]/g
+  let lastIndex = 0
+
+  for (const match of raw.matchAll(regex)) {
+    const before = raw.slice(lastIndex, match.index)
+    if (before) {
+      segments.push({ type: "text", value: before })
+    }
+    segments.push({ type: "media", index: Number(match[1]) as 1 | 2 | 3 })
+    lastIndex = match.index! + match[0].length
+  }
+
+  const remaining = raw.slice(lastIndex)
+  if (remaining) {
+    segments.push({ type: "text", value: remaining })
+  }
+  return segments
+}
+
+/* ── Media Type Auto-Detection Helper ────────────── */
+
+function getResolvedMediaType(url?: string, type?: "video" | "image"): "video" | "image" {
+  if (!url) return "image"
+
+  const cleanUrl = url.split("?")[0].split("#")[0].toLowerCase()
+  const isImageExt = cleanUrl.endsWith(".jpg") ||
+    cleanUrl.endsWith(".jpeg") ||
+    cleanUrl.endsWith(".png") ||
+    cleanUrl.endsWith(".webp") ||
+    cleanUrl.endsWith(".gif") ||
+    cleanUrl.endsWith(".svg")
+  const isVideoExt = cleanUrl.endsWith(".mp4") ||
+    cleanUrl.endsWith(".webm") ||
+    cleanUrl.endsWith(".ogg") ||
+    cleanUrl.endsWith(".mov")
+
+  if (isImageExt && type === "video") return "image"
+  if (isVideoExt && type === "image") return "video"
+  if (type === "video" || type === "image") return type
+
+  if (isVideoExt || url.includes("mixkit.co/videos")) {
+    return "video"
+  }
+  return "image"
+}
+
+/* ── Grain Overlay ───────────────────────────────── */
+
+function GrainOverlay() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-0 z-[1] opacity-[0.03] mix-blend-overlay"
+      style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+        backgroundSize: "128px 128px",
+      }}
+    />
+  )
+}
+
+/* ── Inline Media Capsule ────────────────────────── */
+
+interface MediaCapsuleProps {
+  url?: string
+  mediaType?: "video" | "image"
+  accentHex: string
+  onExpand: () => void
+}
+
+const capsuleVariants = {
+  hidden: { y: "40%", opacity: 0, scale: 0.8 },
   visible: {
-    opacity: 1,
     y: 0,
+    opacity: 1,
+    scale: 1,
     transition: {
       type: "spring" as const,
-      stiffness: 70,
-      damping: 15,
-    },
-  },
+      stiffness: 90,
+      damping: 14
+    }
+  }
 }
+
+function MediaCapsule({ url, mediaType, accentHex, onExpand }: MediaCapsuleProps) {
+  if (!url) return null
+
+  const resolvedMediaType = getResolvedMediaType(url, mediaType)
+
+  return (
+    <motion.span
+      variants={capsuleVariants}
+      className={cn(
+        "ff-shape-container relative inline-flex items-center justify-center align-middle",
+        "mx-1.5 md:mx-2.5",
+        "overflow-hidden",
+        "border border-white/10 shadow-2xl",
+        "cursor-pointer group/capsule select-none"
+      )}
+      style={{
+        width: "2.2em",
+        height: "1.3em"
+      }}
+      whileHover={{ scale: 1.06, y: -2 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      onClick={onExpand}
+    >
+      {/* Dynamic light ring glow */}
+      <div
+        aria-hidden
+        className="absolute -inset-1 opacity-0 group-hover/capsule:opacity-100 transition-opacity duration-500 blur-sm -z-10"
+        style={{
+          background: `radial-gradient(circle, ${accentHex}aa 0%, transparent 80%)`,
+        }}
+      />
+
+      {/* Media content */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden bg-black/40">
+        {resolvedMediaType === "video" ? (
+          <video
+            src={url}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/capsule:scale-110"
+          />
+        ) : (
+          <img
+            src={url}
+            alt="manifesto visual capsule"
+            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/capsule:scale-110"
+            loading="lazy"
+          />
+        )}
+
+        {/* Hover overlay shade */}
+        <div className="absolute inset-0 bg-black/10 group-hover/capsule:bg-black/0 transition-colors duration-300" />
+
+        {/* Maximize action indicator */}
+        <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover/capsule:opacity-100 transition-all duration-300">
+          <Maximize2 className="w-3.5 h-3.5 text-white/90 transform scale-75 group-hover/capsule:scale-100 transition-transform duration-300" />
+        </div>
+      </div>
+    </motion.span>
+  )
+}
+
+/* ── Interactive Modal ────────────────────────────── */
+
+interface MediaModalProps {
+  url?: string
+  mediaType?: "video" | "image"
+  onClose: () => void
+  accentHex: string
+}
+
+function MediaModal({ url, mediaType, onClose, accentHex }: MediaModalProps) {
+  const [isPlaying, setIsPlaying] = React.useState(true)
+  const videoRef = React.useRef<HTMLVideoElement>(null)
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause()
+      } else {
+        videoRef.current.play()
+      }
+      setIsPlaying(!isPlaying)
+    }
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-xl bg-black/80"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, y: 20, opacity: 0 }}
+        animate={{ scale: 1, y: 0, opacity: 1 }}
+        exit={{ scale: 0.9, y: 20, opacity: 0 }}
+        transition={{ type: "spring", damping: 25, stiffness: 220 }}
+        className="relative max-w-4xl w-full aspect-video overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10 bg-zinc-950"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Media Container */}
+        <div className="w-full h-full relative group">
+          {mediaType === "video" ? (
+            <>
+              <video
+                ref={videoRef}
+                src={url}
+                autoPlay
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+                onClick={togglePlay}
+              />
+              <button
+                onClick={togglePlay}
+                className="absolute bottom-6 left-6 p-4 bg-black/60 border border-white/10 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:scale-105 hover:bg-black/80"
+              >
+                {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
+              </button>
+            </>
+          ) : (
+            <img src={url} alt="Expanded visual" className="w-full h-full object-cover" />
+          )}
+
+          {/* Glowing Aura Frame */}
+          <div
+            className="absolute inset-0 pointer-events-none opacity-20"
+            style={{
+              boxShadow: `inset 0 0 40px ${accentHex}`,
+            }}
+          />
+        </div>
+
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-6 right-6 p-3 bg-black/60 border border-white/10 text-white hover:scale-105 transition-transform duration-200 hover:bg-black/85"
+        >
+          <X className="w-5 h-5" />
+        </button>
+      </motion.div>
+    </motion.div>
+  )
+}
+
+/* ── Main Component ──────────────────────────────── */
 
 export function ModernManifestoSection({
   leftText = "WE ARE [media1] BBDO WE [media2] DO BIG [media3] THINGS",
@@ -54,125 +288,254 @@ export function ModernManifestoSection({
   mediaUrl3 = "https://assets.mixkit.co/videos/preview/mixkit-waves-breaking-in-the-ocean-1527-large.mp4",
   mediaType3 = "video",
   rightContent = "<p>We solve big problems with strategy and creative that make a big impact.</p><p>We work with brands and marketers that have the biggest ambitions.</p><p>We hire big talent and bring them big opportunities that build boundless careers.</p>",
-  ctaLabel = "CONTACT US",
+  ctaLabel = "Birlikte Çalışalım",
   ctaHref = "/iletisim",
-  backgroundColor = "var(--ff-purple)",
-  textColor = "var(--ff-foreground)",
-  accentColor = "var(--ff-accent)",
-  hideMobileDock = false,
+  backgroundColor,
+  textColor,
+  accentColor,
 }: ModernManifestoProps) {
+  const containerRef = React.useRef<HTMLDivElement>(null)
+  const contentRef = React.useRef<HTMLDivElement>(null)
+  const isInView = useInView(contentRef, { once: true, margin: "-120px" })
 
-  // Custom theme styles using CSS custom properties for clean native hover logic
-  const sectionStyle = {
-    "--manifesto-bg": backgroundColor || "var(--ff-purple)",
-    "--manifesto-text": textColor || "var(--ff-foreground)",
-    "--manifesto-accent": accentColor || "var(--ff-accent)",
-    backgroundColor: "var(--ff-purple)",
-    color: "var(--ff-foreground)",
-  } as React.CSSProperties
+  // Spotlight effect coordinates
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
 
-  // Render a media pill with proportionate em height and width
-  const renderMediaPill = (url?: string, type?: "video" | "image") => {
-    if (!url) return null
-    return (
-      <span className="w-[2.2em] h-[0.78em] rounded-[0.39em] mx-[0.1em] inline-flex align-middle overflow-hidden relative border border-[var(--manifesto-text)]/15 shadow-lg bg-black/10 select-none">
-        {type === "video" ? (
-          <video
-            src={url}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        ) : (
-          <img
-            src={url}
-            alt="manifesto media"
-            className="absolute inset-0 w-full h-full object-cover"
-            loading="lazy"
-          />
-        )}
-      </span>
-    )
+  const spotlightX = useSpring(mouseX, { stiffness: 60, damping: 25 })
+  const spotlightY = useSpring(mouseY, { stiffness: 60, damping: 25 })
+
+  // Active expanded media modal
+  const [activeMedia, setActiveMedia] = React.useState<{
+    url?: string
+    type?: "video" | "image"
+  } | null>(null)
+
+  const mediaMap: Record<number, { url?: string; type?: "video" | "image" }> = React.useMemo(() => ({
+    1: { url: mediaUrl1, type: mediaType1 },
+    2: { url: mediaUrl2, type: mediaType2 },
+    3: { url: mediaUrl3, type: mediaType3 },
+  }), [mediaUrl1, mediaType1, mediaUrl2, mediaType2, mediaUrl3, mediaType3])
+
+  // Parse input segments
+  const segments = React.useMemo(() => parseSegments(leftText || ""), [leftText])
+
+  /* Color definitions */
+  const isThemeBg = !backgroundColor || backgroundColor.startsWith("var(")
+  const resolvedBg = backgroundColor || "var(--background)"
+  const resolvedText = isThemeBg ? "var(--foreground)" : textColor || "var(--foreground)"
+  const resolvedAccent = isThemeBg ? "var(--ff-purple)" : accentColor || "var(--ff-purple)"
+  const accentHex = isThemeBg ? "#FF4FD8" : accentColor || "#FF4FD8"
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!containerRef.current) return
+    const rect = containerRef.current.getBoundingClientRect()
+    mouseX.set(e.clientX - rect.left)
+    mouseY.set(e.clientY - rect.top)
   }
 
-  // Parse leftText to embed inline media pills dynamically
-  const renderManifestoText = () => {
-    if (!leftText) return null
-    const parts = leftText.split(/(\[media1\]|\[media2\]|\[media3\])/g)
+  // Split text segments into words for precise character animations
+  const renderTextSegment = (text: string, segmentIndex: number) => {
+    // Preserve spaces by splitting while keeping spacing patterns
+    const tokens = text.split(/(\s+)/)
 
-    return parts.map((part, index) => {
-      if (part === "[media1]") {
-        return <React.Fragment key={`media1-${index}`}>{renderMediaPill(mediaUrl1, mediaType1)}</React.Fragment>
+    return tokens.map((token, tokenIdx) => {
+      if (token.trim() === "") {
+        return <span key={`space-${segmentIndex}-${tokenIdx}`}>{token}</span>
       }
-      if (part === "[media2]") {
-        return <React.Fragment key={`media2-${index}`}>{renderMediaPill(mediaUrl2, mediaType2)}</React.Fragment>
-      }
-      if (part === "[media3]") {
-        return <React.Fragment key={`media3-${index}`}>{renderMediaPill(mediaUrl3, mediaType3)}</React.Fragment>
-      }
-      return <span key={`text-${index}`}>{part}</span>
+
+      return (
+        <motion.span
+          key={`word-${segmentIndex}-${tokenIdx}`}
+          className="inline-block relative overflow-hidden align-bottom"
+          variants={{
+            hidden: { y: "100%", opacity: 0 },
+            visible: {
+              y: 0,
+              opacity: 1,
+              transition: {
+                type: "spring",
+                stiffness: 80,
+                damping: 15
+              }
+            }
+          }}
+        >
+          <span
+            className="inline-block transition-all duration-300 hover:text-[var(--manifesto-accent)] hover:-translate-y-0.5 cursor-default"
+          >
+            {token}
+          </span>
+        </motion.span>
+      )
     })
   }
 
   return (
     <section
-      style={sectionStyle}
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
       className={cn(
-        "relative w-full overflow-hidden py-20 sm:py-28 md:py-36 lg:py-44",
-        "transition-colors duration-500 ease-in-out"
+        "relative flex items-center justify-center w-full h-screen overflow-hidden",
+        "transition-colors duration-700 ease-in-out border-b border-white/5 bg-zinc-950 text-white"
       )}
+      style={{
+        "--manifesto-bg": resolvedBg,
+        "--manifesto-text": resolvedText,
+        "--manifesto-accent": resolvedAccent,
+        backgroundColor: resolvedBg,
+        color: resolvedText,
+      } as React.CSSProperties}
     >
-      <div className="mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16">
+      {/* Tactile Grids & Overlays */}
+      <GrainOverlay />
+
+      {/* Ultra-subtle geometric grid background */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.02]" style={{
+        backgroundImage: `linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)`,
+        backgroundSize: '4rem 4rem',
+      }} />
+
+      {/* Cursor spotlight halo */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute w-[600px] h-[600px] -translate-x-1/2 -translate-y-1/2 opacity-30 blur-[130px] z-0"
+        style={{
+          left: spotlightX,
+          top: spotlightY,
+          background: `radial-gradient(circle, ${accentHex}33 0%, transparent 70%)`,
+        }}
+      />
+
+      {/* Decorative Ambient Aura Nodes */}
+      <div className="pointer-events-none absolute top-1/4 -left-20 w-80 h-80 blur-[120px] opacity-[0.06]" style={{ backgroundColor: accentHex }} />
+      <div className="pointer-events-none absolute bottom-1/4 -right-20 w-96 h-96 blur-[140px] opacity-[0.04]" style={{ backgroundColor: accentHex }} />
+
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-12 xl:px-20">
+
+        {/* Core Manifesto Box */}
         <motion.div
-          variants={containerVariants}
+          ref={contentRef}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start"
+          animate={isInView ? "visible" : "hidden"}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.03
+              }
+            }
+          }}
+          className={cn(
+            "w-full text-left font-display font-extrabold uppercase",
+            "text-[clamp(1.75rem,5.5vw,5.5rem)]",
+            "leading-[2.1] tracking-[-0.01em]"
+          )}
         >
-          {/* Left Column: Huge Uppercase Bold Typography */}
-          <motion.div
-            variants={itemVariants}
-            className="lg:col-span-8 flex flex-col justify-center"
-          >
-            <h2 className="font-display font-extrabold text-4xl sm:text-6xl md:text-7xl lg:text-[6.5vw] leading-[1.05] tracking-tight uppercase select-none">
-              {renderManifestoText()}
-            </h2>
-          </motion.div>
+          {segments.map((seg, idx) => {
+            if (seg.type === "text") {
+              return (
+                <React.Fragment key={`seg-${idx}`}>
+                  {renderTextSegment(seg.value, idx)}
+                </React.Fragment>
+              )
+            } else {
+              const media = mediaMap[seg.index]
+              return (
+                <MediaCapsule
+                  key={`seg-${idx}`}
+                  url={media?.url}
+                  mediaType={media?.type}
+                  accentHex={accentHex}
+                  onExpand={() => {
+                    const resolvedType = getResolvedMediaType(media?.url, media?.type)
+                    setActiveMedia({ url: media?.url, type: resolvedType })
+                  }}
+                />
+              )
+            }
+          })}
+        </motion.div>
 
-          {/* Right Column: Editorial Paragraphs and CTA Button */}
-          <motion.div
-            variants={itemVariants}
-            className="lg:col-span-4 flex flex-col justify-start lg:pt-4 text-left"
-          >
-            {rightContent && (
-              <div
-                className="text-[15px] sm:text-[17px] leading-relaxed opacity-90 space-y-6 font-medium max-w-lg mb-10"
-                dangerouslySetInnerHTML={{ __html: rightContent }}
-              />
-            )}
+        {/* Minimal Details Dashboard */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-20"
+        >
+          {/* Subtle separator with accent pulse */}
+          <div className="relative mb-12">
+            <div className="h-px w-full bg-white/10" style={{
+              background: `linear-gradient(90deg, ${accentHex}22 0%, white/10 50%, transparent 100%)`
+            }} />
+            <div
+              className="absolute left-0 top-0 h-px w-24"
+              style={{ backgroundColor: accentHex }}
+            />
+          </div>
 
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            {/* Descriptive Brand Quote */}
+            {rightContent && (() => {
+              const hasHtml = /<\/?[a-z][\s\S]*>/i.test(rightContent)
+              if (hasHtml) {
+                return (
+                  <div
+                    className="lg:col-span-8 text-foreground text-sm max-w-2xl space-y-4 [&_p]:text-inherit"
+                    dangerouslySetInnerHTML={{ __html: rightContent }}
+                  />
+                )
+              }
+              const lines = rightContent.split(/\r?\n/).filter((line) => line.trim() !== "")
+              return (
+                <div className="lg:col-span-8 text-zinc-400 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl font-light space-y-4">
+                  {lines.map((line, idx) => (
+                    <p key={idx}>{line}</p>
+                  ))}
+                </div>
+              )
+            })()}
+
+            {/* Interactive Call to Action */}
             {ctaLabel && (
-              <div>
+              <div className="lg:col-span-4 lg:flex lg:justify-end">
                 <a
                   href={ctaHref || "#"}
-                  className={cn(
-                    "inline-flex items-center justify-center px-10 py-4 rounded-full border border-[var(--manifesto-accent)]",
-                    "text-[12px] font-bold tracking-widest uppercase transition-all duration-300",
-                    "bg-transparent text-[var(--manifesto-text)]",
-                    "hover:bg-[var(--manifesto-accent)] hover:text-[var(--manifesto-bg)]",
-                    "focus:outline-none focus:ring-2 focus:ring-[var(--manifesto-accent)] focus:ring-offset-2 focus:ring-offset-[var(--manifesto-bg)]"
-                  )}
+                  className="ff-shape-button group relative inline-flex items-center gap-3.5 h-12 px-8 py-2 bg-white/5 border border-white/10 hover:border-white/20 text-xs font-bold text-white overflow-hidden transition-all duration-300"
                 >
-                  {ctaLabel}
+                  {/* Glowing background flow */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md -z-10"
+                    style={{
+                      background: `radial-gradient(circle at center, ${accentHex}1a 0%, transparent 80%)`
+                    }}
+                  />
+                  <span className="relative z-10">{ctaLabel}</span>
+                  <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+
+                  {/* Subtle inner hover glow line */}
+                  <div className="absolute inset-0 scale-95 group-hover:scale-100 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none" style={{
+                    boxShadow: `inset 0 0 12px ${accentHex}20`
+                  }} />
                 </a>
               </div>
             )}
-          </motion.div>
+          </div>
         </motion.div>
       </div>
+
+      {/* Expanded Media Modal */}
+      <AnimatePresence>
+        {activeMedia && (
+          <MediaModal
+            url={activeMedia.url}
+            mediaType={activeMedia.type}
+            accentHex={accentHex}
+            onClose={() => setActiveMedia(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   )
 }
