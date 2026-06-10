@@ -12,13 +12,8 @@ import {
   LayoutGrid,
   Columns,
   ChevronRight,
-  Folder,
-  FileText,
-  File,
-  ArrowLeft,
-  Calendar,
-  ZoomIn
-} from "lucide-react"
+  Folder
+} from "@/lib/icons"
 import { cn } from "@/lib/utils"
 
 interface MediaFolder {
@@ -50,6 +45,10 @@ interface MediaPickerProps {
   onSelect: (url: string, type: string) => void
   onClose: () => void
   allowedTypes?: string[]
+  /** Allow selecting more than one file at once. */
+  multiple?: boolean
+  /** Called with all chosen files when `multiple` is enabled. */
+  onSelectMany?: (items: { url: string; type: string }[]) => void
 }
 
 interface ColumnData {
@@ -62,11 +61,39 @@ interface ColumnData {
   previewItem?: MediaItem | null
 }
 
-export function MediaPicker({ onSelect, onClose, allowedTypes = ["image", "video"] }: MediaPickerProps) {
+export function MediaPicker({ onSelect, onClose, allowedTypes = ["image", "video"], multiple = false, onSelectMany }: MediaPickerProps) {
   const [viewMode, setViewMode] = React.useState<"grid" | "columns">("grid")
   const [search, setSearch] = React.useState("")
   const [loading, setLoading] = React.useState(true)
   const [selectedItem, setSelectedItem] = React.useState<MediaItem | null>(null)
+  // Multi-select buffer (only used when `multiple` is true).
+  const [multiSelected, setMultiSelected] = React.useState<MediaItem[]>([])
+
+  const isItemSelected = (item: MediaItem) =>
+    multiple ? multiSelected.some((s) => s.id === item.id) : selectedItem?.id === item.id
+
+  const toggleMulti = (item: MediaItem) =>
+    setMultiSelected((prev) =>
+      prev.some((s) => s.id === item.id)
+        ? prev.filter((s) => s.id !== item.id)
+        : [...prev, item]
+    )
+
+  // Click handler shared by grid + column file tiles.
+  const handlePick = (item: MediaItem) => {
+    if (multiple) toggleMulti(item)
+    else setSelectedItem(item)
+  }
+
+  const handleConfirm = () => {
+    if (multiple) {
+      if (multiSelected.length && onSelectMany) {
+        onSelectMany(multiSelected.map((i) => ({ url: i.url, type: i.type })))
+      }
+    } else if (selectedItem) {
+      onSelect(selectedItem.url, selectedItem.type)
+    }
+  }
 
   // ── Grid View States ──────────────────────────────
   const [currentFolderId, setCurrentFolderId] = React.useState<string | null>(null)
@@ -175,7 +202,7 @@ export function MediaPicker({ onSelect, onClose, allowedTypes = ["image", "video
 
     // Fetch and append next column
     const data = await fetchFolderContent(folder.id)
-    setColumns(prev => [
+    setColumns(_prev => [
       ...nextColumns,
       {
         folderId: folder.id,
@@ -191,7 +218,7 @@ export function MediaPicker({ onSelect, onClose, allowedTypes = ["image", "video
   const handleColumnFileClick = (item: MediaItem, colIndex: number) => {
     const nextColumns = columns.slice(0, colIndex + 1)
 
-    // Mark file as selected in this column
+    // Mark file as selected in this column (drives the preview panel)
     nextColumns[colIndex] = {
       ...nextColumns[colIndex],
       selectedId: item.id,
@@ -201,6 +228,7 @@ export function MediaPicker({ onSelect, onClose, allowedTypes = ["image", "video
 
     setColumns(nextColumns)
     setSelectedItem(item)
+    if (multiple) toggleMulti(item)
   }
 
   // ── Filtering ────────────────────────────────────
@@ -356,13 +384,13 @@ export function MediaPicker({ onSelect, onClose, allowedTypes = ["image", "video
                   ) : (
                     <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-4">
                       {filterItems(gridItems).map((item) => {
-                        const isSelected = selectedItem?.id === item.id
+                        const isSelected = isItemSelected(item)
                         return (
                           <button
                             key={item.id}
                             type="button"
-                            onClick={() => setSelectedItem(item)}
-                            onDoubleClick={() => onSelect(item.url, item.type)}
+                            onClick={() => handlePick(item)}
+                            onDoubleClick={() => { if (multiple) { toggleMulti(item) } else { onSelect(item.url, item.type) } }}
                             className={cn(
                               "group relative aspect-square bg-white border transition-all overflow-hidden flex flex-col ff-shape-container",
                               isSelected
@@ -440,13 +468,15 @@ export function MediaPicker({ onSelect, onClose, allowedTypes = ["image", "video
 
                       {/* Files in column */}
                       {filterItems(column.items).map((item) => {
-                        const isSelected = column.selectedId === item.id && column.selectedType === "file"
+                        const isSelected = multiple
+                          ? isItemSelected(item)
+                          : (column.selectedId === item.id && column.selectedType === "file")
                         return (
                           <button
                             key={item.id}
                             type="button"
                             onClick={() => handleColumnFileClick(item, colIndex)}
-                            onDoubleClick={() => onSelect(item.url, item.type)}
+                            onDoubleClick={() => { if (multiple) { toggleMulti(item) } else { onSelect(item.url, item.type) } }}
                             className={cn(
                               "w-full min-w-max px-3 py-1.5 flex items-center justify-between gap-6 text-left transition-all text-xs font-semibold",
                               isSelected ? "bg-[#ff4fd8]/10 text-[#ff4fd8]" : "text-[#666666] hover:bg-[#F7F7F5]"
@@ -521,13 +551,19 @@ export function MediaPicker({ onSelect, onClose, allowedTypes = ["image", "video
           {/* ── Footer ─────────────────────────────────── */}
           <div className="p-4 px-6 border-t border-[#CCCCCC] bg-white flex items-center justify-between">
             <div className="text-[11px] text-[#888888] font-semibold">
-              {selectedItem ? (
+              {multiple ? (
+                multiSelected.length > 0 ? (
+                  <span><strong className="text-[#ff4fd8]">{multiSelected.length}</strong> dosya seçildi</span>
+                ) : (
+                  <span>Birden fazla dosya seçebilirsiniz.</span>
+                )
+              ) : selectedItem ? (
                 <span>Seçilen: <strong className="text-[#ff4fd8]">{selectedItem.title || "Adsız"}</strong></span>
               ) : (
                 <span>Bir dosya seçin veya çift tıklayın.</span>
               )}
             </div>
-            
+
             <div className="flex gap-2">
               <button
                 type="button"
@@ -538,11 +574,11 @@ export function MediaPicker({ onSelect, onClose, allowedTypes = ["image", "video
               </button>
               <button
                 type="button"
-                disabled={!selectedItem}
-                onClick={() => selectedItem && onSelect(selectedItem.url, selectedItem.type)}
+                disabled={multiple ? multiSelected.length === 0 : !selectedItem}
+                onClick={handleConfirm}
                 className="ff-shape-button px-6 h-9 bg-[#ff4fd8] text-white text-xs font-bold hover:opacity-95 transition-all disabled:opacity-50"
               >
-                Seç ve Ekle
+                {multiple ? `Seç ve Ekle${multiSelected.length ? ` (${multiSelected.length})` : ""}` : "Seç ve Ekle"}
               </button>
             </div>
           </div>

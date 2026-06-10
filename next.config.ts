@@ -1,6 +1,15 @@
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
+  // ── Dev cross-origin (HMR over LAN IP) ────────────
+  // Next.js 16 blocks dev assets / HMR websocket requests from
+  // origins other than localhost by default. When the dev server is
+  // opened via a LAN IP (e.g. http://10.3.5.57:3000 from another
+  // device), the `_next/webpack-hmr` socket fails. Allow-list the
+  // dev machine's LAN IP so hot reload works across devices.
+  // Add more IPs here if you access the dev server from other hosts.
+  allowedDevOrigins: ["10.3.5.57"],
+
   // ── Image Optimization ────────────────────────────
   images: {
     remotePatterns: [
@@ -18,7 +27,7 @@ const nextConfig: NextConfig = {
   // ── Performance ──────────────────────────────────
   experimental: {
     optimizePackageImports: [
-      "lucide-react",
+      "@tabler/icons-react",
       "framer-motion",
       "@radix-ui/react-dropdown-menu",
       "@radix-ui/react-dialog",
@@ -29,6 +38,10 @@ const nextConfig: NextConfig = {
   async headers() {
     const isDev = process.env.NODE_ENV === "development"
     const wsRules = isDev ? "ws: wss: ws://* wss://* " : ""
+    // The dynamic-code script directive is only required by the dev
+    // runtime (Turbopack / React Refresh). Production bundles do not
+    // need it, so omit it there to shrink the script-src surface.
+    const evalRule = isDev ? "'unsafe-eval' " : ""
 
     return [
       {
@@ -53,7 +66,7 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value:
               "default-src 'self'; " +
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.mux.com https://www.gstatic.com; " +
+              `script-src 'self' 'unsafe-inline' ${evalRule}https://*.mux.com https://www.gstatic.com; ` +
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
               "font-src 'self' https://fonts.gstatic.com data:; " +
               "img-src 'self' data: blob: https:; " +

@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { X, Check } from "lucide-react"
+import { X, Check } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { fadeInUp, staggerContainer } from "@/lib/animations"
 import { DIFFERENTIATORS, type Differentiator } from "./about-data"

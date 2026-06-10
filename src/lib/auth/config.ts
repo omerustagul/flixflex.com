@@ -32,9 +32,12 @@ function deriveInitials(name: string | null | undefined, email: string): string 
 
 export const authConfig: NextAuthConfig = {
   // JWT sessions — required for Credentials + edge middleware.
+  // 8-hour lifetime: permission/role changes propagate on next login
+  // (or within 8h), instead of being cached for 30 days. Admins are
+  // expected to re-authenticate roughly once per working day.
   session: {
     strategy: "jwt",
-    maxAge:   60 * 60 * 24 * 30, // 30 days
+    maxAge:   60 * 60 * 8, // 8 hours
   },
 
   // Brand-consistent custom pages (Turkish slugs).

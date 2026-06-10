@@ -1,6 +1,7 @@
 import OpenAI from "openai"
 import { env, hasEnv } from "@/lib/env"
 import { getSetting } from "@/lib/settings"
+import { decryptSecret } from "@/lib/crypto"
 import type { AIRequest, AIResponse } from "../engine"
 
 export const DEFAULT_OPENAI_MODEL = "gpt-4o"
@@ -10,7 +11,7 @@ let _client: OpenAI | null = null
 export async function getOpenAI(): Promise<OpenAI> {
   if (_client) return _client
 
-  const dbKey = await getSetting("ai.provider.openai.key")
+  const dbKey = decryptSecret(await getSetting("ai.provider.openai.key"))
   const apiKey = dbKey || (hasEnv("OPENAI_API_KEY") ? env.OPENAI_API_KEY : null)
 
   if (!apiKey) {

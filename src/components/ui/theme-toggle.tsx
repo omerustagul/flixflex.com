@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { useTheme } from "@/components/shared/theme-provider"
-import { Moon, Sun } from "lucide-react"
+import { Moon, Sun } from "@/lib/icons"
 import { toast } from "sonner"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"

@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { IntegrationForm } from "@/components/admin/settings/integration-form"
 import { getSetting } from "@/lib/settings"
+import { decryptSecret } from "@/lib/crypto"
 
 export const metadata: Metadata = {
   title: "Entegrasyonlar",
@@ -8,10 +9,10 @@ export const metadata: Metadata = {
 
 export default async function EntegrasyonlarPage() {
   const initialData = {
-    // AI
-    anthropicKey: (await getSetting("ai.provider.anthropic.key", "")) ?? "",
-    openaiKey: (await getSetting("ai.provider.openai.key", "")) ?? "",
-    geminiKey: (await getSetting("ai.provider.gemini.key", "")) ?? "",
+    // AI — secrets decrypted for the authenticated admin form
+    anthropicKey: decryptSecret(await getSetting("ai.provider.anthropic.key", "")),
+    openaiKey: decryptSecret(await getSetting("ai.provider.openai.key", "")),
+    geminiKey: decryptSecret(await getSetting("ai.provider.gemini.key", "")),
     defaultModel: (await getSetting("ai.default.model", "claude-3-5-sonnet-20240620")) ?? "claude-3-5-sonnet-20240620",
 
     // Analytics
@@ -19,9 +20,9 @@ export default async function EntegrasyonlarPage() {
     gtmId: (await getSetting("analytics.google.gtm", "")) ?? "",
     pixelId: (await getSetting("analytics.meta.pixel", "")) ?? "",
 
-    // Marketing
-    resendApiKey: (await getSetting("mail.resend.key", "")) ?? "",
-    mailchimpKey: (await getSetting("mail.mailchimp.key", "")) ?? "",
+    // Marketing — secrets decrypted for the authenticated admin form
+    resendApiKey: decryptSecret(await getSetting("mail.resend.key", "")),
+    mailchimpKey: decryptSecret(await getSetting("mail.mailchimp.key", "")),
   }
 
   return (

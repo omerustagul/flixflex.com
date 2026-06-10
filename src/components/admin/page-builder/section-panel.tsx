@@ -6,7 +6,7 @@
 
 import * as React from "react"
 import { useState, useMemo } from "react"
-import { Search, ChevronDown, ChevronRight } from "lucide-react"
+import { Search, ChevronDown, ChevronRight } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { usePageBuilder } from "@/store/page-builder"
 import {

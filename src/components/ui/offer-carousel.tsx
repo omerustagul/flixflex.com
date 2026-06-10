@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { motion, useInView } from "framer-motion"
-import { ArrowRight, Tag } from "lucide-react"
+import { ArrowRight, Tag } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { staggerContainer, scaleInUp } from "@/lib/animations"
 import { TiltCard } from "@/components/ui/tilt-card"
@@ -20,7 +20,7 @@ export interface Offer {
   href: string
 }
 
-function OfferCard({ offer, index }: { offer: Offer; index: number }) {
+function OfferCard({ offer }: { offer: Offer }) {
   return (
     <motion.div
       variants={scaleInUp}
@@ -173,7 +173,7 @@ const OfferCarousel = React.forwardRef<HTMLDivElement, OfferCarouselProps>(
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" as any }}
           >
             {duplicated.map((offer, i) => (
-              <OfferCard key={`${offer.id}-${i}`} offer={offer} index={i} />
+              <OfferCard key={`${offer.id}-${i}`} offer={offer} />
             ))}
           </div>
         </motion.div>

@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, FormEvent } from "react"
-import { Globe, ImageIcon, Search, Layout, Save, Loader2 } from "lucide-react"
+import { Globe, ImageIcon, Search, Layout, Save, Loader2 } from "@/lib/icons"
 import { FFButton, FFInput, FFSlider, FFTextarea } from "@/components/ui"
 import { ImagePicker } from "@/components/admin/media/image-picker"
 import { toast } from "sonner"

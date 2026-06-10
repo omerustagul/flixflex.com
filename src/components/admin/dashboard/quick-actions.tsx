@@ -2,8 +2,7 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { SquarePen, FileText, Palette, Sparkles, ArrowUpRight } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { SquarePen, FileText, Palette, Sparkles, ArrowUpRight } from "@/lib/icons"
 import { staggerContainer, fadeInUp } from "@/lib/animations"
 import { TiltCard } from "@/components/ui/tilt-card"
 

@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { motion } from "framer-motion"
-import { SquarePen, FileText, Users, TrendingUp, ArrowUpRight, ArrowDownRight } from "lucide-react"
+import { SquarePen, FileText, Users, TrendingUp, ArrowUpRight, ArrowDownRight } from "@/lib/icons"
 import { useInView } from "@/hooks/use-in-view"
 import { cn } from "@/lib/utils"
 import { staggerContainer, fadeInUp } from "@/lib/animations"

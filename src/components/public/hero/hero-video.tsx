@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { ArrowUpRight, Play, Volume2, VolumeX } from "lucide-react"
+import { ArrowUpRight, Play, Volume2, VolumeX } from "@/lib/icons"
 import { AnimatedHeading } from "@/components/ui"
 import { fadeInUp, withDelay } from "@/lib/animations"
 import { cn } from "@/lib/utils"

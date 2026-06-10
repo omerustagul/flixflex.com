@@ -2,8 +2,7 @@
 
 import * as React from "react"
 import { motion, useMotionValueEvent, useScroll } from "framer-motion"
-import { Menu, ArrowUpRight } from "lucide-react"
-import Link from "next/link"
+import { Menu, ArrowUpRight } from "@/lib/icons"
 import { ThemeToggle } from "@/components/ui"
 import { cn } from "@/lib/utils"
 import { FlixFlexLogo } from "./logo"

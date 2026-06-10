@@ -4,7 +4,7 @@ import * as React from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { signIn } from "next-auth/react"
 import { motion } from "framer-motion"
-import { Mail, Lock, Eye, EyeOff, AlertCircle } from "lucide-react"
+import { Mail, Lock, Eye, EyeOff, AlertCircle } from "@/lib/icons"
 import { FFInput } from "@/components/ui"
 import { cn } from "@/lib/utils"
 import { fadeInUp } from "@/lib/animations"
@@ -153,7 +153,7 @@ export function LoginCard() {
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
               className={cn(
-                "flex items-start gap-2.5 mb-6",
+                "ff-shape-container flex items-start gap-2.5 mb-6",
                 "bg-red-500/10 border border-red-500/30",
                 "px-4 py-3 text-[13px] text-red-400"
               )}

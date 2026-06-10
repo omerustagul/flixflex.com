@@ -1,9 +1,7 @@
-import Link from "next/link"
-import { ArrowRight, BriefcaseBusiness, Tag } from "lucide-react"
+import { ArrowRight, Tag } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { ServiceCard } from "./service-card"
 import type { Service } from "./services-data"
-import { OfferCarousel } from "@/components/ui/offer-carousel"
 
 // ── Props ──────────────────────────────────────────
 interface ServicesSectionProps {
@@ -13,7 +11,7 @@ interface ServicesSectionProps {
 }
 
 // ── Section ────────────────────────────────────────
-export function ServicesSection({ services, headline, subheadline }: ServicesSectionProps) {
+export function ServicesSection({ services }: ServicesSectionProps) {
   return (
     <section
       className={cn(

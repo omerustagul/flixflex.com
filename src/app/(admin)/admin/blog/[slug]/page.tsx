@@ -5,7 +5,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft } from "@/lib/icons"
 import { getPostBySlug } from "@/lib/ai/blog-store"
 import { BlogEditor } from "@/components/admin/blog/blog-editor"
 

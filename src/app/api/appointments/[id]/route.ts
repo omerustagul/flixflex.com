@@ -6,6 +6,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import prisma from "@/lib/prisma"
 import { auth } from "@/lib/auth"
+import { hasPermission } from "@/lib/rbac/permissions"
 import { sendAppointmentApprovedEmail } from "@/lib/mail"
 
 function generateGoogleMeetLink(): string {
@@ -24,6 +25,9 @@ export async function PATCH(
   const session = await auth()
   if (!session?.user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
+  if (!hasPermission(session.user.permissions ?? [], "appointments", "update")) {
+    return NextResponse.json({ error: "Bu işlem için yetkiniz yok." }, { status: 403 })
   }
 
   try {

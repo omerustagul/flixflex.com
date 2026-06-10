@@ -5,7 +5,7 @@
 
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Sparkles, Wand2, FileText, Activity, KeyRound, ArrowUpRight } from "lucide-react"
+import { Sparkles, Wand2, FileText, Activity, KeyRound, ArrowUpRight } from "@/lib/icons"
 import { hasEnv } from "@/lib/env"
 import { listPosts } from "@/lib/ai/blog-store"
 import { cn } from "@/lib/utils"

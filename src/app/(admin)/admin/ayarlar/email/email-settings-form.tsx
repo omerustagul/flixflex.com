@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, FormEvent } from "react"
-import { Mail, ShieldAlert, KeyRound, Server, Save, Loader2, Play } from "lucide-react"
+import { Mail, ShieldAlert, KeyRound, Server, Save, Loader2, Play } from "@/lib/icons"
 import { FFButton, FFInput, FFSelect, FFSelectItem } from "@/components/ui"
 import { toast } from "sonner"
 

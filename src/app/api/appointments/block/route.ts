@@ -6,18 +6,25 @@
 import { NextRequest, NextResponse } from "next/server"
 import prisma from "@/lib/prisma"
 import { auth } from "@/lib/auth"
+import { hasPermission } from "@/lib/rbac/permissions"
 
-// Helper to check admin authentication
-async function isAdmin() {
+// Gate: authenticated + has the required appointments permission.
+// Returns an error response on failure, or null on success.
+async function gate(action: "read" | "update"): Promise<NextResponse | null> {
   const session = await auth()
-  return !!session?.user
+  if (!session?.user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
+  if (!hasPermission(session.user.permissions ?? [], "appointments", action)) {
+    return NextResponse.json({ error: "Bu işlem için yetkiniz yok." }, { status: 403 })
+  }
+  return null
 }
 
 // GET — List all blocked slots
 export async function GET() {
-  if (!(await isAdmin())) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-  }
+  const denied = await gate("read")
+  if (denied) return denied
 
   try {
     if (!prisma) {
@@ -37,9 +44,8 @@ export async function GET() {
 
 // POST — Block a slot
 export async function POST(req: NextRequest) {
-  if (!(await isAdmin())) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-  }
+  const denied = await gate("update")
+  if (denied) return denied
 
   try {
     if (!prisma) {
@@ -71,9 +77,8 @@ export async function POST(req: NextRequest) {
 
 // DELETE — Unblock a slot
 export async function DELETE(req: NextRequest) {
-  if (!(await isAdmin())) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-  }
+  const denied = await gate("update")
+  if (denied) return denied
 
   try {
     if (!prisma) {

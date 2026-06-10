@@ -2,13 +2,14 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ArrowUpRight, Mail, MapPin } from "lucide-react"
+import { ArrowUpRight, Mail, MapPin } from "@/lib/icons"
 import { staggerContainer, fadeInUp } from "@/lib/animations"
 import { cn } from "@/lib/utils"
 import { FOOTER_COLUMNS, SOCIAL_LINKS } from "./footer-data"
 import { SocialIcon } from "./social-icon"
 import { BackToTop } from "./back-to-top"
 import { FlixFlexLogo } from "../navbar/logo"
+import { StarField } from "@/components/ui/star-field"
 import { useUIStore } from "@/lib/ui-store"
 
 
@@ -24,16 +25,8 @@ export function FlixFlexFooter({ siteSettings = {} }: { siteSettings?: Record<st
           "overflow-hidden"
         )}
       >
-        {/* Subtle geometric pattern */}
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-[0.04] pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(var(--ff-purple) 1px, transparent 1px), linear-gradient(90deg, var(--ff-purple) 1px, transparent 1px)",
-            backgroundSize: "48px 48px",
-          }}
-        />
+        {/* Deep-space starfield (replaces the old grid pattern) */}
+        <StarField className="z-0 opacity-90" density={0.0001} />
 
         {/* Purple aura accent */}
         <div
@@ -41,12 +34,12 @@ export function FlixFlexFooter({ siteSettings = {} }: { siteSettings?: Record<st
           className="absolute -top-32 left-1/3 w-[40rem] h-[40rem] rounded-full pointer-events-none"
           style={{
             background:
-              "radial-gradient(circle, rgba(255, 79, 216,0.18) 0%, transparent 60%)",
-            filter: "blur(40px)",
+              "radial-gradient(circle, var(--ff-purple) 0%, transparent 60%)",
+            filter: "blur(80px)",
           }}
         />
 
-        <div className="relative mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16 pt-20 pb-10">
+        <div className="relative z-10 mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16 pt-20 pb-10">
           {/* ── Top: CTA strip ─────────────────────── */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}

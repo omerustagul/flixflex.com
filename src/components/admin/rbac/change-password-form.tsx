@@ -3,7 +3,7 @@
 import * as React from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { KeyRound, Send, CheckCircle } from "lucide-react"
+import { KeyRound, Send, CheckCircle } from "@/lib/icons"
 import { FFButton } from "@/components/ui/ff-button"
 import { FFInput } from "@/components/ui/ff-input"
 import { setPasswordSchema, type SetPasswordData } from "@/lib/validators/user-schema"
@@ -15,6 +15,7 @@ interface ChangePasswordFormProps {
 export function ChangePasswordForm({ userId }: ChangePasswordFormProps) {
   const [success, setSuccess] = React.useState(false)
   const [serverError, setServerError] = React.useState<string | null>(null)
+  const [resetInfo, setResetInfo] = React.useState(false)
 
   const {
     register,
@@ -67,6 +68,14 @@ export function ChangePasswordForm({ userId }: ChangePasswordFormProps) {
         </p>
       )}
 
+      {resetInfo && (
+        <p className="text-[11px] text-[#666666] leading-relaxed bg-[#f0eff2] border border-[#CCCCCC] p-2.5">
+          E-posta ile self-servis sıfırlama akışı henüz aktif değil. Şimdilik
+          yukarıdaki alandan yeni bir şifre belirleyip kullanıcıya güvenli bir
+          kanaldan iletebilirsiniz.
+        </p>
+      )}
+
       <div className="flex items-center justify-between gap-3 pt-1">
         <FFButton
         className="flex items-center gap-1.5 bg-[#ff4fd8] hover:bg-[#e03eb5] border border-[#ff4fd8] text-white"
@@ -79,13 +88,12 @@ export function ChangePasswordForm({ userId }: ChangePasswordFormProps) {
           Şifreyi Güncelle
         </FFButton>
 
-        {/* Password reset email stub */}
+        {/* Self-service reset email flow not yet implemented (needs a
+            token table + public reset page — tracked for a later phase). */}
         <button
           type="button"
           className="ff-shape-button flex items-center gap-1.5 h-9 bg-transparent border border-[#ff4fd8] text-[11px] font-semibold text-[#ff4fd8] hover:text-[#e03eb5] px-3 py-1.5 transition-colors"
-          onClick={() => {
-            alert("Şifre sıfırlama maili gönderme özelliği henüz aktif değil. (TODO: Resend/SMTP entegrasyonu)")
-          }}
+          onClick={() => setResetInfo((v) => !v)}
         >
           <Send className="w-3 h-3 mr-2" />
           Sıfırlama Maili Gönder

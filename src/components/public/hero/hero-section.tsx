@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ArrowUpRight, Play } from "lucide-react"
+import { ArrowUpRight, Play } from "@/lib/icons"
 import { BackgroundPaths, AnimatedHeading } from "@/components/ui"
 import { fadeInUp, withDelay } from "@/lib/animations"
 import { cn } from "@/lib/utils"

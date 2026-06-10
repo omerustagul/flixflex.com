@@ -7,7 +7,7 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { Save, Eye, AlertTriangle, Loader2 } from "lucide-react"
+import { Save, Eye, AlertTriangle, Loader2 } from "@/lib/icons"
 import { cn, slugify } from "@/lib/utils"
 import { FFButton } from "@/components/ui"
 import { FFSelect, FFSelectItem } from "@/components/ui/ff-select"

@@ -1,7 +1,7 @@
 "use client"
 
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion"
-import { ArrowUp } from "lucide-react"
+import { ArrowUp } from "@/lib/icons"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
 

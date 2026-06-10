@@ -15,6 +15,7 @@
 import Anthropic from "@anthropic-ai/sdk"
 import { env, hasEnv } from "@/lib/env"
 import { getSetting } from "@/lib/settings"
+import { decryptSecret } from "@/lib/crypto"
 
 // ── Default model (kept up to date with project context) ──
 export const DEFAULT_MODEL = "claude-3-5-sonnet-20240620"
@@ -27,7 +28,7 @@ export async function getAnthropic(): Promise<Anthropic> {
   if (_client) return _client
 
   // Priority: Database Settings -> Environment Variables
-  const dbKey = await getSetting("ai.provider.anthropic.key")
+  const dbKey = decryptSecret(await getSetting("ai.provider.anthropic.key"))
   const apiKey = dbKey || (hasEnv("ANTHROPIC_API_KEY") ? env.ANTHROPIC_API_KEY : null)
 
   if (!apiKey) {

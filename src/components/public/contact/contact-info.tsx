@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Mail, Phone, MapPin, Clock, Instagram, Linkedin, Youtube } from "lucide-react"
+import { Mail, Phone, MapPin, Clock, Instagram, Linkedin, Youtube } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { staggerContainer, fadeInUp } from "@/lib/animations"
 

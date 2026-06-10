@@ -8,7 +8,7 @@
 import * as React from "react"
 import { useState } from "react"
 import * as Dialog from "@radix-ui/react-dialog"
-import { Trash2, X } from "lucide-react"
+import { Trash2, X } from "@/lib/icons"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 

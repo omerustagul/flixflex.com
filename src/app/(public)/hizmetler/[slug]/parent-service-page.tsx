@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ChevronRight, ArrowRight, Layers } from "lucide-react"
+import { ChevronRight, ArrowRight, Layers } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { staggerContainer, scaleInUp } from "@/lib/animations"
 import { ServiceHeroVisual } from "@/components/public/services/service-hero-visual"
@@ -13,9 +13,8 @@ import { CaseStudyTeaser } from "@/components/public/services/case-study-teaser"
 import { ServiceCta } from "@/components/public/services/service-cta"
 import { PortfolioSection } from "@/components/public"
 import type { Service } from "@/components/public/sections/services-data"
-import { SERVICES } from "@/components/public/sections/services-data"
-import * as LucideIcons from "lucide-react"
-import type { LucideIcon } from "lucide-react"
+import * as LucideIcons from "@/lib/icons"
+import type { LucideIcon } from "@/lib/icons"
 
 interface ParentServicePageProps {
   service: Service & { children?: Service[] }
@@ -23,7 +22,7 @@ interface ParentServicePageProps {
   serviceIndex: number
 }
 
-export function ParentServicePage({ service, services, serviceIndex }: ParentServicePageProps) {
+export function ParentServicePage({ service, serviceIndex }: ParentServicePageProps) {
   const children = service.children ?? []
 
   return (

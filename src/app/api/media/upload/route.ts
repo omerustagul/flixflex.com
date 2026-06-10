@@ -64,7 +64,7 @@ export async function POST(req: Request) {
     let formData;
     try {
       formData = await req.formData()
-    } catch (formErr) {
+    } catch {
       return NextResponse.json({ error: "Geçersiz form verisi" }, { status: 400 })
     }
 

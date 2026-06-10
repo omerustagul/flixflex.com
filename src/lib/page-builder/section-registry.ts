@@ -26,11 +26,10 @@ import {
   Sparkles,
   Expand,
   type LucideIcon,
-} from "lucide-react"
+} from "@/lib/icons"
 import type { SectionType } from "@/types/page-builder"
 import {
   heroPropsSchema,
-  heroVideoPropsSchema,
   heroAnimatedVideoPropsSchema,
   statsPropsSchema,
   servicesPropsSchema,

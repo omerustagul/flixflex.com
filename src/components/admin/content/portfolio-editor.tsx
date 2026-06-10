@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { Save, Loader2, Send, AlertTriangle, Image as ImageIcon, Trash2, Plus, ArrowLeft, Check, Sparkles } from "lucide-react"
+import { Save, Loader2, Send, AlertTriangle, Image as ImageIcon, Trash2, Plus, ArrowLeft, Check, Sparkles } from "@/lib/icons"
 import Link from "next/link"
 import { slugify, cn } from "@/lib/utils"
 import { MediaPicker } from "@/components/admin/media/media-picker"
@@ -406,8 +406,16 @@ function VisualMediaListField({
       {isOpen && (
         <MediaPicker
           allowedTypes={["image"]}
+          multiple
+          onSelectMany={(items) => {
+            const urls = items.map((i) => i.url)
+            // Append, skipping any URL already in the gallery.
+            const merged = [...values, ...urls.filter((u) => !values.includes(u))]
+            onChange(merged)
+            setIsOpen(false)
+          }}
           onSelect={(url) => {
-            onChange([...values, url])
+            if (!values.includes(url)) onChange([...values, url])
             setIsOpen(false)
           }}
           onClose={() => setIsOpen(false)}
@@ -420,8 +428,6 @@ function VisualMediaListField({
 const inputCls =
   "ff-shape-container w-full h-9 bg-white border border-[#CCCCCC] px-3 py-2 text-[13px] text-[#333333] placeholder:text-[#999999] outline-none focus:border-[#ff4fd8] transition-colors"
 
-const textareaCls =
-  "ff-shape-container w-full bg-white border border-[#CCCCCC] px-3 py-2 text-[13px] text-[#333333] placeholder:text-[#999999] outline-none focus:border-[#ff4fd8] transition-colors"
 
 // ── Main Component ─────────────────────────────────
 export function PortfolioEditor({ mode, initial, services }: PortfolioEditorProps) {

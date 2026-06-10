@@ -129,7 +129,6 @@ export function HeroVideo({
   videoUrl = "/hero-background.mp4",
   videoUrlMobile,
   posterUrl,
-  overlayStrength = 0.5,
   className,
 }: HeroVideoProps) {
   const { scrollYProgress } = useVideoHero()

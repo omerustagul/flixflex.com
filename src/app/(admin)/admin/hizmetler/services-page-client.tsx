@@ -1,13 +1,13 @@
 "use client"
 
 import * as React from "react"
-import type { LucideIcon } from "lucide-react"
+import type { LucideIcon } from "@/lib/icons"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState, useMemo } from "react"
 import * as Dialog from "@radix-ui/react-dialog"
-import { Plus, Pencil, ExternalLink, Layers, ChevronRight, Trash2, X, Loader2 } from "lucide-react"
-import * as LucideIcons from "lucide-react"
+import { Plus, Pencil, ExternalLink, Layers, ChevronRight, Trash2, X, Loader2 } from "@/lib/icons"
+import * as LucideIcons from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { ViewToggle, type ViewMode } from "@/components/admin/view-toggle"
 

@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { motion } from "framer-motion"
-import { CalendarDays, ArrowRight } from "lucide-react"
+import { CalendarDays, ArrowRight } from "@/lib/icons"
 
 import { useUIStore } from "@/lib/ui-store"
 import { cn } from "@/lib/utils"

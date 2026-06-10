@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { motion, AnimatePresence } from "framer-motion"
-import { CheckCircle2, AlertCircle, Loader2, Eye, EyeOff } from "lucide-react"
+import { CheckCircle2, AlertCircle, Loader2, Eye, EyeOff } from "@/lib/icons"
 import { FFInput } from "@/components/ui"
 import { cn } from "@/lib/utils"
 import {

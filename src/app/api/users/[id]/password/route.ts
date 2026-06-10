@@ -8,6 +8,7 @@ import { auth } from "@/lib/auth"
 import bcrypt from "bcryptjs"
 import prisma from "@/lib/prisma"
 import { hasPermission } from "@/lib/rbac/permissions"
+import { logAudit } from "@/lib/audit"
 import { setPasswordSchema } from "@/lib/validators/user-schema"
 
 export const dynamic = "force-dynamic"
@@ -61,6 +62,14 @@ export async function POST(req: NextRequest, { params }: Params) {
       where: { id },
       data:  { password: hashed },
     })
+
+    void logAudit({
+      userId: session.user.id,
+      action: "password.change",
+      resource: "users",
+      resourceId: id,
+    })
+
     return NextResponse.json({ ok: true })
   } catch (err: any) {
     console.error("[users/[id]/password POST]", err)

@@ -4,30 +4,9 @@
 // ═══════════════════════════════════════════════════════════
 
 import { NextRequest, NextResponse } from "next/server"
+import prisma from "@/lib/prisma"
 import { contactSchema } from "@/lib/validators/contact-schema"
-
-// ── In-memory rate limiter (dev-safe; swap for Redis in prod) ──
-type RateLimitEntry = { count: number; resetAt: number }
-const rateLimitMap = new Map<string, RateLimitEntry>()
-const RATE_LIMIT_WINDOW_MS = 60_000 // 60 seconds
-const RATE_LIMIT_MAX       = 3       // 3 submissions per window per IP
-
-function checkRateLimit(ip: string): { allowed: boolean; retryAfter?: number } {
-  const now   = Date.now()
-  const entry = rateLimitMap.get(ip)
-
-  if (!entry || now > entry.resetAt) {
-    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS })
-    return { allowed: true }
-  }
-
-  if (entry.count >= RATE_LIMIT_MAX) {
-    return { allowed: false, retryAfter: Math.ceil((entry.resetAt - now) / 1000) }
-  }
-
-  entry.count++
-  return { allowed: true }
-}
+import { rateLimit, getClientIp } from "@/lib/rate-limit"
 
 // ── Helper: short random ref ───────────────────────────────
 function generateRef(): string {
@@ -37,10 +16,9 @@ function generateRef(): string {
 // ── POST handler ───────────────────────────────────────────
 export async function POST(req: NextRequest) {
   try {
-    // Rate limit by IP
-    const forwarded = req.headers.get("x-forwarded-for")
-    const ip = forwarded ? forwarded.split(",")[0].trim() : "unknown"
-    const { allowed, retryAfter } = checkRateLimit(ip)
+    // Rate limit by IP — 3 submissions / 60s
+    const ip = getClientIp(req)
+    const { allowed, retryAfter } = rateLimit({ namespace: "contact", key: ip, max: 3, windowMs: 60_000 })
 
     if (!allowed) {
       return NextResponse.json(
@@ -78,20 +56,33 @@ export async function POST(req: NextRequest) {
 
     const data = result.data
 
-    // Simulate email send (real SMTP / Resend comes later)
-    console.log("📨 [FlixFlex Contact] New submission:", {
-      name:    data.name,
-      email:   data.email,
-      company: data.company ?? "—",
-      phone:   data.phone   ?? "—",
-      service: data.service,
-      budget:  data.budget  ?? "—",
-      message: data.message.slice(0, 80) + (data.message.length > 80 ? "…" : ""),
-      ip,
-      timestamp: new Date().toISOString(),
-    })
+    // Persist the submission so it appears in the admin inbox. Phone
+    // and budget aren't first-class columns on ContactSubmission, so
+    // fold them into the stored message for the team's reference.
+    const extra: string[] = []
+    if (data.phone)  extra.push(`Telefon: ${data.phone}`)
+    if (data.budget) extra.push(`Bütçe: ${data.budget}`)
+    const storedMessage = extra.length
+      ? `${data.message}\n\n—\n${extra.join("\n")}`
+      : data.message
 
-    await new Promise((r) => setTimeout(r, 800))
+    if (prisma) {
+      try {
+        await prisma.contactSubmission.create({
+          data: {
+            name:    data.name,
+            email:   data.email,
+            company: data.company ?? null,
+            service: data.service,
+            message: storedMessage,
+          },
+        })
+      } catch (dbErr) {
+        // Don't fail the user's submission if persistence hiccups —
+        // log server-side and still return success.
+        console.error("[FlixFlex Contact] DB persist failed:", dbErr)
+      }
+    }
 
     const ref = generateRef()
 

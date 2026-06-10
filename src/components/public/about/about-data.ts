@@ -9,7 +9,7 @@ import {
   Sparkles,
   Star,
   type LucideIcon,
-} from "lucide-react"
+} from "@/lib/icons"
 
 // ── Value types ───────────────────────────────────
 export interface Value {

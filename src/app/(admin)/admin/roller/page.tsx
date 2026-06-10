@@ -4,7 +4,7 @@
 
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Plus, Users, ShieldCheck, Edit2 } from "lucide-react"
+import { Plus, Users, ShieldCheck, Edit2 } from "@/lib/icons"
 import prisma from "@/lib/prisma"
 import { FFBadge } from "@/components/ui/ff-badge"
 import { FFButton } from "@/components/ui/ff-button"

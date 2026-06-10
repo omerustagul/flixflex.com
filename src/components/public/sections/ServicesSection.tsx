@@ -14,7 +14,7 @@ import {
   Layout, Monitor, Code2, Zap, Sparkles, Scissors,
   BarChart3, Palette, MessageSquare, Fingerprint,
   Megaphone, Smartphone, ShoppingCart,
-} from "lucide-react"
+} from "@/lib/icons"
 
 // ── Icon map ────────────────────────────────────────
 const ICON_MAP: Record<string, LucideIcon> = {

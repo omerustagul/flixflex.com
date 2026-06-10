@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { fadeInUp } from "@/lib/animations"
 

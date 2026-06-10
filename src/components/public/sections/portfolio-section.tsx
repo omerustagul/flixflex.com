@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { FFBadge } from "@/components/ui"
 import { TiltCard } from "@/components/ui/tilt-card"

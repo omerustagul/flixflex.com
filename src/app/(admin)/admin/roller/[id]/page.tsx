@@ -5,7 +5,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { ChevronLeft, Lock } from "lucide-react"
+import { ChevronLeft, Lock } from "@/lib/icons"
 import prisma from "@/lib/prisma"
 import { FFContainer } from "@/components/ui/ff-container"
 import { FFBadge } from "@/components/ui/ff-badge"

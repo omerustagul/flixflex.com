@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ChevronRight } from "lucide-react"
+import { ChevronRight } from "@/lib/icons"
 import { PortfolioSection, SERVICES } from "@/components/public"
 import { listPublishedServices, getPublishedServiceBySlug } from "@/lib/content-store"
 import { ProcessSteps } from "@/components/public/services/process-steps"

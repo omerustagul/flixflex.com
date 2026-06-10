@@ -4,7 +4,7 @@
 // ═══════════════════════════════════════════════════════════
 
 import Link from "next/link"
-import { Plus, FileText, Pencil, Copy } from "lucide-react"
+import { Plus, FileText, Pencil, Copy } from "@/lib/icons"
 import { formatDate } from "@/lib/utils"
 import type { PageData, SectionBlock } from "@/types/page-builder"
 import { DeletePageButton } from "./delete-page-button"

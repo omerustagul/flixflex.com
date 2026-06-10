@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Zap, Sparkles } from "lucide-react"
+import { Zap, Sparkles } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 
 interface SideProps {

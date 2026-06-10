@@ -7,7 +7,7 @@ import {
   RotatingText, TestimonialCarousel, FFMarquee, MarqueeTag
 } from "@/components/ui"
 import { Container, Grid, SectionHeader } from "@/components/shared/container"
-import { Zap, ArrowRight, Sparkles, Target } from "lucide-react"
+import { Zap, ArrowRight, Sparkles, Target } from "@/lib/icons"
 
 const DEMO_TESTIMONIALS = [
   { id: 1, name: "Ayşe Yılmaz", role: "CMO", company: "TechCorp", content: "FlixFlex ile kampanya performansımız üç katına çıktı. Veri odaklı yaklaşımları ve yaratıcı vizyonları benzersiz.", rating: 5 },

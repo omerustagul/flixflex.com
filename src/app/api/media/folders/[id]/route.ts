@@ -1,10 +1,18 @@
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
+import { auth } from "@/lib/auth"
+import { hasPermission } from "@/lib/rbac/permissions"
 
 export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const session = await auth().catch(() => null)
+  if (!session?.user) return NextResponse.json({ error: "Yetkisiz erişim" }, { status: 401 })
+  if (!hasPermission(session.user.permissions ?? [], "media", "delete")) {
+    return NextResponse.json({ error: "Bu işlem için yetkiniz yok." }, { status: 403 })
+  }
+
   if (!prisma) return NextResponse.json({ error: "Veritabanı bağlantısı yok" }, { status: 503 })
 
   try {
@@ -41,6 +49,12 @@ export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const session = await auth().catch(() => null)
+  if (!session?.user) return NextResponse.json({ error: "Yetkisiz erişim" }, { status: 401 })
+  if (!hasPermission(session.user.permissions ?? [], "media", "update")) {
+    return NextResponse.json({ error: "Bu işlem için yetkiniz yok." }, { status: 403 })
+  }
+
   if (!prisma) return NextResponse.json({ error: "Veritabanı bağlantısı yok" }, { status: 503 })
 
   try {

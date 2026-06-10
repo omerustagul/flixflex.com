@@ -16,7 +16,7 @@ import {
   Eye,
   EyeOff,
   Search,
-} from "lucide-react"
+} from "@/lib/icons"
 import { cn, formatDate } from "@/lib/utils"
 import { FFSelect, FFSelectItem } from "@/components/ui/ff-select"
 import { FFButton } from "@/components/ui"

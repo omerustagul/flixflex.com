@@ -1,11 +1,19 @@
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { del } from "@vercel/blob"
+import { auth } from "@/lib/auth"
+import { hasPermission } from "@/lib/rbac/permissions"
 
 // ── GET: List media ────────────────────────────────
 export async function GET(req: Request) {
+  const session = await auth().catch(() => null)
+  if (!session?.user) return NextResponse.json({ error: "Yetkisiz erişim" }, { status: 401 })
+  if (!hasPermission(session.user.permissions ?? [], "media", "read")) {
+    return NextResponse.json({ error: "Bu işlem için yetkiniz yok." }, { status: 403 })
+  }
+
   if (!prisma) return NextResponse.json({ success: true, data: [] })
-  
+
   try {
     const { searchParams } = new URL(req.url)
     const type = searchParams.get("type")
@@ -37,6 +45,12 @@ export async function GET(req: Request) {
 
 // ── DELETE: Remove media ────────────────────────────
 export async function DELETE(req: Request) {
+  const session = await auth().catch(() => null)
+  if (!session?.user) return NextResponse.json({ error: "Yetkisiz erişim" }, { status: 401 })
+  if (!hasPermission(session.user.permissions ?? [], "media", "delete")) {
+    return NextResponse.json({ error: "Bu işlem için yetkiniz yok." }, { status: 403 })
+  }
+
   if (!prisma) return NextResponse.json({ error: "Veritabanı bağlantısı yok" }, { status: 503 })
 
   try {
@@ -63,6 +77,12 @@ export async function DELETE(req: Request) {
 
 // ── PATCH: Update media (e.g. Move to folder) ───────
 export async function PATCH(req: Request) {
+  const session = await auth().catch(() => null)
+  if (!session?.user) return NextResponse.json({ error: "Yetkisiz erişim" }, { status: 401 })
+  if (!hasPermission(session.user.permissions ?? [], "media", "update")) {
+    return NextResponse.json({ error: "Bu işlem için yetkiniz yok." }, { status: 403 })
+  }
+
   if (!prisma) return NextResponse.json({ error: "Veritabanı bağlantısı yok" }, { status: 503 })
 
   try {

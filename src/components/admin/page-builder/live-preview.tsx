@@ -7,7 +7,7 @@
 
 import * as React from "react"
 import { useState, useEffect } from "react"
-import { Monitor, Tablet, Smartphone } from "lucide-react"
+import { Monitor, Tablet, Smartphone } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import type { PageData } from "@/types/page-builder"
 import { PageRenderer } from "@/components/public/page-renderer"

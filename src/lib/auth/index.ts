@@ -19,7 +19,6 @@
 // ═══════════════════════════════════════════════════════════
 
 import NextAuth, { type DefaultSession } from "next-auth"
-import type { JWT } from "next-auth/jwt"
 import Credentials from "next-auth/providers/credentials"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import bcrypt from "bcryptjs"
@@ -71,22 +70,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         const emailInput = typeof rawCredentials?.email === "string" ? rawCredentials.email.trim().toLowerCase() : ""
         const passwordInput = typeof rawCredentials?.password === "string" ? rawCredentials.password : ""
 
-        console.log("[auth] AUTHORIZE CALLED with:", emailInput)
-        
-        // TEMPORARY: Force allow admin login to bypass DB/Bcrypt issues
-        if (emailInput === "admin@flixflex.com" && passwordInput === "FlixFlex2026!") {
-          console.log("[auth] FORCING SUCCESS for admin@flixflex.com")
-          return {
-            id:          "fixed-admin-id",
-            email:       "admin@flixflex.com",
-            name:        "Super Admin",
-            image:       null,
-            roleId:      "super-admin-role",
-            roleName:    "Super Admin",
-            permissions: [{ resource: "*", action: "*", scope: null }],
-          }
-        }
-
         // 1. Validate shape
         const parsed = credentialsSchema.safeParse({ email: emailInput, password: passwordInput })
         if (!parsed.success) return null
@@ -103,14 +86,12 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
         if (prisma) {
           try {
-            console.log("[auth] User lookup attempt for:", email.toLowerCase())
             user = await prisma.user.findUnique({
               where:   { email: email.toLowerCase() },
               include: {
                 role: { include: { permissions: true } },
               },
             })
-            console.log("[auth] User found:", user ? "YES" : "NO")
           } catch (err) {
             prismaThrew = true
             if (env.NODE_ENV === "production") {

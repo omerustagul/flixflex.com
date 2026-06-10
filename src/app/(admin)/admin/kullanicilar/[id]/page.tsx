@@ -5,7 +5,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { ChevronLeft, Activity, Clock } from "lucide-react"
+import { ChevronLeft, Activity, Clock } from "@/lib/icons"
 import prisma from "@/lib/prisma"
 import { getMockSession } from "@/lib/auth/mock-session"
 import { FFContainer } from "@/components/ui/ff-container"

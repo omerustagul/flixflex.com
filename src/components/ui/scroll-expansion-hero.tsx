@@ -190,7 +190,7 @@ export const ScrollExpandMedia = ({
 
       {/* Main hero fold wrapper (Exactly h-screen, relative, flex-center) */}
       <div className='w-full flex flex-col items-center justify-center relative z-10 h-screen overflow-hidden'>
-        
+
         {/* Expanding Media Card */}
         <div
           className='ff-shape-container absolute z-0 top-1/2 left-1/2 transition-none'
@@ -306,9 +306,8 @@ export const ScrollExpandMedia = ({
 
         {/* Centered title text */}
         <div
-          className={`flex items-center justify-center text-center gap-4 w-full relative z-10 transition-none flex-col ${
-            textBlend ? 'mix-blend-difference' : 'mix-blend-normal'
-          }`}
+          className={`flex items-center justify-center text-center gap-4 w-full relative z-10 transition-none flex-col ${textBlend ? 'mix-blend-difference' : 'mix-blend-normal'
+            }`}
         >
           <motion.h2
             className='text-4xl md:text-5xl lg:text-6xl font-bold text-blue-200 transition-none'

@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Clock } from "lucide-react"
+import { Clock } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { staggerContainer, fadeInUp } from "@/lib/animations"
 import { BackgroundPaths } from "@/components/ui/background-paths"

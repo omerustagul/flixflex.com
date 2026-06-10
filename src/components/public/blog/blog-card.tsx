@@ -1,8 +1,9 @@
+import { memo } from "react"
 import Link from "next/link"
 import { cn, formatDate } from "@/lib/utils"
 import { FFBadge } from "@/components/ui"
 import { TiltCard } from "@/components/ui/tilt-card"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight } from "@/lib/icons"
 import type { BlogPost } from "./blog-data"
 
 interface BlogCardProps {
@@ -10,7 +11,10 @@ interface BlogCardProps {
   className?: string
 }
 
-export function BlogCard({ post, className }: BlogCardProps) {
+// Memoized: the blog list re-renders on every search keystroke /
+// filter change, but each card's `post` is a stable reference, so
+// memo skips re-rendering the cards that stayed in the list.
+export const BlogCard = memo(function BlogCard({ post, className }: BlogCardProps) {
   return (
     <TiltCard
       variant="glass"
@@ -109,4 +113,4 @@ export function BlogCard({ post, className }: BlogCardProps) {
       </div>
     </TiltCard>
   )
-}
+})

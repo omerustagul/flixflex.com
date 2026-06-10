@@ -1,6 +1,7 @@
 "use client"
 
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef, useMemo } from "react"
+import { sanitizeHtml } from "@/lib/sanitize"
 
 /**
  * Renders the 3D poem animation hero section.
@@ -17,6 +18,8 @@ export const PoemAnimation: React.FC<PoemAnimationProps> = ({
   boyImageUrl,
 }) => {
   const contentRef = useRef<HTMLDivElement>(null)
+  // Sanitize once; the markup is mirrored across six cube faces.
+  const safePoem = useMemo(() => sanitizeHtml(poemHTML), [poemHTML])
 
   // This effect handles the responsive scaling of the animation container.
   useEffect(() => {
@@ -68,16 +71,16 @@ export const PoemAnimation: React.FC<PoemAnimationProps> = ({
                 <div className="face bottom"></div>
                 <div
                   className="face left text"
-                  dangerouslySetInnerHTML={{ __html: poemHTML }}
+                  dangerouslySetInnerHTML={{ __html: safePoem }}
                 ></div>
                 <div
                   className="face right text"
-                  dangerouslySetInnerHTML={{ __html: poemHTML }}
+                  dangerouslySetInnerHTML={{ __html: safePoem }}
                 ></div>
                 <div className="face front"></div>
                 <div
                   className="face back text"
-                  dangerouslySetInnerHTML={{ __html: poemHTML }}
+                  dangerouslySetInnerHTML={{ __html: safePoem }}
                 ></div>
               </div>
             </div>
@@ -88,16 +91,16 @@ export const PoemAnimation: React.FC<PoemAnimationProps> = ({
                 <div className="face bottom"></div>
                 <div
                   className="face left text"
-                  dangerouslySetInnerHTML={{ __html: poemHTML }}
+                  dangerouslySetInnerHTML={{ __html: safePoem }}
                 ></div>
                 <div
                   className="face right text"
-                  dangerouslySetInnerHTML={{ __html: poemHTML }}
+                  dangerouslySetInnerHTML={{ __html: safePoem }}
                 ></div>
                 <div className="face front"></div>
                 <div
                   className="face back text"
-                  dangerouslySetInnerHTML={{ __html: poemHTML }}
+                  dangerouslySetInnerHTML={{ __html: safePoem }}
                 ></div>
               </div>
             </div>

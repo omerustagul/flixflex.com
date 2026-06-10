@@ -11,7 +11,7 @@ import {
   Clapperboard,
   Globe,
   type LucideIcon,
-} from "lucide-react"
+} from "@/lib/icons"
 
 export interface ProcessStep {
   title: string

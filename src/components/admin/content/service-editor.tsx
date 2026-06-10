@@ -10,7 +10,7 @@ import {
   Camera, FileText, MessageCircle, Video, TrendingUp, Shapes, 
   BookOpen, Lightbulb, Layout, Monitor, Code2, Zap, Sparkles, 
   Scissors, Globe, BarChart3, Palette, MessageSquare, Fingerprint, Plus, Trash2, X, Image as ImageIcon
-} from "lucide-react"
+} from "@/lib/icons"
 import { slugify, cn } from "@/lib/utils"
 import { MediaPicker } from "@/components/admin/media/media-picker"
 import type { AdminServiceRecord } from "./types"

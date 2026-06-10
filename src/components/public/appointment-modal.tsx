@@ -3,9 +3,9 @@
 import * as React from "react"
 import * as Dialog from "@radix-ui/react-dialog"
 import { motion, AnimatePresence } from "framer-motion"
-import { useForm, Controller } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { X, Calendar, User, Mail, Phone, Clock, Sparkles, CheckCircle2, AlertCircle, ArrowLeft, ArrowRight, Check } from "lucide-react"
+import { X, Clock, Sparkles, CheckCircle2, AlertCircle, ArrowLeft, ArrowRight, Check } from "@/lib/icons"
 import { toast } from "sonner"
 
 import { useUIStore } from "@/lib/ui-store"
@@ -50,7 +50,6 @@ export function AppointmentModal() {
     watch,
     trigger,
     reset,
-    setError,
     formState: { errors },
   } = useForm<AppointmentFormData>({
     resolver: zodResolver(appointmentSchema),
@@ -149,9 +148,6 @@ export function AppointmentModal() {
 
     const now = new Date()
     if (slotDate < now) return "past"
-
-    // Convert to ISO string for matching (using standard JSON serializer format)
-    const slotISO = slotDate.toISOString()
 
     if (availability.blocked.some(b => new Date(b).getTime() === slotDate.getTime())) return "blocked"
     if (availability.booked.some(b => new Date(b).getTime() === slotDate.getTime())) return "booked"

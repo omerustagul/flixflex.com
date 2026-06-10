@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import * as Dialog from "@radix-ui/react-dialog"
-import { AlertTriangle, X } from "lucide-react"
+import { AlertTriangle, X } from "@/lib/icons"
 import { motion, AnimatePresence } from "framer-motion"
 import { FFButton } from "@/components/ui/ff-button"
 

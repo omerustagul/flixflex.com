@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useState, useRef, useEffect } from "react"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight } from "@/lib/icons"
 
 interface Project {
   title: string
@@ -55,6 +55,10 @@ export function ProjectShowcase({ items }: { items?: any[] }) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [smoothPosition, setSmoothPosition] = useState({ x: 0, y: 0 })
   const [isVisible, setIsVisible] = useState(false)
+  // Container's viewport origin, kept in state so the fixed-position
+  // preview can be placed without reading the ref during render
+  // (which React flags as unsafe — refs may be stale mid-render).
+  const [containerOrigin, setContainerOrigin] = useState({ left: 0, top: 0 })
   const containerRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<number | null>(null)
 
@@ -80,9 +84,28 @@ export function ProjectShowcase({ items }: { items?: any[] }) {
     }
   }, [mousePosition])
 
+  // Keep the container origin synced on mount, scroll and resize so the
+  // fixed-position preview stays aligned without render-time ref reads.
+  useEffect(() => {
+    const sync = () => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect()
+        setContainerOrigin({ left: rect.left, top: rect.top })
+      }
+    }
+    sync()
+    window.addEventListener("scroll", sync, { passive: true })
+    window.addEventListener("resize", sync)
+    return () => {
+      window.removeEventListener("scroll", sync)
+      window.removeEventListener("resize", sync)
+    }
+  }, [])
+
   const handleMouseMove = (e: React.MouseEvent) => {
     if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect()
+      setContainerOrigin({ left: rect.left, top: rect.top })
       setMousePosition({
         x: e.clientX - rect.left,
         y: e.clientY - rect.top,
@@ -107,8 +130,8 @@ export function ProjectShowcase({ items }: { items?: any[] }) {
       <div
         className="pointer-events-none fixed z-50 overflow-hidden rounded-xl shadow-2xl"
         style={{
-          left: containerRef.current?.getBoundingClientRect().left ?? 0,
-          top: containerRef.current?.getBoundingClientRect().top ?? 0,
+          left: containerOrigin.left,
+          top: containerOrigin.top,
           transform: `translate3d(${smoothPosition.x + 20}px, ${smoothPosition.y - 100}px, 0)`,
           opacity: isVisible ? 1 : 0,
           scale: isVisible ? 1 : 0.8,

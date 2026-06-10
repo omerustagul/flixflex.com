@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ChevronRight } from "lucide-react"
+import { ChevronRight } from "@/lib/icons"
 import { FFBadge } from "@/components/ui"
 import { staggerContainer, fadeInUp, ease } from "@/lib/animations"
 import { cn } from "@/lib/utils"

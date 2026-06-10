@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft } from "@/lib/icons"
 import Link from "next/link"
 import prisma from "@/lib/prisma"
 import { revalidatePath } from "next/cache"

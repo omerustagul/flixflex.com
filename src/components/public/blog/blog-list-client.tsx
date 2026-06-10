@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search } from "lucide-react"
+import { Search } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { ease, staggerContainer, fadeInUp } from "@/lib/animations"
 import { BlogCard } from "./blog-card"

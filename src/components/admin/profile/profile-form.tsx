@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { motion, AnimatePresence } from "framer-motion"
-import { CheckCircle2, AlertCircle, Loader2 } from "lucide-react"
+import { CheckCircle2, AlertCircle, Loader2 } from "@/lib/icons"
 import { FFInput } from "@/components/ui"
 import { cn } from "@/lib/utils"
 import {

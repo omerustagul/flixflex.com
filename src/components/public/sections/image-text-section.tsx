@@ -4,7 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { fadeInUp, staggerContainer } from "@/lib/animations"
 

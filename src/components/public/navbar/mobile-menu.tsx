@@ -4,7 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { AnimatePresence, motion } from "framer-motion"
-import { X, ArrowUpRight } from "lucide-react"
+import { X, ArrowUpRight } from "@/lib/icons"
 import { ThemeToggle } from "@/components/ui"
 import {
   mobileMenuVariants,

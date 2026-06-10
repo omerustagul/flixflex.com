@@ -4,6 +4,7 @@ import * as React from "react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { fadeInUp } from "@/lib/animations"
+import { sanitizeHtml } from "@/lib/sanitize"
 
 interface TextContentSectionProps {
   headline?: string
@@ -44,7 +45,7 @@ export function TextContentSection({
                 "text-lg md:text-xl text-[var(--foreground-muted)] leading-relaxed space-y-6",
                 "prose prose-invert max-w-none"
               )}
-              dangerouslySetInnerHTML={{ __html: body }}
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(body) }}
             />
           )}
         </motion.div>

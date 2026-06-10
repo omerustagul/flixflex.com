@@ -7,14 +7,13 @@ import {
   Save,
   KeyRound,
   CheckCircle2,
-  AlertCircle,
   Loader2,
   Sparkles,
   BarChart3,
   Mail,
   Share2,
   Globe
-} from "lucide-react"
+} from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
 

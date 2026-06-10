@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowLeft, ArrowRight } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import type { PortfolioItem } from "@/components/public"
 

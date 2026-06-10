@@ -4,7 +4,7 @@
 
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Plus, Search, Edit2, UserX, UserCheck } from "lucide-react"
+import { Plus, Search, Edit2, UserX, UserCheck } from "@/lib/icons"
 import prisma from "@/lib/prisma"
 import { getMockSession } from "@/lib/auth/mock-session"
 import { FFBadge } from "@/components/ui/ff-badge"
@@ -108,7 +108,7 @@ export default async function UsersPage({ searchParams }: Props) {
           {q ? (
             <>
               <Search className="w-10 h-10 text-[#888888] mb-4" />
-              <p className="text-sm font-medium text-[#888888]">"{q}" için sonuç bulunamadı</p>
+              <p className="text-sm font-medium text-[#888888]">&ldquo;{q}&rdquo; için sonuç bulunamadı</p>
             </>
           ) : (
             <>

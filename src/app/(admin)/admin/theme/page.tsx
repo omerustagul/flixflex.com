@@ -11,7 +11,7 @@ import { PaletteListActions } from "@/components/admin/colors/palette-list-actio
 import { SwatchRow } from "@/components/admin/colors/swatch-row"
 import prisma from "@/lib/prisma"
 import type { ColorPalette } from "@/lib/colors/types"
-import { Plus } from "lucide-react"
+import { Plus } from "@/lib/icons"
 
 export const metadata: Metadata = { title: "Tema Düzeni" }
 

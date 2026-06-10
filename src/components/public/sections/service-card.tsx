@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ArrowRight, Globe } from "lucide-react"
+import { ArrowRight, Globe } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { fadeInUp, ease } from "@/lib/animations"
 import { TiltCard } from "@/components/ui/tilt-card"

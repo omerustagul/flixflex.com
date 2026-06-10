@@ -3,9 +3,10 @@
 import React from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { BackgroundPaths } from "@/components/ui/background-paths"
+import { StarField } from "@/components/ui/star-field"
 import { staggerContainer, fadeInUp } from "@/lib/animations"
 
 // ── Types ──────────────────────────────────────────────────────
@@ -123,8 +124,8 @@ export function CTASection({
           : "bg-[var(--surface)] text-[var(--foreground)]"
       )}
     >
-      {/* Background layers */}
-      <GeometricGrid dark={isDark} />
+      {/* Background layers — starfield on dark, grid on light */}
+      {isDark ? <StarField className="z-0" /> : <GeometricGrid dark={isDark} />}
       <AuraBlobs dark={isDark} />
       {isDark && <BackgroundPaths intensity="light" />}
 
@@ -134,7 +135,7 @@ export function CTASection({
       </div>
 
       {/* Content */}
-      <div className="relative mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16">
+      <div className="relative z-10 mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16">
         <motion.div
           variants={staggerContainer}
           initial="hidden"

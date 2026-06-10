@@ -25,7 +25,6 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic"
 
 export default async function PortfolioPage() {
-  const portfolioItems = await listPublishedPortfolio();
   const pageData = await getPageBySlug("portfolio")
   const portfolio = await listPublishedPortfolio()
 

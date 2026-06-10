@@ -7,7 +7,7 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { Pencil, CheckCircle2, CopyPlus, Trash2 } from "lucide-react"
+import { Pencil, CopyPlus, Trash2 } from "@/lib/icons"
 import type { ColorPalette } from "@/lib/colors/types"
 
 interface PaletteListActionsProps {

@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { Sparkles, ArrowUpRight, Clock } from "lucide-react"
+import { Sparkles, ArrowUpRight, Clock } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { formatRelativeTime } from "@/lib/utils"
 import { TiltCard } from "@/components/ui/tilt-card"

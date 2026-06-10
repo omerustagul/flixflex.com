@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Plus, Minus } from "lucide-react"
+import { Plus, Minus } from "@/lib/icons"
 import * as React from "react"
 import { cn } from "@/lib/utils"
 import { staggerContainer, fadeInUp, accordionContent } from "@/lib/animations"

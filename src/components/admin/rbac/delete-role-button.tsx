@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { Trash2 } from "lucide-react"
+import { Trash2 } from "@/lib/icons"
 import { FFButton } from "@/components/ui/ff-button"
 import { ConfirmDeleteDialog } from "./confirm-delete-dialog"
 

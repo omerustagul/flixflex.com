@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Image from "next/image"
-import { Upload, Video, Image as ImageIcon, Trash2, Loader2, Play, ExternalLink, FolderPlus, Folder, ChevronRight, FileText, File, SortAsc, SortDesc, Calendar, Type, ArrowUpDown, ZoomIn, X as XIcon, RefreshCw } from "lucide-react"
+import { Upload, Video, Image as ImageIcon, Trash2, Loader2, Play, ExternalLink, FolderPlus, Folder, ChevronRight, FileText, File, SortAsc, SortDesc, Calendar, Type, ArrowUpDown, ZoomIn, X as XIcon, RefreshCw } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import MuxPlayer from "@mux/mux-player-react"
 import { toast } from "sonner"
@@ -43,6 +43,7 @@ export default function MediaPage() {
   const [folders, setFolders] = React.useState<MediaFolder[]>([])
   const [loading, setLoading] = React.useState(true)
   const [uploading, setUploading] = React.useState(false)
+  const [uploadCount, setUploadCount] = React.useState<{ done: number; total: number } | null>(null)
   const [filter, setFilter] = React.useState<"all" | "folder" | "image" | "video">("all")
   const [currentFolderId, setCurrentFolderId] = React.useState<string | null>(null)
   const [folderPath, setFolderPath] = React.useState<{ id: string, name: string }[]>([])
@@ -187,62 +188,72 @@ export default function MediaPage() {
     return () => window.clearTimeout(timeoutId)
   }, [loadMedia])
 
-  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-
-    setUploading(true)
+  // Upload a single file. Returns true on success.
+  const uploadOne = async (file: File): Promise<boolean> => {
     const isVideo = file.type.startsWith("video/")
-
     try {
       if (isVideo) {
-        // 1. Get upload URL
         const res = await fetch("/api/media/upload-url", {
           method: "POST",
-          body: JSON.stringify({ title: file.name, type: "video" })
+          body: JSON.stringify({ title: file.name, type: "video" }),
         })
         const data = await res.json()
-
-        if (!res.ok) {
-          throw new Error(data.error || "Yükleme hazırlığı başarısız oldu")
-        }
-
-        const { uploadUrl } = data
-
-        // 2. Upload to Mux
-        await fetch(uploadUrl, {
+        if (!res.ok) throw new Error(data.error || "Yükleme hazırlığı başarısız oldu")
+        await fetch(data.uploadUrl, {
           method: "PUT",
           body: file,
-          headers: { "Content-Type": file.type }
+          headers: { "Content-Type": file.type },
         })
-
-        toast.success("Video yükleniyor, işlenmesi birkaç dakika sürebilir")
-      } else {
-        // Image upload
-        const formData = new FormData()
-        formData.append("file", file)
-        if (currentFolderId) formData.append("folderId", currentFolderId)
-
-        const res = await fetch("/api/media/upload", {
-          method: "POST",
-          body: formData
-        })
-        const data = await res.json().catch(() => null)
-
-        if (!res.ok) {
-          throw new Error(data?.details || data?.error || "Dosya yüklenemedi")
-        }
-
-        toast.success("Dosya yüklendi")
+        return true
       }
-      await refreshMedia()
-    } catch (err: unknown) {
-      console.error("[upload]", err)
-      toast.error(err instanceof Error ? err.message : "Yükleme hatası")
-    } finally {
-      setUploading(false)
-      if (fileInputRef.current) fileInputRef.current.value = ""
+      const formData = new FormData()
+      formData.append("file", file)
+      if (currentFolderId) formData.append("folderId", currentFolderId)
+      const res = await fetch("/api/media/upload", { method: "POST", body: formData })
+      const data = await res.json().catch(() => null)
+      if (!res.ok) throw new Error(data?.details || data?.error || "Dosya yüklenemedi")
+      return true
+    } catch (err) {
+      console.error("[upload]", file.name, err)
+      return false
     }
+  }
+
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files ? Array.from(e.target.files) : []
+    if (files.length === 0) return
+
+    setUploading(true)
+    setUploadCount({ done: 0, total: files.length })
+
+    let ok = 0
+    let fail = 0
+    let hasVideo = false
+
+    // Sequential upload — keeps the server/Mux from being hammered and
+    // lets us report a clean per-file progress count.
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].type.startsWith("video/")) hasVideo = true
+      const success = await uploadOne(files[i])
+      if (success) ok++
+      else fail++
+      setUploadCount({ done: i + 1, total: files.length })
+    }
+
+    setUploading(false)
+    setUploadCount(null)
+    if (fileInputRef.current) fileInputRef.current.value = ""
+
+    if (ok > 0) {
+      toast.success(
+        `${ok} dosya yüklendi` +
+          (fail ? `, ${fail} başarısız` : "") +
+          (hasVideo ? " · videolar işleniyor olabilir" : "")
+      )
+    } else {
+      toast.error("Hiçbir dosya yüklenemedi")
+    }
+    await refreshMedia()
   }
 
   const deleteItem = async (id: string) => {
@@ -390,12 +401,13 @@ export default function MediaPage() {
             className="ff-shape-button inline-flex items-center gap-2 h-9 px-6 bg-[#ff4fd8] text-white font-bold text-[12px] hover:bg-[#ff4fd8]/90 transition-all disabled:opacity-50"
           >
             {uploading ? <Loader2 className="animate-spin" size={16} /> : <Upload size={16} />}
-            Yükle
+            {uploadCount ? `Yükleniyor ${uploadCount.done}/${uploadCount.total}` : "Yükle"}
           </button>
           <input
             type="file"
             ref={fileInputRef}
             onChange={handleUpload}
+            multiple
             className="hidden"
             accept="image/*,video/*,.pdf,.doc,.docx,.xls,.xlsx,.txt,.zip,.tiff"
           />

@@ -5,6 +5,7 @@
 
 import nodemailer from "nodemailer"
 import { getSetting } from "@/lib/settings"
+import { decryptSecret } from "@/lib/crypto"
 
 interface SendMailParams {
   name: string
@@ -179,7 +180,7 @@ export async function sendAppointmentApprovedEmail({
       const host = (await getSetting<string>("mail.smtp.host", "")) || ""
       const portStr = (await getSetting<string>("mail.smtp.port", "587")) || "587"
       const user = (await getSetting<string>("mail.smtp.user", "")) || ""
-      const pass = (await getSetting<string>("mail.smtp.pass", "")) || ""
+      const pass = decryptSecret(await getSetting<string>("mail.smtp.pass", "")) || ""
       const secureSetting = (await getSetting<string>("mail.smtp.secure", "false")) || "false"
       const secure = secureSetting === "true"
 
@@ -211,7 +212,7 @@ export async function sendAppointmentApprovedEmail({
 
     // ── CASE 2: RESEND ────────────────────────────────
     if (provider === "resend") {
-      const apiKey = (await getSetting<string>("mail.resend.key")) || process.env.RESEND_API_KEY
+      const apiKey = decryptSecret(await getSetting<string>("mail.resend.key")) || process.env.RESEND_API_KEY
 
       if (!apiKey) {
         return {

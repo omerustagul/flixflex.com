@@ -6,36 +6,21 @@
 import { NextRequest, NextResponse } from "next/server"
 import prisma from "@/lib/prisma"
 import { auth } from "@/lib/auth"
+import { hasPermission } from "@/lib/rbac/permissions"
+import { rateLimit, getClientIp } from "@/lib/rate-limit"
 import { appointmentSchema } from "@/lib/validators/appointment-schema"
 
-// ── In-memory rate limiter ──
-type RateLimitEntry = { count: number; resetAt: number }
-const rateLimitMap = new Map<string, RateLimitEntry>()
-const RATE_LIMIT_WINDOW_MS = 60_000
-const RATE_LIMIT_MAX       = 3
-
-function checkRateLimit(ip: string): { allowed: boolean; retryAfter?: number } {
-  const now   = Date.now()
-  const entry = rateLimitMap.get(ip)
-
-  if (!entry || now > entry.resetAt) {
-    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS })
-    return { allowed: true }
-  }
-
-  if (entry.count >= RATE_LIMIT_MAX) {
-    return { allowed: false, retryAfter: Math.ceil((entry.resetAt - now) / 1000) }
-  }
-
-  entry.count++
-  return { allowed: true }
-}
+// Booking window guards: no past dates, max 3 months ahead.
+const MAX_LEAD_MS = 1000 * 60 * 60 * 24 * 90 // 90 days
 
 // GET — List all appointments (Admin only)
 export async function GET() {
   const session = await auth()
   if (!session?.user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
+  if (!hasPermission(session.user.permissions ?? [], "appointments", "read")) {
+    return NextResponse.json({ error: "Bu işlem için yetkiniz yok." }, { status: 403 })
   }
 
   try {
@@ -64,10 +49,9 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Rate limit by IP
-    const forwarded = req.headers.get("x-forwarded-for")
-    const ip = forwarded ? forwarded.split(",")[0].trim() : "unknown"
-    const { allowed, retryAfter } = checkRateLimit(ip)
+    // Rate limit by IP — 3 bookings / 60s
+    const ip = getClientIp(req)
+    const { allowed, retryAfter } = rateLimit({ namespace: "appointments", key: ip, max: 3, windowMs: 60_000 })
 
     if (!allowed) {
       return NextResponse.json(
@@ -105,8 +89,29 @@ export async function POST(req: NextRequest) {
 
     const { name, email, phone, subject, date, notes } = result.data
 
-    // Double check if slot is blocked or already booked
+    // ── Date sanity: must be a valid future date within the window ──
     const parsedDate = new Date(date)
+    if (isNaN(parsedDate.getTime())) {
+      return NextResponse.json(
+        { ok: false, message: "Geçersiz tarih formatı." },
+        { status: 400 }
+      )
+    }
+    const now = Date.now()
+    if (parsedDate.getTime() <= now) {
+      return NextResponse.json(
+        { ok: false, message: "Geçmiş bir tarih için randevu alınamaz." },
+        { status: 400 }
+      )
+    }
+    if (parsedDate.getTime() > now + MAX_LEAD_MS) {
+      return NextResponse.json(
+        { ok: false, message: "En fazla 3 ay sonrası için randevu alabilirsiniz." },
+        { status: 400 }
+      )
+    }
+
+    // Double check if slot is blocked or already booked
     const blockedSlot = await prisma.blockedSlot.findUnique({
       where: { date: parsedDate },
     })

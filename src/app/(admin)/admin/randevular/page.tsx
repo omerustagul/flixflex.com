@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Calendar as CalendarIcon, Clock, Search, ShieldAlert, CheckCircle, XCircle, Eye, EyeOff, Trash2, CalendarDays, Sparkles, Filter, ChevronLeft, ChevronRight, Lock, Unlock } from "lucide-react"
+import { Calendar as CalendarIcon, Clock, Search, ShieldAlert, Eye, EyeOff, Trash2, Filter, ChevronLeft, ChevronRight, Lock, Unlock } from "@/lib/icons"
 import { toast } from "sonner"
 import { cn } from "@/lib/utils"
 
@@ -633,7 +633,6 @@ export default function AdminAppointmentsPage() {
                       const slotDate = new Date(currentYear, currentMonth, selectedDay!)
                       const [hours, minutes] = hourStr.split(":").map(Number)
                       slotDate.setHours(hours, minutes, 0, 0)
-                      const slotISO = slotDate.toISOString()
 
                       const isBooked = availability.booked.some(b => new Date(b).getTime() === slotDate.getTime())
                       const isBlocked = availability.blocked.some(b => new Date(b).getTime() === slotDate.getTime())

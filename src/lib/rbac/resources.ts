@@ -3,15 +3,16 @@
 // ═══════════════════════════════════════════════════════════
 
 export const RESOURCES = {
-  BLOG:      "blog",
-  PAGES:     "pages",
-  PORTFOLIO: "portfolio",
-  COLORS:    "colors",
-  ROLES:     "roles",
-  USERS:     "users",
-  SETTINGS:  "settings",
-  AI:        "ai",
-  MEDIA:     "media",
+  BLOG:         "blog",
+  PAGES:        "pages",
+  PORTFOLIO:    "portfolio",
+  COLORS:       "colors",
+  ROLES:        "roles",
+  USERS:        "users",
+  SETTINGS:     "settings",
+  AI:           "ai",
+  MEDIA:        "media",
+  APPOINTMENTS: "appointments",
 } as const
 
 export const ACTIONS = {
@@ -61,10 +62,11 @@ export const DEFAULT_ROLES: RoleConfig[] = [
       { resource: RESOURCES.PAGES,     action: ACTIONS.MANAGE },
       { resource: RESOURCES.PORTFOLIO, action: ACTIONS.MANAGE },
       { resource: RESOURCES.COLORS,    action: ACTIONS.MANAGE },
-      { resource: RESOURCES.AI,        action: ACTIONS.MANAGE },
-      { resource: RESOURCES.MEDIA,     action: ACTIONS.MANAGE },
-      { resource: RESOURCES.USERS,     action: ACTIONS.READ },
-      { resource: RESOURCES.SETTINGS,  action: ACTIONS.READ },
+      { resource: RESOURCES.AI,           action: ACTIONS.MANAGE },
+      { resource: RESOURCES.MEDIA,        action: ACTIONS.MANAGE },
+      { resource: RESOURCES.APPOINTMENTS, action: ACTIONS.MANAGE },
+      { resource: RESOURCES.USERS,        action: ACTIONS.READ },
+      { resource: RESOURCES.SETTINGS,     action: ACTIONS.READ },
     ],
   },
   {

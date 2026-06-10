@@ -27,7 +27,7 @@ import {
   Palette,
   MessageSquare,
   Fingerprint,
-} from "lucide-react"
+} from "@/lib/icons"
 import { cn } from "@/lib/utils"
 
 // ── Icon lookup map ────────────────────────────────

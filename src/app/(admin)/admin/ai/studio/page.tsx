@@ -5,7 +5,7 @@
 
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft } from "@/lib/icons"
 import { AIStudio } from "@/components/admin/ai/ai-studio"
 import { hasEnv } from "@/lib/env"
 import { getSetting } from "@/lib/settings"

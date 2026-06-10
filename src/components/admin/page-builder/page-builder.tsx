@@ -15,7 +15,7 @@ import {
   Send,
   CheckCircle2,
   Clock,
-} from "lucide-react"
+} from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { FFButton } from "@/components/ui/ff-button"
 import { usePageBuilder } from "@/store/page-builder"
@@ -175,7 +175,7 @@ export function PageBuilder({ initialPage }: PageBuilderProps) {
   return (
     <div className="flex flex-col h-[calc(92vh)] bg-[#f7f7f5] overflow-hidden">
       {/* ── Top Toolbar ─────────────────────────────── */}
-      <header className="flex items-center gap-3 px-4 h-14 border-b border-[#CCCCCC] bg-[#f7f7f5] shrink-0">
+      <header className="flex items-center gap-2 px-4 h-14 border-b border-[#CCCCCC] bg-[#f7f7f5] shrink-0">
         {/* Title input */}
         <div className="flex-1 min-w-0 max-w-sm">
           <input

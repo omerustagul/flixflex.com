@@ -57,8 +57,14 @@ export interface PageBuilderActions {
 
 export type PageBuilderStore = PageBuilderState & PageBuilderActions
 
-// ── nanoid-lite for unique IDs without extra deps ──
+// ── Collision-resistant unique IDs (no extra deps) ──
+// crypto.randomUUID is available in all modern browsers and Node 16.7+.
+// The page builder runs client-side, so it is always present here.
+// Falls back to a random+time string in any exotic runtime without it.
 function uid(): string {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID()
+  }
   return Math.random().toString(36).slice(2, 10) + Date.now().toString(36)
 }
 

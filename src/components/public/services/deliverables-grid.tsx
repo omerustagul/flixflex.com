@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { CheckCircle2 } from "lucide-react"
+import { CheckCircle2 } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { staggerContainer, fadeInUp } from "@/lib/animations"
 

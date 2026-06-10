@@ -11,7 +11,7 @@ import {
   KeyRound,
   Wrench,
   ArrowUpRight,
-} from "lucide-react"
+} from "@/lib/icons"
 import { hasEnv } from "@/lib/env"
 
 export const metadata: Metadata = {

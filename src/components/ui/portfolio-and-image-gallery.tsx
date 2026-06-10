@@ -14,7 +14,7 @@ import React, {
   useState,
 } from 'react';
 
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from "@/lib/icons";
 import { Badge } from '@/components/ui/badge';
 
 if (typeof window !== 'undefined') {

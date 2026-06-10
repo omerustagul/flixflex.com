@@ -3,7 +3,7 @@
 import * as React from "react"
 import { useMemo, useRef, useState, useEffect } from "react"
 import Link from "next/link"
-import { ArrowRight, BriefcaseBusiness } from "lucide-react"
+import { ArrowRight, BriefcaseBusiness } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 
 interface PortfolioItem {
@@ -95,7 +95,7 @@ function Card({ item, index }: { item: PortfolioItem; index: number }) {
     <Link
       href={`/portfolio/${item.slug}`}
       className={cn(
-        "group relative flex-shrink-0 w-[280px] md:w-[320px] aspect-[3/4]",
+        "group relative flex-shrink-0 w-[260px] md:w-[300px] aspect-[2/3]",
         "ff-shape-container border border-[var(--border)]/40 cursor-pointer select-none",
         "snap-center transition-all duration-300 hover:shadow-xl"
       )}
@@ -153,11 +153,9 @@ function Card({ item, index }: { item: PortfolioItem; index: number }) {
 export function PortfolioVerticalScrollSection({
   headline = "Seçili İşlerimiz",
   subheadline = "FlixFlex imzalı yüksek dönüşümlü kreatif tasarımlar",
-  direction = "right",
   speed = "normal",
   pauseOnHover = true,
   maxItems = 12,
-  hideMobileDock = false,
   items,
 }: PortfolioVerticalScrollSectionProps) {
   const viewportRef = useRef<HTMLDivElement>(null)
@@ -228,11 +226,11 @@ export function PortfolioVerticalScrollSection({
             <p className="mt-1 text-[var(--foreground-muted)] text-base md:text-sm max-w-xl leading-relaxed">
               {subheadline}
             </p>
-                      )}
-            <button className="inline-flex items-center gap-1.5 px-3 py-1 underline text-[11px] font-semibold text-[var(--foreground)] hover:text-[var(--ff-purple)] transition-colors mt-2">
+          )}
+          <button className="inline-flex items-center gap-1.5 px-3 py-1 underline text-[11px] font-semibold text-[var(--foreground)] hover:text-[var(--ff-purple)] transition-colors mt-2">
             Tüm İşlerimiz
             <ArrowRight size={11} />
-            </button>
+          </button>
         </div>
       </div>
 

@@ -9,6 +9,7 @@ import { auth } from "@/lib/auth"
 import bcrypt from "bcryptjs"
 import prisma from "@/lib/prisma"
 import { hasPermission } from "@/lib/rbac/permissions"
+import { logAudit } from "@/lib/audit"
 import { createUserSchema } from "@/lib/validators/user-schema"
 
 export const dynamic = "force-dynamic"
@@ -46,6 +47,8 @@ export async function GET(req: NextRequest) {
     const [users, total] = await Promise.all([
       prisma.user.findMany({
         where,
+        // Never pull the password hash out of the DB for list views.
+        omit: { password: true },
         include: { role: { select: { id: true, name: true } } },
         orderBy: { createdAt: "desc" },
         skip: (page - 1) * limit,
@@ -54,14 +57,9 @@ export async function GET(req: NextRequest) {
       prisma.user.count({ where }),
     ])
 
-    const safe = users.map(({ ...u }: Record<string, any>) => {
-      delete u.password
-      return u
-    })
-
     return NextResponse.json({
       ok: true,
-      data: safe,
+      data: users,
       pagination: { total, page, limit, pages: Math.ceil(total / limit) },
     })
   } catch (err: any) {
@@ -111,11 +109,19 @@ export async function POST(req: NextRequest) {
     const hashed = await bcrypt.hash(password, 12)
     const user = await prisma.user.create({
       data: { name, email, password: hashed, roleId, isActive: true },
+      omit: { password: true },
       include: { role: { select: { id: true, name: true } } },
     })
-    
-    const { password: _p, ...safe } = user as any
-    return NextResponse.json({ ok: true, data: safe }, { status: 201 })
+
+    void logAudit({
+      userId: session.user.id,
+      action: "create",
+      resource: "users",
+      resourceId: user.id,
+      metadata: { email: user.email, roleId },
+    })
+
+    return NextResponse.json({ ok: true, data: user }, { status: 201 })
   } catch (err: any) {
     console.error("[users POST]", err)
     return NextResponse.json({ ok: false, message: "Sunucu hatası." }, { status: 500 })

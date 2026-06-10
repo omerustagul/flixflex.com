@@ -4,7 +4,7 @@
 
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ChevronLeft } from "lucide-react"
+import { ChevronLeft } from "@/lib/icons"
 import prisma from "@/lib/prisma"
 import { FFContainer } from "@/components/ui/ff-container"
 import { UserForm } from "@/components/admin/rbac/user-form"

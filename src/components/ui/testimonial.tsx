@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { motion, PanInfo, AnimatePresence } from "framer-motion"
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
+import { ChevronLeft, ChevronRight, Quote } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 
 export interface Testimonial {

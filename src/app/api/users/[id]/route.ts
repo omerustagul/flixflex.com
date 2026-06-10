@@ -9,6 +9,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 import prisma from "@/lib/prisma"
 import { hasPermission } from "@/lib/rbac/permissions"
+import { logAudit } from "@/lib/audit"
 import { updateUserSchema } from "@/lib/validators/user-schema"
 
 export const dynamic = "force-dynamic"
@@ -33,13 +34,13 @@ export async function GET(_req: NextRequest, { params }: Params) {
 
     const user = await prisma.user.findUnique({
       where: { id },
+      omit: { password: true },
       include: { role: { select: { id: true, name: true } } },
     })
     if (!user) {
       return NextResponse.json({ ok: false, message: "Kullanıcı bulunamadı." }, { status: 404 })
     }
-    const { password: _p, ...safe } = user as any
-    return NextResponse.json({ ok: true, data: safe })
+    return NextResponse.json({ ok: true, data: user })
   } catch (err: any) {
     console.error("[users/[id] GET]", err)
     return NextResponse.json({ ok: false, message: "Sunucu hatası." }, { status: 500 })
@@ -120,11 +121,19 @@ export async function PATCH(req: NextRequest, { params }: Params) {
         ...(result.data.roleId   !== undefined ? { roleId:   result.data.roleId }   : {}),
         ...(result.data.isActive !== undefined ? { isActive: result.data.isActive } : {}),
       },
+      omit: { password: true },
       include: { role: { select: { id: true, name: true } } },
     })
-    
-    const { password: _p, ...safe } = updated as any
-    return NextResponse.json({ ok: true, data: safe })
+
+    void logAudit({
+      userId: session.user.id,
+      action: "update",
+      resource: "users",
+      resourceId: id,
+      metadata: { fields: Object.keys(result.data) },
+    })
+
+    return NextResponse.json({ ok: true, data: updated })
   } catch (err: any) {
     console.error("[users/[id] PATCH]", err)
     return NextResponse.json({ ok: false, message: "Sunucu hatası." }, { status: 500 })
@@ -157,6 +166,15 @@ export async function DELETE(_req: NextRequest, { params }: Params) {
     }
 
     await prisma.user.delete({ where: { id } })
+
+    void logAudit({
+      userId: session.user.id,
+      action: "delete",
+      resource: "users",
+      resourceId: id,
+      metadata: { email: user.email },
+    })
+
     return NextResponse.json({ ok: true })
   } catch (err: any) {
     console.error("[users/[id] DELETE]", err)

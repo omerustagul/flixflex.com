@@ -7,7 +7,7 @@
 
 import * as React from "react"
 import { useCallback } from "react"
-import { X } from "lucide-react"
+import { X } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { usePageBuilder } from "@/store/page-builder"
 import { useShallow } from "zustand/react/shallow"
@@ -15,7 +15,7 @@ import { SECTION_SCHEMAS } from "@/types/page-builder"
 import { SECTION_REGISTRY } from "@/lib/page-builder/section-registry"
 import { FFSelect, FFSelectItem } from "@/components/ui/ff-select"
 import { MediaPicker } from "@/components/admin/media/media-picker"
-import { Image as ImageIcon, Video } from "lucide-react"
+import { Image as ImageIcon, Video } from "@/lib/icons"
 
 // ── Field renderers ───────────────────────────────
 interface FieldProps {

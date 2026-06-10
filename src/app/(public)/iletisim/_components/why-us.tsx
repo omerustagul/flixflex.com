@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Zap, ShieldCheck, BarChart2, MessageCircle } from "lucide-react"
+import { Zap, ShieldCheck, BarChart2, MessageCircle } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { staggerContainer, fadeInUp } from "@/lib/animations"
 

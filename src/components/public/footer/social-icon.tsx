@@ -1,4 +1,4 @@
-import { Instagram, Linkedin, Twitter, Youtube } from "lucide-react"
+import { Instagram, Linkedin, Twitter, Youtube } from "@/lib/icons"
 import type { SocialLink } from "./footer-data"
 
 const iconMap = {

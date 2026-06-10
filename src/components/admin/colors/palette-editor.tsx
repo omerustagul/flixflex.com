@@ -17,7 +17,7 @@ import * as Tabs from "@radix-ui/react-tabs"
 import { HexColorPicker } from "react-colorful"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { Menu, Loader2, LayoutGrid, Square, Hexagon, Scissors, Smartphone, Layers, MoreHorizontal, Trash2, ChevronLeft, RotateCcw, Save, X, Check } from "lucide-react"
+import { Menu, LayoutGrid, Square, Hexagon, Scissors, Smartphone, Layers, MoreHorizontal, Trash2, ChevronLeft, RotateCcw, Save, X, Check } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { checkWCAG } from "@/lib/utils"
 import { FFBadge } from "@/components/ui"
@@ -32,7 +32,7 @@ import {
   type ShapeVariant,
   type MobileNavbarVariant,
 } from "@/lib/colors/types"
-import { Minus, Plus } from "lucide-react"
+import { Minus, Plus } from "@/lib/icons"
 
 const FONT_OPTIONS = [
   "Syne",

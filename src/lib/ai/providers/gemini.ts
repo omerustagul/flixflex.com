@@ -1,6 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai"
 import { env, hasEnv } from "@/lib/env"
 import { getSetting } from "@/lib/settings"
+import { decryptSecret } from "@/lib/crypto"
 import type { AIRequest, AIResponse } from "../engine"
 
 export const DEFAULT_GEMINI_MODEL = "gemini-1.5-pro"
@@ -10,7 +11,7 @@ let _genAI: GoogleGenerativeAI | null = null
 export async function getGemini(): Promise<GoogleGenerativeAI> {
   if (_genAI) return _genAI
 
-  const dbKey = await getSetting("ai.provider.gemini.key")
+  const dbKey = decryptSecret(await getSetting("ai.provider.gemini.key"))
   const apiKey = dbKey || (hasEnv("GOOGLE_AI_KEY") ? env.GOOGLE_AI_KEY : null)
 
   if (!apiKey) {

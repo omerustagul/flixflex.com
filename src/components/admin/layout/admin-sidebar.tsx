@@ -20,19 +20,21 @@ import {
   HardDrive,
   ExternalLink,
   CalendarDays,
-} from "lucide-react"
+  IconPhotoVideo
+} from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import type { SessionUser } from "@/lib/auth/types"
+import { IconDeviceLaptop, IconLayoutDashboard, IconServerSpark, IconStack } from "@tabler/icons-react"
 
 // ── Nav items ─────────────────────────────────────
 const NAV_ITEMS = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard, exact: true },
   { label: "Randevular", href: "/admin/randevular", icon: CalendarDays, exact: false },
-  { label: "Sayfalar", href: "/admin/sayfalar", icon: FileText, exact: false },
+  { label: "Sayfalar", href: "/admin/sayfalar", icon: IconDeviceLaptop, exact: false },
   { label: "Portfolyo", href: "/admin/portfolyo", icon: BriefcaseBusiness, exact: false },
-  { label: "Hizmetler", href: "/admin/hizmetler", icon: Sparkles, exact: false },
+  { label: "Hizmetler", href: "/admin/hizmetler", icon: IconServerSpark, exact: false },
   { label: "Blog & İçerik", href: "/admin/blog", icon: SquarePen, exact: false },
-  { label: "Dosyalar", href: "/admin/medya", icon: HardDrive, exact: false },
+  { label: "Dosyalar", href: "/admin/medya", icon: IconPhotoVideo, exact: false },
   { label: "AI Asistan", href: "/admin/ai", icon: Sparkles, exact: false },
   { label: "Tema Ayarları", href: "/admin/theme", icon: Palette, exact: false },
   { label: "Roller & Yetkiler", href: "/admin/roller", icon: ShieldCheck, exact: false },

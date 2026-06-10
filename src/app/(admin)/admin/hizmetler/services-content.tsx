@@ -1,10 +1,10 @@
 "use client"
 
-import type { LucideIcon } from "lucide-react"
+import type { LucideIcon } from "@/lib/icons"
 import Link from "next/link"
 import { useState } from "react"
-import { Pencil, ExternalLink } from "lucide-react"
-import * as LucideIcons from "lucide-react"
+import { Pencil, ExternalLink } from "@/lib/icons"
+import * as LucideIcons from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { ViewToggle, type ViewMode } from "@/components/admin/view-toggle"
 

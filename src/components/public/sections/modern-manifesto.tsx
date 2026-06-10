@@ -4,7 +4,9 @@
 import * as React from "react"
 import { motion, useInView, useMotionValue, useSpring, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { ArrowUpRight, Maximize2, X, Play, Pause } from "lucide-react"
+import { sanitizeHtml } from "@/lib/sanitize"
+import { StarField } from "@/components/ui/star-field"
+import { ArrowUpRight, Maximize2, X, Play, Pause } from "@/lib/icons"
 
 // ═══════════════════════════════════════════════════
 // ModernManifestoSection — Next-Gen Inline Edition
@@ -21,9 +23,6 @@ export interface ModernManifestoProps {
   rightContent?: string
   ctaLabel?: string
   ctaHref?: string
-  backgroundColor?: string
-  textColor?: string
-  accentColor?: string
   hideMobileDock?: boolean
 }
 
@@ -140,7 +139,7 @@ function MediaCapsule({ url, mediaType, accentHex, onExpand }: MediaCapsuleProps
         "ff-shape-container relative inline-flex items-center justify-center align-middle",
         "mx-1.5 md:mx-2.5",
         "overflow-hidden",
-        "border border-white/10 shadow-2xl",
+        "border border-[var(--border)] shadow-2xl",
         "cursor-pointer group/capsule select-none"
       )}
       style={{
@@ -161,7 +160,7 @@ function MediaCapsule({ url, mediaType, accentHex, onExpand }: MediaCapsuleProps
       />
 
       {/* Media content */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden bg-black/40">
+      <div className="absolute inset-0 w-full h-full overflow-hidden bg-[var(--surface)]">
         {resolvedMediaType === "video" ? (
           <video
             src={url}
@@ -280,7 +279,7 @@ function MediaModal({ url, mediaType, onClose, accentHex }: MediaModalProps) {
 /* ── Main Component ──────────────────────────────── */
 
 export function ModernManifestoSection({
-  leftText = "WE ARE [media1] BBDO WE [media2] DO BIG [media3] THINGS",
+  leftText = "WE ARE [media1] FLIXFLEX WE [media2] DO BIG [media3] THINGS",
   mediaUrl1 = "https://assets.mixkit.co/videos/preview/mixkit-girl-in-neon-sign-light-looking-at-camera-34293-large.mp4",
   mediaType1 = "video",
   mediaUrl2 = "https://assets.mixkit.co/videos/preview/mixkit-hands-holding-and-using-smartphone-40742-large.mp4",
@@ -290,9 +289,6 @@ export function ModernManifestoSection({
   rightContent = "<p>We solve big problems with strategy and creative that make a big impact.</p><p>We work with brands and marketers that have the biggest ambitions.</p><p>We hire big talent and bring them big opportunities that build boundless careers.</p>",
   ctaLabel = "Birlikte Çalışalım",
   ctaHref = "/iletisim",
-  backgroundColor,
-  textColor,
-  accentColor,
 }: ModernManifestoProps) {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const contentRef = React.useRef<HTMLDivElement>(null)
@@ -320,12 +316,13 @@ export function ModernManifestoSection({
   // Parse input segments
   const segments = React.useMemo(() => parseSegments(leftText || ""), [leftText])
 
-  /* Color definitions */
-  const isThemeBg = !backgroundColor || backgroundColor.startsWith("var(")
-  const resolvedBg = backgroundColor || "var(--background)"
-  const resolvedText = isThemeBg ? "var(--foreground)" : textColor || "var(--foreground)"
-  const resolvedAccent = isThemeBg ? "var(--ff-purple)" : accentColor || "var(--ff-purple)"
-  const accentHex = isThemeBg ? "#FF4FD8" : accentColor || "#FF4FD8"
+  /* Colors are locked to the active theme — not user-configurable. */
+  const resolvedBg = "var(--background)"
+  const resolvedText = "var(--foreground)"
+  const resolvedAccent = "var(--ff-purple)"
+  // Hex equivalent of the default theme primary, used for the rgba glow/aura
+  // effects where a CSS var with alpha suffix isn't valid.
+  const accentHex = "#FF4FD8"
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!containerRef.current) return
@@ -377,7 +374,10 @@ export function ModernManifestoSection({
       onMouseMove={handleMouseMove}
       className={cn(
         "relative flex items-center justify-center w-full h-screen overflow-hidden",
-        "transition-colors duration-700 ease-in-out border-b border-white/5 bg-zinc-950 text-white"
+        // Background/text come from the resolved theme vars in `style` below;
+        // keep only the structural classes here so the section adapts to the
+        // active light/dark theme instead of being locked to a dark palette.
+        "transition-colors duration-700 ease-in-out border-b border-[var(--border)]"
       )}
       style={{
         "--manifesto-bg": resolvedBg,
@@ -390,11 +390,8 @@ export function ModernManifestoSection({
       {/* Tactile Grids & Overlays */}
       <GrainOverlay />
 
-      {/* Ultra-subtle geometric grid background */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.02]" style={{
-        backgroundImage: `linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)`,
-        backgroundSize: '4rem 4rem',
-      }} />
+      {/* Deep-space starfield background (replaces the old grid) */}
+      <StarField className="z-0" />
 
       {/* Cursor spotlight halo */}
       <motion.div
@@ -427,9 +424,9 @@ export function ModernManifestoSection({
             }
           }}
           className={cn(
-            "w-full text-left font-display font-extrabold uppercase",
+            "w-full text-center font-display font-extrabold uppercase",
             "text-[clamp(1.75rem,5.5vw,5.5rem)]",
-            "leading-[2.1] tracking-[-0.01em]"
+            "leading-[2.1] tracking-[0.015em]"
           )}
         >
           {segments.map((seg, idx) => {
@@ -466,8 +463,8 @@ export function ModernManifestoSection({
         >
           {/* Subtle separator with accent pulse */}
           <div className="relative mb-12">
-            <div className="h-px w-full bg-white/10" style={{
-              background: `linear-gradient(90deg, ${accentHex}22 0%, white/10 50%, transparent 100%)`
+            <div className="h-px w-full" style={{
+              background: `linear-gradient(90deg, ${accentHex}33 0%, var(--border) 50%, transparent 100%)`
             }} />
             <div
               className="absolute left-0 top-0 h-px w-24"
@@ -482,14 +479,14 @@ export function ModernManifestoSection({
               if (hasHtml) {
                 return (
                   <div
-                    className="lg:col-span-8 text-foreground text-sm max-w-2xl space-y-4 [&_p]:text-inherit"
-                    dangerouslySetInnerHTML={{ __html: rightContent }}
+                    className="lg:col-span-8 text-[var(--foreground-muted)] text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl font-light space-y-4 [&_p]:text-inherit"
+                    dangerouslySetInnerHTML={{ __html: sanitizeHtml(rightContent) }}
                   />
                 )
               }
               const lines = rightContent.split(/\r?\n/).filter((line) => line.trim() !== "")
               return (
-                <div className="lg:col-span-8 text-zinc-400 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl font-light space-y-4">
+                <div className="lg:col-span-8 text-[var(--foreground-muted)] text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl font-light space-y-4">
                   {lines.map((line, idx) => (
                     <p key={idx}>{line}</p>
                   ))}
@@ -502,7 +499,7 @@ export function ModernManifestoSection({
               <div className="lg:col-span-4 lg:flex lg:justify-end">
                 <a
                   href={ctaHref || "#"}
-                  className="ff-shape-button group relative inline-flex items-center gap-3.5 h-12 px-8 py-2 bg-white/5 border border-white/10 hover:border-white/20 text-xs font-bold text-white overflow-hidden transition-all duration-300"
+                  className="ff-shape-button group relative inline-flex items-center gap-3.5 h-12 px-8 py-2 bg-[var(--foreground)]/5 border border-[var(--border)] hover:border-[var(--ff-purple)]/40 text-xs font-bold text-[var(--foreground)] overflow-hidden transition-all duration-300"
                 >
                   {/* Glowing background flow */}
                   <div
@@ -512,7 +509,7 @@ export function ModernManifestoSection({
                     }}
                   />
                   <span className="relative z-10">{ctaLabel}</span>
-                  <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+                  <ArrowUpRight className="w-4 h-4 text-[var(--foreground-muted)] group-hover:text-[var(--ff-purple)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
 
                   {/* Subtle inner hover glow line */}
                   <div className="absolute inset-0 scale-95 group-hover:scale-100 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none" style={{

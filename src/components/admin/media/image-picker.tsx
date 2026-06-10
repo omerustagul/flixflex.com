@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Image from "next/image"
-import { Image as ImageIcon, Upload, X, Search, Check, Loader2 } from "lucide-react"
+import { Image as ImageIcon, Upload, X, Search, Check, Loader2 } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { FFButton, FFInput } from "@/components/ui"
 import * as Dialog from "@radix-ui/react-dialog"

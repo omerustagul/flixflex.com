@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Plus, Pencil, ExternalLink, ImageIcon } from "lucide-react"
+import { Plus, Pencil, ExternalLink, ImageIcon } from "@/lib/icons"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { ViewToggle, type ViewMode } from "@/components/admin/view-toggle"

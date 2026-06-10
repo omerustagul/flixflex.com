@@ -286,7 +286,7 @@ export const scrollExpandMediaPropsSchema = z.object({
 export type ScrollExpandMediaProps = z.infer<typeof scrollExpandMediaPropsSchema>
 
 export const modernManifestoPropsSchema = z.object({
-  leftText: z.string().default("WE ARE [media1] BBDO WE [media2] DO BIG [media3] THINGS"),
+  leftText: z.string().default("WE ARE [media1] FLIXFLEX WE [media2] DO BIG [media3] THINGS"),
   mediaUrl1: z.string().default("https://assets.mixkit.co/videos/preview/mixkit-girl-in-neon-sign-light-looking-at-camera-34293-large.mp4"),
   mediaType1: z.enum(["video", "image"]).default("video"),
   mediaUrl2: z.string().default("https://assets.mixkit.co/videos/preview/mixkit-hands-holding-and-using-smartphone-40742-large.mp4"),
@@ -296,9 +296,8 @@ export const modernManifestoPropsSchema = z.object({
   rightContent: z.string().default("<p>We solve big problems with strategy and creative that make a big impact.</p><p>We work with brands and marketers that have the biggest ambitions.</p><p>We hire big talent and bring them big opportunities that build boundless careers.</p>"),
   ctaLabel: z.string().default("Birlikte Çalışalım"),
   ctaHref: z.string().default("/iletisim"),
-  backgroundColor: z.string().default("#fafafa"),
-  textColor: z.string().default("#171717"),
-  accentColor: z.string().default("#0d0d0d"),
+  // Colors are intentionally NOT configurable — the section always uses the
+  // active theme (bg → --background, text → --foreground, accent → --ff-purple).
   hideMobileDock: z.boolean().default(false),
 })
 

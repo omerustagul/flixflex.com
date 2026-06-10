@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Save, RotateCcw, Lock, CheckSquare, Square } from "lucide-react"
+import { Save, RotateCcw, Lock, CheckSquare, Square } from "@/lib/icons"
 import { FFButton } from "@/components/ui/ff-button"
 import { FFBadge } from "@/components/ui/ff-badge"
 import { RESOURCE_LIST, ACTION_LIST, PERMISSION_MATRIX, permissionKey } from "@/lib/rbac/permissions"

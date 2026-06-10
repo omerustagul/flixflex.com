@@ -31,7 +31,7 @@ import {
   Copy,
   Trash2,
   HelpCircle,
-} from "lucide-react"
+} from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { usePageBuilder } from "@/store/page-builder"
 import { useShallow } from "zustand/react/shallow"

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { cn } from "@/lib/utils"
-import { Twitter, Linkedin, Link2, Check } from "lucide-react"
+import { Twitter, Linkedin, Link2, Check } from "@/lib/icons"
 
 interface BlogShareProps {
   title: string

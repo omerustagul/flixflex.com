@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowUpRight, Home } from "lucide-react"
+import { ArrowUpRight, Home } from "@/lib/icons"
 
 export const metadata = {
   title: "404 — Sayfa Bulunamadı",

@@ -32,15 +32,14 @@ import { WhyUs as AboutWhyUs } from "@/app/(public)/iletisim/_components/why-us"
 import { FaqAccordion } from "@/app/(public)/iletisim/_components/faq-accordion"
 import { DemoRadialScrollGalleryBento } from "@/components/ui/portfolio-and-image-gallery"
 import { DemoPortfolioGallery } from "@/components/ui/portfolio-gallery"
-import { DemoOfferCarousel, OfferCarousel } from "@/components/ui/offer-carousel"
+import { DemoOfferCarousel } from "@/components/ui/offer-carousel"
 import { DemoProjectShowcase } from "@/components/ui/project-showcase"
 import { AnimatedVideoHero, VideoHeroProvider } from "@/components/public/hero/animated-video-hero"
 import { ParallaxScrolling } from "@/components/public/parallax-scrolling"
 import { PoemAnimation, WovenLightHero, ScrollExpandMedia, FlowArt, FlowSection } from "@/components/ui"
 import { SectionWrapper } from "./section-wrapper"
-import { cn } from "@/lib/utils"
 import { useUIStore } from "@/lib/ui-store"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight } from "@/lib/icons"
 
 /** Props shape consumed by section renderers — covers all properties used across section types. */
 interface SectionRendererProps {
@@ -126,8 +125,7 @@ const SECTION_RENDERERS: Partial<Record<SectionType, (
   ),
   "portfolio-hero": () => <PortfolioHero totalProjects={2} clientCount={1} yearCount={1} categoryCount={1} />,
   "portfolio-grid": (s, ctx) => <PortfolioSection items={ctx?.portfolioItems as any} />,
-  "blog-hero": (s) => {
-    const p = s.props as any
+  "blog-hero": () => {
     return (
       <div className="w-full flex flex-col items-center justify-center py-4 md:py-10">
         <div className="w-full">
@@ -157,7 +155,7 @@ const SECTION_RENDERERS: Partial<Record<SectionType, (
     </section>
   ),
   "contact-hero": () => <ContactHero />,
-  "contact-info": (s) => (
+  "contact-info": () => (
     <section className="relative bg-[var(--background)] py-20 md:py-28">
       <div className="relative mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
@@ -356,9 +354,6 @@ const SECTION_RENDERERS: Partial<Record<SectionType, (
         rightContent={p.rightContent}
         ctaLabel={p.ctaLabel}
         ctaHref={p.ctaHref}
-        backgroundColor={p.backgroundColor}
-        textColor={p.textColor}
-        accentColor={p.accentColor}
         hideMobileDock={p.hideMobileDock}
       />
     )

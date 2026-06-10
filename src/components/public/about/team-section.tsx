@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useRef } from "react"
 import { motion } from "framer-motion"
-import { ExternalLink } from "lucide-react"
+import { ExternalLink } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { fadeInUp, staggerContainer } from "@/lib/animations"
 import { TiltCard } from "@/components/ui/tilt-card"

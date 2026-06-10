@@ -1,7 +1,7 @@
 "use client"
 
 import type * as React from "react"
-import { Plus, Trash2 } from "lucide-react"
+import { Plus, Trash2 } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 
 export const inputCls =

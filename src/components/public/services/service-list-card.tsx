@@ -29,7 +29,7 @@ import {
   Monitor,
   Code2,
   Zap,
-} from "lucide-react"
+} from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { fadeInUp } from "@/lib/animations"
 import type { Service } from "@/components/public/sections/services-data"
