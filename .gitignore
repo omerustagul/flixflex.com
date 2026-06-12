@@ -65,3 +65,6 @@ scratch/
 # Claude Code skill tooling (local dev only — not part of the app)
 .agents/
 skills-lock.json
+
+# DB backup dump — contains data + bcrypt password hashes, never publish
+prisma/backups/db_dump.sql
