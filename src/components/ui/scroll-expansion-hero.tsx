@@ -7,7 +7,8 @@ import {
   ReactNode,
 } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ChevronDown } from '@/lib/icons';
 
 export interface ScrollExpandMediaProps {
   mediaType?: 'video' | 'image';
@@ -39,6 +40,7 @@ export const ScrollExpandMedia = ({
   const [isMobileState, setIsMobileState] = useState<boolean>(false);
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     setScrollProgress(0);
@@ -186,10 +188,28 @@ export const ScrollExpandMedia = ({
           priority
         />
         <div className='absolute inset-0 bg-black/10' />
+        {/* Premium depth: radial vignette + bottom scrim for text legibility */}
+        <div
+          aria-hidden
+          className='absolute inset-0 pointer-events-none'
+          style={{
+            background:
+              'radial-gradient(ellipse 90% 70% at 50% 45%, transparent 40%, rgba(0,0,0,0.45) 100%), linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.55) 100%)',
+          }}
+        />
       </motion.div>
 
       {/* Main hero fold wrapper (Exactly h-screen, relative, flex-center) */}
       <div className='w-full flex flex-col items-center justify-center relative z-10 h-screen overflow-hidden'>
+
+        {/* Expansion progress bar — top edge */}
+        <div className='absolute top-0 inset-x-0 h-[3px] z-30 pointer-events-none bg-white/10'>
+          <div
+            className='h-full bg-[var(--ff-purple)] shadow-[0_0_12px_rgba(255,79,216,0.7)]'
+            style={{ width: `${scrollProgress * 100}%` }}
+          />
+        </div>
+
 
         {/* Expanding Media Card */}
         <div
@@ -287,7 +307,7 @@ export const ScrollExpandMedia = ({
           <div className='flex flex-col items-center text-center relative z-10 mt-4 transition-none'>
             {date && (
               <p
-                className='text-2xl text-blue-200'
+                className='text-2xl text-white/80'
                 style={{ transform: `translateX(-${textTranslateX}vw)` }}
               >
                 {date}
@@ -295,7 +315,7 @@ export const ScrollExpandMedia = ({
             )}
             {scrollToExpand && (
               <p
-                className='text-blue-200 font-medium text-center'
+                className='text-white/80 font-medium text-center tracking-wide'
                 style={{ transform: `translateX(${textTranslateX}vw)` }}
               >
                 {scrollToExpand}
@@ -310,18 +330,38 @@ export const ScrollExpandMedia = ({
             }`}
         >
           <motion.h2
-            className='text-4xl md:text-5xl lg:text-6xl font-bold text-blue-200 transition-none'
+            className='font-display text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-white drop-shadow-[0_4px_30px_rgba(0,0,0,0.55)] transition-none'
             style={{ transform: `translateX(-${textTranslateX}vw)` }}
           >
             {firstWord}
           </motion.h2>
           <motion.h2
-            className='text-4xl md:text-5xl lg:text-6xl font-bold text-center text-blue-200 transition-none'
+            className='font-display text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-center text-white drop-shadow-[0_4px_30px_rgba(0,0,0,0.55)] transition-none'
             style={{ transform: `translateX(${textTranslateX}vw)` }}
           >
             {restOfTitle}
           </motion.h2>
         </div>
+
+        {/* Animated scroll cue — fades out as the media expands */}
+        <motion.div
+          className='absolute bottom-8 left-1/2 z-30 flex flex-col items-center gap-2 pointer-events-none'
+          style={{ x: '-50%' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: Math.max(0, 1 - scrollProgress * 3) }}
+          transition={{ duration: 0.2 }}
+        >
+          <span className='text-[10px] font-semibold uppercase tracking-[0.3em] text-white/70'>
+            Kaydır
+          </span>
+          <motion.span
+            animate={prefersReducedMotion ? undefined : { y: [0, 8, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+            className='text-white/80'
+          >
+            <ChevronDown size={22} strokeWidth={2} />
+          </motion.span>
+        </motion.div>
       </div>
 
       {/* Content Section below the card fold */}

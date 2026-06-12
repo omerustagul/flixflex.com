@@ -26,6 +26,7 @@ import {
   ModernManifestoSection,
 } from "@/components/public"
 import type { Service } from "@/components/public/sections/services-data"
+import type { BlogPost } from "@/components/public/blog/blog-data"
 import { PortfolioHero } from "@/app/(public)/portfolio/_components/portfolio-hero"
 import { HeroStrip as ContactHero } from "@/app/(public)/iletisim/_components/hero-strip"
 import { WhyUs as AboutWhyUs } from "@/app/(public)/iletisim/_components/why-us"
@@ -71,11 +72,12 @@ interface PageRendererProps {
   sections: SectionBlock[]
   portfolioItems?: unknown[]
   servicesItems?: Service[]
+  blogPosts?: BlogPost[]
 }
 
 const SECTION_RENDERERS: Partial<Record<SectionType, (
   section: SectionBlock,
-  context?: { portfolioItems?: unknown[]; servicesItems?: Service[] }
+  context?: { portfolioItems?: unknown[]; servicesItems?: Service[]; blogPosts?: BlogPost[] }
 ) => React.ReactNode>> = {
   "hero": (s) => {
     const p = s.props as SectionRendererProps
@@ -149,9 +151,9 @@ const SECTION_RENDERERS: Partial<Record<SectionType, (
       </div>
     )
   },
-  "blog-grid": () => (
+  "blog-grid": (s, ctx) => (
     <section className="mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16 pb-20 md:pb-28">
-      <BlogListClient />
+      <BlogListClient posts={ctx?.blogPosts} />
     </section>
   ),
   "contact-hero": () => <ContactHero />,
@@ -360,7 +362,7 @@ const SECTION_RENDERERS: Partial<Record<SectionType, (
   },
 }
 
-export function PageRenderer({ sections, portfolioItems, servicesItems }: PageRendererProps) {
+export function PageRenderer({ sections, portfolioItems, servicesItems, blogPosts }: PageRendererProps) {
   const { setMobileDockVisible } = useUIStore()
   const sectionRefs = React.useRef<Map<string, HTMLElement>>(new Map())
   const intersectionRatios = React.useRef<Map<string, number>>(new Map())
@@ -469,7 +471,7 @@ export function PageRenderer({ sections, portfolioItems, servicesItems }: PageRe
                     }}
                     fullBleed={isFullBleed(section.type)}
                   >
-                    {renderer(section, { portfolioItems, servicesItems })}
+                    {renderer(section, { portfolioItems, servicesItems, blogPosts })}
                   </FlowSection>
                 )
               })}
@@ -505,7 +507,7 @@ export function PageRenderer({ sections, portfolioItems, servicesItems }: PageRe
                   }}
                   className="w-full"
                 >
-                  {renderer(section, { portfolioItems, servicesItems })}
+                  {renderer(section, { portfolioItems, servicesItems, blogPosts })}
                 </SectionWrapper>
               )
             })}

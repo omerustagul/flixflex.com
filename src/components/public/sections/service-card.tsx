@@ -44,6 +44,20 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
         className="overflow-hidden p-5 lg:p-6 h-full"
       >
         <article className="flex h-full flex-col">
+          {/* ── Cover image banner (admin-uploaded) ── */}
+          {service.coverImage && (
+            <div className="relative -mx-5 -mt-5 lg:-mx-6 lg:-mt-6 mb-5 h-32 overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={service.coverImage}
+                alt={service.title}
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface)]/50 to-transparent" />
+            </div>
+          )}
+
           {/* ── Top gradient line (visible on hover) ── */}
           <div
             aria-hidden="true"

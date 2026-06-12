@@ -4,6 +4,7 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { ArrowUpRight } from "@/lib/icons"
 import { cn } from "@/lib/utils"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import { fadeInUp } from "@/lib/animations"
 
 interface CaseStudyTeaserProps {
@@ -65,9 +66,7 @@ export function CaseStudyTeaser({ serviceTitle }: CaseStudyTeaserProps) {
 
         {/* Text side */}
         <div className="flex flex-col justify-center gap-3 p-7 md:p-10 flex-1">
-          <p className="text-[10px] font-semibold text-[var(--ff-purple)]">
-            — Referans Proje —
-          </p>
+          <Eyebrow>Referans Proje</Eyebrow>
           <h3 className="font-display text-xl md:text-2xl font-bold text-[var(--foreground)] leading-tight tracking-tight">
             {serviceTitle} alanında gerçekleştirdiğimiz çalışmalara göz atın
           </h3>

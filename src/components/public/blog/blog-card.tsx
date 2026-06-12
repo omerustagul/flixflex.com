@@ -30,30 +30,31 @@ export const BlogCard = memo(function BlogCard({ post, className }: BlogCardProp
       >
         <div
           className={cn(
-            "relative w-full h-[200px] md:h-[220px] bg-gradient-to-br",
-            post.coverGradient
+            "relative w-full h-[200px] md:h-[220px] overflow-hidden",
+            !post.coverImage && "bg-gradient-to-br",
+            !post.coverImage && post.coverGradient
           )}
         >
-          {/* Subtle grid overlay */}
-          <div
-            aria-hidden
-            className="absolute inset-0 opacity-[0.06]"
-            style={{
-              backgroundImage:
-                "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
-              backgroundSize: "32px 32px",
-            }}
-          />
-
-          {/* Watermark title */}
-          <div className="ff-shape-container absolute inset-0 flex items-center justify-center p-4">
-            <p
-              className="font-display font-extrabold text-center leading-[0.85] opacity-10 select-none pointer-events-none break-words text-[clamp(20px,3.5vw,44px)] text-white"
-              aria-hidden
-            >
-              {post.category.toUpperCase()}
-            </p>
-          </div>
+          {post.coverImage ? (
+            /* Admin-uploaded cover image */
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={post.coverImage}
+              alt={post.title}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              loading="lazy"
+            />
+          ) : (
+            /* Fallback: gradient + category watermark when no cover image */
+            <div className="ff-shape-container absolute inset-0 flex items-center justify-center p-4">
+              <p
+                className="font-display font-extrabold text-center leading-[0.85] opacity-10 select-none pointer-events-none break-words text-[clamp(20px,3.5vw,44px)] text-white"
+                aria-hidden
+              >
+                {post.category.toUpperCase()}
+              </p>
+            </div>
+          )}
 
           {/* Category badge */}
           <div className="absolute top-3 left-3">

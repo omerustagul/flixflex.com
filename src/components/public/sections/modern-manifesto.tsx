@@ -424,8 +424,8 @@ export function ModernManifestoSection({
             }
           }}
           className={cn(
-            "w-full text-center font-display font-extrabold uppercase",
-            "text-[clamp(1.75rem,5.5vw,5.5rem)]",
+            "w-full text-center font-display font-extrabold",
+            "text-[clamp(3rem,6vw,6rem)]",
             "leading-[2.1] tracking-[0.015em]"
           )}
         >
@@ -479,7 +479,7 @@ export function ModernManifestoSection({
               if (hasHtml) {
                 return (
                   <div
-                    className="lg:col-span-8 text-[var(--foreground-muted)] text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl font-light space-y-4 [&_p]:text-inherit"
+                    className="lg:col-span-8 text-[var(--foreground-muted)] text-xs sm:text-base md:text-sm leading-relaxed max-w-2xl font-light space-y-4 [&_p]:text-inherit"
                     dangerouslySetInnerHTML={{ __html: sanitizeHtml(rightContent) }}
                   />
                 )

@@ -10,6 +10,8 @@ import { CaseStudyTeaser } from "@/components/public/services/case-study-teaser"
 import { ServiceCta } from "@/components/public/services/service-cta"
 import { ServiceHeroVisual } from "@/components/public/services/service-hero-visual"
 import { ParentServicePage } from "./parent-service-page"
+import { StarField } from "@/components/ui/star-field"
+import { Eyebrow } from "@/components/ui/eyebrow"
 
 // ── Static params ──────────────────────────────────────────
 export const dynamic = "force-dynamic"
@@ -79,18 +81,8 @@ export default async function ServiceDetailPage({
           1. HERO
       ══════════════════════════════════════════════════ */}
       <section className="relative bg-[var(--background)] overflow-hidden pt-24 pb-16 md:pt-32 md:pb-24">
-        {/* Grid background */}
-        <div
-          aria-hidden
-          className="absolute inset-0 pointer-events-none opacity-[0.3]"
-          style={{
-            backgroundImage:
-              "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-            maskImage:
-              "radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 100%)",
-          }}
-        />
+        {/* Deep-space starfield background (replaces the old grid) */}
+        <StarField className="z-0" />
 
         {/* Purple aura top-left */}
         <span
@@ -181,10 +173,8 @@ export default async function ServiceDetailPage({
           <div className="grid lg:grid-cols-[280px_1fr] xl:grid-cols-[340px_1fr] gap-12 lg:gap-20">
             {/* Sticky header column */}
             <div className="lg:sticky lg:top-28 lg:self-start">
-              <p className="text-[12px] font-semibold text-[var(--ff-purple)] mb-4">
-                — Süreç —
-              </p>
-              <h2 className="font-display text-xl md:text-2xl font-extrabold leading-tight tracking-tight text-[var(--foreground)] mb-4">
+              <Eyebrow className="mb-4">Süreç</Eyebrow>
+              <h2 className="font-display text-2xl md:text-4xl font-extrabold leading-[1.1] tracking-tight text-[var(--foreground)] mb-4">
                 Süreç adımları
               </h2>
               <p className="text-sm md:text-base text-[var(--foreground-muted)] leading-relaxed">
@@ -205,10 +195,8 @@ export default async function ServiceDetailPage({
         <div className="mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16">
           {/* Header */}
           <div className="mb-12 md:mb-16">
-            <p className="text-[12px] font-semibold text-[var(--ff-purple)] mb-4">
-              — Teslim Edilenler —
-            </p>
-            <h2 className="font-display text-xl md:text-2xl font-extrabold leading-tight tracking-tight text-[var(--foreground)] mb-4">
+            <Eyebrow className="mb-4">Teslim Edilenler</Eyebrow>
+            <h2 className="font-display text-2xl md:text-4xl font-extrabold leading-[1.1] tracking-tight text-[var(--foreground)] mb-4">
               Ne elde edersiniz?
             </h2>
             <p className="text-sm md:text-base text-[var(--foreground-muted)] max-w-xl leading-relaxed">
@@ -227,9 +215,7 @@ export default async function ServiceDetailPage({
       <section className="py-20 md:py-28 bg-[var(--background)] border-t border-[var(--border)]">
         <div className="mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16">
           <div className="mb-10 md:mb-14">
-            <p className="text-[12px] font-semibold text-[var(--ff-purple)] mb-4">
-              — Referans —
-            </p>
+            <Eyebrow className="mb-4">Referans</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-[var(--foreground)]">
               Gerçek projeler, gerçek sonuçlar
             </h2>

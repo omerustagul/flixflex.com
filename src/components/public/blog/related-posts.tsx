@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import { BlogCard } from "./blog-card"
 import type { BlogPost } from "./blog-data"
 
@@ -13,9 +14,7 @@ export function RelatedPosts({ posts, className }: RelatedPostsProps) {
   return (
     <section className={cn("", className)}>
       <div className="flex items-center gap-4 mb-8">
-        <p className="text-[11px] font-semibold text-[var(--ff-purple)]">
-          — İlgili Yazılar —
-        </p>
+        <Eyebrow>İlgili Yazılar</Eyebrow>
         <span className="flex-1 h-px bg-[var(--border)]" />
       </div>
 

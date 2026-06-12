@@ -5,6 +5,8 @@ import { motion } from "framer-motion"
 import { ArrowUpRight } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { staggerContainer, fadeInUp } from "@/lib/animations"
+import { StarField } from "@/components/ui/star-field"
+import { Eyebrow } from "@/components/ui/eyebrow"
 
 interface ServiceCtaProps {
   serviceTitle: string
@@ -19,16 +21,8 @@ export function ServiceCta({ serviceTitle }: ServiceCtaProps) {
         "bg-[var(--surface-elevated)] text-white"
       )}
     >
-      {/* Grid overlay */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255, 79, 216,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 79, 216,0.07) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-        }}
-      />
+      {/* Deep-space starfield background (replaces the old grid) */}
+      <StarField className="z-0" />
 
       {/* Purple aura */}
       <div
@@ -63,12 +57,9 @@ export function ServiceCta({ serviceTitle }: ServiceCtaProps) {
           viewport={{ once: true, margin: "-80px" }}
           className="flex flex-col items-center text-center"
         >
-          <motion.p
-            variants={fadeInUp}
-            className="text-[11px] font-semibold text-[var(--ff-purple)] mb-6"
-          >
-            — Bir Sonraki Adım —
-          </motion.p>
+          <motion.div variants={fadeInUp} className="mb-6">
+            <Eyebrow align="center">Bir Sonraki Adım</Eyebrow>
+          </motion.div>
 
           <motion.h2
             variants={fadeInUp}

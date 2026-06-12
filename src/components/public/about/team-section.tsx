@@ -7,6 +7,7 @@ import { ExternalLink } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { fadeInUp, staggerContainer } from "@/lib/animations"
 import { TiltCard } from "@/components/ui/tilt-card"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import { TEAM, type TeamMember } from "./about-data"
 
 // ── Individual team card ──────────────────────────────
@@ -110,9 +111,7 @@ export function TeamSection() {
           transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
           className="mb-14 md:mb-20 text-center"
         >
-          <p className="mb-4 text-[11px] font-semibold text-[var(--ff-purple)]">
-            — Ekibimiz —
-          </p>
+          <Eyebrow align="center" className="mb-4">Ekibimiz</Eyebrow>
           <h2
             className={cn(
               "font-display font-extrabold leading-[1.08] tracking-[-0.03em]",
@@ -148,7 +147,7 @@ export function TeamSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="mt-12 text-center text-xs text-[var(--foreground-faint)] tracking-[0.1em] uppercase"
+          className="mt-12 text-center text-xs text-[var(--foreground-faint)]"
         >
           + Büyümeye devam ediyoruz — ekibimize katılmak için{" "}
           <Link

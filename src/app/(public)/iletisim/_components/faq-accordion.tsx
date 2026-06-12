@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Plus, Minus } from "@/lib/icons"
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import { staggerContainer, fadeInUp, accordionContent } from "@/lib/animations"
 
 const FAQ_ITEMS = [
@@ -109,12 +110,9 @@ export function FaqAccordion() {
             viewport={{ once: true, margin: "-60px" }}
             className="lg:col-span-4"
           >
-            <motion.p
-              variants={fadeInUp}
-              className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[var(--ff-purple)] mb-3"
-            >
-              — SSS —
-            </motion.p>
+            <motion.div variants={fadeInUp} className="mb-3">
+              <Eyebrow>SSS</Eyebrow>
+            </motion.div>
             <motion.h2
               variants={fadeInUp}
               className="font-display text-2xl md:text-3xl font-extrabold text-[var(--foreground)] leading-tight"

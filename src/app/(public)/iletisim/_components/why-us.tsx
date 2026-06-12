@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { Zap, ShieldCheck, BarChart2, MessageCircle } from "@/lib/icons"
 import { cn } from "@/lib/utils"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import { staggerContainer, fadeInUp } from "@/lib/animations"
 
 const CARDS = [
@@ -40,12 +41,9 @@ export function WhyUs() {
           viewport={{ once: true, margin: "-60px" }}
           className="mb-12"
         >
-          <motion.p
-            variants={fadeInUp}
-            className="text-[11px] font-semibold text-[var(--ff-purple)] mb-3"
-          >
-            — Neden FlixFlex —
-          </motion.p>
+          <motion.div variants={fadeInUp} className="mb-3">
+            <Eyebrow>Neden FlixFlex</Eyebrow>
+          </motion.div>
           <motion.h2
             variants={fadeInUp}
             className="font-display text-2xl md:text-4xl font-extrabold text-[var(--foreground)] leading-tight max-w-lg"

@@ -10,11 +10,9 @@ import { SocialIcon } from "./social-icon"
 import { BackToTop } from "./back-to-top"
 import { FlixFlexLogo } from "../navbar/logo"
 import { StarField } from "@/components/ui/star-field"
-import { useUIStore } from "@/lib/ui-store"
 
 
 export function FlixFlexFooter({ siteSettings = {} }: { siteSettings?: Record<string, string> }) {
-  const setAppointmentModalOpen = useUIStore((state) => state.setAppointmentModalOpen)
   return (
 
     <>
@@ -28,57 +26,25 @@ export function FlixFlexFooter({ siteSettings = {} }: { siteSettings?: Record<st
         {/* Deep-space starfield (replaces the old grid pattern) */}
         <StarField className="z-0 opacity-90" density={0.0001} />
 
-        {/* Purple aura accent */}
+        {/* Subtle accent glows — minimal, tucked into the corners */}
         <div
           aria-hidden
-          className="absolute -top-32 left-1/3 w-[40rem] h-[40rem] rounded-full pointer-events-none"
+          className="absolute -bottom-24 -left-24 w-72 h-72 rounded-full pointer-events-none"
           style={{
-            background:
-              "radial-gradient(circle, var(--ff-purple) 0%, transparent 60%)",
-            filter: "blur(80px)",
+            background: "radial-gradient(circle, rgba(255,79,216,0.12) 0%, transparent 70%)",
+            filter: "blur(60px)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="absolute -top-16 right-8 w-56 h-56 rounded-full pointer-events-none"
+          style={{
+            background: "radial-gradient(circle, rgba(255,79,216,0.08) 0%, transparent 70%)",
+            filter: "blur(70px)",
           }}
         />
 
         <div className="relative z-10 mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16 pt-20 pb-10">
-          {/* ── Top: CTA strip ─────────────────────── */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-            className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end md:justify-between gap-8"
-          >
-            <div className="max-w-2xl">
-              <p className="text-[11px] font-semibold text-[var(--ff-purple)] mb-4">
-                — Bir sonraki bölüm —
-              </p>
-              <h2 className="font-display text-2xl md:text-4xl font-extrabold leading-[1.05] tracking-tight">
-                Hazır mısın?
-                <br />
-                <span className="text-[var(--ff-purple)]">Birlikte büyüyelim.</span>
-              </h2>
-            </div>
-            <button
-              type="button"
-              onClick={() => setAppointmentModalOpen(true)}
-              className={cn(
-                "ff-shape-button",
-                "group inline-flex items-center justify-center h-9 gap-3 cursor-pointer",
-                "px-10 py-5 text-[15px] font-medium",
-                "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
-                "hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)]",
-                "hover:shadow-[0_4px_24px_rgba(255, 79, 216,0.4)]",
-                "transition-all duration-200 whitespace-nowrap shrink-0"
-              )}
-            >
-              Randevu Oluştur
-              <ArrowUpRight
-                size={18}
-                className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              />
-            </button>
-          </motion.div>
-
           {/* ── Mid: brand + columns ───────────────── */}
           <motion.div
             variants={staggerContainer}

@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { FFBadge } from "@/components/ui"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import { TiltCard } from "@/components/ui/tilt-card"
 import { staggerContainer, fadeInUp, ease } from "@/lib/animations"
 import {
@@ -64,6 +65,7 @@ interface CardProps {
   description: string
   gradient: string
   accentColor: string
+  coverImage?: string | null
   tall?: boolean
   index: number
 }
@@ -77,6 +79,7 @@ function PortfolioCard({
   description,
   gradient,
   accentColor,
+  coverImage,
   tall = false,
   index,
 }: CardProps) {
@@ -99,50 +102,44 @@ function PortfolioCard({
         as="article"
         className="overflow-hidden h-full"
       >
-        {/* ── Placeholder visual ── */}
+        {/* ── Card visual ── */}
         <div
           className={cn(
-            "relative w-full bg-gradient-to-br",
-            gradient,
+            "relative w-full overflow-hidden",
+            !coverImage && "bg-gradient-to-br",
+            !coverImage && gradient,
             tall ? "h-full min-h-[420px]" : "h-[220px] md:h-[260px]"
           )}
         >
-          {/* Subtle grid overlay */}
-          <div
-            aria-hidden
-            className="absolute inset-0 opacity-[0.07]"
-            style={{
-              backgroundImage:
-                "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
-              backgroundSize: "32px 32px",
-            }}
-          />
-
-          {/* Big project name watermark */}
-          <div className="absolute inset-0 flex items-center justify-center p-6">
-            <p
-              className={cn(
-                "font-display font-extrabold leading-[0.85] tracking-[-0.04em]",
-                "text-center break-all",
-                "text-[clamp(28px,5vw,64px)]",
-                "opacity-20 select-none pointer-events-none"
-              )}
-              style={{ color: accentColor }}
-            >
-              {client.toUpperCase()}
-            </p>
-          </div>
+          {coverImage ? (
+            /* Admin-uploaded cover image */
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={coverImage}
+              alt={title}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              loading="lazy"
+            />
+          ) : (
+            /* Fallback: gradient + client watermark when no cover image */
+            <div className="absolute inset-0 flex items-center justify-center p-6">
+              <p
+                className={cn(
+                  "font-display font-extrabold leading-[0.85] tracking-[-0.04em]",
+                  "text-center break-all",
+                  "text-[clamp(28px,5vw,64px)]",
+                  "opacity-20 select-none pointer-events-none"
+                )}
+                style={{ color: accentColor }}
+              >
+                {client.toUpperCase()}
+              </p>
+            </div>
+          )}
 
           {/* Category badge — top left */}
           <div className="absolute top-3 left-3 z-10">
-            <FFBadge variant="purple">{category}</FFBadge>
-          </div>
-
-          {/* Year — top right */}
-          <div className="absolute top-3 right-3 z-10">
-            <span className="text-[10px] font-mono font-medium tracking-[0.15em] text-white/70 uppercase">
-              {year}
-            </span>
+            <FFBadge variant="purple">{category} - {year}</FFBadge>
           </div>
 
           {/* ── Hover overlay ── slides up from bottom */}
@@ -246,24 +243,21 @@ export function PortfolioSection({ items = PORTFOLIO }: PortfolioSectionProps) {
           viewport={{ once: true, margin: "-80px" }}
           className="mb-12 md:mb-16"
         >
-          <motion.p
-            variants={fadeInUp}
-            className="text-[12px] font-semibold text-[var(--ff-purple)] mb-4"
-          >
-            — Seçili İşler —
-          </motion.p>
+          <motion.div variants={fadeInUp} className="mb-4">
+            <Eyebrow>Seçili İşler</Eyebrow>
+          </motion.div>
 
           <motion.h2
             variants={fadeInUp}
-            className="font-display text-xl md:text-2xl font-extrabold leading-[1.1] tracking-tight max-w-2xl"
+            className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold leading-[1.05] max-w-3xl"
           >
-            Domine ettiğimiz{" "}
+            İşte çalıştığımız{" "}
             <span className="text-[var(--ff-purple)]">markalar.</span>
           </motion.h2>
 
           <motion.p
             variants={fadeInUp}
-            className="mt-4 text-[var(--foreground-muted)] text-base md:text-lg max-w-xl leading-relaxed"
+            className="mt-4 text-[var(--foreground-muted)] text-base md:text-md max-w-xl leading-relaxed"
           >
             Ölçülebilir sonuçlar, cesur tasarımlar. İşte FlixFlex imzası taşıyan seçili projelerden bir bakış.
           </motion.p>

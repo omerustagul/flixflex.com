@@ -4,6 +4,7 @@
 // ═══════════════════════════════════════════════════════════
 
 import { type Metadata } from "next"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import { ContactForm } from "@/components/public/contact/contact-form"
 import { ContactInfo } from "@/components/public/contact/contact-info"
 import { HeroStrip } from "./_components/hero-strip"
@@ -13,6 +14,7 @@ import { FaqAccordion } from "./_components/faq-accordion"
 import { getPageBySlug } from "@/lib/page-data"
 import { listPublishedPortfolio } from "@/lib/content-store"
 import { PageRenderer } from "@/components/public/page-renderer"
+import { StarField } from "@/components/ui/star-field"
 
 export const metadata: Metadata = {
   title: "İletişim · FlixFlex Reklam Ajansı",
@@ -37,16 +39,8 @@ export default async function IletisimPage() {
 
         {/* ── 2. Two-column: form + info ─────────────────────── */}
         <section className="relative bg-[var(--background)] py-20 md:py-28">
-          {/* Subtle grid bg */}
-          <div
-            aria-hidden
-            className="absolute inset-0 pointer-events-none opacity-[0.025]"
-            style={{
-              backgroundImage:
-                "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
-              backgroundSize: "48px 48px",
-            }}
-          />
+          {/* Deep-space starfield background (replaces the old grid) */}
+          <StarField className="z-0" />
 
           <div className="relative mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16">
             <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
@@ -56,9 +50,7 @@ export default async function IletisimPage() {
               >
                 {/* Panel header */}
                 <div className="mb-8">
-                  <p className="text-[11px] font-semibold text-[var(--ff-purple)] mb-3">
-                    — Brief Formu —
-                  </p>
+                  <Eyebrow className="mb-3">Brief Formu</Eyebrow>
                   <h2 className="font-display text-2xl md:text-3xl font-extrabold text-[var(--foreground)] leading-tight">
                     Projenizi anlatın
                   </h2>

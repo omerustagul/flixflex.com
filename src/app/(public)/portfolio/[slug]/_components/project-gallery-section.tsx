@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { fadeInUp, staggerContainer } from "@/lib/animations"
 import { cn } from "@/lib/utils"
 import { ProjectGallery } from "@/components/public/portfolio/gallery"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import type { PortfolioItem } from "@/components/public"
 
 interface ProjectGallerySectionProps {
@@ -26,15 +27,12 @@ export function ProjectGallerySection({ project }: ProjectGallerySectionProps) {
           viewport={{ once: true, margin: "-80px" }}
           className="mb-12"
         >
-          <motion.p
-            variants={fadeInUp}
-            className="text-[11px] font-semibold text-[var(--ff-purple)] mb-3"
-          >
-            — Görsel Galeri —
-          </motion.p>
+          <motion.div variants={fadeInUp} className="mb-3">
+            <Eyebrow>Görsel Galeri</Eyebrow>
+          </motion.div>
           <motion.h2
             variants={fadeInUp}
-            className="font-display text-2xl md:text-4xl font-extrabold leading-tight tracking-tight"
+            className="font-display text-3xl md:text-5xl font-extrabold leading-[1.05] tracking-tighter"
           >
             Projeye yakından{" "}
             <span className="text-[var(--ff-purple)]">bakın.</span>
@@ -51,6 +49,7 @@ export function ProjectGallerySection({ project }: ProjectGallerySectionProps) {
           gradient={project.gradient}
           accentColor={project.accentColor}
           title={project.title}
+          images={project.images}
         />
       </div>
     </section>

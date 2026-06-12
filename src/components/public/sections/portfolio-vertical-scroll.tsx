@@ -95,7 +95,7 @@ function Card({ item, index }: { item: PortfolioItem; index: number }) {
     <Link
       href={`/portfolio/${item.slug}`}
       className={cn(
-        "group relative flex-shrink-0 w-[260px] md:w-[300px] aspect-[2/3]",
+        "group relative flex-shrink-0 w-[260px] md:w-[300px] aspect-[5/8]",
         "ff-shape-container border border-[var(--border)]/40 cursor-pointer select-none",
         "snap-center transition-all duration-300 hover:shadow-xl"
       )}
@@ -114,33 +114,39 @@ function Card({ item, index }: { item: PortfolioItem; index: number }) {
 
       {/* Card Content / Metadata */}
       <div className="absolute inset-0 z-10 flex flex-col justify-end p-6 text-white">
+        {/* Logo + title — flush to the bottom by default */}
         <div className="flex flex-col gap-2.5">
           {/* Logo & Client */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center w-fit p-1 gap-2 bg-background/10 backdrop-blur-sm rounded-full border border-border/30">
             {item.clientLogo ? (
               <img
                 src={item.clientLogo}
                 alt={item.client}
-                className="w-6 h-6 rounded-full object-contain filter invert opacity-95"
+                className="w-6 h-6 rounded-full object-contain"
               />
             ) : (
               <div className="w-5 h-5 rounded-full bg-[var(--ff-purple)]/20 border border-[var(--ff-purple)]/40 flex items-center justify-center text-[10px] font-bold text-[var(--ff-purple)]">
                 {item.client ? item.client.charAt(0) : "P"}
               </div>
             )}
-            <span className="text-[11px] font-bold tracking-wider uppercase text-white/80">
+            <span className="text-sm font-bold text-white/80 pr-1">
               {item.client}
             </span>
           </div>
 
           {/* Project Title */}
-          <h3 className="font-display text-base md:text-lg font-bold leading-snug group-hover:text-[var(--ff-purple)] transition-colors duration-300">
+          <h3 className="font-display text-base md:text-md font-bold leading-snug group-hover:text-[var(--ff-purple)] transition-colors duration-300">
             {item.title}
           </h3>
+        </div>
 
-          {/* Hover indicator link */}
-          <div className="h-5 overflow-hidden">
-            <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[var(--ff-purple)] opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out">
+        {/* "Projeyi İncele" — collapsed (0 height) by default so logo+title
+            sit at the bottom; on hover it expands BELOW them, and because the
+            column is justify-end the logo+title slide up while the button
+            appears at the bottom edge. */}
+        <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
+          <div className="overflow-hidden min-h-0">
+            <span className="inline-flex items-center gap-1 pt-2.5 text-[11px] font-bold text-[var(--ff-purple)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
               Projeyi İncele <ArrowRight size={12} className="ml-0.5 transition-transform duration-200 group-hover:translate-x-1" />
             </span>
           </div>
@@ -161,6 +167,11 @@ export function PortfolioVerticalScrollSection({
   const viewportRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [scrollWidth, setScrollWidth] = useState(0)
+
+  // Marquee state kept in refs (no re-renders): paused = hover, drag = active grab.
+  const pausedRef = useRef(false)
+  const dragRef = useRef({ active: false, captured: false, startX: 0, startScroll: 0, moved: false })
+  const dirRef = useRef(1)
 
   // Slice raw items to maxItems size
   const displayItems = useMemo(() => {
@@ -188,13 +199,33 @@ export function PortfolioVerticalScrollSection({
     }
   }, [displayItems])
 
-  const marqueeDuration = useMemo(() => {
-    if (scrollWidth === 0) return "20s"
-    const pixelsPerSecond = speed === "slow" ? 25 : speed === "fast" ? 180 : 60
-    const duration = scrollWidth / pixelsPerSecond
-    const minClamped = speed === "fast" ? 6 : speed === "normal" ? 12 : 20
-    const maxClamped = speed === "fast" ? 30 : speed === "normal" ? 75 : 150
-    return `${Math.max(minClamped, Math.min(maxClamped, duration))}s`
+  // Auto-scroll driven in JS (so it coexists with manual drag). The track
+  // ping-pongs across the overflow and pauses while hovering or dragging.
+  useEffect(() => {
+    const vp = viewportRef.current
+    if (!vp || scrollWidth <= 0) return
+
+    const pxPerSec = speed === "slow" ? 25 : speed === "fast" ? 180 : 60
+    let raf = 0
+    let last = 0
+
+    const step = (ts: number) => {
+      if (!last) last = ts
+      const dt = Math.min((ts - last) / 1000, 0.05) // clamp big frame gaps
+      last = ts
+
+      if (!pausedRef.current && !dragRef.current.active) {
+        const max = vp.scrollWidth - vp.clientWidth
+        let next = vp.scrollLeft + pxPerSec * dt * dirRef.current
+        if (next >= max) { next = max; dirRef.current = -1 }
+        else if (next <= 0) { next = 0; dirRef.current = 1 }
+        vp.scrollLeft = next
+      }
+      raf = requestAnimationFrame(step)
+    }
+
+    raf = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(raf)
   }, [scrollWidth, speed])
 
   return (
@@ -234,23 +265,56 @@ export function PortfolioVerticalScrollSection({
         </div>
       </div>
 
-      {/* Desktop marquee horizontal scroll */}
+      {/* Desktop marquee — auto-scroll + click-drag to scroll manually */}
       <div
         ref={viewportRef}
-        className="hidden md:block relative w-full overflow-hidden select-none group/marquee"
+        onPointerEnter={() => { if (pauseOnHover) pausedRef.current = true }}
+        onPointerLeave={() => { pausedRef.current = false }}
+        onPointerDown={(e) => {
+          const vp = viewportRef.current
+          if (!vp) return
+          // Don't capture yet — a plain click must reach the card link.
+          dragRef.current = { active: true, captured: false, startX: e.clientX, startScroll: vp.scrollLeft, moved: false }
+        }}
+        onPointerMove={(e) => {
+          const d = dragRef.current
+          if (!d.active) return
+          const vp = viewportRef.current
+          if (!vp) return
+          const dx = e.clientX - d.startX
+          if (!d.moved && Math.abs(dx) > 6) {
+            // A real drag started — NOW capture the pointer so it keeps
+            // tracking even off the element. Plain clicks never reach here.
+            d.moved = true
+            vp.setPointerCapture?.(e.pointerId)
+            d.captured = true
+          }
+          if (d.moved) vp.scrollLeft = d.startScroll - dx
+        }}
+        onPointerUp={(e) => {
+          const d = dragRef.current
+          if (d.captured) {
+            viewportRef.current?.releasePointerCapture?.(e.pointerId)
+            d.captured = false
+          }
+          d.active = false
+        }}
+        onPointerCancel={() => {
+          dragRef.current.active = false
+          dragRef.current.captured = false
+        }}
+        // Swallow the click that follows a drag so cards don't navigate accidentally.
+        onClickCapture={(e) => {
+          if (dragRef.current.moved) {
+            e.preventDefault()
+            e.stopPropagation()
+            dragRef.current.moved = false
+          }
+        }}
+        onDragStart={(e) => e.preventDefault()}
+        className="hidden md:block relative w-full overflow-x-auto scrollbar-none select-none cursor-grab active:cursor-grabbing"
       >
-        <div
-          ref={containerRef}
-          className={cn(
-            "flex gap-6 py-4 px-6 mb-8 w-max",
-            scrollWidth > 0 && "animate-marquee-bounce",
-            pauseOnHover && "group-hover/marquee:[animation-play-state:paused]"
-          )}
-          style={{
-            "--scroll-width": `${scrollWidth}px`,
-            "--marquee-duration": marqueeDuration,
-          } as React.CSSProperties}
-        >
+        <div ref={containerRef} className="flex gap-6 my-4 px-6 w-max">
           {displayItems.map((item, index) => (
             <Card key={`desktop-${item.slug}-${index}`} item={item} index={index} />
           ))}

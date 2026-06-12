@@ -7,6 +7,8 @@ import { CalendarDays, ArrowRight } from "@/lib/icons"
 import { useUIStore } from "@/lib/ui-store"
 import { cn } from "@/lib/utils"
 import { fadeInUp } from "@/lib/animations"
+import { Eyebrow } from "@/components/ui/eyebrow"
+import { Magnetic } from "@/components/ui/magnetic"
 
 interface AppointmentCardSectionProps {
   eyebrow?: string
@@ -24,7 +26,7 @@ export function AppointmentCardSection({
   const setAppointmentModalOpen = useUIStore((state) => state.setAppointmentModalOpen)
 
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden bg-[var(--background)]">
+    <section className="relative py-20 md:py-28 overflow-hidden bg-[var(--background)]">
       {/* Decorative Blur Backgrounds */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-72 h-72 rounded-full bg-[var(--ff-purple)]/5 blur-3xl pointer-events-none" />
       <div className="absolute top-1/3 right-1/4 -translate-y-1/2 w-96 h-96 rounded-full bg-[var(--ff-purple)]/10 blur-3xl pointer-events-none" />
@@ -49,9 +51,7 @@ export function AppointmentCardSection({
               <CalendarDays size={24} className="stroke-[1.5]" />
             </div>
             <div>
-              <span className="text-[11px] font-bold text-[var(--ff-purple)] block mb-2">
-                {eyebrow}
-              </span>
+              <Eyebrow className="mb-3">{eyebrow}</Eyebrow>
               <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-extrabold text-[var(--foreground)] tracking-tight leading-tight mb-4">
                 {headline}
               </h2>
@@ -63,25 +63,27 @@ export function AppointmentCardSection({
 
           {/* Action Button */}
           <div className="shrink-0 flex items-center">
-            <button
-              type="button"
-              onClick={() => setAppointmentModalOpen(true)}
-              className={cn(
-                "ff-shape-button",
-                "group inline-flex items-center justify-center gap-2.5 h-11",
-                "px-8 py-4 text-[13px] font-semibold cursor-pointer",
-                "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
-                "hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)]",
-                "hover:shadow-[0_4px_24px_rgba(255, 79, 216,0.4)]",
-                "transition-all duration-200 whitespace-nowrap"
-              )}
-            >
-              <span>{ctaLabel}</span>
-              <ArrowRight
-                size={16}
-                className="transition-transform duration-200 group-hover:translate-x-1"
-              />
-            </button>
+            <Magnetic>
+              <button
+                type="button"
+                onClick={() => setAppointmentModalOpen(true)}
+                className={cn(
+                  "ff-shape-button",
+                  "group inline-flex items-center justify-center gap-2.5 h-11",
+                  "px-8 py-4 text-[13px] font-semibold cursor-pointer",
+                  "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
+                  "hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)]",
+                  "hover:shadow-[0_4px_24px_rgba(255, 79, 216,0.4)]",
+                  "transition-all duration-200 whitespace-nowrap"
+                )}
+              >
+                <span>{ctaLabel}</span>
+                <ArrowRight
+                  size={16}
+                  className="transition-transform duration-200 group-hover:translate-x-1"
+                />
+              </button>
+            </Magnetic>
           </div>
         </motion.div>
       </div>

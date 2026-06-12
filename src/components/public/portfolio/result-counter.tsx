@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { FFStatCounter } from "@/components/ui"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import { cn } from "@/lib/utils"
 import { staggerContainer, fadeInUp } from "@/lib/animations"
 
@@ -29,9 +30,7 @@ export function ResultCounter({ stats, className }: ResultCounterProps) {
     >
       {/* Section label */}
       <motion.div variants={fadeInUp}>
-        <p className="text-[11px] font-semibold text-[var(--ff-purple)] mb-3">
-          — Ölçülebilir Sonuçlar —
-        </p>
+        <Eyebrow className="mb-3">Ölçülebilir Sonuçlar</Eyebrow>
         <h2 className="font-display text-2xl md:text-4xl font-extrabold leading-tight tracking-tight">
           Rakamlar{" "}
           <span className="text-[var(--ff-purple)]">her şeyi anlatır.</span>

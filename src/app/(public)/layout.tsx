@@ -1,3 +1,4 @@
+import NextTopLoader from "nextjs-toploader"
 import { FlixFlexFooter, AppointmentModal, ParallaxProvider } from "@/components/public"
 import { ThemedNavbar } from "@/components/public/navbar/themed-navbar"
 import { PageTransition } from "@/components/shared/page-transition"
@@ -21,7 +22,20 @@ export default async function PublicLayout({
 
   return (
     <ParallaxProvider>
-      <LoadingScreen />
+      {/* Route progress bar — fills on navigation (Vercel/Linear style) */}
+      <NextTopLoader
+        color="#FF4FD8"
+        height={2}
+        showSpinner={false}
+        shadow="0 0 12px #FF4FD8, 0 0 6px #FF4FD8"
+        speed={300}
+        easing="cubic-bezier(0.16, 1, 0.3, 1)"
+        crawlSpeed={180}
+      />
+      <LoadingScreen
+        logoUrl={siteSettings.site_logo_white || siteSettings.site_logo}
+        logoHeight={siteSettings.site_logo_height ? parseInt(siteSettings.site_logo_height) : undefined}
+      />
       <ThemedNavbar />
       <PageTransition>
         <main id="content" className="relative">

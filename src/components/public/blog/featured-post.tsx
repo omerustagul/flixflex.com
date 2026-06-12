@@ -19,23 +19,23 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
         "hover:shadow-[0_12px_60px_rgba(255, 79, 216,0.12)]"
       )}
     >
-      {/* Full-width gradient background */}
+      {/* Full-width cover — admin image when set, else gradient */}
       <div
         className={cn(
-          "relative w-full h-[420px] md:h-[520px] bg-gradient-to-br",
-          post.coverGradient
+          "relative w-full h-[420px] md:h-[520px] overflow-hidden",
+          !post.coverImage && "bg-gradient-to-br",
+          !post.coverImage && post.coverGradient
         )}
       >
-        {/* Subtle grid overlay */}
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)",
-            backgroundSize: "48px 48px",
-          }}
-        />
+        {post.coverImage && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={post.coverImage}
+            alt={post.title}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            loading="lazy"
+          />
+        )}
 
         {/* Dark gradient overlay for readability */}
         <div

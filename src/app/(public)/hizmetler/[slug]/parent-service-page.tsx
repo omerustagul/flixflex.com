@@ -5,6 +5,7 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { ChevronRight, ArrowRight, Layers } from "@/lib/icons"
 import { cn } from "@/lib/utils"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import { staggerContainer, scaleInUp } from "@/lib/animations"
 import { ServiceHeroVisual } from "@/components/public/services/service-hero-visual"
 import { ProcessSteps } from "@/components/public/services/process-steps"
@@ -15,6 +16,7 @@ import { PortfolioSection } from "@/components/public"
 import type { Service } from "@/components/public/sections/services-data"
 import * as LucideIcons from "@/lib/icons"
 import type { LucideIcon } from "@/lib/icons"
+import { StarField } from "@/components/ui/star-field"
 
 interface ParentServicePageProps {
   service: Service & { children?: Service[] }
@@ -31,17 +33,8 @@ export function ParentServicePage({ service, serviceIndex }: ParentServicePagePr
           1. HERO
       ══════════════════════════════════════════════════ */}
       <section className="relative bg-[var(--background)] overflow-hidden pt-24 pb-16 md:pt-32 md:pb-24">
-        <div
-          aria-hidden
-          className="absolute inset-0 pointer-events-none opacity-[0.3]"
-          style={{
-            backgroundImage:
-              "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-            maskImage:
-              "radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 100%)",
-          }}
-        />
+        {/* Deep-space starfield background (replaces the old grid) */}
+        <StarField className="z-0" />
         <span
           aria-hidden
           className="absolute top-0 left-0 w-[600px] h-[400px] pointer-events-none"
@@ -110,9 +103,7 @@ export function ParentServicePage({ service, serviceIndex }: ParentServicePagePr
         <section className="py-20 md:py-28 bg-[var(--surface)] border-t border-[var(--border)]">
           <div className="mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16">
             <div className="mb-12 md:mb-16">
-              <p className="text-[12px] font-semibold text-[var(--ff-purple)] mb-4">
-                — Alt Hizmetler —
-              </p>
+              <Eyebrow className="mb-4">Alt Hizmetler</Eyebrow>
               <h2 className="font-display text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-[var(--foreground)]">
                 {service.title} kapsamında sunduklarımız
               </h2>
@@ -143,10 +134,8 @@ export function ParentServicePage({ service, serviceIndex }: ParentServicePagePr
         <div className="mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16">
           <div className="grid lg:grid-cols-[280px_1fr] xl:grid-cols-[340px_1fr] gap-12 lg:gap-20">
             <div className="lg:sticky lg:top-28 lg:self-start">
-              <p className="text-[12px] font-semibold text-[var(--ff-purple)] mb-4">
-                — Süreç —
-              </p>
-              <h2 className="font-display text-xl md:text-2xl font-extrabold leading-tight tracking-tight text-[var(--foreground)] mb-4">
+              <Eyebrow className="mb-4">Süreç</Eyebrow>
+              <h2 className="font-display text-2xl md:text-4xl font-extrabold leading-[1.1] tracking-tight text-[var(--foreground)] mb-4">
                 Süreç adımları
               </h2>
               <p className="text-sm md:text-base text-[var(--foreground-muted)] leading-relaxed">
@@ -164,10 +153,8 @@ export function ParentServicePage({ service, serviceIndex }: ParentServicePagePr
       <section className="py-20 md:py-28 bg-[var(--surface)] border-t border-[var(--border)]">
         <div className="mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16">
           <div className="mb-12 md:mb-16">
-            <p className="text-[12px] font-semibold text-[var(--ff-purple)] mb-4">
-              — Teslim Edilenler —
-            </p>
-            <h2 className="font-display text-xl md:text-2xl font-extrabold leading-tight tracking-tight text-[var(--foreground)] mb-4">
+            <Eyebrow className="mb-4">Teslim Edilenler</Eyebrow>
+            <h2 className="font-display text-2xl md:text-4xl font-extrabold leading-[1.1] tracking-tight text-[var(--foreground)] mb-4">
               Ne elde edersiniz?
             </h2>
             <p className="text-sm md:text-base text-[var(--foreground-muted)] max-w-xl leading-relaxed">
@@ -184,9 +171,7 @@ export function ParentServicePage({ service, serviceIndex }: ParentServicePagePr
       <section className="py-20 md:py-28 bg-[var(--background)] border-t border-[var(--border)]">
         <div className="mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16">
           <div className="mb-10 md:mb-14">
-            <p className="text-[12px] font-semibold text-[var(--ff-purple)] mb-4">
-              — Referans —
-            </p>
+            <Eyebrow className="mb-4">Referans</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-[var(--foreground)]">
               Gerçek projeler, gerçek sonuçlar
             </h2>

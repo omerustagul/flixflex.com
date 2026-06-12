@@ -3,6 +3,8 @@
 import { motion } from "framer-motion"
 import { staggerContainer, fadeInUp, ease } from "@/lib/animations"
 import { cn } from "@/lib/utils"
+import { StarField } from "@/components/ui/star-field"
+import { Eyebrow } from "@/components/ui/eyebrow"
 
 interface PortfolioHeroProps {
   totalProjects: number
@@ -23,10 +25,13 @@ function StatPill({ value, label, index }: StatPillProps) {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, delay: 0.6 + index * 0.08, ease: ease.smooth }}
+      whileHover={{ y: -3 }}
       className={cn(
         "ff-shape-button flex items-baseline gap-2 px-5 py-3",
         "border border-[var(--border)]",
-        "bg-[var(--surface)]"
+        "bg-[var(--surface)]",
+        "transition-colors duration-300 cursor-default",
+        "hover:border-[var(--ff-purple)]/40 hover:shadow-[0_8px_30px_rgba(255,79,216,0.12)]"
       )}
     >
       <span className="font-display font-extrabold text-xl md:text-2xl text-[var(--ff-purple)] leading-none">
@@ -59,16 +64,8 @@ export function PortfolioHero({
         "pt-32 pb-20 md:pt-40 md:pb-24 overflow-hidden"
       )}
     >
-      {/* Grid background */}
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
-        }}
-      />
+      {/* Deep-space starfield background (replaces the old grid) */}
+      <StarField className="z-0" />
 
       {/* Purple aura top-left */}
       <div
@@ -89,12 +86,9 @@ export function PortfolioHero({
           className="max-w-4xl"
         >
           {/* Eyebrow */}
-          <motion.p
-            variants={fadeInUp}
-            className="text-[11px] font-semibold text-[var(--ff-purple)] mb-5"
-          >
-            — Portfolyo —
-          </motion.p>
+          <motion.div variants={fadeInUp} className="mb-5">
+            <Eyebrow>Portfolyo</Eyebrow>
+          </motion.div>
 
           {/* Heading */}
           <motion.h1

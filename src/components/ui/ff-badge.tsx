@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 const badgeVariants: Record<string, string> = {
-  purple: "ff-shape-container bg-ff-purple/10 backdrop-blur-sm border-ff-purple/30 text-ff-purple",
+  purple: "ff-shape-container bg-ff-purple/10 backdrop-blur-sm border-2 border-ff-purple/30 text-ff-purple",
   charcoal: "ff-shape-container bg-[#323232] border-[#323232] text-white",
   white: "ff-shape-container bg-white/10 border-white/20 text-white",
   outline: "ff-shape-container bg-transparent border-[var(--border)] text-[var(--foreground-muted)]",

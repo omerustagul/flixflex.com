@@ -192,7 +192,7 @@ export function BlogTemplateVisual({ post, related }: VisualTemplateProps) {
       )}
 
       <CTASection
-        eyebrow="— Vizyon Gerçeğe Dönüşsün —"
+        eyebrow="Vizyon Gerçeğe Dönüşsün"
         title={<>Yaratıcılığı <span className="text-[var(--ff-purple)]">eyleme</span> dönüştürüyoruz.</>}
         description="FlixFlex ile markanız için cesur, ölçülebilir ve akılda kalıcı kampanyalar hayata geçirelim."
       />

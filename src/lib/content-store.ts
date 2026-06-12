@@ -8,6 +8,11 @@ import {
   SERVICES as RAW_SERVICES,
   type Service as PublicService,
 } from "@/components/public/sections/services-data"
+import {
+  POSTS as BLOG_POSTS,
+  getPost as getStaticPost,
+  type BlogPost as PublicBlogPost,
+} from "@/components/public/blog/blog-data"
 
 // Strip React component icons — only plain objects can cross Server→Client boundary
 const SERVICES = RAW_SERVICES.map(({ icon, ...rest }) => rest)
@@ -241,6 +246,97 @@ export async function listPublishedMainServices(): Promise<PublicService[]> {
     console.error('[listPublishedMainServices] DB error:', err)
     return SERVICES.filter((s) => !s.parentId)
   }
+}
+
+// ── Blog ──────────────────────────────────────────
+const DEFAULT_BLOG_GRADIENT =
+  "from-[var(--ff-purple)]/30 via-[var(--ff-purple)]/20 to-[var(--foreground)]"
+
+function deriveInitials(name: string): string {
+  const parts = name.trim().split(/\s+/).filter(Boolean)
+  if (parts.length === 0) return "FF"
+  if (parts.length === 1) return (parts[0][0] + (parts[0][1] ?? "")).toUpperCase()
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+}
+
+type BlogRow = {
+  id: string
+  title: string
+  slug: string
+  excerpt: string | null
+  content: string
+  coverImage: string | null
+  template: string
+  category: string | null
+  tags: string[]
+  author: string | null
+  readTime: number
+  publishedAt: Date | null
+  createdAt: Date
+}
+
+function mapBlogPost(row: BlogRow): PublicBlogPost {
+  const author = row.author?.trim() || "FlixFlex"
+  const template = ["classic", "editorial", "visual"].includes(row.template)
+    ? (row.template as PublicBlogPost["template"])
+    : "classic"
+  return {
+    id: row.id,
+    title: row.title,
+    slug: row.slug,
+    excerpt: row.excerpt ?? "",
+    content: row.content,
+    coverImage: row.coverImage ?? null,
+    coverGradient: DEFAULT_BLOG_GRADIENT,
+    template,
+    category: row.category ?? "Genel",
+    tags: Array.isArray(row.tags) ? row.tags : [],
+    author: { name: author, role: "", initials: deriveInitials(author) },
+    readMinutes: row.readTime ?? 5,
+    publishedAt: (row.publishedAt ?? row.createdAt).toISOString().slice(0, 10),
+  }
+}
+
+export async function listPublishedBlogPosts(): Promise<PublicBlogPost[]> {
+  if (!prisma) return BLOG_POSTS
+
+  try {
+    const rows = await prisma.blogPost.findMany({
+      where: { status: "published" },
+      orderBy: [{ publishedAt: "desc" }, { createdAt: "desc" }],
+    })
+    return rows.length ? rows.map(mapBlogPost) : BLOG_POSTS
+  } catch (err) {
+    console.error("[listPublishedBlogPosts] DB error:", err)
+    return BLOG_POSTS
+  }
+}
+
+export async function getPublishedBlogBySlug(slug: string): Promise<PublicBlogPost | null> {
+  if (!prisma) return getStaticPost(slug) ?? null
+
+  try {
+    const row = await prisma.blogPost.findUnique({ where: { slug } })
+    if (!row || row.status !== "published") return getStaticPost(slug) ?? null
+    return mapBlogPost(row)
+  } catch (err) {
+    console.error("[getPublishedBlogBySlug] DB error:", err)
+    return getStaticPost(slug) ?? null
+  }
+}
+
+export async function getFeaturedBlogPost(): Promise<PublicBlogPost> {
+  const all = await listPublishedBlogPosts()
+  return all[0]
+}
+
+export async function listRelatedBlogPosts(slug: string, n = 3): Promise<PublicBlogPost[]> {
+  const all = await listPublishedBlogPosts()
+  const post = all.find((p) => p.slug === slug)
+  if (!post) return all.filter((p) => p.slug !== slug).slice(0, n)
+  const same = all.filter((p) => p.slug !== slug && p.category === post.category)
+  const others = all.filter((p) => p.slug !== slug && p.category !== post.category)
+  return [...same, ...others].slice(0, n)
 }
 
 export async function getPublishedServiceBySlug(

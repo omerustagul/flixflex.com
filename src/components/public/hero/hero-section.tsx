@@ -8,6 +8,8 @@ import { fadeInUp, withDelay } from "@/lib/animations"
 import { cn } from "@/lib/utils"
 import { HeroVisual } from "./hero-visual"
 import { ScrollIndicator } from "./scroll-indicator"
+import { StarField } from "@/components/ui/star-field"
+import { Magnetic } from "@/components/ui/magnetic"
 
 interface HeroSectionProps {
   title?: string
@@ -45,16 +47,8 @@ export function HeroSection({
         }}
       />
 
-      {/* Grid pattern */}
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-[0.025] pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
-        }}
-      />
+      {/* Deep-space starfield background (replaces the old grid) */}
+      <StarField className="z-0" />
 
       <div className="relative mx-auto max-w-[1440px] w-full px-6 md:px-10 xl:px-16">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -137,39 +131,41 @@ export function HeroSection({
               animate="visible"
               className="mt-10 flex flex-wrap items-center gap-4"
             >
-              <Link
-                href={primaryCta?.href || "/iletisim"}
-                className={cn(
-                  "ff-shape-button",
-                  "group inline-flex items-center justify-center gap-2.5",
-                  "px-8 py-4 text-sm font-medium uppercase tracking-[0.05em]",
-                  "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
-                  "hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)]",
-                  "hover:shadow-[0_4px_24px_rgba(255, 79, 216,0.45)]",
-                  "transition-all duration-200"
-                )}
-              >
-                {primaryCta?.label || "Keşfet"}
-                <ArrowUpRight
-                  size={16}
-                  className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                />
-              </Link>
-              <Link
-                href={secondaryCta?.href || "/isler"}
-                className={cn(
-                  "ff-shape-button",
-                  "group inline-flex items-center justify-center gap-2.5",
-                  "px-8 py-4 text-sm font-medium uppercase tracking-[0.05em]",
-                  "bg-transparent text-[var(--ff-purple)] border border-[var(--ff-purple)]",
-                  "hover:bg-[var(--ff-purple)/0.1] hover:border-[var(--ff-purple)] hover:text-[var(--ff-purple-dark)]",
-                  "hover:shadow-[0_0_20px_var(--ff-purple)/0.15)]",
-                  "transition-all duration-200"
-                )}
-              >
-                <Play size={14} />
-                {secondaryCta?.label || "Portfolyomuzu Gör"}
-              </Link>
+              <Magnetic>
+                <Link
+                  href={primaryCta?.href || "/iletisim"}
+                  className={cn(
+                    "ff-shape-button",
+                    "group inline-flex items-center justify-center gap-2.5",
+                    "px-8 py-4 text-sm font-medium uppercase tracking-[0.05em]",
+                    "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
+                    "hover:shadow-[0_8px_36px_rgba(255,79,216,0.45)]",
+                    "transition-shadow duration-300"
+                  )}
+                >
+                  {primaryCta?.label || "Keşfet"}
+                  <ArrowUpRight
+                    size={16}
+                    className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  />
+                </Link>
+              </Magnetic>
+              <Magnetic>
+                <Link
+                  href={secondaryCta?.href || "/portfolio"}
+                  className={cn(
+                    "ff-shape-button",
+                    "group inline-flex items-center justify-center gap-2.5",
+                    "px-8 py-4 text-sm font-medium uppercase tracking-[0.05em]",
+                    "bg-transparent text-[var(--ff-purple)] border border-[var(--ff-purple)]",
+                    "hover:bg-[var(--ff-purple)]/10",
+                    "transition-colors duration-300"
+                  )}
+                >
+                  <Play size={14} />
+                  {secondaryCta?.label || "Portfolyomuzu Gör"}
+                </Link>
+              </Magnetic>
             </motion.div>
 
             {/* Trust strip */}

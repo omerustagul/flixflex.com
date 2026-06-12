@@ -5,6 +5,7 @@ import { Clock } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { staggerContainer, fadeInUp } from "@/lib/animations"
 import { BackgroundPaths } from "@/components/ui/background-paths"
+import { StarField } from "@/components/ui/star-field"
 
 export function HeroStrip() {
   return (
@@ -29,16 +30,8 @@ export function HeroStrip() {
         }}
       />
 
-      {/* Grid pattern */}
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
-        }}
-      />
+      {/* Deep-space starfield background (replaces the old grid) */}
+      <StarField className="z-0" />
 
       <div className="relative mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16">
         <motion.div
@@ -57,8 +50,8 @@ export function HeroStrip() {
             )}
           >
             <span className="w-1.5 h-1.5 bg-[var(--ff-purple)] animate-pulse" />
-            <span className="text-[10px] font-medium text-[var(--ff-purple)]">
-              — İletişim —
+            <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--ff-purple)]">
+              İletişim
             </span>
           </motion.div>
 

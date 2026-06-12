@@ -52,6 +52,10 @@ export { ContainerScroll }      from "./container-scroll-animation"
 export { TiltCard }             from "./tilt-card"
 export type { TiltCardProps }   from "./tilt-card"
 
+export { Eyebrow }              from "./eyebrow"
+export { Magnetic }             from "./magnetic"
+export { Reveal, RevealGroup, RevealItem } from "./reveal"
+
 export { PoemAnimation }        from "./3d-animation"
 export type { PoemAnimationProps } from "./3d-animation"
 

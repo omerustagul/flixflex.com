@@ -51,7 +51,7 @@ export function FlixFlexLogo({ className, size = "md", logoUrl, logoHeight, tran
             FF
             <span
               aria-hidden
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              className="ff-shape-container absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               style={{
                 background:
                   "linear-gradient(135deg, rgba(255,255,255,0.25) 0%, transparent 60%)",

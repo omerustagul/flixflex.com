@@ -5,6 +5,8 @@ import { ServicesListAnimated } from "@/components/public/services/services-list
 import { getPageBySlug } from "@/lib/page-data"
 import { PageRenderer } from "@/components/public/page-renderer"
 import { listPublishedMainServices, listPublishedPortfolio } from "@/lib/content-store"
+import { StarField } from "@/components/ui/star-field"
+import { Eyebrow } from "@/components/ui/eyebrow"
 
 // ── SEO ────────────────────────────────────────────────────
 export const metadata: Metadata = {
@@ -36,18 +38,8 @@ export default async function HizmetlerPage() {
       <>
         {/* ── Hero ── */}
         <section className="relative bg-[var(--background)] overflow-hidden pt-28 pb-20 md:pt-36 md:pb-28">
-          {/* Subtle grid bg */}
-          <div
-            aria-hidden
-            className="absolute inset-0 pointer-events-none opacity-[0.35]"
-            style={{
-              backgroundImage:
-                "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
-              backgroundSize: "40px 40px",
-              maskImage:
-                "radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%)",
-            }}
-          />
+          {/* Deep-space starfield background (replaces the old grid) */}
+          <StarField className="z-0" />
 
           {/* Purple top-left accent */}
           <span
@@ -61,9 +53,7 @@ export default async function HizmetlerPage() {
 
           <div className="relative mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16">
             {/* Eyebrow */}
-            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[var(--ff-purple)] mb-6">
-              — Hizmetlerimiz —
-            </p>
+            <Eyebrow className="mb-6">Hizmetlerimiz</Eyebrow>
 
             {/* Main heading */}
             <h1
@@ -109,7 +99,7 @@ export default async function HizmetlerPage() {
 
         {/* ── Bottom CTA ── */}
         <CTASection
-          eyebrow="— Hazır mısın? —"
+          eyebrow="Hazır mısın?"
           title={
             <>
               Hangi hizmetten{" "}

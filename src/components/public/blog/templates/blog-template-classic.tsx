@@ -124,7 +124,7 @@ export function BlogTemplateClassic({ post, related }: ClassicTemplateProps) {
       </article>
 
       <CTASection
-        eyebrow="— Birlikte Büyüyelim —"
+        eyebrow="Birlikte Büyüyelim"
         title={<>Markanızı bir üst seviyeye <span className="text-[var(--ff-purple)]">taşıyalım.</span></>}
         description="Bu makaleyi beğendiyseniz, FlixFlex'in markanız için neler yapabileceğini keşfedin."
       />

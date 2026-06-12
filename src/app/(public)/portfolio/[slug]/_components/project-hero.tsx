@@ -7,13 +7,14 @@ import { FFBadge } from "@/components/ui"
 import { staggerContainer, fadeInUp, ease } from "@/lib/animations"
 import { cn } from "@/lib/utils"
 import type { PortfolioItem } from "@/components/public"
+import { StarField } from "@/components/ui/star-field"
 
 interface ProjectHeroProps {
   project: PortfolioItem
 }
 
 export function ProjectHero({ project }: ProjectHeroProps) {
-  const { title, client, year, category, gradient, accentColor } = project
+  const { title, client, year, category, gradient, accentColor, coverImage, clientLogo } = project
 
   return (
     <section
@@ -23,15 +24,8 @@ export function ProjectHero({ project }: ProjectHeroProps) {
       )}
     >
       {/* Grid texture */}
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
-        }}
-      />
+      {/* Deep-space starfield background (replaces the old grid) */}
+      <StarField className="z-0" />
 
       {/* Purple aura */}
       <div
@@ -67,8 +61,17 @@ export function ProjectHero({ project }: ProjectHeroProps) {
             <span className="text-[var(--foreground-muted)]">{title}</span>
           </motion.nav>
 
-          {/* Category badge */}
-          <motion.div variants={fadeInUp} className="mb-5">
+          {/* Client logo + category badge */}
+          <motion.div variants={fadeInUp} className="mb-5 flex items-center gap-3">
+            {clientLogo && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={clientLogo}
+                alt={`${client} logo`}
+                className="h-8 w-auto max-w-[140px] object-contain"
+                loading="lazy"
+              />
+            )}
             <FFBadge variant="purple">{category}</FFBadge>
           </motion.div>
 
@@ -97,7 +100,7 @@ export function ProjectHero({ project }: ProjectHeroProps) {
               <div
                 key={item.label}
                 className={cn(
-                  "ff-shape-button flex flex-col px-6 py-3",
+                  "flex flex-col px-3 py-3",
                   i !== 0 && "border-l border-[var(--border)]"
                 )}
               >
@@ -121,35 +124,48 @@ export function ProjectHero({ project }: ProjectHeroProps) {
             "ff-shape-container relative w-full overflow-hidden",
             "h-[55vw] max-h-[680px] min-h-[320px]",
             "border border-[var(--border)]",
-            "bg-gradient-to-br",
-            gradient
+            !coverImage && "bg-gradient-to-br",
+            !coverImage && gradient
           )}
         >
-          {/* Grid overlay */}
-          <div
-            aria-hidden
-            className="absolute inset-0 opacity-[0.06]"
-            style={{
-              backgroundImage:
-                "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
-              backgroundSize: "40px 40px",
-            }}
-          />
+          {coverImage ? (
+            /* Admin-uploaded cover image */
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={coverImage}
+              alt={title}
+              className="absolute inset-0 w-full h-full object-cover"
+              loading="eager"
+            />
+          ) : (
+            <>
+              {/* Grid overlay */}
+              <div
+                aria-hidden
+                className="absolute inset-0 opacity-[0.06]"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
+                  backgroundSize: "40px 40px",
+                }}
+              />
 
-          {/* Big title watermark */}
-          <div className="absolute inset-0 flex items-center justify-center p-10">
-            <p
-              className={cn(
-                "font-display font-extrabold text-center break-words",
-                "leading-[0.85] tracking-[-0.04em]",
-                "select-none pointer-events-none",
-                "text-[clamp(48px,9vw,160px)]"
-              )}
-              style={{ color: accentColor, opacity: 0.22 }}
-            >
-              {client.toUpperCase()}
-            </p>
-          </div>
+              {/* Big title watermark */}
+              <div className="absolute inset-0 flex items-center justify-center p-10">
+                <p
+                  className={cn(
+                    "font-display font-extrabold text-center break-words",
+                    "leading-[0.85] tracking-[-0.04em]",
+                    "select-none pointer-events-none",
+                    "text-[clamp(48px,9vw,160px)]"
+                  )}
+                  style={{ color: accentColor, opacity: 0.22 }}
+                >
+                  {client.toUpperCase()}
+                </p>
+              </div>
+            </>
+          )}
 
           {/* Corner label */}
           <div className="absolute bottom-5 left-5 z-10">

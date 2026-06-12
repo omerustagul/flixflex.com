@@ -1,17 +1,14 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { POSTS, getPost, getRelatedPosts } from "@/components/public/blog/blog-data"
 import { ReadingProgressBar } from "@/components/public/blog/reading-progress-bar"
 import { BlogTemplateClassic } from "@/components/public/blog/templates/blog-template-classic"
 import { BlogTemplateEditorial } from "@/components/public/blog/templates/blog-template-editorial"
 import { BlogTemplateVisual } from "@/components/public/blog/templates/blog-template-visual"
 import type { BlogPost } from "@/components/public/blog/blog-data"
+import { getPublishedBlogBySlug, listRelatedBlogPosts } from "@/lib/content-store"
 import type { JSX } from "react"
 
-// ── generateStaticParams ─────────────────────────────────
-export function generateStaticParams() {
-  return POSTS.map((post) => ({ slug: post.slug }))
-}
+export const dynamic = "force-dynamic"
 
 // ── generateMetadata ─────────────────────────────────────
 export async function generateMetadata({
@@ -20,7 +17,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  const post = getPost(slug)
+  const post = await getPublishedBlogBySlug(slug)
 
   if (!post) {
     return {
@@ -74,12 +71,12 @@ export default async function BlogDetailPage({
 }) {
   const { slug } = await params
 
-  const post = getPost(slug)
+  const post = await getPublishedBlogBySlug(slug)
   if (!post) notFound()
 
   // After notFound() TypeScript still needs narrowing
   const safePost = post as BlogPost
-  const related = getRelatedPosts(slug, 3)
+  const related = await listRelatedBlogPosts(slug, 3)
   const Template = TEMPLATES[safePost.template]
 
   return (

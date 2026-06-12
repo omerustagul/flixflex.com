@@ -15,6 +15,7 @@ import {
   BarChart3, Palette, MessageSquare, Fingerprint,
   Megaphone, Smartphone, ShoppingCart,
 } from "@/lib/icons"
+import { StarField } from "@/components/ui/star-field"
 
 // ── Icon map ────────────────────────────────────────
 const ICON_MAP: Record<string, LucideIcon> = {

@@ -83,7 +83,7 @@ export default async function ProjectDetailPage({
       <PrevNextNav prev={prevItem} next={nextItem} />
       <CTASection
         variant="dark"
-        eyebrow="— Benzer Bir Proje —"
+        eyebrow="Benzer Bir Proje"
         title={
           <>
             Markanız için{" "}

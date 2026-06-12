@@ -7,17 +7,17 @@ import { cn } from "@/lib/utils"
 import { ease, staggerContainer, fadeInUp } from "@/lib/animations"
 import { BlogCard } from "./blog-card"
 import { BlogCategories } from "./blog-categories"
-import { POSTS, type BlogCategory } from "./blog-data"
+import { POSTS, type BlogCategory, type BlogPost } from "./blog-data"
 
 const POSTS_PER_PAGE = 9
 
-export function BlogListClient() {
+export function BlogListClient({ posts = POSTS }: { posts?: BlogPost[] } = {}) {
   const [category, setCategory] = useState<BlogCategory>("Tümü")
   const [search, setSearch] = useState("")
   const [page, setPage] = useState(1)
 
   const filtered = useMemo(() => {
-    let results = POSTS
+    let results = posts
 
     if (category !== "Tümü") {
       results = results.filter((p) => p.category === category)
@@ -34,7 +34,7 @@ export function BlogListClient() {
     }
 
     return results
-  }, [category, search])
+  }, [category, search, posts])
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / POSTS_PER_PAGE))
   const safePage = Math.min(page, totalPages)

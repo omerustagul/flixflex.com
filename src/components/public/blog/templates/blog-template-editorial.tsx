@@ -216,7 +216,7 @@ export function BlogTemplateEditorial({ post, related }: EditorialTemplateProps)
       )}
 
       <CTASection
-        eyebrow="— Bir Sonraki Adım —"
+        eyebrow="Bir Sonraki Adım"
         title={<>Stratejiyi <span className="text-[var(--ff-purple)]">harekete</span> geçirelim.</>}
         description="Okuduklarınızı markanıza uygulamak ister misiniz? FlixFlex ekibiyle bir oturum ayarlayalım."
       />

@@ -8,6 +8,8 @@ export interface BlogPost {
   slug: string
   excerpt: string
   content: string
+  /** Admin-uploaded cover image URL (preferred over coverGradient when set). */
+  coverImage?: string | null
   coverGradient: string
   template: "classic" | "editorial" | "visual"
   category: string

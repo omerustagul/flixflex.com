@@ -5,6 +5,7 @@ import { motion, useMotionValueEvent, useScroll } from "framer-motion"
 import { Menu, ArrowUpRight } from "@/lib/icons"
 import { ThemeToggle } from "@/components/ui"
 import { cn } from "@/lib/utils"
+import { Magnetic } from "@/components/ui/magnetic"
 import { FlixFlexLogo } from "./logo"
 import { DesktopNav } from "./desktop-nav"
 import { MobileMenu } from "./mobile-menu"
@@ -69,24 +70,26 @@ export function FlixFlexNavbar({ siteSettings = {} }: FlixFlexNavbarProps) {
                 <ThemeToggle />
               </div>
 
-              <button
-                type="button"
-                onClick={() => setAppointmentModalOpen(true)}
-                className={cn(
-                  "ff-shape-button",
-                  "group hidden md:inline-flex items-center justify-center gap-1.5 cursor-pointer",
-                  "px-4 py-2 text-[11px] font-medium transition-all duration-300",
-                  scrolled
-                    ? "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)] hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)] hover:shadow-[0_4px_20px_rgba(255, 79, 216,0.4)]"
-                    : "bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 hover:border-white/40"
-                )}
-              >
-                Randevu Al
-                <ArrowUpRight
-                  size={14}
-                  className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                />
-              </button>
+              <Magnetic className="hidden md:inline-flex" strength={10}>
+                <button
+                  type="button"
+                  onClick={() => setAppointmentModalOpen(true)}
+                  className={cn(
+                    "ff-shape-button",
+                    "group inline-flex items-center justify-center gap-1.5 cursor-pointer",
+                    "px-4 py-2 text-[11px] font-medium transition-colors duration-300",
+                    scrolled
+                      ? "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)] hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)] hover:shadow-[0_6px_24px_rgba(255,79,216,0.4)]"
+                      : "bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 hover:border-white/40"
+                  )}
+                >
+                  Randevu Al
+                  <ArrowUpRight
+                    size={14}
+                    className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  />
+                </button>
+              </Magnetic>
 
               {/* Mobile burger */}
               <button

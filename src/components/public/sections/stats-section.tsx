@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { FFStatCounter } from "@/components/ui"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import { cn } from "@/lib/utils"
 
 const STATS = [
@@ -62,9 +63,7 @@ export function StatsSection() {
           transition={{ duration: 0.6 }}
           className="mb-12 md:mb-16 max-w-2xl"
         >
-          <p className="text-[11px] font-semibold text-[var(--ff-purple)] mb-4">
-            — Rakamlar konuşur —
-          </p>
+          <Eyebrow className="mb-4">Rakamlar konuşur</Eyebrow>
           <h2 className="font-display text-3xl md:text-5xl font-extrabold leading-[1.1] tracking-tight text-[var(--foreground)]">
             Hikâye değil,{" "}
             <span className="text-[var(--ff-purple)]">kanıt.</span>

@@ -1,6 +1,9 @@
-import { ArrowRight, Tag } from "@/lib/icons"
+import { ArrowRight } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { ServiceCard } from "./service-card"
+import { StarField } from "@/components/ui/star-field"
+import { Eyebrow } from "@/components/ui/eyebrow"
+import { RevealGroup, RevealItem } from "@/components/ui/reveal"
 import type { Service } from "./services-data"
 
 // ── Props ──────────────────────────────────────────
@@ -19,18 +22,8 @@ export function ServicesSection({ services }: ServicesSectionProps) {
         "overflow-hidden"
       )}
     >
-      {/* Subtle grid background */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none opacity-[0.35]"
-        style={{
-          backgroundImage:
-            "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-          maskImage:
-            "radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%)",
-        }}
-      />
+      {/* Deep-space starfield background (replaces the old grid) */}
+      <StarField className="z-0" />
 
       {/* Purple corner accent — top-right */}
       <span
@@ -42,28 +35,33 @@ export function ServicesSection({ services }: ServicesSectionProps) {
         }}
       />
 
-      <div className="relative px-6 md:px-10 xl:px-16">
+      <div className="relative z-10 px-6 md:px-10 xl:px-16">
         {/* ── Section header ── */}
         <div className="w-full flex flex-col items-center justify-center py-6 md:py-10">
           <div className="w-full flex flex-col items-center justify-center space-y-8 md:space-y-12">
-            <div className="flex flex-col items-center justify-center gap-1 text-center">
-            <span className="ff-shape-container inline-flex items-center gap-1.5 px-3 py-1 bg-[var(--ff-purple)]/10 border border-[var(--ff-purple)]/20 text-[11px] font-semibold text-[var(--ff-purple)] mb-4">
-            <Tag size={11} />
-            Hizmetlerimiz
-            </span>
-            <h2 className="font-display text-xl md:text-2xl lg:text-3xl font-extrabold leading-[1.15] tracking-tight max-w-2xl text-[var(--foreground)]">
-            Sunduğumuz Hizmetler
-            </h2>
-            <p className="mt-1 text-[var(--foreground-muted)] text-base md:text-sm max-w-xl leading-relaxed">
-            Sunduğumuz hizmetlerle size nasıl değer katabileceğinizi keşfedin.
-            </p>
-            <button className="inline-flex items-center gap-1.5 px-3 py-1 underline text-[11px] font-semibold text-[var(--foreground)] hover:text-[var(--ff-purple)] transition-colors mt-2">
-            Tüm Hizmetlerimiz
-            <ArrowRight size={11} />
-            </button>
-        </div>
+            <RevealGroup className="flex flex-col items-center justify-center gap-3 text-center">
+              <RevealItem>
+                <Eyebrow align="center">Hizmetlerimiz</Eyebrow>
+              </RevealItem>
+              <RevealItem>
+                <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-extrabold leading-[1.05] tracking-tighter max-w-3xl text-[var(--foreground)]">
+                  Sunduğumuz <span className="text-[var(--ff-purple)]">Hizmetler</span>
+                </h2>
+              </RevealItem>
+              <RevealItem>
+                <p className="text-[var(--foreground-muted)] text-base md:text-lg max-w-xl leading-relaxed">
+                  Sunduğumuz hizmetlerle size nasıl değer katabileceğinizi keşfedin.
+                </p>
+              </RevealItem>
+              <RevealItem>
+                <button className="inline-flex items-center gap-1.5 px-3 py-1 underline text-[11px] font-semibold text-[var(--foreground)] hover:text-[var(--ff-purple)] transition-colors mt-1">
+                  Tüm Hizmetlerimiz
+                  <ArrowRight size={11} />
+                </button>
+              </RevealItem>
+            </RevealGroup>
             {/* ── Desktop grid (hidden on mobile) ── */}
-            <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-6">
               {services.map((service, i) => (
                 <div key={service.slug} className="bg-[var(--background)]">
                   <ServiceCard service={service} index={i} />

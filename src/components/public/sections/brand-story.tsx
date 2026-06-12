@@ -4,6 +4,7 @@ import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Zap, Sparkles } from "@/lib/icons"
 import { cn } from "@/lib/utils"
+import { Eyebrow } from "@/components/ui/eyebrow"
 
 interface SideProps {
   word: string
@@ -174,9 +175,7 @@ export function BrandStorySection() {
     >
       {/* Eyebrow */}
       <div className="mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16 mb-16 md:mb-24 text-center">
-        <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[var(--ff-purple)] mb-4">
-          — Markamızın iki kalbi —
-        </p>
+        <Eyebrow align="center" className="mb-4">Markamızın iki kalbi</Eyebrow>
         <h2 className="font-display text-3xl md:text-5xl font-extrabold leading-[1.1] tracking-tight max-w-3xl mx-auto">
           The <span className="text-[var(--foreground)]">Flix</span>{" "}
           <span className="text-[var(--foreground-faint)]">&amp;</span>{" "}

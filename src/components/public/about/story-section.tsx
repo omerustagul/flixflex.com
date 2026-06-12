@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import { fadeInUp, staggerContainer } from "@/lib/animations"
 
 // ── Quick facts / timeline data ───────────────────────
@@ -98,9 +99,7 @@ export function StorySection() {
             transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
           >
             {/* Eyebrow */}
-            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[var(--ff-purple)] mb-5">
-              — Hikâyemiz —
-            </p>
+            <Eyebrow className="mb-5">Hikâyemiz</Eyebrow>
 
             {/* Headline */}
             <h2
@@ -167,9 +166,7 @@ export function StorySection() {
               variants={fadeInUp}
               className="mb-8"
             >
-              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[var(--ff-purple)] mb-2">
-                — Rakamlarla FlixFlex —
-              </p>
+              <Eyebrow className="mb-2">Rakamlarla FlixFlex</Eyebrow>
               <h3 className="font-display text-xl md:text-2xl font-bold text-[var(--foreground)] tracking-tight">
                 5 yılda ne yaptık
               </h3>

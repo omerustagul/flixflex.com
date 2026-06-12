@@ -7,6 +7,8 @@ import { ArrowUpRight } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { BackgroundPaths } from "@/components/ui/background-paths"
 import { StarField } from "@/components/ui/star-field"
+import { Magnetic } from "@/components/ui/magnetic"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import { staggerContainer, fadeInUp } from "@/lib/animations"
 
 // ── Types ──────────────────────────────────────────────────────
@@ -28,7 +30,12 @@ const DEFAULT_TITLE: React.ReactNode = (
   </>
 )
 
-const DEFAULT_EYEBROW = "— Bir Sonraki Adım —"
+const DEFAULT_EYEBROW = "Bir Sonraki Adım"
+
+/** Strip the legacy `— … —` dash-wrapping from any eyebrow string. */
+function cleanEyebrow(value: string): string {
+  return value.replace(/^[\s—–-]+/, "").replace(/[\s—–-]+$/, "")
+}
 const DEFAULT_DESCRIPTION =
   "Bir sonraki bölümü birlikte yazalım. Brief'ini paylaş, hemen toplanalım."
 const DEFAULT_PRIMARY_CTA = { label: "İletişime Geç", href: "/iletisim" }
@@ -51,27 +58,24 @@ function GeometricGrid({ dark }: { dark: boolean }) {
 }
 
 // ── Purple aura blobs ──────────────────────────────────────────
+// Minimal, modern accents tucked into the corners — no large central blob.
 function AuraBlobs({ dark }: { dark: boolean }) {
   return (
     <>
-      {/* Centre aura */}
       <div
         aria-hidden
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[64rem] h-[32rem] pointer-events-none"
+        className="absolute -bottom-24 -left-24 w-72 h-72 rounded-full pointer-events-none"
         style={{
-          background: `radial-gradient(ellipse, rgba(255, 79, 216,${dark ? "0.22" : "0.1"
-            }) 0%, transparent 65%)`,
-          filter: "blur(64px)",
+          background: `radial-gradient(circle, rgba(255,79,216,${dark ? "0.12" : "0.06"}) 0%, transparent 70%)`,
+          filter: "blur(60px)",
         }}
       />
-      {/* Bottom-left accent */}
       <div
         aria-hidden
-        className="absolute -bottom-16 -left-16 w-[28rem] h-[28rem] pointer-events-none"
+        className="absolute -top-20 right-8 w-56 h-56 rounded-full pointer-events-none"
         style={{
-          background: `radial-gradient(circle, rgba(255, 79, 216,${dark ? "0.14" : "0.06"
-            }) 0%, transparent 60%)`,
-          filter: "blur(48px)",
+          background: `radial-gradient(circle, rgba(255,79,216,${dark ? "0.08" : "0.04"}) 0%, transparent 70%)`,
+          filter: "blur(70px)",
         }}
       />
     </>
@@ -145,15 +149,9 @@ export function CTASection({
         >
           {/* Eyebrow */}
           {eyebrow && (
-            <motion.p
-              variants={fadeInUp}
-              className={cn(
-                "text-[11px] font-semibold mb-6",
-                "text-[var(--ff-purple)]"
-              )}
-            >
-              {eyebrow}
-            </motion.p>
+            <motion.div variants={fadeInUp} className="mb-6">
+              <Eyebrow align="center">{cleanEyebrow(eyebrow)}</Eyebrow>
+            </motion.div>
           )}
 
           {/* Mega title */}
@@ -190,47 +188,48 @@ export function CTASection({
             className="flex flex-col sm:flex-row items-center gap-4"
           >
             {/* Primary CTA */}
-            <Link
-              href={primaryCTA.href}
-              className={cn(
-                "ff-shape-button",
-                "group inline-flex items-center justify-center gap-2.5",
-                "px-10 py-5 h-9 text-[15px] font-medium",
-                "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
-                "hover:bg-[var(--ff-purple-hover)] hover:border-[var(--ff-purple-hover)]",
-                "hover:shadow-[0_4px_32px_rgba(255, 79, 216,0.5)]",
-                "transition-all duration-200 whitespace-nowrap"
-              )}
-            >
-              {primaryCTA.label}
-              <ArrowUpRight
-                size={16}
-                aria-hidden
-                className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              />
-            </Link>
+            <Magnetic>
+              <Link
+                href={primaryCTA.href}
+                className={cn(
+                  "ff-shape-button",
+                  "group inline-flex items-center justify-center gap-2.5",
+                  "px-10 py-5 h-9 text-[15px] font-medium",
+                  "bg-[var(--ff-purple)] text-white border border-[var(--ff-purple)]",
+                  "hover:shadow-[0_8px_40px_rgba(255,79,216,0.5)]",
+                  "transition-shadow duration-300 whitespace-nowrap"
+                )}
+              >
+                {primaryCTA.label}
+                <ArrowUpRight
+                  size={16}
+                  aria-hidden
+                  className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+              </Link>
+            </Magnetic>
 
             {/* Secondary CTA */}
-            <Link
-              href={secondaryCTA.href}
-              className={cn(
-                "ff-shape-button",
-                "group inline-flex items-center justify-center gap-2.5",
-                "px-10 py-5 h-9 text-[15px] font-medium",
-                "bg-transparent",
-                isDark
-                  ? "text-[var(--ff-purple)] border border-[var(--ff-purple)] hover:border-[var(--ff-purple)] hover:text-[var(--ff-purple)]"
-                  : "text-[var(--ff-purple)] border border-[var(--ff-purple)] hover:border-[var(--ff-purple)] hover:text-[var(--ff-purple)]",
-                "transition-all duration-200 whitespace-nowrap"
-              )}
-            >
-              {secondaryCTA.label}
-              <ArrowUpRight
-                size={16}
-                aria-hidden
-                className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              />
-            </Link>
+            <Magnetic>
+              <Link
+                href={secondaryCTA.href}
+                className={cn(
+                  "ff-shape-button",
+                  "group inline-flex items-center justify-center gap-2.5",
+                  "px-10 py-5 h-9 text-[15px] font-medium",
+                  "bg-transparent text-[var(--ff-purple)] border border-[var(--ff-purple)]",
+                  "hover:bg-[var(--ff-purple)]/10",
+                  "transition-colors duration-300 whitespace-nowrap"
+                )}
+              >
+                {secondaryCTA.label}
+                <ArrowUpRight
+                  size={16}
+                  aria-hidden
+                  className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+              </Link>
+            </Magnetic>
           </motion.div>
 
           {/* Animated status indicator */}

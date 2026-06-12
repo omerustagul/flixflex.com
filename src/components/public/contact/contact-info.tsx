@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { Mail, Phone, MapPin, Clock, Instagram, Linkedin, Youtube } from "@/lib/icons"
 import { cn } from "@/lib/utils"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import { staggerContainer, fadeInUp } from "@/lib/animations"
 
 // ── Decorative floating shapes (right-panel visual) ───────
@@ -107,9 +108,7 @@ export function ContactInfo() {
     >
       {/* Header */}
       <motion.div variants={fadeInUp} className="mb-8">
-        <p className="text-[11px] font-semibold text-[var(--ff-purple)] mb-3">
-          — Bize Ulaşın —
-        </p>
+        <Eyebrow className="mb-3">Bize Ulaşın</Eyebrow>
         <h2 className="font-display text-2xl font-extrabold text-[var(--foreground)] leading-tight">
           Doğrudan konuşmayı<br />
           <span className="text-[var(--ff-purple)]">tercih eder misiniz?</span>

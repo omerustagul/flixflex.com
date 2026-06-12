@@ -45,7 +45,7 @@ export default async function PortfolioPage() {
         <PortfolioSection items={portfolio} />
         <CTASection
           variant="dark"
-          eyebrow="— Sıradaki Projeniz —"
+          eyebrow="Sıradaki Projeniz"
           title={
             <>
               Bir sonraki{" "}

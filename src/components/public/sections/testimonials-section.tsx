@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import { TestimonialCarousel } from "@/components/ui/testimonial"
 import type { Testimonial } from "@/components/ui/testimonial"
 import { staggerContainer, fadeInUp } from "@/lib/animations"
@@ -111,12 +112,9 @@ export function TestimonialsSection() {
           className="mb-14 md:mb-20 text-center"
         >
           {/* Eyebrow */}
-          <motion.p
-            variants={fadeInUp}
-            className="text-[11px] font-semibold text-[var(--ff-purple)] mb-5"
-          >
-            — Referanslar —
-          </motion.p>
+          <motion.div variants={fadeInUp} className="mb-5">
+            <Eyebrow align="center">Referanslar</Eyebrow>
+          </motion.div>
 
           {/* Heading */}
           <motion.h2

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { CheckCircle2 } from "@/lib/icons"
 import { cn } from "@/lib/utils"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import { staggerContainer, fadeInUp } from "@/lib/animations"
 
 interface SuccessMessageProps {
@@ -54,9 +55,7 @@ export function SuccessMessage({ refCode, onReset }: SuccessMessageProps) {
 
       {/* Heading */}
       <motion.div variants={fadeInUp} className="space-y-3 max-w-md">
-        <p className="text-[11px] font-semibold text-[var(--ff-purple)]">
-          — Mesajınız İletildi —
-        </p>
+        <Eyebrow align="center">Mesajınız İletildi</Eyebrow>
         <h3 className="font-display text-2xl md:text-3xl font-extrabold text-[var(--foreground)] leading-tight">
           Teşekkürler!{" "}
           <span className="text-[var(--ff-purple)]">Sesinizi duyduk.</span>

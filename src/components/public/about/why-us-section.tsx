@@ -4,6 +4,7 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { X, Check } from "@/lib/icons"
 import { cn } from "@/lib/utils"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import { fadeInUp, staggerContainer } from "@/lib/animations"
 import { DIFFERENTIATORS, type Differentiator } from "./about-data"
 
@@ -49,11 +50,9 @@ function ComparisonRow({
         {/* Topic badge */}
         <div
           className={cn(
-            "my-2 px-2 py-1 shrink-0",
-            "border border-[var(--ff-purple)]/30 bg-[var(--ff-purple)]/10 text-[var(--ff-purple)]",
+            "ff-shape-container px-4 py-1 shrink-0",
+            "border border-border/40 bg-foreground/20 backdrop-blur-sm text-[var(--background)]",
             "transition-[background-color,border-color,box-shadow] duration-300",
-            "group-hover:bg-[var(--ff-purple)] group-hover:border-[var(--ff-purple)]",
-            "group-hover:shadow-[0_0_12px_rgba(255, 79, 216,0.2)]"
           )}
         >
           <span className="font-mono text-[9px] md:text-[10px] font-semibold text-[var(--ff-purple)] whitespace-nowrap">
@@ -126,9 +125,7 @@ export function WhyUsSection() {
           transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
           className="mb-14 md:mb-20 text-center"
         >
-          <p className="mb-4 text-[11px] font-semibold text-[var(--ff-purple)]">
-            — Neden FlixFlex —
-          </p>
+          <Eyebrow align="center" className="mb-4">Neden FlixFlex</Eyebrow>
           <h2
             className={cn(
               "font-display font-extrabold leading-[1.08] tracking-[-0.03em]",
@@ -175,10 +172,10 @@ export function WhyUsSection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
           className={cn(
-            "ff-shape-container",
-            "border border-[var(--border)]",
+            "ff-shape-container p-4",
+            "border-2 border-[var(--border)]",
             "divide-y-0",
-            "bg-[var(--surface-elevated)]"
+            "bg-[var(--surface-elevated)]/20 backdrop-blur-sm",
           )}
         >
           {DIFFERENTIATORS.map((diff, i) => (

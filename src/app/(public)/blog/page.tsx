@@ -1,13 +1,15 @@
 import type { Metadata } from "next"
 import { cn } from "@/lib/utils"
+import { Eyebrow } from "@/components/ui/eyebrow"
 import { CTASection } from "@/components/public/sections/cta-section"
 import { FeaturedPost } from "@/components/public/blog/featured-post"
 import { BlogListClient } from "@/components/public/blog/blog-list-client"
-import { getFeaturedPost } from "@/components/public/blog/blog-data"
 
 import { getPageBySlug } from "@/lib/page-data"
-import { listPublishedPortfolio } from "@/lib/content-store"
+import { listPublishedPortfolio, listPublishedBlogPosts, getFeaturedBlogPost } from "@/lib/content-store"
 import { PageRenderer } from "@/components/public/page-renderer"
+
+export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
   title: "Blog & Düşünceler | FlixFlex",
@@ -23,11 +25,14 @@ export const metadata: Metadata = {
 }
 
 export default async function BlogPage() {
-  const portfolioItems = await listPublishedPortfolio();
+  const [portfolioItems, blogPosts, featured] = await Promise.all([
+    listPublishedPortfolio(),
+    listPublishedBlogPosts(),
+    getFeaturedBlogPost(),
+  ])
   const pageData = await getPageBySlug("blog")
 
   if (!pageData || pageData.sections.length === 0) {
-    const featured = getFeaturedPost()
 
     return (
       <>
@@ -64,9 +69,7 @@ export default async function BlogPage() {
           <div className="relative mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16">
             <div className="max-w-3xl">
               {/* Eyebrow */}
-              <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-[var(--ff-purple)] mb-5">
-                — Düşünceler & İçgörüler —
-              </p>
+              <Eyebrow className="mb-5">Düşünceler &amp; İçgörüler</Eyebrow>
 
               {/* Heading */}
               <h1
@@ -90,9 +93,7 @@ export default async function BlogPage() {
         {/* ── Featured post ─────────────────────────────── */}
         <section className="mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16 pb-16">
           <div className="flex items-center gap-4 mb-6">
-            <p className="text-[11px] font-semibold text-[var(--ff-purple)]">
-              — Öne Çıkan Yazı —
-            </p>
+            <Eyebrow>Öne Çıkan Yazı</Eyebrow>
             <span className="flex-1 h-px bg-[var(--border)]" />
           </div>
 
@@ -102,18 +103,16 @@ export default async function BlogPage() {
         {/* ── Blog grid ─────────────────────────────────── */}
         <section className="mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16 pb-20 md:pb-28">
           <div className="flex items-center gap-4 mb-8">
-            <p className="text-[11px] font-semibold text-[var(--ff-purple)]">
-              — Tüm Yazılar —
-            </p>
+            <Eyebrow>Tüm Yazılar</Eyebrow>
             <span className="flex-1 h-px bg-[var(--border)]" />
           </div>
 
-          <BlogListClient />
+          <BlogListClient posts={blogPosts} />
         </section>
 
         {/* ── CTA ──────────────────────────────────────── */}
         <CTASection
-          eyebrow="— Birlikte Büyüyelim —"
+          eyebrow="Birlikte Büyüyelim"
           title={
             <>
               Markanızı <span className="text-[var(--ff-purple)]">domine</span> edelim.
@@ -127,5 +126,5 @@ export default async function BlogPage() {
     )
   }
 
-  return <PageRenderer sections={pageData.sections} portfolioItems={portfolioItems} />
+  return <PageRenderer sections={pageData.sections} portfolioItems={portfolioItems} blogPosts={blogPosts} />
 }

@@ -3,6 +3,7 @@
 import { useRef } from "react"
 import { motion } from "framer-motion"
 import { BackgroundPaths } from "@/components/ui"
+import { StarField } from "@/components/ui/star-field"
 import { cn } from "@/lib/utils"
 
 // ── Character-by-character reveal ────────────────────
@@ -164,16 +165,8 @@ export function ManifestoSection() {
         }}
       />
 
-      {/* Subtle grid */}
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-[0.02] pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
-        }}
-      />
+      {/* Deep-space starfield background (replaces the old grid) */}
+      <StarField className="z-0" />
 
       {/* Content */}
       <div className="relative mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16 w-full text-center">

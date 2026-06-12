@@ -4,6 +4,8 @@ import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { fadeInUp, staggerContainer, cardHover } from "@/lib/animations"
 import { VALUES, type Value } from "./about-data"
+import { StarField } from "@/components/ui/star-field"
+import { Eyebrow } from "@/components/ui/eyebrow"
 
 // ── Individual value card ──────────────────────────────
 function ValueCard({ value, index }: { value: Value; index: number }) {
@@ -89,18 +91,8 @@ export function ValuesSection() {
         "py-20 md:py-28 overflow-hidden"
       )}
     >
-      {/* Subtle grid */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none opacity-[0.3]"
-        style={{
-          backgroundImage:
-            "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-          maskImage:
-            "radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 90%)",
-        }}
-      />
+      {/* Deep-space starfield background (replaces the old grid) */}
+      <StarField className="z-0" />
 
       {/* Top right accent */}
       <div
@@ -121,9 +113,7 @@ export function ValuesSection() {
           transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
           className="mb-14 md:mb-20 text-center"
         >
-          <p className="mb-4 text-[11px] font-semibold tracking-[0.2em] uppercase text-[var(--ff-purple)]">
-            — Temel Değerlerimiz —
-          </p>
+          <Eyebrow align="center" className="mb-4">Temel Değerlerimiz</Eyebrow>
           <h2
             className={cn(
               "font-display font-extrabold leading-[1.08] tracking-[-0.03em]",
