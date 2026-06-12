@@ -66,7 +66,20 @@ function FactItem({
 }
 
 // ── Section ───────────────────────────────────────────
-export function StorySection() {
+const DEFAULT_STORY_PARAGRAPHS = [
+  "FlixFlex, 2020 yılında İstanbul'da bir garaj ofisinde, iki kişilik bir ekibin \"neden Türk markalar dijitalde hak ettiği yerde değil?\" sorusundan doğdu. Cevap ne şablonlarda ne de ajans klişelerindeydi; cesaret, strateji ve veriydi.",
+  "İlk yılımızda 5 startup ile çalıştık — bütçeler küçük, hedefler büyüktü. Her bütçeyi sanki kendi paramızmış gibi harcadık, her sonucu şeffaf raporladık. Kulaktan kulağa yayılan itibar, bugün 50+ aktif müşteri portföyüne dönüştü.",
+  "Bugün FlixFlex; strateji, yaratıcılık ve performans pazarlamasını tek çatı altında birleştiren 8 kişilik bir ekip. Biz sadece reklam yapmıyoruz — markaları bir sonraki seviyeye taşıyoruz.",
+]
+
+interface StorySectionProps {
+  eyebrow?: string
+  headline?: string
+  paragraphs?: string[]
+}
+
+export function StorySection({ eyebrow, headline, paragraphs }: StorySectionProps = {}) {
+  const paras = paragraphs && paragraphs.length > 0 ? paragraphs : DEFAULT_STORY_PARAGRAPHS
   return (
     <section
       className={cn(
@@ -99,7 +112,7 @@ export function StorySection() {
             transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
           >
             {/* Eyebrow */}
-            <Eyebrow className="mb-5">Hikâyemiz</Eyebrow>
+            <Eyebrow className="mb-5">{eyebrow ?? "Hikâyemiz"}</Eyebrow>
 
             {/* Headline */}
             <h2
@@ -109,47 +122,28 @@ export function StorySection() {
                 "mb-8"
               )}
             >
-              Sıfırdan değil,{" "}
-              <span className="text-[var(--ff-purple)]">sıfırı</span>{" "}
-              domine ederek.
+              {headline ?? (
+                <>
+                  Sıfırdan değil,{" "}
+                  <span className="text-[var(--ff-purple)]">sıfırı</span>{" "}
+                  domine ederek.
+                </>
+              )}
             </h2>
 
             {/* Body paragraphs */}
             <div className="space-y-5 text-base md:text-lg text-[var(--foreground-muted)] leading-relaxed">
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.15, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-              >
-                FlixFlex, 2020 yılında İstanbul&apos;da bir garaj ofisinde, iki kişilik
-                bir ekibin &quot;neden Türk markalar dijitalde hak ettiği yerde değil?&quot;
-                sorusundan doğdu. Cevap ne şablonlarda ne de ajans klişelerindeydi;
-                cesaret, strateji ve veriydi.
-              </motion.p>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.25, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-              >
-                İlk yılımızda 5 startup ile çalıştık — bütçeler küçük, hedefler
-                büyüktü. Her bütçeyi sanki kendi paramızmış gibi harcadık, her
-                sonucu şeffaf raporladık. Kulaktan kulağa yayılan itibar, bugün
-                50+ aktif müşteri portföyüne dönüştü.
-              </motion.p>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.35, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-              >
-                Bugün FlixFlex; strateji, yaratıcılık ve performans pazarlamasını
-                tek çatı altında birleştiren 8 kişilik bir ekip. Biz sadece reklam
-                yapmıyoruz — markaları bir sonraki seviyeye taşıyoruz.
-              </motion.p>
+              {paras.map((para, i) => (
+                <motion.p
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.15 + i * 0.1, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                >
+                  {para}
+                </motion.p>
+              ))}
             </div>
           </motion.div>
 

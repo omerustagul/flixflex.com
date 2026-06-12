@@ -31,6 +31,7 @@ export interface BlogPostRecord {
   slug: string
   excerpt: string
   content: string
+  coverImage: string | null
   coverGradient: string
   template: "classic" | "editorial" | "visual"
   category: string
@@ -80,7 +81,8 @@ function toRecord(row: NonNullable<PrismaBlogRow>): BlogPostRecord {
     slug: row.slug,
     excerpt: row.excerpt ?? "",
     content: row.content,
-    coverGradient: row.coverImage ?? DEFAULT_GRADIENT,
+    coverImage: row.coverImage ?? null,
+    coverGradient: row.coverGradient ?? DEFAULT_GRADIENT,
     template: (row.template as BlogPostRecord["template"]) ?? "classic",
     category: row.category ?? "Strateji",
     tags: row.tags ?? [],
@@ -146,6 +148,7 @@ export interface CreatePostInput {
   slug?: string
   excerpt?: string
   content: string
+  coverImage?: string | null
   coverGradient?: string
   template?: "classic" | "editorial" | "visual"
   category?: string
@@ -168,6 +171,7 @@ export async function createPost(input: CreatePostInput): Promise<BlogPostRecord
       slug,
       excerpt: input.excerpt ?? deriveExcerpt(input.content),
       content: input.content,
+      coverImage: input.coverImage ?? null,
       coverGradient: input.coverGradient ?? DEFAULT_GRADIENT,
       template: input.template ?? "classic",
       category: input.category ?? "Strateji",
@@ -188,7 +192,8 @@ export async function createPost(input: CreatePostInput): Promise<BlogPostRecord
       slug,
       excerpt: input.excerpt ?? deriveExcerpt(input.content),
       content: input.content,
-      coverImage: input.coverGradient ?? DEFAULT_GRADIENT,
+      coverImage: input.coverImage ?? null,
+      coverGradient: input.coverGradient ?? DEFAULT_GRADIENT,
       template: input.template ?? "classic",
       category: input.category ?? "Strateji",
       tags: input.tags ?? [],
@@ -229,7 +234,8 @@ export async function updatePost(
           content: patch.content,
           readTime: readingTime(patch.content),
         } : {}),
-        ...(patch.coverGradient !== undefined ? { coverImage: patch.coverGradient } : {}),
+        ...(patch.coverImage !== undefined ? { coverImage: patch.coverImage } : {}),
+        ...(patch.coverGradient !== undefined ? { coverGradient: patch.coverGradient } : {}),
         ...(patch.template !== undefined ? { template: patch.template } : {}),
         ...(patch.category !== undefined ? { category: patch.category } : {}),
         ...(patch.tags !== undefined ? { tags: patch.tags } : {}),
@@ -288,6 +294,7 @@ export function toPublicPost(record: BlogPostRecord): BlogPost {
     slug: record.slug,
     excerpt: record.excerpt,
     content: record.content,
+    coverImage: record.coverImage,
     coverGradient: record.coverGradient,
     template: record.template,
     category: record.category,

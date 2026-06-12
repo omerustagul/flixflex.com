@@ -33,7 +33,7 @@ export interface TiltCardProps {
 
 const GLASS_CLASSES = [
   "ff-shape-container group flex flex-col",
-  "bg-[var(--surface-elevated)] border border-[var(--border)]",
+  "bg-[var(--surface-elevated)]/10 backdrop-blur-sm border border-[var(--border)]/40",
   "transition-[border-color,box-shadow] duration-300",
   "hover:border-[var(--ff-purple)]/40",
   "hover:shadow-[0_8px_40px_rgba(255, 79, 216,0.12)]",

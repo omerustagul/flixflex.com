@@ -47,6 +47,22 @@ export function MobileNavbar({
   const pathname = usePathname()
   const { isMobileDockVisible } = useUIStore()
 
+  // Hide the dock once the footer scrolls into view — it slides back down
+  // so it never overlaps the footer's content / CTAs.
+  const [footerVisible, setFooterVisible] = React.useState(false)
+  React.useEffect(() => {
+    const footer = document.querySelector("footer")
+    if (!footer) return
+    const io = new IntersectionObserver(
+      ([entry]) => setFooterVisible(entry.isIntersecting),
+      { threshold: 0 }
+    )
+    io.observe(footer)
+    return () => io.disconnect()
+  }, [pathname])
+
+  const show = isMobileDockVisible && !footerVisible
+
   function isActive(href: string) {
     if (href === "/") return pathname === "/"
     return pathname.startsWith(href)
@@ -57,9 +73,9 @@ export function MobileNavbar({
       role="navigation"
       aria-label="Mobil alt navigasyon"
       initial={{ y: 80, opacity: 0 }}
-      animate={{ 
-        y: isMobileDockVisible ? 0 : 80, 
-        opacity: isMobileDockVisible ? 1 : 0 
+      animate={{
+        y: show ? 0 : 80,
+        opacity: show ? 1 : 0,
       }}
       transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
       className={cn(

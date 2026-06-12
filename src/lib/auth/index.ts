@@ -28,6 +28,8 @@ import prisma from "@/lib/prisma"
 import { env } from "@/lib/env"
 import { authConfig } from "@/lib/auth/config"
 import type { SessionPermission } from "@/lib/auth/types"
+import { decryptSecret } from "@/lib/crypto"
+import { verifyTotp, hashBackupCode } from "@/lib/totp"
 
 // ── Credentials shape validation ────────────────────────
 const credentialsSchema = z.object({
@@ -65,10 +67,12 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       credentials: {
         email:    { label: "E-posta", type: "email" },
         password: { label: "Şifre",   type: "password" },
+        totp:     { label: "2FA Kodu", type: "text" },
       },
       async authorize(rawCredentials) {
         const emailInput = typeof rawCredentials?.email === "string" ? rawCredentials.email.trim().toLowerCase() : ""
         const passwordInput = typeof rawCredentials?.password === "string" ? rawCredentials.password : ""
+        const totpInput = typeof rawCredentials?.totp === "string" ? rawCredentials.totp.replace(/\s/g, "") : ""
 
         // 1. Validate shape
         const parsed = credentialsSchema.safeParse({ email: emailInput, password: passwordInput })
@@ -154,6 +158,37 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         // 5. Verify password using bcryptjs
         const ok = await bcrypt.compare(password, user.password)
         if (!ok) return null
+
+        // 5b. Second factor — only enforced for accounts that enabled it.
+        //     Accepts a current TOTP code OR a one-time backup code.
+        //     Fail-safe: accounts WITHOUT 2FA are completely unaffected.
+        if (user.twoFactorEnabled && user.twoFactorSecret) {
+          let twoFaOk = false
+          try {
+            const secret = decryptSecret(user.twoFactorSecret)
+            if (totpInput && verifyTotp(secret, totpInput)) {
+              twoFaOk = true
+            } else if (totpInput) {
+              const codeHash = hashBackupCode(totpInput)
+              const codes: string[] = user.twoFactorBackupCodes ?? []
+              if (codes.includes(codeHash)) {
+                twoFaOk = true
+                // Consume the used backup code (fire-and-forget).
+                if (prisma) {
+                  prisma.user
+                    .update({
+                      where: { id: user.id },
+                      data: { twoFactorBackupCodes: codes.filter((c) => c !== codeHash) },
+                    })
+                    .catch(() => {})
+                }
+              }
+            }
+          } catch (err) {
+            console.error("[auth] 2FA verification error:", err)
+          }
+          if (!twoFaOk) return null
+        }
 
         // 5. Update lastLogin (fire-and-forget — never block auth)
         if (prisma) {

@@ -61,7 +61,7 @@ export function PortfolioHero({
     <section
       className={cn(
         "relative bg-[var(--background)] text-[var(--foreground)]",
-        "pt-32 pb-20 md:pt-40 md:pb-24 overflow-hidden"
+        "pt-26 pb-4 md:pt-30 md:pb-18 overflow-hidden"
       )}
     >
       {/* Deep-space starfield background (replaces the old grid) */}

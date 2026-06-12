@@ -9,6 +9,7 @@ import { auth } from "@/lib/auth"
 import { hasPermission } from "@/lib/rbac/permissions"
 import { rateLimit, getClientIp } from "@/lib/rate-limit"
 import { appointmentSchema } from "@/lib/validators/appointment-schema"
+import { notifyAdmins } from "@/lib/notify"
 
 // Booking window guards: no past dates, max 3 months ahead.
 const MAX_LEAD_MS = 1000 * 60 * 60 * 24 * 90 // 90 days
@@ -152,6 +153,22 @@ export async function POST(req: NextRequest) {
     })
 
     console.log("📅 [FlixFlex Appointment] New appointment created:", appointment)
+
+    // Notify admins (respects notifications settings; never blocks the user).
+    try {
+      await notifyAdmins("appointment", {
+        title: "Yeni randevu talebi alındı",
+        rows: [
+          { label: "Ad", value: name },
+          { label: "E-posta", value: email },
+          { label: "Telefon", value: phone },
+          { label: "Konu", value: subject },
+          { label: "Tarih", value: parsedDate.toLocaleString("tr-TR", { dateStyle: "long", timeStyle: "short" }) },
+        ],
+      })
+    } catch (notifyErr) {
+      console.error("[FlixFlex Appointment] notify failed:", notifyErr)
+    }
 
     return NextResponse.json(
       { ok: true, appointmentId: appointment.id },

@@ -17,6 +17,7 @@ const createSchema = z.object({
   slug:         z.string().min(1).optional(),
   excerpt:      z.string().max(500).optional(),
   content:      z.string().min(20),
+  coverImage:   z.string().optional().nullable(),
   coverGradient: z.string().optional(),
   template:     TEMPLATE.optional(),
   category:     z.string().optional(),

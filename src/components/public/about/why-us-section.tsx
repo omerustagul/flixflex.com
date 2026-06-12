@@ -8,6 +8,39 @@ import { Eyebrow } from "@/components/ui/eyebrow"
 import { fadeInUp, staggerContainer } from "@/lib/animations"
 import { DIFFERENTIATORS, type Differentiator } from "./about-data"
 
+// ── Brand mark (inline, theme-safe, no link) ──────────
+function BrandMark() {
+  return (
+    <span className="inline-flex items-center gap-2">
+      <span className="flex items-center justify-center w-7 h-7 md:w-8 md:h-8 shrink-0 bg-[var(--ff-purple)] text-white font-bold text-[10px] md:text-xs tracking-tight">
+        FF
+      </span>
+      <span className="font-display font-extrabold tracking-tight leading-none text-base md:text-lg text-[var(--foreground)]">
+        Flix<span className="text-[var(--ff-purple)]">Flex</span>
+      </span>
+    </span>
+  )
+}
+
+// ── VS comparison badge ───────────────────────────────
+function VsBadge({ className }: { className?: string }) {
+  return (
+    <span
+      aria-hidden
+      className={cn(
+        "flex items-center justify-center shrink-0",
+        "w-9 h-9 md:w-11 md:h-11 rounded-full",
+        "bg-[var(--ff-purple)] text-white",
+        "font-display font-extrabold text-[10px] md:text-xs tracking-tight",
+        "shadow-[0_0_18px_rgba(255,79,216,0.5)]",
+        className
+      )}
+    >
+      VS
+    </span>
+  )
+}
+
 // ── Single comparison row ─────────────────────────────
 function ComparisonRow({
   diff,
@@ -19,77 +52,84 @@ function ComparisonRow({
     <motion.div
       variants={fadeInUp}
       className={cn(
-        "group grid grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-stretch",
-        "border-b border-[var(--border)] last:border-b-0",
-        "transition-colors duration-200"
+        "group border-b border-[var(--border)] last:border-b-0",
+        "py-4 md:py-0 transition-colors duration-200"
       )}
     >
-      {/* ONLAR side */}
-      <div
-        className={cn(
-          "flex items-center gap-3 py-5 md:py-6 pr-4 md:pr-8",
-          "transition-opacity duration-300",
-          "group-hover:opacity-60"
-        )}
-      >
-        <span
-          aria-hidden
-          className="shrink-0 w-6 h-6 flex items-center justify-center border border-[var(--border)] text-[var(--foreground-faint)]"
-        >
-          <X size={12} strokeWidth={2.5} />
+      {/* Mobile-only topic chip (centered above the two sides) */}
+      <div className="md:hidden flex justify-center mb-3">
+        <span className="px-3 py-1 text-[11px] font-semibold bg-[var(--ff-purple)]/10 text-[var(--ff-purple)] whitespace-nowrap">
+          {diff.topic}
         </span>
-        <p className="text-sm md:text-base text-[var(--foreground-muted)] leading-snug">
-          {diff.theirs}
-        </p>
       </div>
 
-      {/* Center topic divider */}
-      <div className="flex flex-col items-center justify-center py-4 px-2 md:px-4">
-        {/* Vertical line */}
-        <div className="w-px flex-1 bg-[var(--border)]" />
-        {/* Topic badge */}
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-3 md:gap-8 items-stretch">
+        {/* ONLAR side */}
         <div
           className={cn(
-            "ff-shape-container px-4 py-1 shrink-0",
-            "border border-border/40 bg-foreground/20 backdrop-blur-sm text-[var(--background)]",
-            "transition-[background-color,border-color,box-shadow] duration-300",
+            "flex items-center gap-3 md:py-6 md:pr-8",
+            "transition-opacity duration-300 md:group-hover:opacity-60"
           )}
         >
-          <span className="font-mono text-[9px] md:text-[10px] font-semibold text-[var(--ff-purple)] whitespace-nowrap">
-            {diff.topic}
+          <span
+            aria-hidden
+            className="ff-shape-container shrink-0 w-6 h-6 flex items-center justify-center bg-[var(--error)]/10 backdrop-blur-sm border-2 border-[var(--error)]/40 text-[var(--error)]"
+          >
+            <X size={12} strokeWidth={2.5} />
           </span>
+          <p className="text-sm md:text-base text-[var(--foreground-muted)] leading-snug">
+            {diff.theirs}
+          </p>
         </div>
-        {/* Vertical line */}
-        <div className="w-px flex-1 bg-[var(--border)]" />
-      </div>
 
-      {/* BİZ side */}
-      <div
-        className={cn(
-          "flex items-center gap-3 py-5 md:py-6 pl-4 md:pl-8"
-        )}
-      >
-        <span
-          aria-hidden
-          className={cn(
-            "shrink-0 w-6 h-6 flex items-center justify-center",
-            "bg-[var(--ff-purple)] border border-[var(--ff-purple)] text-white",
-            "transition-[box-shadow] duration-300",
-            "group-hover:shadow-[0_0_14px_rgba(255, 79, 216,0.5)]"
-          )}
-        >
-          <Check size={12} strokeWidth={2.5} />
-        </span>
-        <p className="text-sm md:text-base text-[var(--foreground)] font-medium leading-snug">
-          {diff.ours}
-        </p>
+        {/* Center topic divider — desktop only */}
+        <div className="hidden md:flex flex-col items-center justify-center">
+          <div className="w-px flex-1 bg-[var(--border)]" />
+          <div
+            className={cn(
+              "flex items-center justify-center w-24 h-full py-2 shrink-0",
+              "bg-[var(--ff-purple)]/10 backdrop-blur-sm"
+            )}
+          >
+            <span className="text-xs md:text-sm font-semibold text-[var(--ff-purple)] whitespace-nowrap">
+              {diff.topic}
+            </span>
+          </div>
+          <div className="w-px flex-1 bg-[var(--border)]" />
+        </div>
+
+        {/* BİZ side */}
+        <div className="flex items-center gap-3 md:py-6 md:pl-8">
+          <span
+            aria-hidden
+            className={cn(
+              "ff-shape-container shrink-0 w-6 h-6 flex items-center justify-center",
+              "bg-[var(--secondary)]/10 border-2 border-[var(--secondary)]/40 text-[var(--secondary)]",
+              "transition-[box-shadow] duration-300",
+              "md:group-hover:shadow-[0_0_14px_rgba(255, 79, 216,0.5)]"
+            )}
+          >
+            <Check size={12} strokeWidth={2.5} />
+          </span>
+          <p className="text-sm md:text-base text-[var(--foreground)] font-medium leading-snug">
+            {diff.ours}
+          </p>
+        </div>
       </div>
     </motion.div>
   )
 }
 
 // ── Section ────────────────────────────────────────────
-export function WhyUsSection() {
+interface WhyUsSectionProps {
+  eyebrow?: string
+  headline?: string
+  subheadline?: string
+  items?: Differentiator[]
+}
+
+export function WhyUsSection({ eyebrow, headline, subheadline, items }: WhyUsSectionProps = {}) {
+  const list = items && items.length > 0 ? items : DIFFERENTIATORS
   return (
     <section
       className={cn(
@@ -125,7 +165,7 @@ export function WhyUsSection() {
           transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
           className="mb-14 md:mb-20 text-center"
         >
-          <Eyebrow align="center" className="mb-4">Neden FlixFlex</Eyebrow>
+          <Eyebrow align="center" className="mb-4">{eyebrow ?? "Neden FlixFlex"}</Eyebrow>
           <h2
             className={cn(
               "font-display font-extrabold leading-[1.08] tracking-[-0.03em]",
@@ -133,36 +173,17 @@ export function WhyUsSection() {
               "text-[var(--foreground)]"
             )}
           >
-            Diğerleri vs.{" "}
-            <span className="text-[var(--ff-purple)]">Biz</span>
+            {headline ?? (
+              <>
+                Diğerleri vs.{" "}
+                <span className="text-[var(--ff-purple)]">Biz</span>
+              </>
+            )}
           </h2>
           <p className="mt-5 text-base md:text-lg text-[var(--foreground-muted)] max-w-2xl mx-auto leading-relaxed">
-            Piyasadaki ajanslardan nasıl ayrışıyoruz? Şeffaf, direkt ve
-            ölçülebilir bir karşılaştırma.
+            {subheadline ??
+              "Piyasadaki ajanslardan nasıl ayrışıyoruz? Şeffaf, direkt ve ölçülebilir bir karşılaştırma."}
           </p>
-        </motion.div>
-
-        {/* Column labels */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="grid grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 mb-2 md:mb-4"
-        >
-          <div className="py-3 pr-4 md:pr-8">
-            <span className="text-[10px] font-semibold tracking-[0.18em] uppercase text-[var(--foreground-faint)]">
-              Onlar
-            </span>
-          </div>
-          <div className="px-2 md:px-4 flex items-center justify-center">
-            <span className="w-8 invisible" />
-          </div>
-          <div className="py-3 pl-4 md:pl-8">
-            <span className="text-[10px] font-semibold tracking-[0.18em] uppercase text-[var(--ff-purple)]">
-              FlixFlex
-            </span>
-          </div>
         </motion.div>
 
         {/* Comparison rows */}
@@ -172,13 +193,37 @@ export function WhyUsSection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
           className={cn(
-            "ff-shape-container p-4",
+            "ff-shape-container px-4 md:px-6",
             "border-2 border-[var(--border)]",
             "divide-y-0",
             "bg-[var(--surface-elevated)]/20 backdrop-blur-sm",
           )}
         >
-          {DIFFERENTIATORS.map((diff, i) => (
+          {/* Column labels — header row (Diğer Ajanslar · VS · Logo) */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 md:gap-8 py-5 md:py-6 border-b-2 border-[var(--border)]"
+          >
+            {/* Diğer Ajanslar */}
+            <div className="flex items-center justify-center">
+              <span className="text-xs md:text-sm font-semibold uppercase tracking-[0.08em] text-[var(--foreground-faint)] text-center">
+                Diğer Ajanslar
+              </span>
+            </div>
+            {/* Center VS comparison badge */}
+            <div className="flex items-center justify-center md:w-24">
+              <VsBadge />
+            </div>
+            {/* FlixFlex logo */}
+            <div className="flex items-center justify-center">
+              <BrandMark />
+            </div>
+          </motion.div>
+
+          {list.map((diff, i) => (
             <ComparisonRow key={diff.topic} diff={diff} index={i} />
           ))}
         </motion.div>

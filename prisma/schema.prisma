@@ -16,12 +16,30 @@ model User {
   isActive  Boolean    @default(true)
   lastLogin DateTime?
   roleId    String
+  // ── Two-factor authentication (TOTP) ──
+  twoFactorEnabled     Boolean  @default(false)
+  twoFactorSecret      String?  // encrypted base32 TOTP secret
+  twoFactorBackupCodes String[] @default([]) // sha256 hashes of one-time backup codes
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   auditLogs AuditLog[]
   role      Role       @relation(fields: [roleId], references: [id])
 
   @@map("users")
+}
+
+model ApiKey {
+  id          String    @id @default(cuid())
+  name        String
+  prefix      String    // short public identifier shown in the UI (e.g. ffk_ab12cd)
+  hashedKey   String    // sha256 hash of the full secret key (never stored in plaintext)
+  scopes      String[]  @default([])
+  isActive    Boolean   @default(true)
+  lastUsedAt  DateTime?
+  createdById String?
+  createdAt   DateTime  @default(now())
+
+  @@map("api_keys")
 }
 
 model Role {
@@ -55,7 +73,8 @@ model BlogPost {
   slug            String    @unique
   excerpt         String?
   content         String
-  coverImage      String?
+  coverImage      String?   // real cover image URL
+  coverGradient   String?   // fallback gradient class when no cover image
   template        String    @default("classic")
   category        String?
   tags            String[]

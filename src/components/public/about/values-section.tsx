@@ -6,6 +6,20 @@ import { fadeInUp, staggerContainer, cardHover } from "@/lib/animations"
 import { VALUES, type Value } from "./about-data"
 import { StarField } from "@/components/ui/star-field"
 import { Eyebrow } from "@/components/ui/eyebrow"
+import { Target, TrendingUp, Sparkles, Star, Rocket, Zap, Shield, type LucideIcon } from "@/lib/icons"
+
+// Icon-key → component map for admin-configured value cards.
+const VALUE_ICONS: Record<string, LucideIcon> = {
+  Target, TrendingUp, Sparkles, Star, Rocket, Zap, Shield,
+}
+
+interface ValueItemInput {
+  iconKey?: string
+  titleTr?: string
+  title?: string
+  tagline?: string
+  description?: string
+}
 
 // ── Individual value card ──────────────────────────────
 function ValueCard({ value, index }: { value: Value; index: number }) {
@@ -83,7 +97,25 @@ function ValueCard({ value, index }: { value: Value; index: number }) {
 }
 
 // ── Section ────────────────────────────────────────────
-export function ValuesSection() {
+interface ValuesSectionProps {
+  eyebrow?: string
+  headline?: string
+  subheadline?: string
+  items?: ValueItemInput[]
+}
+
+export function ValuesSection({ eyebrow, headline, subheadline, items }: ValuesSectionProps = {}) {
+  const list: Value[] =
+    items && items.length > 0
+      ? items.map((it, i) => ({
+          slug: `value-${i}`,
+          title: it.title ?? it.titleTr ?? "",
+          titleTr: it.titleTr ?? "",
+          icon: VALUE_ICONS[it.iconKey ?? "Star"] ?? Star,
+          tagline: it.tagline ?? "",
+          description: it.description ?? "",
+        }))
+      : VALUES
   return (
     <section
       className={cn(
@@ -113,7 +145,7 @@ export function ValuesSection() {
           transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
           className="mb-14 md:mb-20 text-center"
         >
-          <Eyebrow align="center" className="mb-4">Temel Değerlerimiz</Eyebrow>
+          <Eyebrow align="center" className="mb-4">{eyebrow ?? "Temel Değerlerimiz"}</Eyebrow>
           <h2
             className={cn(
               "font-display font-extrabold leading-[1.08] tracking-[-0.03em]",
@@ -121,12 +153,16 @@ export function ValuesSection() {
               "text-[var(--foreground)]"
             )}
           >
-            İşimizin{" "}
-            <span className="text-[var(--ff-purple)]">DNA&apos;sı</span> bu.
+            {headline ?? (
+              <>
+                İşimizin{" "}
+                <span className="text-[var(--ff-purple)]">DNA&apos;sı</span> bu.
+              </>
+            )}
           </h2>
           <p className="mt-5 text-base md:text-lg text-[var(--foreground-muted)] max-w-2xl mx-auto leading-relaxed">
-            Her kararımızı, her çalışmamızı ve her müşteri ilişkimizi şekillendiren
-            dört temel değer.
+            {subheadline ??
+              "Her kararımızı, her çalışmamızı ve her müşteri ilişkimizi şekillendiren dört temel değer."}
           </p>
         </motion.div>
 
@@ -138,7 +174,7 @@ export function ValuesSection() {
           viewport={{ once: true, margin: "-60px" }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
         >
-          {VALUES.map((value, i) => (
+          {list.map((value, i) => (
             <div key={value.slug} className="bg-[var(--background)]">
               <ValueCard value={value} index={i} />
             </div>

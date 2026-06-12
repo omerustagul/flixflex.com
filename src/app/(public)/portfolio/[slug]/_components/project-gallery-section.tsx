@@ -12,6 +12,10 @@ interface ProjectGallerySectionProps {
 }
 
 export function ProjectGallerySection({ project }: ProjectGallerySectionProps) {
+  // No admin-uploaded gallery images → hide the section entirely.
+  const images = (project.images ?? []).filter(Boolean)
+  if (images.length === 0) return null
+
   return (
     <section
       className={cn(
@@ -49,7 +53,7 @@ export function ProjectGallerySection({ project }: ProjectGallerySectionProps) {
           gradient={project.gradient}
           accentColor={project.accentColor}
           title={project.title}
-          images={project.images}
+          images={images}
         />
       </div>
     </section>

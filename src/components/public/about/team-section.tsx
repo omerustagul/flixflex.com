@@ -77,8 +77,16 @@ function TeamCard({ member }: { member: TeamMember }) {
 }
 
 // ── Section ────────────────────────────────────────────
-export function TeamSection() {
+interface TeamSectionProps {
+  eyebrow?: string
+  headline?: string
+  subheadline?: string
+  members?: TeamMember[]
+}
+
+export function TeamSection({ eyebrow, headline, subheadline, members }: TeamSectionProps = {}) {
   const sectionRef = useRef<HTMLElement>(null)
+  const list = members && members.length > 0 ? members : TEAM
 
   return (
     <section
@@ -111,7 +119,7 @@ export function TeamSection() {
           transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
           className="mb-14 md:mb-20 text-center"
         >
-          <Eyebrow align="center" className="mb-4">Ekibimiz</Eyebrow>
+          <Eyebrow align="center" className="mb-4">{eyebrow ?? "Ekibimiz"}</Eyebrow>
           <h2
             className={cn(
               "font-display font-extrabold leading-[1.08] tracking-[-0.03em]",
@@ -119,12 +127,16 @@ export function TeamSection() {
               "text-[var(--foreground)]"
             )}
           >
-            Arkamızda{" "}
-            <span className="text-[var(--ff-purple)]">insanlar</span> var.
+            {headline ?? (
+              <>
+                Arkamızda{" "}
+                <span className="text-[var(--ff-purple)]">insanlar</span> var.
+              </>
+            )}
           </h2>
           <p className="mt-5 text-base md:text-lg text-[var(--foreground-muted)] max-w-2xl mx-auto leading-relaxed">
-            Strateji, yaratıcılık, veri ve üretim — hepsi tek bir kompakt, güçlü
-            ekipte birleşiyor.
+            {subheadline ??
+              "Strateji, yaratıcılık, veri ve üretim — hepsi tek bir kompakt, güçlü ekipte birleşiyor."}
           </p>
         </motion.div>
 
@@ -136,7 +148,7 @@ export function TeamSection() {
           viewport={{ once: true, margin: "-60px" }}
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6"
         >
-          {TEAM.map((member) => (
+          {list.map((member) => (
             <TeamCard key={member.name} member={member} />
           ))}
         </motion.div>

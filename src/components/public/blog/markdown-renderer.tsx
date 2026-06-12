@@ -100,6 +100,30 @@ export function MarkdownRenderer({
       return
     }
 
+    // Image block — ![alt](url)
+    const imgMatch = trimmed.match(/^!\[(.*?)\]\((.*?)\)$/)
+    if (imgMatch) {
+      flushList(String(idx))
+      const [, alt, url] = imgMatch
+      elements.push(
+        <figure key={idx} className="my-8 -mx-2 md:mx-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={url}
+            alt={alt}
+            loading="lazy"
+            className="ff-shape-container w-full h-auto object-cover border border-[var(--border)]"
+          />
+          {alt && (
+            <figcaption className="mt-2 text-center text-[12px] text-[var(--foreground-faint)]">
+              {alt}
+            </figcaption>
+          )}
+        </figure>
+      )
+      return
+    }
+
     if (trimmed.startsWith("> ")) {
       flushList(String(idx))
       elements.push(

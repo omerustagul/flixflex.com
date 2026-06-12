@@ -34,6 +34,9 @@ const darkTokensSchema = z.object({
   foregroundFaint: colorValue,
   border: colorValue,
   borderStrong: colorValue,
+  // Optional dark-mode secondary overrides (fall back to light values).
+  secondary: colorValue.optional(),
+  secondaryLight: colorValue.optional(),
 })
 
 // ── Full ColorTokens schema ──────────────────────

@@ -39,12 +39,12 @@ function NavSide({
 
       {/* Content */}
       <div className={cn(
-        "absolute inset-0 z-10 p-8 md:p-12 flex flex-col justify-between text-white",
+        "absolute inset-0 z-10 p-4 md:p-6 flex flex-col justify-between text-white",
         isNext ? "items-end text-right" : "items-start text-left"
       )}>
         {/* Top: Direction Indicator */}
         <div className={cn(
-          "flex items-center gap-2 text-[10px] font-semibold tracking-[0.25em] uppercase text-white/60 group-hover:text-[var(--ff-purple)] transition-colors duration-300"
+          "flex items-center bg-[var(--ff-purple)]/10 backdrop-blur-sm rounded-full border-2 border-[var(--ff-purple)]/30 px-2 py-1 gap-2 text-[10px] font-semibold text-ff-purple group-hover:text-[var(--ff-purple)] transition-colors duration-300"
         )}>
           {!isNext && <ArrowLeft size={12} className="transition-transform duration-300 group-hover:-translate-x-1" />}
           <span>{isNext ? "Sonraki Proje" : "Önceki Proje"}</span>
@@ -74,10 +74,10 @@ function NavSide({
             "flex flex-col gap-1",
             isNext ? "items-end" : "items-start"
           )}>
-            <span className="text-white/50 text-[10px] font-semibold tracking-wider uppercase">
+            <span className="text-white/50 text-[11px] font-semibold">
               {item.client} &middot; {item.category}
             </span>
-            <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-extrabold leading-[1.15] tracking-tight group-hover:text-[var(--ff-purple)] transition-colors duration-300 max-w-lg">
+            <h3 className="font-display text-lg md:text-xl lg:text-2xl font-extrabold leading-[1.15] group-hover:text-[var(--ff-purple)] transition-colors duration-300 max-w-lg">
               {item.title}
             </h3>
           </div>
@@ -108,8 +108,8 @@ export function PrevNextNav({ prev, next }: PrevNextProps) {
   if (!prev && !next) return null
 
   return (
-    <div className="bg-[var(--background)] px-6 md:px-10 xl:px-16 py-10">
-      <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row gap-6">
+    <div className="bg-[var(--background)] py-10">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-10 xl:px-16 flex flex-col md:flex-row gap-6">
         {prev ? (
           <NavSide item={prev} direction="prev" />
         ) : (

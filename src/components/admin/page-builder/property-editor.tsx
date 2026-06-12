@@ -632,25 +632,21 @@ export function PropertyEditor() {
           </FFSelect>
         </div>
 
-        {/* Render hideMobileDock toggle at the absolute bottom if present */}
-        {Object.entries(shape)
-          .filter(([fieldName]) => fieldName === "hideMobileDock")
-          .map(([fieldName, fieldDef]) => {
-            const fDef = fieldDef as Record<string, unknown>
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const innerDef = (fDef as any)._def ?? fDef
-            const currentVal = props[fieldName]
-
-            return (
-              <BooleanField
-                key={fieldName}
-                name={fieldName}
-                value={currentVal}
-                schema={innerDef}
-                onChange={(v) => handleChange(fieldName, v)}
-              />
-            )
-          })}
+        {/* Universal mobile-dock control — available on EVERY section,
+            independent of the section's prop schema. Writes props.hideMobileDock
+            which the public PageRenderer's IntersectionObserver reads. */}
+        <div className="mt-2 pt-4 border-t border-[#CCCCCC]">
+          <BooleanField
+            name="hideMobileDock"
+            value={props.hideMobileDock}
+            schema={{}}
+            onChange={(v) => handleChange("hideMobileDock", v)}
+          />
+          <p className="text-[9px] text-[#999999] leading-normal mt-1">
+            Açıkken, bu section ekranda görünürken mobil alt navigasyon (dock) gizlenir.
+            Hero / tam-ekran alanlar için idealdir.
+          </p>
+        </div>
       </div>
     </div>
   )

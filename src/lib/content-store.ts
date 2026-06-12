@@ -266,6 +266,7 @@ type BlogRow = {
   excerpt: string | null
   content: string
   coverImage: string | null
+  coverGradient: string | null
   template: string
   category: string | null
   tags: string[]
@@ -287,7 +288,7 @@ function mapBlogPost(row: BlogRow): PublicBlogPost {
     excerpt: row.excerpt ?? "",
     content: row.content,
     coverImage: row.coverImage ?? null,
-    coverGradient: DEFAULT_BLOG_GRADIENT,
+    coverGradient: row.coverGradient ?? DEFAULT_BLOG_GRADIENT,
     template,
     category: row.category ?? "Genel",
     tags: Array.isArray(row.tags) ? row.tags : [],

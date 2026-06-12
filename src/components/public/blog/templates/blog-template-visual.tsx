@@ -79,6 +79,13 @@ export function BlogTemplateVisual({ post, related }: VisualTemplateProps) {
           "overflow-hidden pb-0"
         )}
       >
+        {post.coverImage && (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={post.coverImage} alt={post.title} loading="eager" className="absolute inset-0 w-full h-full object-cover" />
+            <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30" />
+          </>
+        )}
         {/* Grid */}
         <div
           aria-hidden

@@ -34,13 +34,13 @@ export function ProjectSummary({ project }: ProjectSummaryProps) {
         "py-0 mt-3"
       )}
     >
-      <div className="mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16">
+      <div className="mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16 py-6">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-2"
+          className="grid grid-cols-2 md:grid-cols-4 gap-3"
         >
           {cols.map((col) => (
             <motion.div key={col.label} variants={fadeInUp} className="h-full">
@@ -49,7 +49,7 @@ export function ProjectSummary({ project }: ProjectSummaryProps) {
                 tiltLimit={10}
                 scale={1.02}
                 spotlight={false}
-                className="h-full flex flex-col gap-1 px-6 py-8 md:px-8 md:py-10"
+                className="h-full flex flex-col gap-1 p-5"
               >
                 <span className="text-[11px] font-semibold text-[var(--ff-purple)] relative z-20">
                   {col.label}

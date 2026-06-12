@@ -39,6 +39,10 @@ export interface ColorTokens {
     foregroundFaint: string
     border:          string
     borderStrong:    string
+    // Optional dark-mode secondary overrides. When absent, the light
+    // `secondary` / `secondaryLight` are reused (backward compatible).
+    secondary?:      string
+    secondaryLight?: string
   }
 
   // ── Status ───────────────────────────────────────

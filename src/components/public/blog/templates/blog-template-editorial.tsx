@@ -73,6 +73,13 @@ export function BlogTemplateEditorial({ post, related }: EditorialTemplateProps)
           "py-20 md:py-28 overflow-hidden"
         )}
       >
+        {post.coverImage && (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={post.coverImage} alt={post.title} loading="eager" className="absolute inset-0 w-full h-full object-cover" />
+            <div aria-hidden className="absolute inset-0 bg-black/55" />
+          </>
+        )}
         {/* Grid */}
         <div
           aria-hidden

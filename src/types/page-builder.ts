@@ -207,9 +207,60 @@ export const faqPropsSchema = z.object({
 })
 
 export const teamPropsSchema = z.object({
-  headline: z.string().default("Ekibimiz"),
-  subheadline: z.string().default("Tutkulu profesyoneller"),
-  showAll: z.boolean().default(false),
+  eyebrow: z.string().default("Ekibimiz"),
+  headline: z.string().default("Arkamızda insanlar var."),
+  subheadline: z.string().default("Strateji, yaratıcılık, veri ve üretim — hepsi tek bir kompakt, güçlü ekipte birleşiyor."),
+  members: z.array(z.object({
+    name: z.string().default("İsim Soyisim"),
+    role: z.string().default("Görev"),
+    initials: z.string().default("İS"),
+    accent: z.boolean().optional(),
+    bio: z.string().optional(),
+  })).optional(),
+  hideMobileDock: z.boolean().default(false),
+})
+
+// ── About: Why-Us (comparison) ──
+export const whyUsPropsSchema = z.object({
+  eyebrow: z.string().default("Neden FlixFlex"),
+  headline: z.string().default("Diğerleri vs. Biz"),
+  subheadline: z.string().default("Piyasadaki ajanslardan nasıl ayrışıyoruz? Şeffaf, direkt ve ölçülebilir bir karşılaştırma."),
+  items: z.array(z.object({
+    topic: z.string().default("Konu"),
+    theirs: z.string().default("Onların yaklaşımı"),
+    ours: z.string().default("Bizim yaklaşımımız"),
+  })).optional(),
+  hideMobileDock: z.boolean().default(false),
+})
+
+// ── About: Manifesto (kinetic words) ──
+export const manifestoPropsSchema = z.object({
+  eyebrow: z.string().default("Manifestomuz"),
+  line1: z.string().default("FLIX"),
+  line2: z.string().default("FLEX"),
+  line3: z.string().default("DOMINATE"),
+  hideMobileDock: z.boolean().default(false),
+})
+
+// ── About: Story ──
+export const storyPropsSchema = z.object({
+  eyebrow: z.string().default("Hikâyemiz"),
+  headline: z.string().default("Küçük bir ekip, büyük bir vizyon."),
+  paragraphs: z.array(z.string()).optional(),
+  hideMobileDock: z.boolean().default(false),
+})
+
+// ── About: Values ──
+export const valuesPropsSchema = z.object({
+  eyebrow: z.string().default("Temel Değerlerimiz"),
+  headline: z.string().default("İşimizin DNA'sı bu."),
+  subheadline: z.string().default("Her kararımızı, her çalışmamızı ve her müşteri ilişkimizi şekillendiren dört temel değer."),
+  items: z.array(z.object({
+    iconKey: z.string().default("Star"),
+    titleTr: z.string().default("Değer"),
+    tagline: z.string().default("Kısa slogan."),
+    description: z.string().default("Açıklama metni."),
+  })).optional(),
   hideMobileDock: z.boolean().default(false),
 })
 
@@ -338,10 +389,10 @@ export const SECTION_SCHEMAS: Record<SectionType, z.ZodObject<z.ZodRawShape>> = 
   "faq": faqPropsSchema,
   "team": teamPropsSchema,
   "contact-form": contactFormPropsSchema,
-  "manifesto": z.object({}),
-  "story": z.object({}),
-  "values": z.object({}),
-  "why-us": z.object({}),
+  "manifesto": manifestoPropsSchema,
+  "story": storyPropsSchema,
+  "values": valuesPropsSchema,
+  "why-us": whyUsPropsSchema,
   "services-list": z.object({}),
   "portfolio-hero": z.object({}),
   "portfolio-grid": z.object({}),

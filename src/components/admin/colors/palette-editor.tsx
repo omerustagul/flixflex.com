@@ -97,6 +97,8 @@ const LIGHT_FIELDS: FieldDef[] = [
 ]
 
 const DARK_FIELDS: FieldDef[] = [
+  { key: "secondary", label: "Dark Secondary (Charcoal)", hint: "Koyu modda ikincil renk — boş bırakılırsa açık ton kullanılır" },
+  { key: "secondaryLight", label: "Dark Secondary Light", hint: "Koyu modda açık ton" },
   { key: "background", label: "Dark Background" },
   { key: "backgroundAlt", label: "Dark Background Alt" },
   { key: "surface", label: "Dark Surface" },
@@ -1042,7 +1044,13 @@ export function PaletteEditor({ initial }: PaletteEditorProps) {
                 <ColorField
                   key={field.key}
                   label={field.label}
-                  value={colors.dark[field.key as keyof ColorTokens["dark"]]}
+                  hint={field.hint}
+                  value={
+                    // Dark secondary may be unset on legacy palettes — fall
+                    // back to the light value so the picker shows a sensible start.
+                    (colors.dark[field.key as keyof ColorTokens["dark"]] as string | undefined) ??
+                    (colors[field.key as keyof ColorTokens] as string)
+                  }
                   onChange={(v) => setDarkColor(field.key, v)}
                 />
               ))}

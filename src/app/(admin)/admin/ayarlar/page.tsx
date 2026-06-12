@@ -48,12 +48,14 @@ const TILES: SettingsTile[] = [
     title: "Bildirimler",
     description: "Admin bildirim tercihleri ve özet e-postaları.",
     icon: Bell,
+    href: "/admin/ayarlar/bildirimler",
   },
   {
     slug: "guvenlik",
     title: "Güvenlik & 2FA",
-    description: "Oturum süresi, IP kısıtlamaları, iki adımlı doğrulama.",
+    description: "İki adımlı doğrulama (TOTP), yedek kodlar.",
     icon: Shield,
+    href: "/admin/ayarlar/guvenlik",
   },
   {
     slug: "entegrasyonlar",
@@ -67,6 +69,7 @@ const TILES: SettingsTile[] = [
     title: "Veritabanı",
     description: "Bağlantı durumu, yedekler, manuel senkronizasyon.",
     icon: Database,
+    href: "/admin/ayarlar/veritabani",
     status: hasEnv("DATABASE_URL") ? "ok" : "missing",
   },
   {
@@ -74,12 +77,14 @@ const TILES: SettingsTile[] = [
     title: "API Anahtarları",
     description: "Dış API anahtarları, döndürme, kullanım sınırları.",
     icon: KeyRound,
+    href: "/admin/ayarlar/api-anahtarlari",
   },
   {
     slug: "bakim",
     title: "Bakım Modu",
     description: "Siteyi geçici olarak ziyaretçilere kapat.",
     icon: Wrench,
+    href: "/admin/ayarlar/bakim",
   },
 ]
 

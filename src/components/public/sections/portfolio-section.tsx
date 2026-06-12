@@ -29,24 +29,19 @@ function FilterTab({ label, active, onClick }: FilterTabProps) {
       type="button"
       onClick={onClick}
       className={cn(
-        "ff-shape-button",
-        "relative px-5 py-2 text-xs font-semibold",
-        "transition-colors duration-200 border",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ff-purple)]",
+        "relative shrink-0 whitespace-nowrap px-4 py-3 text-xs font-semibold",
+        "transition-colors duration-200",
+        "focus-visible:outline-none focus-visible:text-[var(--ff-purple)]",
         active
-          ? "bg-[var(--ff-purple)] border-[var(--ff-purple)] text-white"
-          : [
-            "bg-transparent text-[var(--foreground-muted)]",
-            "border-[var(--border)]",
-            "hover:text-[var(--foreground)] hover:border-[var(--ff-purple)]",
-          ]
+          ? "text-[var(--ff-purple)]"
+          : "text-[var(--foreground-muted)] hover:text-[var(--foreground)]"
       )}
     >
       {label}
       {active && (
         <motion.span
-          layoutId="filter-pill"
-          className="absolute inset-0 bg-[var(--ff-purple)] -z-[1]"
+          layoutId="filter-tab-underline"
+          className="absolute left-2 right-2 -bottom-px h-0.5 bg-[var(--ff-purple)]"
           transition={{ duration: 0.25, ease: ease.smooth }}
         />
       )}
@@ -105,10 +100,10 @@ function PortfolioCard({
         {/* ── Card visual ── */}
         <div
           className={cn(
-            "relative w-full overflow-hidden",
+            "ff-shape-container relative w-full",
             !coverImage && "bg-gradient-to-br",
             !coverImage && gradient,
-            tall ? "h-full min-h-[420px]" : "h-[220px] md:h-[260px]"
+            tall ? "h-full min-h-[420px]" : "h-full"
           )}
         >
           {coverImage ? (
@@ -142,17 +137,17 @@ function PortfolioCard({
             <FFBadge variant="purple">{category} - {year}</FFBadge>
           </div>
 
-          {/* ── Hover overlay ── slides up from bottom */}
-          <motion.div
+          {/* ── Info overlay ── always visible on mobile, hover-reveal on desktop */}
+          <div
             className={cn(
               "ff-shape-container absolute inset-0 z-20 flex flex-col justify-end p-5",
-              "bg-gradient-to-t from-black/90 via-black/60 to-transparent"
+              "bg-gradient-to-t from-black/90 via-black/60 to-transparent",
+              "transition-all duration-300 ease-out",
+              "opacity-100 translate-y-0",
+              "md:opacity-0 md:translate-y-[20%] md:group-hover:opacity-100 md:group-hover:translate-y-0"
             )}
-            initial={{ opacity: 0, y: "30%" }}
-            whileHover={{ opacity: 1, y: "0%" }}
-            transition={{ duration: 0.3, ease: ease.smooth }}
           >
-            <div className="translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+            <div className="md:translate-y-2 md:group-hover:translate-y-0 transition-transform duration-300">
               {/* Client name small */}
               <p className="text-[10px] font-semibold tracking-[0.18em] uppercase text-white/70 mb-1">
                 {client}
@@ -168,21 +163,20 @@ function PortfolioCard({
                 {description}
               </p>
 
-              {/* CTA link — styled directly, no nested button */}
-              <Link
-                href={`/portfolio/${slug}`}
-                className={cn(
-                  "inline-flex items-center gap-2",
-                  "text-[11px] font-semibold tracking-[0.1em] uppercase",
-                  "text-[var(--ff-purple)]",
-                  "hover:text-white transition-colors duration-150"
-                )}
-              >
-                Vakayı Gör
+              {/* CTA affordance — the whole card is the link */}
+              <span className="inline-flex items-center gap-2 text-[11px] font-semibold text-[var(--ff-purple)]">
+                Projeyi İncele
                 <ArrowRight size={12} />
-              </Link>
+              </span>
             </div>
-          </motion.div>
+          </div>
+
+          {/* Full-card tap/click target → detail page */}
+          <Link
+            href={`/portfolio/${slug}`}
+            className="absolute inset-0 z-30"
+            aria-label={`${title} — projeyi incele`}
+          />
         </div>
       </TiltCard>
     </motion.div>
@@ -269,7 +263,10 @@ export function PortfolioSection({ items = PORTFOLIO }: PortfolioSectionProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.15, ease: ease.smooth }}
-          className="flex flex-wrap gap-2 mb-10"
+          className={cn(
+            "flex gap-1 mb-10 overflow-x-auto border-b border-[var(--border)]",
+            "[&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+          )}
           role="group"
           aria-label="Proje kategorisi filtrele"
         >

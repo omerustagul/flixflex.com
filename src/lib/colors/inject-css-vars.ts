@@ -126,6 +126,9 @@ ${fontImport}
   --foreground-faint:   ${colors.dark.foregroundFaint};
   --border:             ${colors.dark.border};
   --border-strong:      ${colors.dark.borderStrong};
+  --ff-charcoal:        ${colors.dark.secondary ?? colors.secondary};
+  --ff-charcoal-light:  ${colors.dark.secondaryLight ?? colors.secondaryLight};
+  --secondary:          ${colors.dark.secondary ?? colors.secondary};
   --ff-purple-muted:    ${colors.primaryMuted};
   --ff-purple-glow:     ${colors.primaryGlow};
 }

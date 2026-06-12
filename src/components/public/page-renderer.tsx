@@ -15,6 +15,7 @@ import {
   StorySection,
   ValuesSection,
   TeamSection,
+  WhyUsSection,
   ServicesListAnimated,
   ContactForm,
   ContactInfo,
@@ -29,7 +30,6 @@ import type { Service } from "@/components/public/sections/services-data"
 import type { BlogPost } from "@/components/public/blog/blog-data"
 import { PortfolioHero } from "@/app/(public)/portfolio/_components/portfolio-hero"
 import { HeroStrip as ContactHero } from "@/app/(public)/iletisim/_components/hero-strip"
-import { WhyUs as AboutWhyUs } from "@/app/(public)/iletisim/_components/why-us"
 import { FaqAccordion } from "@/app/(public)/iletisim/_components/faq-accordion"
 import { DemoRadialScrollGalleryBento } from "@/components/ui/portfolio-and-image-gallery"
 import { DemoPortfolioGallery } from "@/components/ui/portfolio-gallery"
@@ -112,11 +112,11 @@ const SECTION_RENDERERS: Partial<Record<SectionType, (
     )
   },
   "testimonials": () => <TestimonialsSection />,
-  "team": () => <TeamSection />,
-  "manifesto": () => <ManifestoSection />,
-  "story": () => <StorySection />,
-  "values": () => <ValuesSection />,
-  "why-us": () => <AboutWhyUs />,
+  "team": (s) => <TeamSection {...(s.props as any)} />,
+  "manifesto": (s) => <ManifestoSection {...(s.props as any)} />,
+  "story": (s) => <StorySection {...(s.props as any)} />,
+  "values": (s) => <ValuesSection {...(s.props as any)} />,
+  "why-us": (s) => <WhyUsSection {...(s.props as any)} />,
   "faq": () => <FaqAccordion />,
   "services-list": (s, ctx) => (
     <section className="relative bg-[var(--background)] py-0">
@@ -129,7 +129,7 @@ const SECTION_RENDERERS: Partial<Record<SectionType, (
   "portfolio-grid": (s, ctx) => <PortfolioSection items={ctx?.portfolioItems as any} />,
   "blog-hero": () => {
     return (
-      <div className="w-full flex flex-col items-center justify-center py-4 md:py-10">
+      <div className="w-full flex flex-col items-center justify-center mt-16 py-10 md:py-16">
         <div className="w-full">
           <div className="flex flex-col items-center justify-center gap-1">
             <span className="ff-shape-container inline-flex items-center gap-1.5 px-3 py-1 bg-[var(--ff-purple)]/10 backdrop-blur-xs border border-[var(--ff-purple)]/20 text-[11px] font-semibold text-[var(--ff-purple)]">

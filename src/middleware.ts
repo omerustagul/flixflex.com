@@ -15,6 +15,28 @@
 import { NextResponse } from "next/server"
 import NextAuth from "next-auth"
 import { authConfig } from "@/lib/auth/config"
+import { hasPermission } from "@/lib/rbac/permissions"
+
+// Map an /admin sub-route prefix → the resource that gates it.
+// Routes not listed here (dashboard, profile) are open to any admin.
+const ROUTE_RESOURCE: { prefix: string; resource: string }[] = [
+  { prefix: "/admin/randevular", resource: "appointments" },
+  { prefix: "/admin/sayfalar", resource: "pages" },
+  { prefix: "/admin/portfolyo", resource: "portfolio" },
+  { prefix: "/admin/hizmetler", resource: "services" },
+  { prefix: "/admin/blog", resource: "blog" },
+  { prefix: "/admin/medya", resource: "media" },
+  { prefix: "/admin/ai", resource: "ai" },
+  { prefix: "/admin/theme", resource: "colors" },
+  { prefix: "/admin/roller", resource: "roles" },
+  { prefix: "/admin/kullanicilar", resource: "users" },
+  { prefix: "/admin/ayarlar", resource: "settings" },
+]
+
+function requiredResource(pathname: string): string | null {
+  const match = ROUTE_RESOURCE.find((r) => pathname.startsWith(r.prefix))
+  return match?.resource ?? null
+}
 
 // Edge-safe auth instance: uses the lightweight shared config only.
 // Does NOT import Prisma, bcryptjs, or the env validator — those
@@ -62,6 +84,20 @@ export default auth((req) => {
     const callbackUrl = pathname + (nextUrl.search ?? "")
     loginUrl.searchParams.set("callbackUrl", callbackUrl)
     return NextResponse.redirect(loginUrl)
+  }
+
+  // ── Per-page authorization ──────────────────────────────
+  // Super Admin bypasses all checks (never lockable). Everyone else
+  // needs READ permission on the route's resource, else bounce to the
+  // dashboard. JWT-embedded permissions make this an edge-only check.
+  const sessionUser = req.auth?.user as { role?: string; permissions?: { resource: string; action: string }[] } | undefined
+  const resource = requiredResource(pathname)
+  if (
+    resource &&
+    sessionUser?.role !== "Super Admin" &&
+    !hasPermission(sessionUser?.permissions ?? [], resource, "read")
+  ) {
+    return NextResponse.redirect(new URL("/admin", nextUrl.origin))
   }
 
   const requestHeaders = new Headers(req.headers)

@@ -57,6 +57,8 @@ export function LoginCard() {
 
   const [email, setEmail] = React.useState("")
   const [password, setPassword] = React.useState("")
+  const [totp, setTotp] = React.useState("")
+  const [showTotp, setShowTotp] = React.useState(false)
   const [showPassword, setShowPassword] = React.useState(false)
   const [rememberMe, setRememberMe] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
@@ -81,6 +83,7 @@ export function LoginCard() {
       const result = await signIn("credentials", {
         email,
         password,
+        totp: totp.trim(),
         redirect: false,
         callbackUrl,
       })
@@ -197,6 +200,29 @@ export function LoginCard() {
               autoComplete="current-password"
               disabled={loading}
             />
+
+            {/* Optional 2FA code — only required for accounts with 2FA enabled */}
+            {showTotp ? (
+              <FFInput
+                label="2FA Kodu"
+                type="text"
+                inputMode="numeric"
+                placeholder="6 haneli kod veya yedek kod"
+                value={totp}
+                onChange={(e) => setTotp(e.target.value)}
+                leftIcon={<Lock size={15} />}
+                autoComplete="one-time-code"
+                disabled={loading}
+              />
+            ) : (
+              <button
+                type="button"
+                onClick={() => setShowTotp(true)}
+                className="text-[12px] text-[var(--foreground-muted)] hover:text-[var(--ff-purple)] transition-colors"
+              >
+                İki adımlı doğrulama (2FA) kullanıyorum
+              </button>
+            )}
 
             {/* Remember me */}
             <label className="flex items-center gap-3 cursor-pointer group">

@@ -68,3 +68,6 @@ skills-lock.json
 
 # DB backup dump — contains data + bcrypt password hashes, never publish
 prisma/backups/db_dump.sql
+
+# Playwright test artifacts
+.playwright-mcp/

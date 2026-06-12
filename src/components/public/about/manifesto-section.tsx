@@ -107,7 +107,7 @@ function SubTagline() {
 }
 
 // ── Eyebrow badge ─────────────────────────────────────
-function EyebrowBadge() {
+function EyebrowBadge({ label }: { label: string }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -122,14 +122,21 @@ function EyebrowBadge() {
     >
       <span className="w-1.5 h-1.5 bg-[var(--ff-purple)] animate-pulse" />
       <span className="text-[10px] font-semibold text-[var(--ff-purple)]">
-        Manifestomuz
+        {label}
       </span>
     </motion.div>
   )
 }
 
 // ── Section ───────────────────────────────────────────
-export function ManifestoSection() {
+interface ManifestoSectionProps {
+  eyebrow?: string
+  line1?: string
+  line2?: string
+  line3?: string
+}
+
+export function ManifestoSection({ eyebrow, line1, line2, line3 }: ManifestoSectionProps = {}) {
   const sectionRef = useRef<HTMLElement>(null)
 
   return (
@@ -170,7 +177,7 @@ export function ManifestoSection() {
 
       {/* Content */}
       <div className="relative mx-auto max-w-[1440px] px-6 md:px-10 xl:px-16 w-full text-center">
-        <EyebrowBadge />
+        <EyebrowBadge label={eyebrow ?? "Manifestomuz"} />
 
         {/* Mega manifesto text */}
         <div
@@ -185,19 +192,19 @@ export function ManifestoSection() {
         >
           {/* Line 1: FLIX */}
           <div className="block">
-            <RevealWord text="FLIX" color="white" baseDelay={0.1} charDelay={0.038} />
+            <RevealWord text={line1 ?? "FLIX"} color="white" baseDelay={0.1} charDelay={0.038} />
           </div>
 
           {/* Separator row */}
           <div className="flex items-center justify-center gap-4 md:gap-8 my-[0.05em]">
             <Dot delay={0.5} />
-            <RevealWord text="FLEX" color="purple" baseDelay={0.55} charDelay={0.038} />
+            <RevealWord text={line2 ?? "FLEX"} color="purple" baseDelay={0.55} charDelay={0.038} />
             <Dot delay={0.85} />
           </div>
 
           {/* Line 3: DOMINATE */}
           <div className="block">
-            <RevealWord text="DOMINATE" color="white" baseDelay={0.9} charDelay={0.028} />
+            <RevealWord text={line3 ?? "DOMINATE"} color="white" baseDelay={0.9} charDelay={0.028} />
           </div>
         </div>
 

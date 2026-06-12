@@ -3,7 +3,10 @@ import { FlixFlexFooter, AppointmentModal, ParallaxProvider } from "@/components
 import { ThemedNavbar } from "@/components/public/navbar/themed-navbar"
 import { PageTransition } from "@/components/shared/page-transition"
 import { LoadingScreen } from "@/components/shared/loading-screen"
+import { MaintenanceScreen } from "@/components/shared/maintenance-screen"
 import { prisma } from "@/lib/prisma"
+import { getSetting } from "@/lib/settings"
+import { auth } from "@/lib/auth"
 
 export default async function PublicLayout({
   children,
@@ -19,6 +22,21 @@ export default async function PublicLayout({
     : []
 
   const siteSettings = settingsData.reduce((acc, s) => ({ ...acc, [s.key]: s.value }), {} as Record<string, string>)
+
+  // ── Maintenance mode gate ──────────────────────────────
+  // When enabled, public visitors see a maintenance notice. Logged-in
+  // admins bypass it so they can keep working on the site.
+  const maintenanceEnabled = await getSetting<boolean>("maintenance.enabled", false)
+  if (maintenanceEnabled) {
+    const session = await auth()
+    if (!session?.user) {
+      const [mTitle, mMessage] = await Promise.all([
+        getSetting<string>("maintenance.title", ""),
+        getSetting<string>("maintenance.message", ""),
+      ])
+      return <MaintenanceScreen title={mTitle} message={mMessage} />
+    }
+  }
 
   return (
     <ParallaxProvider>

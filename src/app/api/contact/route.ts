@@ -7,6 +7,7 @@ import { NextRequest, NextResponse } from "next/server"
 import prisma from "@/lib/prisma"
 import { contactSchema } from "@/lib/validators/contact-schema"
 import { rateLimit, getClientIp } from "@/lib/rate-limit"
+import { notifyAdmins } from "@/lib/notify"
 
 // ── Helper: short random ref ───────────────────────────────
 function generateRef(): string {
@@ -82,6 +83,22 @@ export async function POST(req: NextRequest) {
         // log server-side and still return success.
         console.error("[FlixFlex Contact] DB persist failed:", dbErr)
       }
+    }
+
+    // Notify admins (respects notifications settings; never blocks the user).
+    try {
+      await notifyAdmins("contact", {
+        title: "Yeni iletişim mesajı alındı",
+        rows: [
+          { label: "Ad", value: data.name },
+          { label: "E-posta", value: data.email },
+          ...(data.company ? [{ label: "Şirket", value: data.company }] : []),
+          ...(data.service ? [{ label: "Hizmet", value: String(data.service) }] : []),
+          { label: "Mesaj", value: storedMessage.slice(0, 500) },
+        ],
+      })
+    } catch (notifyErr) {
+      console.error("[FlixFlex Contact] notify failed:", notifyErr)
     }
 
     const ref = generateRef()
